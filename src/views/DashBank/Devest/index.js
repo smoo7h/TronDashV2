@@ -61,9 +61,16 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Devest({ className, ...rest }) {
+function Devest({ className, dappData, ...rest }) {
   const classes = useStyles();
 
+  const [calculatedAmount, setcalculatedAmount] = useState(0);
+
+  const handleChange = event => {
+    //we need to calculate their input value
+
+    setcalculatedAmount(event.target.value * dappData.CurrentSellPrice);
+  };
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
@@ -85,6 +92,8 @@ function Devest({ className, ...rest }) {
             />
             <TextField
               //  fullWidth
+              type="number"
+              onChange={handleChange}
               className={classes.margin2}
               id="input-with-icon-textfield"
               // label="Amount"
@@ -101,13 +110,16 @@ function Devest({ className, ...rest }) {
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
-            key={"Devestbuy"}
+            key={"DevestbuyAmount"}
           >
             <ListItemText
               primary="Price"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">1.1 trx</Typography>
+            <Typography color="inherit">
+              {" "}
+              {dappData.CurrentSellPrice} {dappData.SellPrice.Currency}
+            </Typography>
           </ListItem>
           <ListItem
             classes={{ divider: classes.itemDivider }}
@@ -118,7 +130,7 @@ function Devest({ className, ...rest }) {
               primary="total"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">25 credits</Typography>
+            <Typography color="inherit">{calculatedAmount}</Typography>
           </ListItem>
         </List>
       </CardContent>

@@ -38,7 +38,7 @@ export default [
         items: [
           {
             title: "Dash Bank",
-            href: "/dashbank/TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT/about"
+            href: "/dashbank/TUTik4srgKuzgXoL4KfV75foQbYuP8SirY/about"
           },
           {
             title: "Dash Lotto",

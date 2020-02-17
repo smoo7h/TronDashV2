@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import axios from "axios";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -39,9 +40,46 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DappSummary({ customer, className, ...rest }) {
+function DappSummary({ customer, dappData, className, ...rest }) {
   const classes = useStyles();
   const [openEdit, setOpenEdit] = useState(false);
+  const [creationDate, setcreationDate] = useState(0);
+
+  const fetchNumberOfTransactions = address => {
+    if (address) {
+      let currentuseraddress = window.tronWeb.defaultAddress.base58;
+      if (window.tronWeb) {
+        axios
+          .get("https://apilist.tronscan.org/api/contract?contract=" + address)
+          .then(response => {
+            let creationdate = new Date(response.data.data[0].date_created);
+
+            setcreationDate(creationdate.toLocaleDateString());
+          })
+          .catch(error => {
+            console.error("Error during service worker registration:", error);
+          });
+      }
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchData = () => {
+      if (mounted) {
+        //get the contract address
+
+        fetchNumberOfTransactions(dappData.ContractAddress);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleEditOpen = () => {
     setOpenEdit(true);
@@ -83,12 +121,16 @@ function DappSummary({ customer, className, ...rest }) {
               <TableCell>{"Bankroll"}</TableCell>
             </TableRow>
             <TableRow>
+              <TableCell>Contract Address</TableCell>
+              <TableCell>{"TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT"}</TableCell>
+            </TableRow>
+            <TableRow selected>
               <TableCell>Website</TableCell>
               <TableCell>{"https://banktoll.network"}</TableCell>
             </TableRow>
-            <TableRow selected>
-              <TableCell>Contract Deployed</TableCell>
-              <TableCell>{"04/03/19"}</TableCell>
+            <TableRow>
+              <TableCell>Creation Date</TableCell>
+              <TableCell>{creationDate}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

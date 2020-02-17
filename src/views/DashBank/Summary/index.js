@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-function Summary({ className, ...rest }) {
+function Summary({ dappData, className, ...rest }) {
   const classes = useStyles();
   const [customer, setCustomer] = useState();
 
@@ -47,7 +47,7 @@ function Summary({ className, ...rest }) {
       spacing={3}
     >
       <Grid item lg={12} md={12} xl={12} xs={12}>
-        <DappSummary />
+        <DappSummary dappData={dappData} />
       </Grid>
     </Grid>
   );

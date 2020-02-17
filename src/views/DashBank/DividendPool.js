@@ -23,17 +23,16 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1)
   },
   avatar: {
-    backgroundImage: gradients.green,
+    // backgroundImage: gradients.green,
     height: 48,
     width: 48
   }
 }));
 
-function DividendPool({ className, ...rest }) {
+function DividendPool({ className, dappData, ...rest }) {
   const classes = useStyles();
   const data = {
     value: "24,000",
-    currency: "$",
     difference: "+4.5%"
   };
 
@@ -45,9 +44,13 @@ function DividendPool({ className, ...rest }) {
         </Typography>
         <div className={classes.details}>
           <Typography variant="h3">
-            {data.currency}
-            {data.value}
+            {dappData.CurrentDivPool
+              ? Number(dappData.CurrentDivPool.toFixed(0)).toLocaleString()
+              : "0"}
+            {` `}
+            {dappData.DivPool.Currency}
           </Typography>
+          {/* 
           <Label
             className={classes.label}
             color={colors.green[600]}
@@ -55,9 +58,10 @@ function DividendPool({ className, ...rest }) {
           >
             {data.difference}
           </Label>
+          */}
         </div>
       </div>
-      <Avatar className={classes.avatar}>
+      <Avatar className={classes.avatar} src={dappData.ImageURL}>
         <AttachMoneyIcon />
       </Avatar>
     </Card>
@@ -66,6 +70,7 @@ function DividendPool({ className, ...rest }) {
 
 DividendPool.propTypes = {
   className: PropTypes.string
+  //  divamount: PropTypes.string
 };
 
 export default DividendPool;

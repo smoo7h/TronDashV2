@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Container } from '@material-ui/core';
+import React, { useState, useEffect, useRef } from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Container } from "@material-ui/core";
 //import axios from 'src/utils/axios';
-import axios from 'axios';
-import Page from 'src/components/Page';
-import SearchBar from 'src/components/SearchBar';
-import Header from './Header';
-import Results from './Results';
-import Statistics from './Statistics';
-import TronWeb from 'tronweb';
-import BigNumber from 'bignumber.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from "axios";
+import Page from "src/components/Page";
+import SearchBar from "src/components/SearchBar";
+import Header from "./Header";
+import Results from "./Results";
+import Statistics from "./Statistics";
+import TronWeb from "tronweb";
+import BigNumber from "bignumber.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3)
   },
   loading: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   }
 }));
 
@@ -79,7 +79,7 @@ function CustomerManagementList() {
       rowItem[fieldName] = Number(functionItem.ServerValue);
       //check if its an estimated field if it is we need 2 do math
       if (
-        fieldName == 'TotalStaked' &&
+        fieldName == "TotalStaked" &&
         rowItem.CurrentUserInvestment &&
         rowItem.CurrentDivPool &&
         rowItem.EstimageDivs
@@ -90,7 +90,7 @@ function CustomerManagementList() {
         let estimatedProfit =
           (divamount / totalfrozen) * rowItem.CurrentUserInvestment;
         returnValue = estimatedProfit;
-        rowItem['EstimatedDivs'] = returnValue;
+        rowItem["EstimatedDivs"] = returnValue;
       }
 
       // if it is push otherwise update
@@ -102,11 +102,11 @@ function CustomerManagementList() {
       //update the state
       setCustomers(updatelist => updatelist);
     } else {
-      if (contractParameter == '@UserAddress') {
+      if (contractParameter == "@UserAddress") {
         contractParameter = window.tronWeb.defaultAddress.base58;
       }
 
-      if (functionSelector == '@ContractBalance') {
+      if (functionSelector == "@ContractBalance") {
         //just get the contact balance
         returnValue = await window.tronWeb.trx.getBalance(contractAddress);
 
@@ -133,7 +133,7 @@ function CustomerManagementList() {
             try {
               //you have to send the one with a
               getbalance1 =
-                contractParameter == '' || !contractParameter
+                contractParameter == "" || !contractParameter
                   ? await contract[functionSelector]().call()
                   : await contract[functionSelector](contractParameter).call();
             } catch (error) {
@@ -154,7 +154,7 @@ function CustomerManagementList() {
             returnValue = returnValue;
             //if this is a estimated dividend do the calculation here
             if (
-              fieldName == 'TotalStaked' &&
+              fieldName == "TotalStaked" &&
               rowItem.CurrentUserInvestment &&
               rowItem.CurrentDivPool &&
               rowItem.EstimageDivs
@@ -170,7 +170,7 @@ function CustomerManagementList() {
               if (returnValue < 0) {
                 returnValue = 0;
               }
-              rowItem['EstimatedDivs'] = returnValue;
+              rowItem["EstimatedDivs"] = returnValue;
             }
 
             //add return value to the object
@@ -197,7 +197,7 @@ function CustomerManagementList() {
     //get data from our api server
     axios
       .get(
-        'https://trondashdappdatav2.azurewebsites.net/api/GetTronDashData?code=qOwvPJ6qxBfsGyozUauaoi082IZUMo9xl6h5smuvsMDKRS4PWV6i6w==&user=' +
+        "https://trondashdappdatav2.azurewebsites.net/api/GetTronDashData?code=qOwvPJ6qxBfsGyozUauaoi082IZUMo9xl6h5smuvsMDKRS4PWV6i6w==&user=" +
           window.tronWeb.defaultAddress.hex
       )
       .then(response => {
@@ -206,7 +206,7 @@ function CustomerManagementList() {
           //divpool
           fetchContractValue(
             item,
-            'CurrentDivPool',
+            "CurrentDivPool",
             item.DivPool.ContractAddress,
             item.DivPool.ContractFunctionSelector,
             item.DivPool.ContractParameter,
@@ -216,7 +216,7 @@ function CustomerManagementList() {
           //CurrentUserDivs
           fetchContractValue(
             item,
-            'CurrentUserDivs',
+            "CurrentUserDivs",
             item.UserDividend.ContractAddress,
             item.UserDividend.ContractFunctionSelector,
             item.UserDividend.ContractParameter,
@@ -226,7 +226,7 @@ function CustomerManagementList() {
           //user investment
           fetchContractValue(
             item,
-            'CurrentUserInvestment',
+            "CurrentUserInvestment",
             item.Investment.ContractAddress,
             item.Investment.ContractFunctionSelector,
             item.Investment.ContractParameter,
@@ -239,7 +239,7 @@ function CustomerManagementList() {
             //CurrentUserDivsEstimated
             fetchContractValue(
               item,
-              'TotalStaked',
+              "TotalStaked",
               item.TotalStaked.ContractAddress,
               item.TotalStaked.ContractFunctionSelector,
               item.TotalStaked.ContractParameter,

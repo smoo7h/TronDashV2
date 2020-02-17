@@ -3,6 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
+import axios from "axios";
 import {
   Card,
   CardActions,
@@ -58,9 +59,9 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function DappInfo({ className, ...rest }) {
+function DappInfo({ className, dappData, ...rest }) {
   const classes = useStyles();
-
+  const [creationDate, setcreationDate] = useState(0);
   const [data, setData] = useState([
     163,
     166,
@@ -75,41 +76,6 @@ function DappInfo({ className, ...rest }) {
     176,
     172
   ]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    setInterval(() => {
-      if (mounted) {
-        setData(data => {
-          const newData = [...data];
-
-          newData.shift();
-          newData.push(0);
-
-          return newData;
-        });
-      }
-
-      setTimeout(() => {
-        if (mounted) {
-          setData(prevData => {
-            const newData = [...prevData];
-            const random = getRandomInt(100, 200);
-
-            newData.pop();
-            newData.push(random);
-
-            return newData;
-          });
-        }
-      }, 500);
-    }, 2000);
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const labels = data.map((value, i) => i);
 
@@ -132,6 +98,40 @@ function DappInfo({ className, ...rest }) {
     }
   ];
 
+  const fetchNumberOfTransactions = address => {
+    if (address) {
+      let currentuseraddress = window.tronWeb.defaultAddress.base58;
+      if (window.tronWeb) {
+        axios
+          .get("https://apilist.tronscan.org/api/contract?contract=" + address)
+          .then(response => {
+            let creationdate = new Date(response.data.data[0].date_created);
+
+            setcreationDate(creationdate.toLocaleDateString());
+          })
+          .catch(error => {
+            console.error("Error during service worker registration:", error);
+          });
+      }
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchData = () => {
+      if (mounted) {
+        fetchNumberOfTransactions(dappData.ContractAddress);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
@@ -147,7 +147,7 @@ function DappInfo({ className, ...rest }) {
             <Avatar
               alt="Person"
               className={classes.avatar}
-              src={"https://trondash.com/static/media/bankroll.71f452fa.png"}
+              src={dappData.ImageURL}
             />
           </Box>
         </Box>
@@ -181,9 +181,13 @@ function DappInfo({ className, ...rest }) {
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
             <Typography color="inherit">
-              {"15,223"}
+              {dappData.CurrentUserInvestment
+                ? Number(
+                    dappData.CurrentUserInvestment.toFixed(0)
+                  ).toLocaleString()
+                : "0"}
               {` `}
-              {"trx"}
+              {dappData.DivPool.Currency}
             </Typography>
           </ListItem>
           <ListItem
@@ -192,10 +196,10 @@ function DappInfo({ className, ...rest }) {
             key={"StartDate"}
           >
             <ListItemText
-              primary={"Start Date"}
+              primary={"Total Deposit"}
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">{"02/12/19"}</Typography>
+            <Typography color="inherit">{creationDate}</Typography>
           </ListItem>
           <ListItem
             classes={{ divider: classes.itemDivider }}
@@ -230,6 +234,21 @@ function DappInfo({ className, ...rest }) {
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
+            key={"TotalRefferals"}
+          >
+            <ListItemText
+              primary={"My Refferals"}
+              primaryTypographyProps={{ color: "inherit", variant: "body1" }}
+            />
+            <Typography color="inherit">
+              {"0.2"}
+              {` `}
+              {"trx"}
+            </Typography>
+          </ListItem>
+          <ListItem
+            classes={{ divider: classes.itemDivider }}
+            divider
             key={"MyDividends"}
           >
             <ListItemText
@@ -237,9 +256,13 @@ function DappInfo({ className, ...rest }) {
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
             <Typography color="inherit">
-              {"23"}
+              {dappData.CurrentUserDivs
+                ? Number(dappData.CurrentUserDivs)
+                    .toFixed(2)
+                    .toLocaleString()
+                : "0"}
               {` `}
-              {"trx"}
+              {dappData.UserDividend.Currency}
             </Typography>
           </ListItem>
         </List>

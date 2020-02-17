@@ -70,9 +70,16 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Invest({ className, ...rest }) {
+function Invest({ className, dappData, ...rest }) {
   const classes = useStyles();
 
+  const [calculatedAmount, setcalculatedAmount] = useState(0);
+
+  const handleChange = event => {
+    //we need to calculate their input value
+
+    setcalculatedAmount(event.target.value * dappData.CurrentSellPrice);
+  };
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
@@ -87,7 +94,7 @@ function Invest({ className, ...rest }) {
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
-            key={"investbuy"}
+            key={"investbuy2"}
           >
             <ListItemText
               primary="Amount"
@@ -96,9 +103,11 @@ function Invest({ className, ...rest }) {
             />
             <TextField
               //  fullWidth
+              type="number"
               className={classes.margin2}
               id="input-with-icon-textfield"
               // label="Amount"
+              onChange={handleChange}
               inputProps={{
                 style: { textAlign: "right" }
               }}
@@ -118,7 +127,9 @@ function Invest({ className, ...rest }) {
               primary="Price"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">1.1 trx</Typography>
+            <Typography color="inherit">
+              {dappData.CurrentBuyPrice} {dappData.BuyPrice.Currency}
+            </Typography>
           </ListItem>
           <ListItem
             classes={{ divider: classes.itemDivider }}
@@ -129,7 +140,7 @@ function Invest({ className, ...rest }) {
               primary="total"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">25 credits</Typography>
+            <Typography color="inherit">{calculatedAmount}</Typography>
           </ListItem>
         </List>
       </CardContent>
