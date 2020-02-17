@@ -1,16 +1,16 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Container, Grid } from "@material-ui/core";
-import Page from "src/components/Page";
-import Header from "./Header";
-import LatestProjects from "./LatestProjects";
-import NewProjects from "./NewProjects";
-import RealTime from "./RealTime";
-import RoiPerCustomer from "./RoiPerCustomer";
-import TeamTasks from "./TeamTasks";
-import TodaysMoney from "./TodaysMoney";
-import SystemHealth from "./SystemHealth";
-import PerformanceOverTime from "./PerformanceOverTime";
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
+import { Container, Grid } from '@material-ui/core';
+import Page from 'src/components/Page';
+import Header from './Header';
+import LatestProjects from './LatestProjects';
+import NewProjects from './NewProjects';
+import RealTime from './RealTime';
+import RoiPerCustomer from './RoiPerCustomer';
+import TeamTasks from './TeamTasks';
+import TodaysMoney from './TodaysMoney';
+import SystemHealth from './SystemHealth';
+import PerformanceOverTime from './PerformanceOverTime';
 
 const useStyles = makeStyles(theme => ({
   root: {

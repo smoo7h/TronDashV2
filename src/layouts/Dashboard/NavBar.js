@@ -1,12 +1,12 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useState } from 'react';
-import { useLocation, matchPath } from 'react-router';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/styles';
-import TronWeb from 'tronweb';
+import React, { useEffect, useState } from "react";
+import { useLocation, matchPath } from "react-router";
+import { Link as RouterLink } from "react-router-dom";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/styles";
+import TronWeb from "tronweb";
 import {
   Drawer,
   Divider,
@@ -19,17 +19,17 @@ import {
   Badge,
   Link,
   colors
-} from '@material-ui/core';
-import axios from 'axios';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import NavItem from 'src/components/NavItem';
-import navConfig from './navConfig';
+} from "@material-ui/core";
+import axios from "axios";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import NavItem from "src/components/NavItem";
+import navConfig from "./navConfig";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
   },
   mobileDrawer: {
     width: 256
@@ -37,17 +37,17 @@ const useStyles = makeStyles(theme => ({
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: 'calc(100% - 64px)'
+    height: "calc(100% - 64px)"
   },
   navigation: {
-    overflow: 'auto',
+    overflow: "auto",
     padding: theme.spacing(0, 2, 2, 2),
     flexGrow: 1
   },
   profile: {
     padding: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   badge: {
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`
@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: colors.grey[300]
   },
   avatar: {
-    cursor: 'pointer',
+    cursor: "pointer",
     width: 40,
     height: 40
   },
@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2)
   },
   moreButton: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
     color: colors.blueGrey[200]
   }
 }));
@@ -145,16 +145,16 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
   const classes = useStyles();
   const location = useLocation();
   const session = useSelector(state => state.session);
-  const [status, setStatus] = useState('online');
-  const [username, setUsername] = useState('');
+  const [status, setStatus] = useState("online");
+  const [username, setUsername] = useState("");
   //tron intergrateion
 
   const handleStatusToggle = () => {
     const statusSeq = {
-      online: 'away',
-      away: 'busy',
-      busy: 'offline',
-      offline: 'online'
+      online: "away",
+      away: "busy",
+      busy: "offline",
+      offline: "online"
     };
 
     setStatus(prevStatus => statusSeq[prevStatus]);
@@ -171,7 +171,7 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
   useEffect(() => {
     axios
       .get(
-        'https://apilist.tronscan.org/api/account?address=' +
+        "https://apilist.tronscan.org/api/account?address=" +
           window.tronWeb.defaultAddress.base58
       )
       .then(response => {
@@ -184,7 +184,7 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
   useEffect(() => {
     axios
       .get(
-        'https://apilist.tronscan.org/api/account?address=' +
+        "https://apilist.tronscan.org/api/account?address=" +
           window.tronWeb.defaultAddress.base58
       )
       .then(response => {
@@ -212,17 +212,17 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
           <Badge
             overlap="circle"
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
+              vertical: "bottom",
+              horizontal: "right"
             }}
             classes={{
               dot: classes.badgeDot,
               badge: clsx({
                 [classes.badge]: true,
-                [classes.onlineBadge]: status === 'online',
-                [classes.awayBadge]: status === 'away',
-                [classes.busyBadge]: status === 'busy',
-                [classes.offlineBadge]: status === 'offline'
+                [classes.onlineBadge]: status === "online",
+                [classes.awayBadge]: status === "away",
+                [classes.busyBadge]: status === "busy",
+                [classes.offlineBadge]: status === "offline"
               })
             }}
             variant="dot"
@@ -242,12 +242,12 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
               color="textPrimary"
               underline="none"
             >
-              {`${username ? username : ''}`}
+              {`${username ? username : ""}`}
             </Link>
             <Typography variant="body2">
               {window.tronWeb
                 ? window.tronWeb.defaultAddress.base58.substring(0, 16)
-                : ''}
+                : ""}
             </Typography>
           </div>
           <IconButton className={classes.moreButton} size="small">
