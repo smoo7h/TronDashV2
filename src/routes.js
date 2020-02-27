@@ -14,9 +14,11 @@ export default [
   {
     path: "/",
     exact: true,
-    component: () => <Redirect to="/dividends" />
+    //component: () => <Redirect to="/dividends" />
+    component: () => (
+      <Redirect to="/dashbank/TUTik4srgKuzgXoL4KfV75foQbYuP8SirY/about" />
+    )
   },
-
   {
     path: "/errors",
     component: ErrorLayout,

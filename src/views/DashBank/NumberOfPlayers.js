@@ -3,7 +3,8 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Card, Typography, Avatar, LinearProgress } from "@material-ui/core";
-import DoneIcon from "@material-ui/icons/Done";
+
+import UserIcon from "@material-ui/icons/People";
 import gradients from "src/utils/gradients";
 
 const useStyles = makeStyles(theme => ({
@@ -32,29 +33,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NumberOfPlayers({ className, ...rest }) {
+function NumberOfPlayers({ className, numberOfusers, ...rest }) {
   const classes = useStyles();
-  const data = {
-    value: 97
-  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <div className={classes.content}>
         <Typography component="h3" gutterBottom variant="overline">
-          Number Of Users
+          Number Of Users 24h
         </Typography>
         <div className={classes.details}>
-          <Typography variant="h3">{data.value}%</Typography>
+          <Typography variant="h3">{numberOfusers}</Typography>
+          {/*
           <LinearProgress
             className={classes.progress}
-            value={data.value}
+            value={numberOfusers}
             variant="determinate"
           />
+           */}
         </div>
       </div>
       <Avatar className={classes.avatar}>
-        <DoneIcon />
+        <UserIcon />
       </Avatar>
     </Card>
   );

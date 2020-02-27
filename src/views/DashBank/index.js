@@ -17,6 +17,7 @@ import Page from "src/components/Page";
 import Header from "./Header";
 import Summary from "./Summary";
 import Invoices from "./Invoices";
+import LatestProjects from "./LatestProjects";
 import Logs from "./Logs";
 
 import TotalTransactions from "./TotalTransactions";
@@ -61,6 +62,9 @@ function DashBank({ match, history }) {
   const [dappData, setdappData] = useState(null);
   const [dataFetched, setdataFetched] = useState(false);
   const [timerrunning, settimerrunning] = useState(false);
+  const [numberOfUsers, setnumberOfUsers] = useState(0);
+  const [volume, setVolume] = useState(0);
+
   const [tick, setTick] = useState(1);
   const { id, tab: currentTab } = match.params;
   const tabs = [
@@ -115,17 +119,14 @@ function DashBank({ match, history }) {
       }
 
       if (functionSelector == "@ContractBalance") {
-        //just get the contact balance
+        //just get the contact balance 6 044 007 486709
         returnValue = await window.tronWeb.trx.getBalance(contractAddress);
         let currentObject = dappData;
         //check if its in the list
         currentObject[fieldName] = returnValue * 0.000001; //always 6 decimal places because its trx
 
-        //add return value to the object
-        currentObject[fieldName] = returnValue;
-
         //update the state
-        setdappData(currentObject => currentObject);
+        setdappData(currentObject);
       } else {
         //get the contacct value
         window.tronWeb
@@ -279,6 +280,14 @@ function DashBank({ match, history }) {
     history.push(value);
   };
 
+  const handleNumberOfUsersChange = value => {
+    setnumberOfUsers(value);
+  };
+
+  const handleVolumeChange = value => {
+    setVolume(value);
+  };
+
   useInterval(() => {
     //this is the data refresh interval it will refresh every x amount of time after the %
     setTick(tick => tick + 1);
@@ -309,13 +318,19 @@ function DashBank({ match, history }) {
             <DividendPool dappData={dappData ? dappData : 0} />
           </Grid>
           <Grid item lg={3} sm={6} xs={12}>
-            <NumberOfPlayers dappData={dappData ? dappData : 0} />
+            <NumberOfPlayers
+              dappData={dappData ? dappData : 0}
+              numberOfusers={numberOfUsers}
+            />
           </Grid>
           <Grid item lg={3} sm={6} xs={12}>
             <TotalTransactions dappData={dappData ? dappData : 0} />
           </Grid>
           <Grid item lg={3} sm={6} xs={12}>
-            <TotalVolume dappData={dappData ? dappData : 0} />
+            <TotalVolume
+              dappData={dappData ? dappData : 0}
+              totalVolume={volume}
+            />
           </Grid>
           <Grid item lg={3} xs={12}>
             <DappInfo dappData={dappData ? dappData : 0} />
@@ -326,7 +341,11 @@ function DashBank({ match, history }) {
             <Devest dappData={dappData ? dappData : 0} />
           </Grid>
           <Grid item lg={6} xs={12}>
-            <PerformanceOverTime dappData={dappData ? dappData : 0} />
+            <PerformanceOverTime
+              dappdata={dappData ? dappData : 0}
+              handleNumberOfUsersChange={handleNumberOfUsersChange}
+              handleVolumeChange={handleVolumeChange}
+            />
           </Grid>
         </Grid>
 
@@ -347,7 +366,7 @@ function DashBank({ match, history }) {
             <Summary dappData={dappData ? dappData : 0} />
           )}
           {currentTab === "transactions" && (
-            <Invoices dappData={dappData ? dappData : 0} />
+            <LatestProjects dappData={dappData ? dappData : 0} />
           )}
           {currentTab === "leaderboard" && (
             <Logs dappData={dappData ? dappData : 0} />

@@ -24,8 +24,10 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     // backgroundImage: gradients.green,
+    //   border: `2px solid ${theme.palette.common.white}`,
     height: 48,
     width: 48
+    // backgroundColor: theme.palette.common.white
   }
 }));
 
@@ -61,9 +63,15 @@ function DividendPool({ className, dappData, ...rest }) {
           */}
         </div>
       </div>
-      <Avatar className={classes.avatar} src={dappData.ImageURL}>
-        <AttachMoneyIcon />
-      </Avatar>
+      {dappData.Invest.Currency == "trx" && (
+        <Avatar
+          className={classes.avatar}
+          src={"https://www.coinopsy.com/media/img/quality_logo/tron-trx.png"}
+        ></Avatar>
+      )}
+      {dappData.Invest.Currency != "trx" && (
+        <Avatar className={classes.avatar} src={dappData.ImageURL}></Avatar>
+      )}
     </Card>
   );
 }

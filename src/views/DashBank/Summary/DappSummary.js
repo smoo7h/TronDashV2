@@ -98,38 +98,30 @@ function DappSummary({ customer, dappData, className, ...rest }) {
           <TableBody>
             <TableRow>
               <TableCell>About</TableCell>
-              <TableCell>
-                {
-                  "Bankroll Credits is the simplest way to tap into the full potential of the Bankroll Network. Passively earn TRX by holding credits over time. Properties like Luck and the BNKR token flow TRX directly to Credits HODLERs. Finally, earning extra crypto doesn't have to be a gamble."
-                }
-              </TableCell>
+              <TableCell>{dappData.About}</TableCell>
             </TableRow>
             <TableRow selected>
               <TableCell>Fees</TableCell>
-              <TableCell>
-                {
-                  "A transaction fee of 10% is charged on buys and sells that is distributed as follows: 8% to the instant dividend pool, 1% as referral reward, and 1% for maintenenance/promotion of the platform. A small 1% fee is charged on transfers. An additional revenue sharing pool drips 1.1% to the community daily."
-                }
-              </TableCell>
+              <TableCell>{dappData.Fees}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>{"Credits"}</TableCell>
+              <TableCell>{dappData.Name}</TableCell>
             </TableRow>
             <TableRow selected>
               <TableCell>Company</TableCell>
-              <TableCell>{"Bankroll"}</TableCell>
+              <TableCell>{dappData.CompanyName}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Contract Address</TableCell>
-              <TableCell>{"TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT"}</TableCell>
+              <TableCell>{dappData.ContractAddress}</TableCell>
             </TableRow>
             <TableRow selected>
               <TableCell>Website</TableCell>
-              <TableCell>{"https://banktoll.network"}</TableCell>
+              <TableCell>{dappData.Website}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Creation Date</TableCell>
+              <TableCell>Deploy Date</TableCell>
               <TableCell>{creationDate}</TableCell>
             </TableRow>
           </TableBody>

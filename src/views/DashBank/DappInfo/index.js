@@ -4,6 +4,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
+import { ExecuteContract } from "../../../utils/ContractFunctions";
 import {
   Card,
   CardActions,
@@ -62,41 +63,32 @@ function getRandomInt(min, max) {
 function DappInfo({ className, dappData, ...rest }) {
   const classes = useStyles();
   const [creationDate, setcreationDate] = useState(0);
-  const [data, setData] = useState([
-    163,
-    166,
-    161,
-    159,
-    99,
-    163,
-    173,
-    166,
-    167,
-    183,
-    176,
-    172
-  ]);
 
-  const labels = data.map((value, i) => i);
-
-  const pages = [
-    {
-      pathname: "/projects",
-      views: "24"
-    },
-    {
-      pathname: "/chat",
-      views: "21"
-    },
-    {
-      pathname: "/cart",
-      views: "15"
-    },
-    {
-      pathname: "/cart/checkout",
-      views: "8"
+  const handleReinvest = (event, id) => {
+    //get selected object and execute the reinvest command
+    if (dappData.CurrentUserDivs > 0) {
+      ExecuteContract(
+        dappData.ReInvest.ContractAddress,
+        dappData.ReInvest.ContractFunctionSelector,
+        dappData.ReInvest.ContractParameter
+          ? dappData.ReInvest.ContractParameter
+          : ""
+      );
     }
-  ];
+  };
+
+  const handleWithdrawl = (event, id) => {
+    //get selected object and execute the Withdraw command
+    if (dappData.CurrentUserDivs > 0) {
+      ExecuteContract(
+        dappData.WithDrawl.ContractAddress,
+        dappData.WithDrawl.ContractFunctionSelector,
+        dappData.WithDrawl.ContractParameter
+          ? dappData.WithDrawl.ContractParameter
+          : ""
+      );
+    }
+  };
 
   const fetchNumberOfTransactions = address => {
     if (address) {
@@ -135,9 +127,9 @@ function DappInfo({ className, dappData, ...rest }) {
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
-        subheader="bankroll.network"
+        subheader={dappData.CompanyName}
         subheaderTypographyProps={{ color: "inherit" }}
-        title="Credits"
+        title={dappData.Name}
         titleTypographyProps={{ color: "inherit" }}
       />
 
@@ -270,18 +262,16 @@ function DappInfo({ className, dappData, ...rest }) {
       <CardActions className={classes.actions}>
         <Button
           color="primary"
-          //  component={RouterLink}
           size="small"
-          //  to="#"
+          onClick={handleReinvest}
           variant="contained"
         >
           Reinvest
         </Button>
         <Button
           color="primary"
-          //   component={RouterLink}
+          onClick={handleWithdrawl}
           size="small"
-          // to="#"
           variant="contained"
         >
           Withdraw

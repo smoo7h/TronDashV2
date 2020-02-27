@@ -151,7 +151,7 @@ function CustomerManagementList() {
             let multiplier = Math.pow(10, dappDecimals * -1);
             returnValue = Number(numchec) * multiplier;
             //remove the decmalls
-            returnValue = returnValue;
+
             //if this is a estimated dividend do the calculation here
             if (
               fieldName == "TotalStaked" &&

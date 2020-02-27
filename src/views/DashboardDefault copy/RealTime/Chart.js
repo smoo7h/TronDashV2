@@ -1,29 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { Bar } from 'react-chartjs-2';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { Bar } from "react-js-2";
+import { makeStyles, useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
-    position: 'relative'
+    position: "relative"
   }
 }));
 
-function Chart({
-  data: dataProp,
-  labels,
-  className,
-  ...rest
-}) {
+function Chart({ data: dataProp, labels, className, ...rest }) {
   const classes = useStyles();
   const theme = useTheme();
 
   const data = {
     datasets: [
       {
-        label: 'src/views',
-        backgroundColor: 'rgba(255,255,255,0.4)',
+        label: "src/views",
+        backgroundColor: "rgba(255,255,255,0.4)",
         data: dataProp,
         barThickness: 12,
         maxBarThickness: 10,
@@ -74,7 +69,7 @@ function Chart({
     },
     tooltips: {
       enabled: true,
-      mode: 'index',
+      mode: "index",
       intersect: false,
       caretSize: 10,
       yPadding: 20,
@@ -88,7 +83,7 @@ function Chart({
       callbacks: {
         legend: () => {},
         title: () => {},
-        label: (tooltipItem) => {
+        label: tooltipItem => {
           const label = `Views: ${tooltipItem.yLabel}`;
 
           return label;
@@ -98,14 +93,8 @@ function Chart({
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Bar
-        data={data}
-        options={options}
-      />
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Bar data={data} options={options} />
     </div>
   );
 }

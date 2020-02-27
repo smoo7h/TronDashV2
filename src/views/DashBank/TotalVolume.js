@@ -3,7 +3,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Card, Typography, Avatar } from "@material-ui/core";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import AttachMoneyIcon from "@material-ui/icons/Timeline";
 import gradients from "src/utils/gradients";
 
 const useStyles = makeStyles(theme => ({
@@ -29,12 +29,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function TotalVolume({ className, ...rest }) {
+function TotalVolume({ className, totalVolume, dappData, ...rest }) {
   const classes = useStyles();
-  const data = {
-    value: "25.50",
-    currency: "$"
-  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -45,12 +41,13 @@ function TotalVolume({ className, ...rest }) {
           gutterBottom
           variant="overline"
         >
-          Total Volume
+          Total 24h Volume
         </Typography>
         <div className={classes.details}>
           <Typography color="inherit" variant="h3">
-            {data.currency}
-            {data.value}
+            {Number(totalVolume.toFixed(0)).toLocaleString()}
+            {` `}
+            {dappData.DivPool.Currency}
           </Typography>
         </div>
       </div>

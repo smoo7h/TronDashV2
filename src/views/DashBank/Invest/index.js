@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { ExecuteInvestContract } from "src/utils/ContractFunctions";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -74,12 +75,30 @@ function Invest({ className, dappData, ...rest }) {
   const classes = useStyles();
 
   const [calculatedAmount, setcalculatedAmount] = useState(0);
+  const [uncalculatedAmount, setuncalculatedAmount] = useState(0);
 
   const handleChange = event => {
     //we need to calculate their input value
 
     setcalculatedAmount(event.target.value * dappData.CurrentSellPrice);
+    setuncalculatedAmount(event.target.value);
   };
+
+  const handleInvest = (event, id) => {
+    //get selected object and execute the Withdraw command
+    if (dappData.CurrentUserDivs > 0) {
+      ExecuteInvestContract(
+        dappData.Invest.ContractAddress,
+        dappData.Invest.ContractFunctionSelector,
+        dappData.Invest.ContractParameter
+          ? dappData.Invest.ContractParameter
+          : "",
+        uncalculatedAmount,
+        dappData.Invest.Decimals
+      );
+    }
+  };
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
@@ -145,7 +164,12 @@ function Invest({ className, dappData, ...rest }) {
         </List>
       </CardContent>
       <CardActions className={classes.actions}>
-        <Button variant="contained" size="small" color="primary">
+        <Button
+          variant="contained"
+          size="small"
+          color="primary"
+          onClick={handleInvest}
+        >
           Invest
         </Button>
       </CardActions>

@@ -3,7 +3,8 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Card, Typography, Avatar, colors } from "@material-ui/core";
-import FolderOpenIcon from "@material-ui/icons/FolderOpenOutlined";
+
+import VolumeIcon from "@material-ui/icons/SwapVert";
 import Label from "src/components/Label";
 import axios from "axios";
 import gradients from "src/utils/gradients";
@@ -85,7 +86,7 @@ function TotalTransactions({ className, dappData, ...rest }) {
         </div>
       </div>
       <Avatar className={classes.avatar}>
-        <FolderOpenIcon />
+        <VolumeIcon />
       </Avatar>
     </Card>
   );

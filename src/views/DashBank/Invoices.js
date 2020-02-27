@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import moment from 'moment';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState, useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import clsx from "clsx";
+import moment from "moment";
+import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { makeStyles } from "@material-ui/styles";
 import {
   Button,
   Card,
@@ -17,10 +17,10 @@ import {
   TableHead,
   TableRow,
   colors
-} from '@material-ui/core';
-import axios from 'src/utils/axios';
-import Label from 'src/components/Label';
-import GenericMoreButton from 'src/components/GenericMoreButton';
+} from "@material-ui/core";
+import axios from "axios";
+import Label from "src/components/Label";
+import GenericMoreButton from "src/components/GenericMoreButton";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -29,6 +29,9 @@ const useStyles = makeStyles(() => ({
   },
   inner: {
     minWidth: 1150
+  },
+  header: {
+    backgroundColor: "#212121"
   }
 }));
 
@@ -40,12 +43,12 @@ function Invoices({ className, ...rest }) {
     let mounted = true;
 
     const fetchInvoices = () => {
-      axios.get('/api/management/customers/1/invoices').then(response => {
+      axios.get("/api/management/customers/1/invoices").then(response => {
         if (mounted) {
           setInvoices(response.data.invoices);
         }
       });
-    }
+    };
 
     fetchInvoices();
 
@@ -61,37 +64,28 @@ function Invoices({ className, ...rest }) {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Card>
-        <CardHeader
-          action={<GenericMoreButton />}
-          title="Customer invoices"
-        />
+        <CardHeader title="Dapp Activity" />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar>
             <div className={classes.inner}>
               <Table>
-                <TableHead>
+                <TableHead className={classes.header}>
                   <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Payment Method</TableCell>
-                    <TableCell>Total</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell align="right">Actions</TableCell>
+                    <TableCell>Time</TableCell>
+                    <TableCell>User</TableCell>
+                    <TableCell>Type</TableCell>
+                    <TableCell>Amount</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {invoices.map(invoice => (
                     <TableRow key={invoice.id}>
-                      <TableCell>#{invoice.id.split('-').shift()}</TableCell>
+                      <TableCell>#{invoice.id.split("-").shift()}</TableCell>
                       <TableCell>
-                        {moment(invoice.date).format('DD/MM/YYYY | HH:MM')}
+                        {moment(invoice.date).format("DD/MM/YYYY | HH:MM")}
                       </TableCell>
                       <TableCell>{invoice.description}</TableCell>
                       <TableCell>{invoice.paymentMethod}</TableCell>
@@ -112,7 +106,7 @@ function Invoices({ className, ...rest }) {
                           color="primary"
                           component={RouterLink}
                           size="small"
-                          to={'/management/invoices/1'}
+                          to={"/management/invoices/1"}
                           variant="outlined"
                         >
                           View
