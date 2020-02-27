@@ -318,14 +318,15 @@ function DashBank({ match, history }) {
             <DividendPool dappData={dappData ? dappData : 0} />
           </Grid>
           <Grid item lg={3} sm={6} xs={12}>
+            <TotalTransactions dappData={dappData ? dappData : 0} />
+          </Grid>
+          <Grid item lg={3} sm={6} xs={12}>
             <NumberOfPlayers
               dappData={dappData ? dappData : 0}
               numberOfusers={numberOfUsers}
             />
           </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <TotalTransactions dappData={dappData ? dappData : 0} />
-          </Grid>
+
           <Grid item lg={3} sm={6} xs={12}>
             <TotalVolume
               dappData={dappData ? dappData : 0}

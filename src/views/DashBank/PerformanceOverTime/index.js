@@ -147,38 +147,45 @@ function PerformanceOverTime({
         let lastnumber = graphdata[graphdata.length - 1];
 
         if (element.transactiontype == "Invest") {
-          //get the bottom of the stack
-          let numertor =
-            element.result[dappdata.InvestEvent.AmountEventQualifier];
-          let newvalue = Number(lastnumber) - numertor;
-          graphdata.push(Number(newvalue).toFixed(0));
-          graphlabels.push(convertDateToString(element.block_timestamp));
+          if (dappdata.InvestEvent) {
+            //get the bottom of the stack
+            let numertor =
+              element.result[dappdata.InvestEvent.AmountEventQualifier];
+            let newvalue = Number(lastnumber) - numertor;
+            graphdata.push(Number(newvalue).toFixed(0));
+            graphlabels.push(convertDateToString(element.block_timestamp));
+          }
         } else if (element.transactiontype == "Reinvest") {
-          let lastnumber = graphdata[graphdata.length - 1];
-          let numertor =
-            element.result[dappdata.ReInvestEvent.AmountEventQualifier];
-          let newvalue = Number(lastnumber) - numertor;
-          graphdata.push(Number(newvalue).toFixed(0));
-          graphlabels.push(convertDateToString(element.block_timestamp));
+          if (dappdata.ReInvestEvent) {
+            let lastnumber = graphdata[graphdata.length - 1];
+            let numertor =
+              element.result[dappdata.ReInvestEvent.AmountEventQualifier];
+            let newvalue = Number(lastnumber) - numertor;
+            graphdata.push(Number(newvalue).toFixed(0));
+            graphlabels.push(convertDateToString(element.block_timestamp));
+          }
         } else if (element.transactiontype == "Devest") {
-          //get the bottom of the stack
-          let lastnumber = graphdata[graphdata.length - 1];
-          let numertor =
-            element.result[dappdata.DeVestEvent.AmountEventQualifier];
-          let newvalue = Number(lastnumber) + numertor;
-          graphdata.push(Number(newvalue).toFixed(0));
-          graphlabels.push(convertDateToString(element.block_timestamp));
+          if (dappdata.DeVestEvent) {
+            //get the bottom of the stack
+            let lastnumber = graphdata[graphdata.length - 1];
+            let numertor =
+              element.result[dappdata.DeVestEvent.AmountEventQualifier];
+            let newvalue = Number(lastnumber) + numertor;
+            graphdata.push(Number(newvalue).toFixed(0));
+            graphlabels.push(convertDateToString(element.block_timestamp));
+          }
         } else if (element.transactiontype == "Withdraw") {
           //get the bottom of the stack
           //
-
-          let lastnumber = graphdata[graphdata.length - 1];
-          let ele = dappdata.WithdrawalEvent.AmountEventQualifier.toString();
-          let numertor = element.result.tronWithdrawn;
-          let newvalue = Number(lastnumber) + numertor;
-          if (newvalue) {
-            graphdata.push(Number(newvalue).toFixed(0));
-            graphlabels.push(convertDateToString(element.block_timestamp));
+          if (dappdata.WithdrawalEvent) {
+            let lastnumber = graphdata[graphdata.length - 1];
+            let ele = dappdata.WithdrawalEvent.AmountEventQualifier.toString();
+            let numertor = element.result.tronWithdrawn;
+            let newvalue = Number(lastnumber) + numertor;
+            if (newvalue) {
+              graphdata.push(Number(newvalue).toFixed(0));
+              graphlabels.push(convertDateToString(element.block_timestamp));
+            }
           }
         }
       });
@@ -308,7 +315,33 @@ function PerformanceOverTime({
           timestamp = timestamp - 86400000;
           trans.forEach(element => {
             if (element.block_timestamp > timestamp) {
-              total = total + Object.values(element.result)[1];
+              let newvalue = 0;
+              if (element.transactiontype == "Invest") {
+                if (dappdata.InvestEvent) {
+                  newvalue =
+                    element.result[dappdata.InvestEvent.AmountEventQualifier];
+                }
+              } else if (element.transactiontype == "Reinvest") {
+                if (dappdata.ReInvestEvent) {
+                  newvalue =
+                    element.result[dappdata.ReInvestEvent.AmountEventQualifier];
+                }
+              } else if (element.transactiontype == "Devest") {
+                if (dappdata.DevestEvent) {
+                  newvalue =
+                    element.result[dappdata.DevestEvent.AmountEventQualifier];
+                }
+              } else if (element.transactiontype == "Withdraw") {
+                if (dappdata.WithdrawalEvent) {
+                  newvalue =
+                    element.result[
+                      dappdata.WithdrawalEvent.AmountEventQualifier
+                    ];
+                }
+              }
+
+              //add the value data
+              total = total + newvalue;
             }
           });
           //get the decimal value

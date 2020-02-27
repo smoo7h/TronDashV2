@@ -41,7 +41,7 @@ function TotalVolume({ className, totalVolume, dappData, ...rest }) {
           gutterBottom
           variant="overline"
         >
-          Total 24h Volume
+          Recent Volume
         </Typography>
         <div className={classes.details}>
           <Typography color="inherit" variant="h3">

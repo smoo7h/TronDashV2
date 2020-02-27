@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import moment from "moment";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { makeStyles } from "@material-ui/styles";
 import {
   Card,
   CardHeader,
@@ -15,9 +15,9 @@ import {
   TableCell,
   TableRow,
   colors
-} from '@material-ui/core';
-import axios from 'src/utils/axios';
-import Label from 'src/components/Label';
+} from "@material-ui/core";
+import axios from "src/utils/axios";
+import Label from "src/components/Label";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -43,12 +43,12 @@ function Logs({ className, ...rest }) {
     let mounted = true;
 
     const fetchLogs = () => {
-      axios.get('/api/management/customers/1/logs').then(response => {
+      axios.get("/api/management/customers/1/logs").then(response => {
         if (mounted) {
           setLogs(response.data.logs);
         }
       });
-    }
+    };
 
     fetchLogs();
 
@@ -58,12 +58,9 @@ function Logs({ className, ...rest }) {
   }, []);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Card>
-        <CardHeader title="Customer logs" />
+        <CardHeader title="Top Players" />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar options={{ suppressScrollY: true }}>
@@ -90,7 +87,7 @@ function Logs({ className, ...rest }) {
                       <TableCell>{log.desc}</TableCell>
                       <TableCell align="right">{log.IP}</TableCell>
                       <TableCell align="right">
-                        {moment(log.created_at).format('YYYY/MM/DD | hh:mm:ss')}
+                        {moment(log.created_at).format("YYYY/MM/DD | hh:mm:ss")}
                       </TableCell>
                     </TableRow>
                   ))}

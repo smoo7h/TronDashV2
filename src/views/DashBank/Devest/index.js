@@ -14,9 +14,7 @@ import {
   ListItem,
   ListItemText
 } from "@material-ui/core";
-import Input from "@material-ui/core/Input";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import InputLabel from "@material-ui/core/InputLabel";
+import { ExecuteInvestContract } from "src/utils/ContractFunctions";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 
@@ -65,12 +63,30 @@ function Devest({ className, dappData, ...rest }) {
   const classes = useStyles();
 
   const [calculatedAmount, setcalculatedAmount] = useState(0);
+  const [uncalculatedAmount, setcalunculatedAmount] = useState(0);
 
   const handleChange = event => {
     //we need to calculate their input value
 
     setcalculatedAmount(event.target.value * dappData.CurrentSellPrice);
+    setcalunculatedAmount(event.target.value);
   };
+
+  const handleDenvest = (event, id) => {
+    //get selected object and execute the Withdraw command
+    if (Number(uncalculatedAmount) > 0) {
+      ExecuteInvestContract(
+        dappData.Devest.ContractAddress,
+        dappData.Devest.ContractFunctionSelector,
+        dappData.Devest.ContractParameter
+          ? dappData.Devest.ContractParameter
+          : "",
+        uncalculatedAmount,
+        dappData.Devest.Decimals
+      );
+    }
+  };
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
@@ -102,7 +118,10 @@ function Devest({ className, dappData, ...rest }) {
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">trx</InputAdornment>
+                  <InputAdornment position="end">
+                    {" "}
+                    {dappData.DivPool.Currency}
+                  </InputAdornment>
                 )
               }}
             />
@@ -130,12 +149,19 @@ function Devest({ className, dappData, ...rest }) {
               primary="total"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">{calculatedAmount}</Typography>
+            <Typography color="inherit">
+              {calculatedAmount} {` `} {dappData.DivPool.Currency}
+            </Typography>
           </ListItem>
         </List>
       </CardContent>
       <CardActions className={classes.actions}>
-        <Button variant="contained" size="small" color="primary">
+        <Button
+          variant="contained"
+          size="small"
+          color="primary"
+          onClick={handleDenvest}
+        >
           Devest
         </Button>
       </CardActions>

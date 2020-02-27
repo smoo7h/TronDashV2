@@ -224,7 +224,10 @@ function LatestProjects({ className, dappData, ...rest }) {
               </TableHead>
               <TableBody>
                 {transactions.map(transaction => (
-                  <TableRow hover key={transaction.transaction_id}>
+                  <TableRow
+                    hover
+                    key={transaction.transaction_id + Math.random()}
+                  >
                     <TableCell>
                       <div className={classes.tags}>
                         {transaction.color === "red" && (
@@ -253,7 +256,9 @@ function LatestProjects({ className, dappData, ...rest }) {
                           )}
                         </Avatar>
                         {window.tronWeb.address.fromHex(
-                          transaction.result.customerAddress
+                          transaction.result[
+                            dappData.ReInvestEvent.UserEventQualifier
+                          ]
                         )}
                       </div>
                     </TableCell>

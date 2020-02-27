@@ -182,6 +182,7 @@ function DappInfo({ className, dappData, ...rest }) {
               {dappData.DivPool.Currency}
             </Typography>
           </ListItem>
+          {/* 
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
@@ -223,6 +224,7 @@ function DappInfo({ className, dappData, ...rest }) {
               {"trx"}
             </Typography>
           </ListItem>
+          */}
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
@@ -233,11 +235,12 @@ function DappInfo({ className, dappData, ...rest }) {
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
             <Typography color="inherit">
-              {"0.2"}
+              {"0"}
               {` `}
-              {"trx"}
+              {dappData.DivPool.Currency}
             </Typography>
           </ListItem>
+
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider

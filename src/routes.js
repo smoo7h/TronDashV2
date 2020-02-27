@@ -125,7 +125,7 @@ export default [
       {
         path: "/management/customers",
         exact: true,
-        component: lazy(() => import("src/views/CustomerManagementList"))
+        component: lazy(() => import("src/views/DividendList"))
       },
       {
         path: "/dashbank/:id/:tab",
@@ -135,7 +135,7 @@ export default [
       {
         path: "/dividends",
         exact: true,
-        component: lazy(() => import("src/views/CustomerManagementList"))
+        component: lazy(() => import("src/views/DividendList"))
       },
       {
         path: "/management/customers/:id",
@@ -170,7 +170,7 @@ export default [
       {
         path: "/presentation",
         exact: true,
-        component: lazy(() => import("src/views/CustomerManagementList"))
+        component: lazy(() => import("src/views/DividendList"))
       },
       {
         path: "/profile/:id",

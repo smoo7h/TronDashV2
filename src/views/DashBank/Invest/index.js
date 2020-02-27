@@ -4,6 +4,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { ExecuteInvestContract } from "src/utils/ContractFunctions";
 import { makeStyles } from "@material-ui/styles";
+import BigNumber from "bignumber.js";
 import {
   Card,
   CardActions,
@@ -86,7 +87,7 @@ function Invest({ className, dappData, ...rest }) {
 
   const handleInvest = (event, id) => {
     //get selected object and execute the Withdraw command
-    if (dappData.CurrentUserDivs > 0) {
+    if (Number(uncalculatedAmount) > 0) {
       ExecuteInvestContract(
         dappData.Invest.ContractAddress,
         dappData.Invest.ContractFunctionSelector,
@@ -94,7 +95,9 @@ function Invest({ className, dappData, ...rest }) {
           ? dappData.Invest.ContractParameter
           : "",
         uncalculatedAmount,
-        dappData.Invest.Decimals
+        dappData.Invest.Decimals,
+        dappData.Invest.Currency,
+        dappData.TokenId
       );
     }
   };
@@ -132,7 +135,10 @@ function Invest({ className, dappData, ...rest }) {
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">trx</InputAdornment>
+                  <InputAdornment position="end">
+                    {" "}
+                    {dappData.DivPool.Currency}
+                  </InputAdornment>
                 )
               }}
             />
@@ -147,7 +153,8 @@ function Invest({ className, dappData, ...rest }) {
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
             <Typography color="inherit">
-              {dappData.CurrentBuyPrice} {dappData.BuyPrice.Currency}
+              {Number(dappData.CurrentBuyPrice).toLocaleString()}{" "}
+              {dappData.BuyPrice.Currency}
             </Typography>
           </ListItem>
           <ListItem
@@ -159,7 +166,9 @@ function Invest({ className, dappData, ...rest }) {
               primary="total"
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">{calculatedAmount}</Typography>
+            <Typography color="inherit">
+              {calculatedAmount} {dappData.DivPool.Currency}
+            </Typography>
           </ListItem>
         </List>
       </CardContent>

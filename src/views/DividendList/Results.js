@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@material-ui/styles';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import DirectionToggle from '../../components/DirectionToggle';
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { makeStyles } from "@material-ui/styles";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import DirectionToggle from "../../components/DirectionToggle";
 import {
   Avatar,
   Card,
@@ -24,26 +24,26 @@ import {
   TablePagination,
   TableRow,
   Typography
-} from '@material-ui/core';
-import getInitials from 'src/utils/getInitials';
-import ReviewStars from 'src/components/ReviewStars';
-import GenericMoreButton from 'src/components/GenericMoreButton';
-import TableEditBar from 'src/components/TableEditBar';
+} from "@material-ui/core";
+import getInitials from "src/utils/getInitials";
+import ReviewStars from "src/components/ReviewStars";
+import GenericMoreButton from "src/components/GenericMoreButton";
+import TableEditBar from "src/components/TableEditBar";
 
 function desc(a, b, orderBy) {
   //account for nulls
   if (!b[orderBy]) {
     //check for estimate divs if there are some sort by that instead
-    if (orderBy == 'CurrentUserDivs' && b['EstimatedDivs']) {
-      orderBy = 'EstimatedDivs';
+    if (orderBy == "CurrentUserDivs" && b["EstimatedDivs"]) {
+      orderBy = "EstimatedDivs";
     } else {
       b[orderBy] = 0;
     }
   }
   if (!a[orderBy]) {
     //check for estimate divs if there are some sort by that instead
-    if (orderBy == 'CurrentUserDivs' && a['EstimatedDivs']) {
-      orderBy = 'EstimatedDivs';
+    if (orderBy == "CurrentUserDivs" && a["EstimatedDivs"]) {
+      orderBy = "EstimatedDivs";
     } else {
       a[orderBy] = 0;
     }
@@ -69,49 +69,49 @@ function stableSort(array, cmp) {
 }
 
 function getSorting(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => desc(a, b, orderBy)
     : (a, b) => -desc(a, b, orderBy);
 }
 
 const headCells = [
   {
-    id: 'Name',
+    id: "Name",
     numeric: false,
     disablePadding: true,
-    label: 'Dapp'
+    label: "Dapp"
   },
   {
-    id: 'DappType',
+    id: "DappType",
     numeric: false,
     disablePadding: false,
-    label: 'Type'
+    label: "Type"
   },
   {
-    id: 'CurrentDivPool',
+    id: "CurrentDivPool",
     numeric: false,
     disablePadding: false,
-    label: 'Dividend Pool'
+    label: "Dividend Pool"
   },
   {
-    id: 'CurrentUserInvestment',
+    id: "CurrentUserInvestment",
     numeric: false,
     disablePadding: false,
-    label: 'Investment'
+    label: "Investment"
   },
   {
-    id: 'CurrentUserRefferal',
+    id: "CurrentUserRefferal",
     numeric: false,
     disablePadding: false,
-    label: 'Refferal'
+    label: "Refferal"
   },
   {
-    id: 'CurrentUserDivs',
+    id: "CurrentUserDivs",
     numeric: false,
     disablePadding: false,
-    label: 'Dividend'
+    label: "Dividend"
   },
-  { id: 'Invest', numeric: false, disablePadding: false, label: '' }
+  { id: "Invest", numeric: false, disablePadding: false, label: "" }
 ];
 
 function EnhancedTableHead(props) {
@@ -136,19 +136,19 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
+            inputProps={{ "aria-label": "select all desserts" }}
           />
         </TableCell>
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
@@ -165,7 +165,7 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired
 };
@@ -179,8 +179,8 @@ const useStyles = makeStyles(theme => ({
     minWidth: 700
   },
   nameCell: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   avatar: {
     height: 42,
@@ -189,7 +189,7 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     padding: theme.spacing(1),
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end"
   }
 }));
 
@@ -199,17 +199,17 @@ function Results({ className, customers, ...rest }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
   const [selectallbutton, setselectallbutton] = useState(true);
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('CurrentDivPool');
+  const [order, setOrder] = React.useState("desc");
+  const [orderBy, setOrderBy] = React.useState("CurrentDivPool");
   const [selected, setSelected] = React.useState([]);
-  const [filter, setFilter] = React.useState('');
+  const [filter, setFilter] = React.useState("");
   const handleSelectAll = event => {
     if (selectedCustomers.length == customers.length) {
       setSelectedCustomers([]);
       setselectallbutton(true);
     } else {
       const selectedCustomers =
-        event.target.checked || event.type == 'click'
+        event.target.checked || event.type == "click"
           ? customers.map(customer => customer.ID)
           : [];
       setselectallbutton(false);
@@ -217,8 +217,8 @@ function Results({ className, customers, ...rest }) {
     }
   };
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -247,14 +247,14 @@ function Results({ className, customers, ...rest }) {
   };
 
   const handleFilter = (event, id) => {
-    if (event == 'my dapps') {
-      setFilter('my dapps');
-    } else if (event == 'trx dapps') {
-      setFilter('trx dapps');
-    } else if (event == 'btt dapps') {
-      setFilter('btt dapps');
+    if (event == "my dapps") {
+      setFilter("my dapps");
+    } else if (event == "trx dapps") {
+      setFilter("trx dapps");
+    } else if (event == "btt dapps") {
+      setFilter("btt dapps");
     } else {
-      setFilter('');
+      setFilter("");
     }
   };
 
@@ -270,7 +270,7 @@ function Results({ className, customers, ...rest }) {
       try {
         //you have to send the one with a
         returnvalue =
-          contractParameter == ''
+          contractParameter == ""
             ? await contract[functionSelector]().send({ feeLimit: 10000000 })
             : await contract[functionSelector](contractParameter).send({
                 feeLimit: 10000000
@@ -292,7 +292,7 @@ function Results({ className, customers, ...rest }) {
           currentdapp.ReInvest.ContractFunctionSelector,
           currentdapp.ReInvest.ContractParameter
             ? currentdapp.ReInvest.ContractParameter
-            : ''
+            : ""
         );
       }
     });
@@ -308,7 +308,7 @@ function Results({ className, customers, ...rest }) {
           currentdapp.WithDrawl.ContractFunctionSelector,
           currentdapp.WithDrawl.ContractParameter
             ? currentdapp.WithDrawl.ContractParameter
-            : ''
+            : ""
         );
       }
     });
@@ -346,12 +346,12 @@ function Results({ className, customers, ...rest }) {
                 <TableBody>
                   {stableSort(
                     customers.filter(function(el) {
-                      if (filter == 'my dapps') {
+                      if (filter == "my dapps") {
                         return el.CurrentUserInvestment > 0; // Changed this so a home would match
-                      } else if (filter == 'trx dapps') {
-                        return el.PaysOutIn == 'trx'; // Changed this so a home would match
-                      } else if (filter == 'btt dapps') {
-                        return el.PaysOutIn == 'btt'; // Changed this so a home would match
+                      } else if (filter == "trx dapps") {
+                        return el.PaysOutIn == "trx"; // Changed this so a home would match
+                      } else if (filter == "btt dapps") {
+                        return el.PaysOutIn == "btt"; // Changed this so a home would match
                       } else {
                         return el.ID != null;
                       }
@@ -410,7 +410,7 @@ function Results({ className, customers, ...rest }) {
                             ? Number(
                                 customer.CurrentDivPool.toFixed(0)
                               ).toLocaleString()
-                            : '0'}
+                            : "0"}
                           {` `}
                           {customer.DivPool.Currency}
                         </TableCell>
@@ -419,14 +419,14 @@ function Results({ className, customers, ...rest }) {
                             ? Number(
                                 customer.CurrentUserInvestment.toFixed(2)
                               ).toLocaleString()
-                            : '0'}
+                            : "0"}
                           {` `}
                           {customer.Investment.Currency}
                         </TableCell>
                         <TableCell>
                           {customer.CurrentUserReferal
                             ? customer.CurrentUserReferal
-                            : '0'}
+                            : "0"}
                           {` `}
                           {customer.Referral.Currency}
                         </TableCell>
@@ -434,7 +434,7 @@ function Results({ className, customers, ...rest }) {
                           {customer.EstimatedDivs &&
                           customer.CurrentUserDivs &&
                           customer.CurrentUserDivs > 0
-                            ? ''
+                            ? ""
                             : customer.DivPoolPreFix}
 
                           {` `}
@@ -443,41 +443,41 @@ function Results({ className, customers, ...rest }) {
                             ? Number(customer.CurrentUserDivs)
                                 .toFixed(2)
                                 .toLocaleString()
-                            : ''}
+                            : ""}
 
                           {customer.EstimatedDivs &&
                           customer.CurrentUserDivs > 0
                             ? Number(customer.CurrentUserDivs)
                                 .toFixed(2)
                                 .toLocaleString()
-                            : ''}
+                            : ""}
 
                           {!customer.CurrentUserDivs && customer.EstimatedDivs
                             ? Number(customer.EstimatedDivs)
                                 .toFixed(2)
                                 .toLocaleString()
-                            : ''}
+                            : ""}
 
                           {!customer.EstimatedDivs && !customer.CurrentUserDivs
-                            ? '0'
-                            : ''}
+                            ? "0"
+                            : ""}
 
                           {` `}
                           {customer.UserDividend.Currency}
                         </TableCell>
 
                         <TableCell align="right">
-                          {' '}
+                          {" "}
                           <Button
                             color="primary"
                             //need below to do internal site
-                            // component={RouterLink}
+                            component={RouterLink}
                             //color={statusColors.pending}
                             size="small"
                             target="_blank"
-                            href={customer.Website}
-                            //need below to do internal site
-                            //to="http://www.google.com/"
+                            //href={`/dashbank/${customer.ContractAddress}/about`}
+                            //need below to do internal sit
+                            to={`/dashbank/${customer.ContractAddress}/about`}
                             variant="outlined"
                           >
                             Invest

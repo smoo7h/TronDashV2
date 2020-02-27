@@ -40,7 +40,7 @@ function NumberOfPlayers({ className, numberOfusers, ...rest }) {
     <Card {...rest} className={clsx(classes.root, className)}>
       <div className={classes.content}>
         <Typography component="h3" gutterBottom variant="overline">
-          Number Of Users 24h
+          Number Of Recent Users
         </Typography>
         <div className={classes.details}>
           <Typography variant="h3">{numberOfusers}</Typography>

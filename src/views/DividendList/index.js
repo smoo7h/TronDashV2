@@ -46,7 +46,7 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-function CustomerManagementList() {
+function DividendList() {
   const classes = useStyles();
   const [customers, setCustomers] = useState([]);
   const [tick, setTick] = useState(1);
@@ -290,4 +290,4 @@ function CustomerManagementList() {
   );
 }
 
-export default CustomerManagementList;
+export default DividendList;
