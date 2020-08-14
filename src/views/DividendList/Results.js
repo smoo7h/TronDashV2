@@ -191,6 +191,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     justifyContent: "flex-end",
   },
+  gradientbutton: {
+    backgroundColor: "#4158D0",
+    backgroundImage:
+      "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+  },
 }));
 
 function Results({ className, customers, ...rest }) {
@@ -470,17 +475,18 @@ function Results({ className, customers, ...rest }) {
                           {" "}
                           <Button
                             color="primary"
-                            //need below to do internal site
-                            component={RouterLink}
+                            // className={classes.gradientbutton}
                             //color={statusColors.pending}
                             size="small"
                             target="_blank"
-                            //href={`/dashbank/${customer.ContractAddress}/about`}
+                            href={customer.InvestUrl}
                             //need below to do internal sit
-                            to={`/dashbank/${customer.ContractAddress}/about`}
+                            // to={`/dashbank/${customer.ContractAddress}/about`}
+                            //need below to do internal site
+                            //  component={RouterLink}
                             variant="outlined"
                           >
-                            Invest
+                            Stake
                           </Button>
                         </TableCell>
                       </TableRow>

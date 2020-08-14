@@ -82,9 +82,12 @@ export default [
       {
         path: "/faq",
         exact: true,
-        component: lazy(() =>
-          import("src/views/CustomerManagementDetails/Summary")
-        ),
+        component: lazy(() => import("src/views/Faq")),
+      },
+      {
+        path: "/referral",
+        exact: true,
+        component: lazy(() => import("src/views/Referral")),
       },
       {
         path: "/calendar",

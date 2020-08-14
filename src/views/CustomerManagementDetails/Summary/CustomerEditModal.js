@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/styles";
 import {
   Modal,
   Card,
@@ -13,33 +13,31 @@ import {
   Typography,
   TextField,
   Switch,
-  Button
-} from '@material-ui/core';
+  Button,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    outline: 'none',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    outline: "none",
     boxShadow: theme.shadows[20],
     width: 700,
-    maxHeight: '100%',
-    overflowY: 'auto',
-    maxWidth: '100%'
+    maxHeight: "100%",
+    overflowY: "auto",
+    maxWidth: "100%",
   },
   actions: {
-    justifyContent: 'flex-end'
-  }
+    justifyContent: "flex-end",
+  },
 }));
 
-function CustomerEditModal({
-  open, onClose, customer, className, ...rest
-}) {
+function CustomerEditModal({ open, onClose, customer, className, ...rest }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    ...customer
+    ...customer,
   });
 
   const handleFieldChange = (event) => {
@@ -47,38 +45,21 @@ function CustomerEditModal({
     setValues((currentValues) => ({
       ...currentValues,
       [event.target.name]:
-        event.target.type === 'checkbox'
+        event.target.type === "checkbox"
           ? event.target.checked
-          : event.target.value
+          : event.target.value,
     }));
   };
 
-  if (!open) {
-    return null;
-  }
-
   return (
-    <Modal
-      onClose={onClose}
-      open={open}
-    >
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Modal onClose={onClose} open={open}>
+      <Card {...rest} className={clsx(classes.root, className)}>
         <form>
           <CardHeader title="Edit Customer" />
           <Divider />
           <CardContent>
-            <Grid
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+            <Grid container spacing={3}>
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Email address"
@@ -88,11 +69,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Full name"
@@ -102,11 +79,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Phone number"
@@ -116,11 +89,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="State/Region"
@@ -130,11 +99,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Country"
@@ -144,11 +109,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Address 1"
@@ -158,11 +119,7 @@ function CustomerEditModal({
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Address 2"
@@ -173,11 +130,7 @@ function CustomerEditModal({
                 />
               </Grid>
               <Grid item />
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Email Verified</Typography>
                 <Typography variant="body2">
                   Disabling this will automatically send the user a verification
@@ -192,11 +145,7 @@ function CustomerEditModal({
                   value={values.verified}
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Discounted Prices</Typography>
                 <Typography variant="body2">
                   This will give the user discountedprices for all products
@@ -214,14 +163,8 @@ function CustomerEditModal({
           </CardContent>
           <Divider />
           <CardActions className={classes.actions}>
-            <Button onClick={onClose}>
-              Close
-            </Button>
-            <Button
-              color="primary"
-              onClick={onClose}
-              variant="contained"
-            >
+            <Button onClick={onClose}>Close</Button>
+            <Button color="primary" onClick={onClose} variant="contained">
               Save
             </Button>
           </CardActions>
@@ -235,12 +178,12 @@ CustomerEditModal.propTypes = {
   className: PropTypes.string,
   customer: PropTypes.any,
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };
 
 CustomerEditModal.defaultProps = {
   open: false,
-  onClose: () => {}
+  onClose: () => {},
 };
 
 export default CustomerEditModal;

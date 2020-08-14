@@ -270,7 +270,7 @@ const card = {
   position: "relative",
   width: "100%",
   margin: "25px 0",
-  boxShadow: "0 1px 4px 0 rgba(" + hexToRgb(blackColor) + ", 0.14)",
+  //boxShadow: "0 1px 4px 0 rgba(" + hexToRgb(blackColor) + ", 0.14)",
   borderRadius: "6px",
   color: "rgba(" + hexToRgb(blackColor) + ", 0.87)",
   background: blackColor,

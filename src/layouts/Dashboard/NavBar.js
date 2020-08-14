@@ -25,6 +25,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import NavItem from "src/components/NavItem";
 import navConfig from "./navConfig";
 
+const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
@@ -208,7 +209,7 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
       </nav>
       <Divider className={classes.divider} />
 
-      {username != "" && (
+      {window.tronWeb.defaultAddress.base58 != FOUNDATION_ADDRESS && (
         <div className={classes.profile}>
           <Badge
             overlap="circle"

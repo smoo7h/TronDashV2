@@ -60,8 +60,8 @@ export default [
         icon: LensIcon,
       },
       {
-        title: "Refferal",
-        href: "/Refferal",
+        title: "Referral",
+        href: "/referral",
         icon: GroupAddIcon,
       },
       {

@@ -52,7 +52,7 @@ class RegisterPage extends React.Component {
   render() {
     const styles = {
       testimonialIcon: {
-        marginTop: "60px",
+        // marginTop: "60px",
         //marginBottom: "10px",
         "& svg": {
           width: "40px",
@@ -75,6 +75,7 @@ class RegisterPage extends React.Component {
       },
       card: {
         backgroundColor: "#424242",
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
         color: "#FFFFFF",
       },
       title: {
@@ -82,12 +83,17 @@ class RegisterPage extends React.Component {
       },
       reinvestbutton: {
         background: "linear-gradient(to right, #D50000, #FF8A80)",
-        //  color: "black",
+        background: "linear-gradient(to right, #D50000, #FF8A80)",
+        color: "black",
+        boxShadow:
+          "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)",
         fontWeight: 900,
       },
       withdrawlbutton: {
         background: "linear-gradient(to right, #796eff, #ff5263)",
-        // color: "black",
+        color: "black",
+        boxShadow:
+          "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)",
         fontWeight: 900,
       },
       table: {
@@ -99,10 +105,19 @@ class RegisterPage extends React.Component {
     return (
       <div
         style={{
-          padding: 24,
+          paddingLeft: 24,
+          width: "100%",
         }}
       >
-        <GridContainer justify="center" className={styles.root}>
+        <GridContainer
+          className={styles.root}
+          className={classes.card}
+          style={
+            {
+              //    padding: 24,
+            }
+          }
+        >
           <GridItem xs={12} sm={12} md={10}>
             <Card
               className={classes.cardSignup}
@@ -126,7 +141,7 @@ class RegisterPage extends React.Component {
                       title="DASH Definition"
                       description0=" TronDash.com, an innovative utility that enables you to see your div earnings on the most popular dApps utilizing the Tron blockchain."
                       description1="There’s a 2% burn rate for all DASH transactions and a predefined amount of just under 21MM, a total that will be widdled down through a continuous transaction burn. "
-                      description2="Not just an economic experiment, DASH is backed by the TronDash ecosystem. Revenue from advertising and forthcoming Dapps will be paid as dividends to DASH token holders."
+                      description2="Not just an economic experiment, DASH is backed by the TronDash ecosystem. "
                       icon={Timeline}
                       iconColor="rose"
                     />
