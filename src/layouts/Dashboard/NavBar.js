@@ -207,7 +207,8 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
         )}
       </nav>
       <Divider className={classes.divider} />
-      {
+
+      {username != "" && (
         <div className={classes.profile}>
           <Badge
             overlap="circle"
@@ -256,7 +257,7 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
           </IconButton>
            */}
         </div>
-      }
+      )}
     </div>
   );
 

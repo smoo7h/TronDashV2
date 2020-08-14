@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useHistory } from 'react-router';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState, useRef, useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useHistory } from "react-router";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/styles";
 import {
   AppBar,
   Badge,
@@ -21,91 +21,95 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  ClickAwayListener
-} from '@material-ui/core';
-import LockIcon from '@material-ui/icons/LockOutlined';
-import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import PeopleIcon from '@material-ui/icons/PeopleOutline';
-import InputIcon from '@material-ui/icons/Input';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import axios from 'src/utils/axios';
-import NotificationsPopover from 'src/components/NotificationsPopover';
-import PricingModal from 'src/components/PricingModal';
-import { logout } from 'src/actions';
-import ChatBar from './ChatBar';
+  ClickAwayListener,
+} from "@material-ui/core";
+import LockIcon from "@material-ui/icons/LockOutlined";
+import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
+import PeopleIcon from "@material-ui/icons/PeopleOutline";
+import InputIcon from "@material-ui/icons/Input";
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import axios from "src/utils/axios";
+import NotificationsPopover from "src/components/NotificationsPopover";
+import PricingModal from "src/components/PricingModal";
+import { logout } from "src/actions";
+import ChatBar from "./ChatBar";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: "none",
   },
   flexGrow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   search: {
-    backgroundColor: 'rgba(255,255,255, 0.1)',
+    backgroundColor: "rgba(255,255,255, 0.1)",
     borderRadius: 4,
     flexBasis: 300,
     height: 36,
     padding: theme.spacing(0, 2),
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center",
   },
   searchIcon: {
     marginRight: theme.spacing(2),
-    color: 'inherit'
+    color: "inherit",
   },
   searchInput: {
     flexGrow: 1,
-    color: 'inherit',
-    '& input::placeholder': {
+    color: "inherit",
+    "& input::placeholder": {
       opacity: 1,
-      color: 'inherit'
-    }
+      color: "inherit",
+    },
   },
   searchPopper: {
-    zIndex: theme.zIndex.appBar + 100
+    zIndex: theme.zIndex.appBar + 100,
   },
   searchPopperContent: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   trialButton: {
     marginLeft: theme.spacing(2),
     color: theme.palette.common.white,
     backgroundColor: colors.green[600],
-    '&:hover': {
-      backgroundColor: colors.green[900]
-    }
+    "&:hover": {
+      backgroundColor: colors.green[900],
+    },
   },
   trialIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   menuButton: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   chatButton: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   notificationsButton: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   notificationsBadge: {
-    backgroundColor: colors.orange[600]
+    backgroundColor: colors.orange[600],
   },
   logoutButton: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   logoutIcon: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
+  logo: {
+    maxWidth: "100%",
+    height: "auto",
+  },
 }));
 
 const popularSearches = [
-  'Devias React Dashboard',
-  'Devias',
-  'Admin Pannel',
-  'Project',
-  'Pages'
+  "Devias React Dashboard",
+  "Devias",
+  "Admin Pannel",
+  "Project",
+  "Pages",
 ];
 
 function TopBar({ onOpenNavBarMobile, className, ...rest }) {
@@ -115,14 +119,14 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
   const dispatch = useDispatch();
   const notificationsRef = useRef(null);
   const [openSearchPopover, setOpenSearchPopover] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
   const [openChatBar, setOpenChatBar] = useState(false);
   const [pricingModalOpen, setPricingModalOpen] = useState(false);
 
   const handleLogout = () => {
-    history.push('/auth/login');
+    history.push("/auth/login");
     // dispatch(logout());
   };
 
@@ -150,7 +154,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
     setOpenNotifications(false);
   };
 
-  const handleSearchChange = event => {
+  const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
 
     if (event.target.value) {
@@ -170,7 +174,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
     let mounted = true;
 
     const fetchNotifications = () => {
-      axios.get('/api/account/notifications').then(response => {
+      axios.get("/api/account/notifications").then((response) => {
         if (mounted) {
           setNotifications(response.data.notifications);
         }
@@ -200,9 +204,15 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
             <MenuIcon />
           </IconButton>
         </Hidden>
+
         <RouterLink to="/">
-          <img alt="Logo" src="/images/logos/logo--white.svg" />
+          <img
+            alt="Logo"
+            src="/images/logos/logo--white.svg"
+            className={classes.logo}
+          />
         </RouterLink>
+
         <div className={classes.flexGrow} />
         {/* 
         //this is for the button on the right could be used for dark/light mode
@@ -232,7 +242,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
 
 TopBar.propTypes = {
   className: PropTypes.string,
-  onOpenNavBarMobile: PropTypes.func
+  onOpenNavBarMobile: PropTypes.func,
 };
 
 export default TopBar;

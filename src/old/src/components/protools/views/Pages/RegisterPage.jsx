@@ -59,12 +59,50 @@ class RegisterPage extends React.Component {
           height: "40px",
         },
       },
+      root: {
+        paddingTop: 24,
+
+        paddingBottom: 24,
+        paddingLeft: 24,
+        paddingRight: 24,
+        fontSize: 14,
+        fontWeight: 400,
+        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+        fontWeight: 400,
+        borderBottom: "1px solid #515151",
+        letterSpacing: "-0.05px",
+        verticalAlign: "inherit",
+      },
+      card: {
+        backgroundColor: "#424242",
+        color: "#FFFFFF",
+      },
+      title: {
+        fontWeight: 500,
+      },
+      reinvestbutton: {
+        background: "linear-gradient(to right, #D50000, #FF8A80)",
+        //  color: "black",
+        fontWeight: 900,
+      },
+      withdrawlbutton: {
+        background: "linear-gradient(to right, #796eff, #ff5263)",
+        // color: "black",
+        fontWeight: 900,
+      },
+      table: {
+        backgroundColor: "#424242",
+      },
     };
 
     const { classes } = this.props;
     return (
-      <div className={classes.container}>
-        <GridContainer justify="center">
+      <div
+        style={{
+          padding: 24,
+        }}
+      >
+        <GridContainer justify="center" className={styles.root}>
           <GridItem xs={12} sm={12} md={10}>
             <Card
               className={classes.cardSignup}
@@ -81,7 +119,7 @@ class RegisterPage extends React.Component {
               <h2 style={{ color: "#FFFFFF" }} className={classes.cardTitle}>
                 Dash Token
               </h2>
-              <CardBody>
+              <CardBody style={{ color: "#FFFFFF", fontColor: "#FFFFFF" }}>
                 <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={5}>
                     <InfoArea
@@ -113,6 +151,8 @@ class RegisterPage extends React.Component {
                       iconColor="info"
                     />
                     <br></br>
+                    <br></br>
+                    <br></br>
                     <div className={classes.center}>
                       <h4
                         className={classes.socialTitle}
@@ -120,7 +160,7 @@ class RegisterPage extends React.Component {
                       >
                         Exchanges
                       </h4>
-
+                      <br></br>
                       <Link
                         color="inherit"
                         target="_blank"
@@ -138,6 +178,7 @@ class RegisterPage extends React.Component {
                         </Button>
                       </Link>
                       {` `}
+
                       <Link
                         color="inherit"
                         target="_blank"

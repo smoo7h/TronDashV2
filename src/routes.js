@@ -15,9 +15,6 @@ export default [
     path: "/",
     exact: true,
     component: () => <Redirect to="/dividends" />,
-    //component: () => (
-    //  <Redirect to="/dashbank/TUTik4srgKuzgXoL4KfV75foQbYuP8SirY/about" />
-    // )
   },
   {
     path: "/errors",
@@ -80,6 +77,13 @@ export default [
         exact: true,
         component: lazy(() =>
           import("src/old/src/components/protools/views/Widgets/DashLotto.jsx")
+        ),
+      },
+      {
+        path: "/faq",
+        exact: true,
+        component: lazy(() =>
+          import("src/views/CustomerManagementDetails/Summary")
         ),
       },
       {

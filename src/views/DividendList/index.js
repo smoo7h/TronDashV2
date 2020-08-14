@@ -12,18 +12,18 @@ import TronWeb from "tronweb";
 import BigNumber from "bignumber.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
   },
   results: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   loading: {
     display: "flex",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
 function useInterval(callback, delay) {
@@ -69,7 +69,7 @@ function DividendList() {
   ) => {
     let returnValue;
     let updatelist = customers;
-    let objIndex = updatelist.findIndex(obj => obj.ID == rowItem.ID);
+    let objIndex = updatelist.findIndex((obj) => obj.ID == rowItem.ID);
     //get the latest datapoint from state
     if (objIndex >= 0) {
       rowItem = customers[objIndex];
@@ -100,7 +100,7 @@ function DividendList() {
         updatelist[objIndex] = rowItem;
       }
       //update the state
-      setCustomers(updatelist => updatelist);
+      setCustomers((updatelist) => updatelist);
     } else {
       if (contractParameter == "@UserAddress") {
         contractParameter = window.tronWeb.defaultAddress.base58;
@@ -113,7 +113,7 @@ function DividendList() {
         //check if its in the list
         rowItem[fieldName] = returnValue * 0.000001; //always 6 decimal places because its trx
 
-        let objIndex = updatelist.findIndex(obj => obj.ID == rowItem.ID);
+        let objIndex = updatelist.findIndex((obj) => obj.ID == rowItem.ID);
         // if it is push otherwise update
         if (objIndex == -1) {
           updatelist.push(rowItem);
@@ -121,7 +121,7 @@ function DividendList() {
           updatelist[objIndex] = rowItem;
         }
         //update the state
-        setCustomers(updatelist => updatelist);
+        setCustomers((updatelist) => updatelist);
       } else {
         //get the contacct value
         window.tronWeb
@@ -177,7 +177,7 @@ function DividendList() {
             rowItem[fieldName] = returnValue;
 
             //check if its in the list
-            let objIndex = updatelist.findIndex(obj => obj.ID == rowItem.ID);
+            let objIndex = updatelist.findIndex((obj) => obj.ID == rowItem.ID);
             // if it is push otherwise update
             if (objIndex == -1) {
               updatelist.push(rowItem);
@@ -185,7 +185,7 @@ function DividendList() {
               updatelist[objIndex] = rowItem;
             }
             //update the state
-            setCustomers(updatelist => updatelist);
+            setCustomers((updatelist) => updatelist);
             //not sure what the line below does but maybe it updates the list
             // setCustomers(updatelist => [...customers, updatelist]);
           });
@@ -200,7 +200,7 @@ function DividendList() {
         "https://trondashdappdatav2.azurewebsites.net/api/GetTronDashData?code=qOwvPJ6qxBfsGyozUauaoi082IZUMo9xl6h5smuvsMDKRS4PWV6i6w==&user=" +
           window.tronWeb.defaultAddress.hex
       )
-      .then(response => {
+      .then((response) => {
         //now get data for each contract function we
         response.data.map(async (item, key) => {
           //divpool
@@ -264,8 +264,8 @@ function DividendList() {
 
   useInterval(() => {
     //this is the data refresh interval it will refresh every x amount of time after the %
-    setTick(tick => tick + 1);
-    if (tick % 5 == 0) {
+    setTick((tick) => tick + 1);
+    if (tick % 8 == 0) {
       console.log(tick);
       fetchCustomers();
     }

@@ -25,7 +25,7 @@ import Card from "../../components/Card/Card.jsx";
 
 import CardBody from "../../components/Card/CardBody.jsx";
 
-import image from "../../../../assets/doublelogo.png";
+import image from "../../../../assets/dashlotto.png";
 
 import {
   cardTitle,
@@ -82,6 +82,40 @@ const styles = {
   cardTestimonialDescription: {
     fontStyle: "italic",
     color: "#999999",
+  },
+  root: {
+    //  paddingTop: 24,
+
+    paddingBottom: 24,
+    paddingLeft: 24,
+    paddingRight: 24,
+    fontSize: 14,
+    fontWeight: 400,
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    fontWeight: 400,
+    borderBottom: "1px solid #515151",
+    letterSpacing: "-0.05px",
+    verticalAlign: "inherit",
+  },
+  card: {
+    backgroundColor: "#424242",
+    color: "#FFFFFF",
+  },
+  title: {
+    fontWeight: 500,
+  },
+  reinvestbutton: {
+    background: "linear-gradient(to right, #D50000, #FF8A80)",
+    //  color: "black",
+    fontWeight: 900,
+  },
+  withdrawlbutton: {
+    background: "linear-gradient(to right, #796eff, #ff5263)",
+    // color: "black",
+    fontWeight: 900,
+  },
+  table: {
+    backgroundColor: "#424242",
   },
 };
 
@@ -322,17 +356,18 @@ class DashLotto extends React.Component {
       );
     };
     return (
-      <GridContainer>
+      <GridContainer className={classes.root}>
         <GridItem xs={12} sm={12} md={12}>
           <div>
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <GridContainer>
                   <GridItem xs={12} sm={12} lg={12}>
-                    <Card pricing>
+                    <Card pricing className={classes.card}>
                       <CardBody pricing>
-                        <h6 className={classes.cardCategory}>DashLotto</h6>
-
+                        <b>
+                          <p className={classes.cardDescription}>DASH Lotto</p>
+                        </b>
                         <Avatar
                           alt="DashLotto"
                           src={image}
@@ -348,7 +383,7 @@ class DashLotto extends React.Component {
                           1000 DASH are awarded daily and a progressive TRX
                           jackpot builds all week
                         </p>
-
+                        <br></br>
                         <GridContainer>
                           <GridItem xs={1} sm={4} md={4}>
                             {``}
@@ -413,11 +448,14 @@ class DashLotto extends React.Component {
                         <br />
                         <Button
                           round
-                          style={{ backgroundColor: "#3f51b5" }}
+                          //style={{ backgroundColor: "#3f51b5" }}
+                          className={classes.withdrawlbutton}
                           onClick={this.handelbuyticket()}
                         >
                           Purchase Ticket
                         </Button>
+                        <br></br>
+                        <br></br>
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={12}>
                             <b>Your Tron Wallet:</b> {this.state.userbalance}{" "}
@@ -476,7 +514,7 @@ class DashLotto extends React.Component {
                           <GridItem xs={12} sm={12} md={6}>
                             <div style={{ width: "100%", overflowX: "auto" }}>
                               <Table className={classes.table} size="small">
-                                <TableHead>
+                                <TableHead className={classes.table}>
                                   <TableRow>
                                     <TableCell>Date</TableCell>
                                     <TableCell align="right">Prize</TableCell>
@@ -507,9 +545,10 @@ class DashLotto extends React.Component {
                             <p className={classes.cardDescription}>
                               <b> Weekly Jackpot History</b>
                             </p>
+                            <br></br>
                             <div style={{ width: "100%", overflowX: "auto" }}>
                               <Table className={classes.table} size="small">
-                                <TableHead>
+                                <TableHead className={classes.table}>
                                   <TableRow>
                                     <TableCell>Date</TableCell>
                                     <TableCell align="right">Prize</TableCell>

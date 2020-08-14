@@ -83,6 +83,37 @@ const styles = {
     fontStyle: "italic",
     color: "#999999",
   },
+  root: {
+    //  paddingTop: 24,
+    paddingBottom: 24,
+    paddingLeft: 24,
+    paddingRight: 24,
+    fontSize: 14,
+    fontWeight: 400,
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    fontWeight: 400,
+    borderBottom: "1px solid #515151",
+    letterSpacing: "-0.05px",
+    verticalAlign: "inherit",
+  },
+  card: {
+    backgroundColor: "#424242",
+    color: "#FFFFFF",
+    lineHeight: "21px",
+  },
+  title: {
+    fontWeight: 500,
+  },
+  reinvestbutton: {
+    background: "linear-gradient(to right, #D50000, #FF8A80)",
+    //  color: "black",
+    fontWeight: 900,
+  },
+  withdrawlbutton: {
+    background: "linear-gradient(to right, #796eff, #ff5263)",
+    // color: "black",
+    fontWeight: 900,
+  },
 };
 
 class Widgets extends React.Component {
@@ -279,16 +310,18 @@ class Widgets extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer className={classes.root}>
         <GridItem xs={12} sm={12} md={12}>
           <div>
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <GridContainer>
                   <GridItem xs={12} sm={12} lg={12}>
-                    <Card pricing>
+                    <Card pricing className={classes.card}>
                       <CardBody pricing>
-                        <h6 className={classes.cardCategory}>TRX Bank</h6>
+                        <b>
+                          <p className={classes.cardDescription}>TRX Bank</p>
+                        </b>
 
                         <Avatar
                           alt="DashBank"
@@ -306,7 +339,7 @@ class Widgets extends React.Component {
                           For every 100,000trx deposited 25,000 DASH is
                           airdropped to the DashBank
                         </p>
-
+                        <br></br>
                         <GridContainer>
                           <GridItem xs={1} sm={4} md={4}>
                             {``}
@@ -338,7 +371,8 @@ class Widgets extends React.Component {
                         <br />
                         <Button
                           round
-                          color="rose"
+                          //color="rose"
+                          className={classes.reinvestbutton}
                           onClick={this.handleReinvestdivsClick()}
                         >
                           Reinvest Divs
@@ -347,6 +381,7 @@ class Widgets extends React.Component {
                           round
                           style={{ backgroundColor: "#3f51b5" }}
                           onClick={this.handleWithdrawalldivsClick()}
+                          className={classes.withdrawlbutton}
                         >
                           Withdrawl Divs
                         </Button>
@@ -424,9 +459,11 @@ class Widgets extends React.Component {
                                 endAdornment: (
                                   <InputAdornment position="end">
                                     <IconButton
-                                      style={{
-                                        left: 22,
-                                      }}
+                                      style={
+                                        {
+                                          //left: 22,
+                                        }
+                                      }
                                       edge="end"
                                       color="secondary"
                                       aria-label="Deposit"
@@ -437,7 +474,8 @@ class Widgets extends React.Component {
                                     >
                                       <Button
                                         round
-                                        color="rose"
+                                        // color="rose"
+                                        className={classes.reinvestbutton}
                                         style={{
                                           lineHeight: 0,
                                         }}
@@ -469,18 +507,21 @@ class Widgets extends React.Component {
                                       variant="contained"
                                       aria-label="withdrawal"
                                       className={classes.margin}
-                                      style={{
-                                        left: 22,
-                                      }}
+                                      style={
+                                        {
+                                          //left: 22,
+                                        }
+                                      }
                                       onClick={this.handleWithdrawallClick(
                                         this.state.withdrawall
                                       )}
                                     >
                                       <Button
                                         round
+                                        className={classes.withdrawlbutton}
                                         style={{
                                           lineHeight: 0,
-                                          backgroundColor: "#3f51b5",
+                                          // backgroundColor: "#3f51b5",
                                         }}
                                       >
                                         Withdraw
