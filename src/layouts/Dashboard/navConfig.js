@@ -3,20 +3,20 @@
 import React from "react";
 import { colors } from "@material-ui/core";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import BookIcon from "@material-ui/icons/Book";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ChatIcon from "@material-ui/icons/ChatOutlined";
 import CodeIcon from "@material-ui/icons/Code";
 import DashboardIcon from "@material-ui/icons/DashboardOutlined";
 import ErrorIcon from "@material-ui/icons/ErrorOutline";
 import FolderIcon from "@material-ui/icons/FolderOutlined";
+import LensIcon from "@material-ui/icons/Lens";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import HomeIcon from "@material-ui/icons/HomeOutlined";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import LockOpenIcon from "@material-ui/icons/LockOpenOutlined";
-import MailIcon from "@material-ui/icons/MailOutlined";
-import PresentToAllIcon from "@material-ui/icons/PresentToAll";
-import PeopleIcon from "@material-ui/icons/PeopleOutlined";
-import PersonIcon from "@material-ui/icons/PersonOutlined";
-import ReceiptIcon from "@material-ui/icons/ReceiptOutlined";
+
 import SettingsIcon from "@material-ui/icons/SettingsOutlined";
 import ViewConfigIcon from "@material-ui/icons/ViewComfy";
 import ListIcon from "@material-ui/icons/List";
@@ -27,40 +27,53 @@ export default [
     //subheader: 'Pages',
     items: [
       {
-        title: "Dividends",
+        title: "Dashboard",
         href: "/dividends",
-        icon: HomeIcon
+        icon: DashboardIcon,
       },
       {
         title: "Dapps",
         href: "/management",
-        icon: BarChartIcon,
+        icon: AccountBalanceIcon,
         items: [
           {
             title: "Dash Bank",
-            href: "/dashbank/TUTik4srgKuzgXoL4KfV75foQbYuP8SirY/about"
+            href: "/dashbankstake",
+          },
+          {
+            title: "TRX Bank",
+            href: "/trxbank",
+          },
+          {
+            title: "BTT Bank",
+            href: "/bttbank",
           },
           {
             title: "Dash Lotto",
-            href: "/dashlotto"
-          }
-        ]
+            href: "/dashlotto",
+          },
+        ],
       },
       {
         title: "Dash Token",
         href: "/dashtoken",
-        icon: BarChartIcon
+        icon: LensIcon,
       },
       {
         title: "Refferal",
         href: "/Refferal",
-        icon: BarChartIcon
+        icon: GroupAddIcon,
       },
       {
         title: "FAQ",
         href: "/faq",
-        icon: BarChartIcon
-      }
-    ]
-  }
+        icon: HelpOutlineIcon,
+      },
+      {
+        title: "Old Site",
+        href: "/old",
+        icon: BookIcon,
+      },
+    ],
+  },
 ];

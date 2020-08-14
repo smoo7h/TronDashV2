@@ -1,0 +1,295 @@
+{
+  "tewkenaireData": {
+    "address": "TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R",
+    "abi": [
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "dividendsOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "approve",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "exitFee",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_tronToSpend", "type": "uint256" }],
+        "name": "calculateTokensReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "transferFrom",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "withdraw",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "sellPrice",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "stakingRequirement",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_includeReferralBonus", "type": "bool" }],
+        "name": "myDividends",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "balanceOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "buyPrice",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_tokensToSell", "type": "uint256" }],
+        "name": "calculateTronReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "myTokens",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "symbol",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "seedWallet",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_toAddress", "type": "address" },
+          { "name": "_amountOfTokens", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "feedsFrags", "type": "bool" }],
+        "name": "doesFragsBack",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "payable": true,
+        "inputs": [
+          { "name": "_player", "type": "address" },
+          { "name": "_referredBy", "type": "address" }
+        ],
+        "name": "buyFor",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "tokens", "type": "uint256" },
+          { "name": "data", "type": "bytes" }
+        ],
+        "name": "approveAndCall",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "deposits", "type": "uint128" },
+          { "name": "withdrawals", "type": "uint128" }
+        ],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "playerStats",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "players",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_amountOfTokens", "type": "uint256" }],
+        "name": "sell",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "name": "exit", "stateMutability": "Nonpayable", "type": "Function" },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "transferFee",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "payable": true,
+        "inputs": [{ "name": "_referredBy", "type": "address" }],
+        "name": "buy",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "name": "reinvest",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalTronBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "incomingTron", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" },
+          { "indexed": true, "name": "referredBy", "type": "address" },
+          { "name": "timestamp", "type": "uint256" },
+          { "name": "price", "type": "uint256" }
+        ],
+        "name": "onTokenPurchase",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tokensBurned", "type": "uint256" },
+          { "name": "tronEarned", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" },
+          { "name": "price", "type": "uint256" }
+        ],
+        "name": "onTokenSell",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tronReinvested", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" }
+        ],
+        "name": "onReinvestment",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tronWithdrawn", "type": "uint256" }
+        ],
+        "name": "onWithdraw",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "tokens", "type": "uint256" }
+        ],
+        "name": "Transfer",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Approval",
+        "type": "Event"
+      }
+    ]
+  }
+}

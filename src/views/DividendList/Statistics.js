@@ -1,42 +1,42 @@
-import React, { useState, useEffect, useRef, setTimeoutCount } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import { Card, Typography, Grid, colors } from '@material-ui/core';
-import axios from 'axios';
-import Label from 'src/components/Label';
-import TronWeb from 'tronweb';
+import React, { useState, useEffect, useRef, setTimeoutCount } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/styles";
+import { Card, Typography, Grid, colors } from "@material-ui/core";
+import axios from "axios";
+import Label from "src/components/Label";
+import TronWeb from "tronweb";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   content: {
-    padding: 0
+    padding: 0,
   },
   item: {
     padding: theme.spacing(3),
-    textAlign: 'center',
-    [theme.breakpoints.up('md')]: {
-      '&:not(:last-of-type)': {
-        borderRight: `1px solid ${theme.palette.divider}`
-      }
+    textAlign: "center",
+    [theme.breakpoints.up("md")]: {
+      "&:not(:last-of-type)": {
+        borderRight: `1px solid ${theme.palette.divider}`,
+      },
     },
-    [theme.breakpoints.down('sm')]: {
-      '&:not(:last-of-type)': {
-        borderBottom: `1px solid ${theme.palette.divider}`
-      }
-    }
+    [theme.breakpoints.down("sm")]: {
+      "&:not(:last-of-type)": {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+      },
+    },
   },
   titleWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   label: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   overline: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
 
 function Statistics({ className, customers, ...rest }) {
@@ -64,7 +64,7 @@ function Statistics({ className, customers, ...rest }) {
     if (customers) {
       let totaldivs = customers.reduce(function(prev, cur) {
         if (
-          cur.UserDividend.Currency == 'trx' &&
+          cur.UserDividend.Currency == "trx" &&
           cur.CurrentUserDivs &&
           !cur.DivPoolPreFix
         ) {
@@ -81,11 +81,11 @@ function Statistics({ className, customers, ...rest }) {
     //calculate the divs per day
     if (customers) {
       let totaldivs = customers.reduce(function(prev, cur) {
-        if (cur.DivPoolPreFix == '*' && cur.EstimatedDivs) {
+        if (cur.DivPoolPreFix == "*" && cur.EstimatedDivs) {
           return prev + cur.EstimatedDivs;
         } else if (
-          cur.DappType.Name == 'Bank' &&
-          cur.UserDividend.Currency == 'trx'
+          cur.DappType.Name == "Bank" &&
+          cur.UserDividend.Currency == "trx"
         ) {
           //calculate bank divs at 0.001% a day estimate
           var dailyestimate = cur.CurrentUserInvestment * 0.001;
@@ -136,10 +136,10 @@ function Statistics({ className, customers, ...rest }) {
     if (window.tronWeb) {
       axios
         .get(
-          'https://apilist.tronscan.org/api/account?address=' +
+          "https://apilist.tronscan.org/api/account?address=" +
             window.tronWeb.defaultAddress.base58
         )
-        .then(response => {
+        .then((response) => {
           setuserEnergy(
             response.data.bandwidth.energyRemaining.toLocaleString()
           );
@@ -147,8 +147,8 @@ function Statistics({ className, customers, ...rest }) {
             response.data.bandwidth.freeNetRemaining.toLocaleString()
           );
         })
-        .catch(error => {
-          console.error('Error during service worker registration:', error);
+        .catch((error) => {
+          console.error("Error during service worker registration:", error);
         });
     }
   };
@@ -167,11 +167,11 @@ function Statistics({ className, customers, ...rest }) {
             <Typography variant="h2">
               {divBalance ? divBalance : 0} trx
             </Typography>
-            {divBalance > 0 && (
+            {/*divBalance > 0 && (
               <Label className={classes.label} color={colors.green[600]}>
                 ^
               </Label>
-            )}
+            )*/}
           </div>
           <Typography className={classes.overline} variant="overline">
             Available Divs
@@ -202,7 +202,7 @@ function Statistics({ className, customers, ...rest }) {
 }
 
 Statistics.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Statistics;

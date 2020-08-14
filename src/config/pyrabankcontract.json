@@ -1,0 +1,248 @@
+{
+  "pyrabankDividendsData": {
+    "address": "412D7EafC74aa5D44bC1D20D2d2F2cd3372CC53510",
+    "abi": [
+      {
+        "name": "acceptOwnership",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "owner",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "removeGame",
+        "inputs": [{ "name": "game", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "isGame",
+        "inputs": [{ "name": "game", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "newOwner",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "addGame",
+        "inputs": [{ "name": "game", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "transferOwnership",
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "OwnershipTransferred",
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "type": "Event"
+      },
+      {
+        "constant": true,
+        "name": "getLastLevel",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerToFrozenAmount",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setPlayerToFrozenAmount",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerToFrozenLevel",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setPlayerToFrozenLevel",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerToFrozen",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setPlayerToFrozen",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "level", "type": "uint256" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerToMintableAmount",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setPlayerToMintableAmount",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "addMintableAmount",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getLevelToFrozenSum",
+        "inputs": [{ "name": "level", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setLevelToFrozenSum",
+        "inputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "addFrozenSum",
+        "inputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "subFrozenSum",
+        "inputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getLevelToDividends",
+        "inputs": [{ "name": "level", "type": "uint256" }],
+        "outputs": [{ "type": "int256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getLevelInfo",
+        "inputs": [{ "name": "level", "type": "uint256" }],
+        "outputs": [
+          { "name": "frozenSum", "type": "uint256" },
+          { "name": "dividends", "type": "int256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setLevelToDividends",
+        "inputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "value", "type": "int256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "addDividends",
+        "inputs": [
+          { "name": "level", "type": "uint256" },
+          { "name": "value", "type": "int256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getPlayersTokenSum",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setPlayersTokenSum",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setLastLevel",
+        "inputs": [{ "name": "_lastLevel", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "updateLastLevel",
+        "inputs": [
+          { "name": "_lastLevel", "type": "uint256" },
+          { "name": "_currentLevel", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      }
+    ]
+  }
+}

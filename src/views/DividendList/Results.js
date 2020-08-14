@@ -23,7 +23,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import getInitials from "src/utils/getInitials";
 import ReviewStars from "src/components/ReviewStars";
@@ -65,7 +65,7 @@ function stableSort(array, cmp) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 function getSorting(order, orderBy) {
@@ -79,39 +79,39 @@ const headCells = [
     id: "Name",
     numeric: false,
     disablePadding: true,
-    label: "Dapp"
+    label: "Dapp",
   },
   {
     id: "DappType",
     numeric: false,
     disablePadding: false,
-    label: "Type"
+    label: "Type",
   },
   {
     id: "CurrentDivPool",
     numeric: false,
     disablePadding: false,
-    label: "Dividend Pool"
+    label: "Dividend Pool",
   },
   {
     id: "CurrentUserInvestment",
     numeric: false,
     disablePadding: false,
-    label: "Investment"
+    label: "Investment",
   },
   {
     id: "CurrentUserRefferal",
     numeric: false,
     disablePadding: false,
-    label: "Refferal"
+    label: "Refferal",
   },
   {
     id: "CurrentUserDivs",
     numeric: false,
     disablePadding: false,
-    label: "Dividend"
+    label: "Dividend",
   },
-  { id: "Invest", numeric: false, disablePadding: false, label: "" }
+  { id: "Invest", numeric: false, disablePadding: false, label: "" },
 ];
 
 function EnhancedTableHead(props) {
@@ -122,9 +122,9 @@ function EnhancedTableHead(props) {
     orderBy,
     numSelected,
     rowCount,
-    onRequestSort
+    onRequestSort,
   } = props;
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
@@ -139,7 +139,7 @@ function EnhancedTableHead(props) {
             inputProps={{ "aria-label": "select all desserts" }}
           />
         </TableCell>
-        {headCells.map(headCell => (
+        {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -167,30 +167,30 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   content: {
-    padding: 0
+    padding: 0,
   },
   inner: {
-    minWidth: 700
+    minWidth: 700,
   },
   nameCell: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     height: 42,
     width: 42,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   actions: {
     padding: theme.spacing(1),
-    justifyContent: "flex-end"
-  }
+    justifyContent: "flex-end",
+  },
 }));
 
 function Results({ className, customers, ...rest }) {
@@ -203,14 +203,14 @@ function Results({ className, customers, ...rest }) {
   const [orderBy, setOrderBy] = React.useState("CurrentDivPool");
   const [selected, setSelected] = React.useState([]);
   const [filter, setFilter] = React.useState("");
-  const handleSelectAll = event => {
+  const handleSelectAll = (event) => {
     if (selectedCustomers.length == customers.length) {
       setSelectedCustomers([]);
       setselectallbutton(true);
     } else {
       const selectedCustomers =
         event.target.checked || event.type == "click"
-          ? customers.map(customer => customer.ID)
+          ? customers.map((customer) => customer.ID)
           : [];
       setselectallbutton(false);
       setSelectedCustomers(selectedCustomers);
@@ -273,7 +273,7 @@ function Results({ className, customers, ...rest }) {
           contractParameter == ""
             ? await contract[functionSelector]().send({ feeLimit: 10000000 })
             : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000
+                feeLimit: 10000000,
               });
       } catch (error) {
         //sometimes if they have the wrong value for the functionSelector this happens
@@ -284,8 +284,8 @@ function Results({ className, customers, ...rest }) {
 
   const handleReinvest = (event, id) => {
     //get selected object and execute the reinvest command
-    selectedCustomers.forEach(element => {
-      let currentdapp = customers.find(x => x.ID === element);
+    selectedCustomers.forEach((element) => {
+      let currentdapp = customers.find((x) => x.ID === element);
       if (currentdapp.CurrentUserDivs > 0) {
         executeContract(
           currentdapp.ReInvest.ContractAddress,
@@ -300,8 +300,8 @@ function Results({ className, customers, ...rest }) {
 
   const handleWithdrawl = (event, id) => {
     //get selected object and execute the reinvest command
-    selectedCustomers.forEach(element => {
-      let currentdapp = customers.find(x => x.ID === element);
+    selectedCustomers.forEach((element) => {
+      let currentdapp = customers.find((x) => x.ID === element);
       if (currentdapp.CurrentUserDivs > 0) {
         executeContract(
           currentdapp.WithDrawl.ContractAddress,
@@ -316,7 +316,7 @@ function Results({ className, customers, ...rest }) {
   const statusColors = {
     pending: colors.orange[600],
     paid: colors.green[600],
-    rejected: colors.red[600]
+    rejected: colors.red[600],
   };
 
   return (
@@ -325,7 +325,7 @@ function Results({ className, customers, ...rest }) {
         {selectallbutton && <DirectionToggle onToggle={handleSelectAll} />}
 
         <CardHeader
-          action={<GenericMoreButton filterClick={handleFilter} />}
+          action={<GenericMoreButton filterclick={handleFilter} />}
           title="Dapp Dividends"
         />
         <Divider />
@@ -359,12 +359,12 @@ function Results({ className, customers, ...rest }) {
                     getSorting(order, orderBy)
                   )
                     .slice(0, rowsPerPage)
-                    .map(customer => (
+                    .map((customer) => (
                       <TableRow
                         hover
                         key={customer.ID}
                         selected={selectedCustomers.indexOf(customer.ID) !== -1}
-                        onClick={event => handleSelectOne(event, customer.ID)}
+                        onClick={(event) => handleSelectOne(event, customer.ID)}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox
@@ -372,7 +372,7 @@ function Results({ className, customers, ...rest }) {
                               selectedCustomers.indexOf(customer.ID) !== -1
                             }
                             color="primary"
-                            onChange={event =>
+                            onChange={(event) =>
                               handleSelectOne(event, customer.ID)
                             }
                             value={
@@ -502,11 +502,11 @@ function Results({ className, customers, ...rest }) {
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array
+  customers: PropTypes.array,
 };
 
 Results.defaultProps = {
-  customers: []
+  customers: [],
 };
 
 export default Results;

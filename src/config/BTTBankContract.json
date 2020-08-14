@@ -1,0 +1,205 @@
+{
+  "BTTBankData": {
+    "address": "TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5",
+    "abi": [
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "dividendsOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_bttToSpend", "type": "uint256" }],
+        "name": "calculateTokensReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_tokensToSell", "type": "uint256" }],
+        "name": "calculateBTTReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "accountAddress", "type": "address" }],
+        "name": "getBTTTokenBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "withdraw",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "buyAndSellPrice",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "stakingRequirement",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_includeReferralBonus", "type": "bool" }],
+        "name": "myDividends",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "balanceOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changeownership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "owner",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "myTokens",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "symbol",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalBTTBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_toAddress", "type": "address" },
+          { "name": "_amountOfTokens", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_amountOfTokens", "type": "uint256" }],
+        "name": "sell",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "name": "exit", "stateMutability": "Nonpayable", "type": "Function" },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "payable": true,
+        "inputs": [{ "name": "_referredBy", "type": "address" }],
+        "name": "buy",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "name": "reinvest",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "incomingBTT", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" },
+          { "indexed": true, "name": "referredBy", "type": "address" }
+        ],
+        "name": "onTokenPurchase",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tokensBurned", "type": "uint256" },
+          { "name": "bttEarned", "type": "uint256" }
+        ],
+        "name": "onTokenSell",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "bttReinvested", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" }
+        ],
+        "name": "onReinvestment",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "bttWithdrawn", "type": "uint256" }
+        ],
+        "name": "onWithdraw",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "tokens", "type": "uint256" }
+        ],
+        "name": "Transfer",
+        "type": "Event"
+      }
+    ]
+  }
+}

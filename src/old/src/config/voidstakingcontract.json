@@ -1,0 +1,139 @@
+{
+  "voidstaking": {
+    "address": "TMP9UiG5d3TKQvvTwaQ5dHRi27w13ajTQw",
+    "abi": [
+      {
+        "constant": true,
+        "name": "erc20",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "timeLockSeconds",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "inputs": [
+          { "name": "_lockTime", "type": "uint256" },
+          { "name": "_erc20Address", "type": "address" }
+        ],
+        "type": "Constructor",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "nextReward",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "userStake",
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalStaked",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "remainingPool",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "tokenBalanceOf",
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "timeLockRemaining",
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "incompleteRounds",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "timeUntilNextRound",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "unclaimedReward",
+        "inputs": [{ "name": "staker", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "seed",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "rewardForRounds",
+        "inputs": [{ "name": "round", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "claimReward",
+        "inputs": [{ "name": "staker", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "withdraw",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "stake",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "receiveApproval",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "tokens", "type": "uint256" },
+          { "type": "address" },
+          { "type": "bytes" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      { "name": "unstake", "type": "Function", "stateMutability": "Nonpayable" }
+    ]
+  }
+}

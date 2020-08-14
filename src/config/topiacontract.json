@@ -1,0 +1,1689 @@
+{
+  "TopiaDividendsData": {
+    "address": "TLZK5EjcwfDsASYFRJKvW8GenyYRSDuFkR",
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "mainDividendPaid",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "whitelistCaller",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "noOfDivPaidAfterFreezeDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "outstandingDivWithdrawUnfreeze",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "changeGlobalHalt",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          { "name": "_topiaTokenContractAddress", "type": "address" },
+          { "name": "_refPoolContractAddress", "type": "address" },
+          { "name": "_leaderBoardContractAddress", "type": "address" }
+        ],
+        "name": "updateContractAddresses",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_refPoolPercentSUN", "type": "uint256" }],
+        "name": "updateRefPoolPercent",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "sharesPoolPercentSUN",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "totalFrozenTopiaTrackerDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "globalHalt",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "topiaTokenContractAddress",
+        "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "outstandingDivWithdrawUpgrade",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "leaderBoardContractAddress",
+        "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "requestFundFromGameContracts",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "refPoolContractAddress",
+        "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "reInvestDividendRemainderDivRake",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "acceptOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "dividendPaidLastTimeDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "outstandingDivWithdrawFreeze",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "sharesPoolAddress",
+        "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "leaderboardsPercentSUN",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "withdrawDividendDivRake",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_newAddress", "type": "address" }],
+        "name": "addWhitelistAddress",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "distributeMainDividend",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "dividendRemainderDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "userConfirmedDividendDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_signer", "type": "address" }],
+        "name": "changeSigner",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "uint256" }],
+        "name": "whitelistCallerArray",
+        "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "totalDividendsPaidNumberDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "dividendAmount", "type": "uint256" }],
+        "name": "requestDividendPayment",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "name": "removeWhitelistAddress",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_leaderBoardPercentSUN", "type": "uint256" }],
+        "name": "updateLeaderboardPercent",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          { "name": "_newPercentSUN", "type": "uint256" },
+          { "name": "_newAddress", "type": "address" }
+        ],
+        "name": "updateSharesPoolDetail",
+        "outputs": [{ "name": "", "type": "string" }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "displayAvailableDividendALL",
+        "outputs": [
+          { "name": "", "type": "bool" },
+          { "name": "", "type": "uint256" }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "refPoolPercentSUN",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "divPaidAllTimeDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "dividendAccumulatedDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "previousDivAmountWithdrawalDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "topiaFrozenAtDistributionDivRake",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      { "payable": true, "stateMutability": "payable", "type": "fallback" },
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": true, "name": "totalDividend", "type": "uint256" },
+          { "indexed": true, "name": "payableAmount", "type": "uint256" }
+        ],
+        "name": "DividendPaidDivRake",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": true, "name": "user", "type": "address" },
+          {
+            "indexed": false,
+            "name": "availableMainDividend",
+            "type": "uint256"
+          }
+        ],
+        "name": "UserWithdrawDividend",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      }
+    ]
+  },
+  "TopiaTokenData": {
+    "address": "TGpP9GPsjyq2yo4WrwSJvqYwqZLKRnSzE8",
+    "abi": [
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "whitelistCaller",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "durationFreezeTier2",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "goldTopiaUser",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "goldTopiaAllUsers",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "safeguardTokenMovement",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "bronzeTopiaUser",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "frozenTopiaReleaseAmount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "dividendContractAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "bronzeTopiaAllUsers",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "globalHalt",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "withdrawnOwnerTokens",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "silverTopiaUser",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "balanceOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "acceptOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "symbol",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "tokenSwap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "frozenTopiaReleaseTime",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "freezeTierTime",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_signer", "type": "address" }],
+        "name": "changeSigner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "inputs": [{ "type": "uint256" }],
+        "name": "whitelistCallerArray",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "frozenAccount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "silverTopiaAllUsers",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "burnTracker",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }, { "type": "address" }],
+        "name": "allowance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "freezeTierStatus",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "durationFreezeTier1",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Transfer",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Burn",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "target", "type": "address" },
+          { "name": "frozen", "type": "bool" }
+        ],
+        "name": "FrozenFunds",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Approval",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "user", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "TokenSwap",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "Event"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transferFrom",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_spender", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "approve",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "burn",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "burnFrom",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "target", "type": "address" },
+          { "name": "freeze", "type": "bool" }
+        ],
+        "name": "freezeAccount",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_user", "type": "address" },
+          { "name": "_tronAmount", "type": "uint256" }
+        ],
+        "name": "mintToken",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "claimOwnerTokens",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "displayTokensToClaim",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_newAddress", "type": "address" }],
+        "name": "updateDividendContract",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_newAddress", "type": "address" }],
+        "name": "addWhitelistGameAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "name": "removeWhitelistGameAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "tokenAmount", "type": "uint256" }],
+        "name": "manualWithdrawTokens",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeSafeguardTokenMovement",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeGlobalHalt",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "ratesArray", "type": "uint256[]" }],
+        "name": "updateMintingRates",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalTRXbalanceContract",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "freezeTopia",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "name": "unfreezeTopia",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "displayAvailabletoWithdrawTOPIA",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "name": "withdrawUnfrozenTopia",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "findFreezeTierPercentage",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "tier1", "type": "uint256" },
+          { "name": "tier2", "type": "uint256" }
+        ],
+        "name": "changeFreezeTiersDuration",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "upgradeTopia",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_user", "type": "address" }],
+        "name": "frozenTopia",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "frozenTopiaGlobal",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "type": "uint256" },
+          { "type": "uint256" },
+          { "type": "uint256" }
+        ],
+        "constant": true,
+        "name": "totalFrozenTopiaIndividual",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }, { "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "userFreezeTierAndAmount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "recipients", "type": "address[]" },
+          { "name": "tokenAmount", "type": "uint256" }
+        ],
+        "name": "airdrop",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      }
+    ]
+  },
+
+  "TopiaRefferalData": {
+    "address": "TPqGPvP6taPcTEW3GZdLn5zhB4VQALovUV",
+    "abi": [
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "whitelistCaller",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeGlobalHalt",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_user", "type": "address" },
+          { "name": "_referrer", "type": "address" },
+          { "name": "_trxAmount", "type": "uint256" },
+          { "name": "_totalWinning", "type": "uint256" }
+        ],
+        "name": "payReferrerBonusAndAddReferrer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "referrers",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "globalHalt",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "referrerBonusBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "acceptOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "name": "claimOwnerRefRake",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_user", "type": "address" },
+          { "name": "_referrer", "type": "address" }
+        ],
+        "name": "updateReferrer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_newAddress", "type": "address" }],
+        "name": "addWhitelistAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_signer", "type": "address" }],
+        "name": "changeSigner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "inputs": [{ "type": "uint256" }],
+        "name": "whitelistCallerArray",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_user", "type": "address" },
+          { "name": "_totalWinning", "type": "uint256" },
+          { "name": "_trxAmount", "type": "uint256" }
+        ],
+        "name": "payReferrerBonusOnly",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "refPool",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "name": "removeWhitelistAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "name": "claimReferrerBonus",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "referralsWageredAllTime",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_referrer", "type": "address" }],
+        "name": "findReferrerBonusTier",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "referer", "type": "address" },
+          { "indexed": true, "name": "player", "type": "address" },
+          { "name": "betAmount", "type": "uint256" },
+          { "name": "trxReceived", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" }
+        ],
+        "name": "ReferrerBonus",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "referrer", "type": "address" },
+          { "indexed": true, "name": "amount", "type": "uint256" }
+        ],
+        "name": "ReferrerBonusWithdrawn",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "Event"
+      }
+    ]
+  },
+
+  "TopiaDiamondTokenData": {
+    "address": "TXpSN9vd4VnSz8xvMhH7iabVaEtgWnfNiG",
+    "abi": [
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_spender", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "approve",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "name": "unfreezeDiamonds",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalMintedLifetime",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "safeguardTokenMovement",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeGlobalHalt",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "_voucherContract", "type": "address" },
+          { "name": "_diamondDividendContract", "type": "address" }
+        ],
+        "name": "updateContractAddresses",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transferFrom",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "diamondDividendContractAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "transferBlockerWhitelist",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "globalHalt",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "freezeDiamond",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "voucherContractAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "updateTransferBlockerStatus",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "type": "string" },
+          { "type": "uint256" },
+          { "type": "address" }
+        ],
+        "inputs": [
+          { "name": "recipients", "type": "address[]" },
+          { "name": "tokenAmount", "type": "uint256[]" }
+        ],
+        "name": "airdrop",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "name": "manualWithdrawTRX",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "balanceOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "transferBlocker",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "acceptOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "frozenDiamondsGlobal",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "_newAddress", "type": "address" },
+          { "name": "_status", "type": "bool" }
+        ],
+        "name": "updateTransferBlockerWhitelistAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "symbol",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalTRXbalanceContract",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_signer", "type": "address" }],
+        "name": "changeSigner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "frozenAccount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "usersDiamondFrozen",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "tokenAmount", "type": "uint256" }],
+        "name": "manualWithdrawDiamonds",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeSafeguardTokenMovement",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "maxSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }, { "type": "address" }],
+        "name": "allowance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "target", "type": "address" },
+          { "name": "freeze", "type": "bool" }
+        ],
+        "name": "freezeAccount",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "user", "type": "address" },
+          { "name": "diamondsAmount", "type": "uint256" }
+        ],
+        "name": "mintDiamonds",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Transfer",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Burn",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "name": "Approval",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "target", "type": "address" },
+          { "name": "frozen", "type": "bool" }
+        ],
+        "name": "FrozenAccounts",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "user", "type": "address" },
+          { "indexed": true, "name": "diamondAmount", "type": "uint256" }
+        ],
+        "name": "DiamondFrozen",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "user", "type": "address" },
+          { "indexed": true, "name": "diamondAmount", "type": "uint256" }
+        ],
+        "name": "DiamondUnFrozen",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "Event"
+      }
+    ]
+  },
+  "TopiaDiamondDivData": {
+    "address": "41265d3e9eb2256721b495c747859e0c7cdf42e3db",
+    "abi": [
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "token", "type": "address" },
+          { "name": "tokenAmount", "type": "uint256" }
+        ],
+        "name": "manualWithdrawTokens",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "whitelistCaller",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "previousDivAmountWithdrawal",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "name": "changeGlobalHalt",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [
+          { "name": "_voucherContract", "type": "address" },
+          { "name": "_diamondContract", "type": "address" }
+        ],
+        "name": "updateContractAddresses",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "dividendAccumulated",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getDividendPotential",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "divPaidAllTimeTrx",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "diamondContractAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "dividendRemainder",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "totalFrozenDiamondTracker",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "globalHalt",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "voucherContractAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "name": "withdrawDividendsEverything",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "name": "removeWhitelistGameAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "name": "manualWithdrawTRX",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "diamondsFrozenAtDivDistribution",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "acceptOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "divPercentageSUN",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "inputs": [{ "name": "_newAddress", "type": "address" }],
+        "name": "addWhitelistGameAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "dividendPaidLastTime",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "type": "string" },
+          { "type": "uint256" },
+          { "type": "uint256" },
+          { "type": "uint256" }
+        ],
+        "name": "distributeMainDividend",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalTRXbalanceContract",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "noOfDivPaidAfterFreeze",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_signer", "type": "address" }],
+        "name": "changeSigner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "inputs": [{ "type": "uint256" }],
+        "name": "whitelistCallerArray",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "user", "type": "address" }],
+        "name": "userConfirmedDividendTRX",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalDividendsPaidNumber",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "payable": true,
+        "name": "reInvestDividendRemainder",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "totalDividendPaidTRX", "type": "uint256" }
+        ],
+        "name": "DividendPaidTRX",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "user", "type": "address" },
+          { "indexed": true, "name": "tokenID", "type": "uint256" },
+          { "indexed": true, "name": "amount", "type": "uint256" }
+        ],
+        "name": "DividendWithdrawTRX",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "Event"
+      }
+    ]
+  }
+}

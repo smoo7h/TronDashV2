@@ -1,0 +1,476 @@
+{
+  "oneup.sol:oneup": {
+    "address": "41644aC5524557359961A4FfcEA66efeB25b54EAC3",
+    "abi": [
+      {
+        "constant": true,
+        "name": "getProfitPercentageAddress",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "CARD_BASE_PRICE",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "checkReferral",
+        "inputs": [{ "name": "_hunter", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "P3TToken",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "DAILY_HALF_TIME",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getContractDetail",
+        "outputs": [
+          { "name": "_balance", "type": "uint256" },
+          { "name": "_totalIn", "type": "uint256" },
+          { "name": "_totalOut", "type": "uint256" },
+          { "name": "_numberDayDeploy", "type": "uint256" },
+          { "name": "_totalTransactions", "type": "uint256" },
+          { "name": "_totalWallet", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getWithdrawTimeByAddress",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getDividendsCanWithdraw",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "marketing",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getProfitLevelByAddress",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "ROI_CHANGE_TIME",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setP3TInterface",
+        "inputs": [{ "name": "_p3tcontract", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getAddressByVanity",
+        "inputs": [{ "name": "_vanity", "type": "string" }],
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalOut",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "withdraw",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getDividends",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getCardLevel",
+        "inputs": [{ "name": "_cardId", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerTodayWithdraw",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "minimum",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "ROI_DEFAULT",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "stakingRequirement",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getCardPrice",
+        "inputs": [{ "name": "_cardId", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getContractBalance",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "deployTime",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "ROI_CHANGE",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "checkInvestments",
+        "inputs": [{ "name": "_investor", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalWallet",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "listVanityAddress",
+        "inputs": [{ "type": "bytes32" }],
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setMarketing",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "owner",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "cards",
+        "inputs": [{ "type": "uint256" }],
+        "outputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "price", "type": "uint256" },
+          { "name": "profit", "type": "uint256" },
+          { "name": "halfLife", "type": "uint256" },
+          { "name": "startingLevel", "type": "uint256" },
+          { "name": "startingTime", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getCardDetail",
+        "inputs": [{ "name": "_cardId", "type": "uint256" }],
+        "outputs": [
+          { "name": "_owner", "type": "address" },
+          { "name": "_profit", "type": "uint256" },
+          { "name": "_halfLife", "type": "uint256" },
+          { "name": "_startingTime", "type": "uint256" },
+          { "name": "_price", "type": "uint256" },
+          { "name": "_discountPeriod", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "ownerWallet",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "listDailyInfo",
+        "inputs": [{ "type": "uint256" }],
+        "outputs": [
+          { "name": "totalIn", "type": "uint256" },
+          { "name": "totalOut", "type": "uint256" },
+          { "name": "totalWallet", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "checkWithdrawals",
+        "inputs": [{ "name": "_investor", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "ROI_MAX",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalTransactions",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getPlayerDetail",
+        "inputs": [{ "name": "_add", "type": "address" }],
+        "outputs": [
+          { "name": "_vanity", "type": "string" },
+          { "name": "_vanityStatus", "type": "bool" },
+          { "name": "_investment", "type": "uint256" },
+          { "name": "_dividends", "type": "uint256" },
+          { "name": "_referral", "type": "uint256" },
+          { "name": "_profitPercentage", "type": "uint256" },
+          { "name": "_dividendsTodayWithdraw", "type": "uint256" },
+          { "name": "_dividendsCanWithdraw", "type": "uint256" },
+          { "name": "_totalWithdraws", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "withdrawInvestment",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "VANITY_PRICE",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "checkVanityExisted",
+        "inputs": [{ "name": "_vanity", "type": "string" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "buyCard",
+        "inputs": [{ "name": "_cardId", "type": "uint256" }],
+        "type": "Function",
+        "payable": true,
+        "stateMutability": "Payable"
+      },
+      {
+        "constant": true,
+        "name": "checkBalance",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "buyVanity",
+        "inputs": [{ "name": "_vanity", "type": "string" }],
+        "type": "Function",
+        "payable": true,
+        "stateMutability": "Payable"
+      },
+      {
+        "constant": true,
+        "name": "totalIn",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "players",
+        "inputs": [{ "type": "address" }],
+        "outputs": [
+          { "name": "joinedDay", "type": "uint256" },
+          { "name": "totalWithdraws", "type": "uint256" },
+          { "name": "withdrawDay", "type": "uint256" },
+          { "name": "prevDividends", "type": "uint256" },
+          { "name": "dividendsTodayWithdraw", "type": "uint256" },
+          { "name": "betRoundId", "type": "uint256" },
+          { "name": "vanity", "type": "string" },
+          { "name": "vanityStatus", "type": "bool" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "buy",
+        "inputs": [{ "name": "_referredBy", "type": "address" }],
+        "type": "Function",
+        "payable": true,
+        "stateMutability": "Payable"
+      },
+      {
+        "constant": true,
+        "name": "calculateCardDiscountPeriodByCardId",
+        "inputs": [{ "name": "_cardId", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getBalance",
+        "inputs": [{ "name": "_address", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "reinvest",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      { "type": "Constructor", "stateMutability": "Nonpayable" },
+      { "type": "Fallback", "payable": true, "stateMutability": "Payable" },
+      {
+        "name": "onInvest",
+        "inputs": [
+          { "name": "investor", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onBuyCard",
+        "inputs": [
+          { "name": "ownerNew", "type": "address" },
+          { "name": "ownerOld", "type": "address" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "cardId", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onBuyVanity",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "vanity", "type": "string" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onWithdrawInvestment",
+        "inputs": [
+          { "name": "investor", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onWithdraw",
+        "inputs": [
+          { "name": "investor", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onWithdrawReferral",
+        "inputs": [
+          { "name": "hunter", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "OwnershipTransferred",
+        "inputs": [
+          { "indexed": true, "name": "previousOwner", "type": "address" },
+          { "indexed": true, "name": "newOwner", "type": "address" }
+        ],
+        "type": "Event"
+      }
+    ]
+  }
+}

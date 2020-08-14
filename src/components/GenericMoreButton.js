@@ -1,20 +1,20 @@
-import React, { useRef, useState, memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, useState, memo } from "react";
+import PropTypes from "prop-types";
 import {
   ListItemIcon,
   ListItemText,
   Tooltip,
   IconButton,
   Menu,
-  MenuItem
-} from '@material-ui/core';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import PrintIcon from '@material-ui/icons/Print';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-import AchiveIcon from '@material-ui/icons/ArchiveOutlined';
+  MenuItem,
+} from "@material-ui/core";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import PrintIcon from "@material-ui/icons/Print";
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import AchiveIcon from "@material-ui/icons/ArchiveOutlined";
 
 function GenericMoreButton(props) {
   const moreRef = useRef(null);
@@ -43,20 +43,20 @@ function GenericMoreButton(props) {
       <Menu
         anchorEl={moreRef.current}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
+          vertical: "top",
+          horizontal: "left",
         }}
         elevation={1}
         onClose={handleMenuClose}
         open={openMenu}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
+          vertical: "top",
+          horizontal: "left",
         }}
       >
         <MenuItem
-          onClick={e => {
-            props.filterClick('');
+          onClick={(e) => {
+            props.filterclick("");
           }}
         >
           <ListItemIcon>
@@ -65,8 +65,8 @@ function GenericMoreButton(props) {
           <ListItemText primary="all dapps" />
         </MenuItem>
         <MenuItem
-          onClick={e => {
-            props.filterClick('my dapps');
+          onClick={(e) => {
+            props.filterclick("my dapps");
           }}
         >
           <ListItemIcon>
@@ -75,8 +75,8 @@ function GenericMoreButton(props) {
           <ListItemText primary="my dapps" />
         </MenuItem>
         <MenuItem
-          onClick={e => {
-            props.filterClick('trx dapps');
+          onClick={(e) => {
+            props.filterclick("trx dapps");
           }}
         >
           <ListItemIcon>
@@ -85,8 +85,8 @@ function GenericMoreButton(props) {
           <ListItemText primary="trx dapps" />
         </MenuItem>
         <MenuItem
-          onClick={e => {
-            props.filterClick('btt dapps');
+          onClick={(e) => {
+            props.filterclick("btt dapps");
           }}
         >
           <ListItemIcon>
@@ -100,7 +100,7 @@ function GenericMoreButton(props) {
 }
 
 GenericMoreButton.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default memo(GenericMoreButton);

@@ -1,0 +1,294 @@
+{
+  "data" :[{"Name":"DashBank Dash","Website":null,"MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TWEiEdjKTGDwgXhsfNu2RuXzUCvdrdrsUU","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"Bank Roll Credits","Website":"bankroll.network","MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TUTik4srgKuzgXoL4KfV75foQbYuP8SirY","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"Boost","Website":null,"MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TMmWrjjKGRCdoUzmv6YUaov7mwxy1swDnq","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"DashBank TRX","Website":null,"MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"Tewkenaire Stable","Website":"https://tewkenaire.network/stable.html","MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TSXnUzYWuockj3KspfGAd8hnRhshPm1yyw","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"Tewkenaire Crazy","Website":null,"MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TCSw8e8M6BRUYvh1vHhHZCZPiiBrcDjv7R","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"DashBank BTT","Website":"https://trondash.com/bttbank","MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"btt","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TDwhzSDTWufUcfVp5JDm182F8GB8cQkeZ5","ContractFunctionSelector":"sellPrice()","ContractParameter":""}},{"Name":"Frag Box","Website":null,"MyProperty":null,"ImageURL":null,"DappType":{"Name":"Bank"},"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","Trc20TokenAddress":null,"Trc20TokenDecimals":0,"DappDecimals":6,"TokenType":null,"PaysOutIn":"trx","Active":true,"PoloniexDexID":0,"DivPool":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"totalSupply()","ContractParameter":""},"Investment":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"balanceOf(address)","ContractParameter":"UserKey"},"Referral":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"true"},"UserDividend":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"myDividends(bool)","ContractParameter":"false"},"Invest":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"buy(uint256)","ContractParameter":"UserAmount"},"Devest":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"sell(uint256)","ContractParameter":"UserAmount"},"ReInvest":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"reinvest()","ContractParameter":""},"WithDrawl":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"withdraw()","ContractParameter":""},"BuyPrice":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"buyPrice()","ContractParameter":""},"SellPrice":{"ContractAddress":"TTXAkorQWkzwZADnULju1jKSEv3vaum5gz","ContractFunctionSelector":"sellPrice()","ContractParameter":""}}]
+}
+
+{
+  "TrxBankData": {
+    "address": "TKBWWZUkgTrsYTTfxNY2pxzGE9acqNr2Na",
+    "abi": [
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "dividendsOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_trxToSpend", "type": "uint256" }],
+        "name": "calculateTokensReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalSupply",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "constant": true,
+        "name": "miningRate",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "payable": true,
+        "name": "airdrop",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "name": "withdraw",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "buyAndSellPrice",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "customerAddress", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "name": "transferDash",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalMined",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "stakingRequirement",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "rate", "type": "uint8" }],
+        "name": "changeminingrate",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_includeReferralBonus", "type": "bool" }],
+        "name": "myDividends",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_customerAddress", "type": "address" }],
+        "name": "balanceOf",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "name": "checkminingrate",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changeownership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "owner",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "dev",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "myTokens",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "symbol",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changedev",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_toAddress", "type": "address" },
+          { "name": "_amountOfTokens", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "payable": true,
+        "name": "fund",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_tokensToSell", "type": "uint256" }],
+        "name": "calculateTrxReceived",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_amountOfTokens", "type": "uint256" }],
+        "name": "sell",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "inputs": [
+          { "name": "_toAddress", "type": "address" },
+          { "name": "_amountOfTokens", "type": "uint256" }
+        ],
+        "name": "windrop",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "name": "exit", "stateMutability": "Nonpayable", "type": "Function" },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "payable": true,
+        "inputs": [{ "name": "_referredBy", "type": "address" }],
+        "name": "buy",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalDeposit",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "reinvest",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "totalTronBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "incomingBTT", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" },
+          { "indexed": true, "name": "referredBy", "type": "address" }
+        ],
+        "name": "onTokenPurchase",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "name": "onAriDrop",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tokensBurned", "type": "uint256" },
+          { "name": "bttEarned", "type": "uint256" }
+        ],
+        "name": "onTokenSell",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "bttReinvested", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" }
+        ],
+        "name": "onReinvestment",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "bttWithdrawn", "type": "uint256" }
+        ],
+        "name": "onWithdraw",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "tokens", "type": "uint256" }
+        ],
+        "name": "Transfer",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "tokens", "type": "uint256" }
+        ],
+        "name": "WinDrop",
+        "type": "Event"
+      }
+    ]
+  }
+}

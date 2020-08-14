@@ -126,7 +126,7 @@ function PerformanceOverTime({
 
       //make the graph look better
       if (startingvalue > 10000000) {
-        startingvalue = dappdata.CurrentDivPool * 10000;
+        startingvalue = dappdata.CurrentDivPool * 100;
       } else if (startingvalue > 1000000) {
         startingvalue = dappdata.CurrentDivPool * 100000;
       } else {

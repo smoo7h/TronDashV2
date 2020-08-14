@@ -1,0 +1,619 @@
+{
+  "erc20": {
+    "address": "41EBF34837aDb3e2D93624b0130611230658E8c3f3",
+    "abi": [
+      { "type": "Constructor", "stateMutability": "Nonpayable" },
+      {
+        "name": "Transfer",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Approval",
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "constant": true,
+        "name": "name",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "Pure"
+      },
+      {
+        "constant": true,
+        "name": "symbol",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "Pure"
+      },
+      {
+        "constant": true,
+        "name": "decimals",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "Pure"
+      },
+      {
+        "constant": true,
+        "name": "totalSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "balanceOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "allowance",
+        "inputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "spender", "type": "address" }
+        ],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "transfer",
+        "inputs": [
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "multiTransfer",
+        "inputs": [
+          { "name": "receivers", "type": "address[]" },
+          { "name": "amounts", "type": "uint256[]" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "approveAndCall",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" },
+          { "name": "data", "type": "bytes" }
+        ],
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "approve",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "transferFrom",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "increaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "addedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "decreaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "subtractedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burn",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burnFrom",
+        "inputs": [
+          { "name": "account", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      }
+    ]
+  },
+
+  "erc202": {
+    "address": "TNo59Khpq46FGf4sD7XSWYFNfYfbc8CqNK",
+    "abi": [
+      {
+        "constant": true,
+        "name": "mintingFinished",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "name",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "approve",
+        "inputs": [
+          { "name": "_spender", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "genesisRate",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "statsOf",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [
+          { "type": "uint256" },
+          { "type": "uint256" },
+          { "type": "uint256" },
+          { "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "transferFrom",
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "decimals",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "remainingMintableSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "cap",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "mintedBy",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "mint",
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_amount", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burn",
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "totalTxs",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "decreaseApproval",
+        "inputs": [
+          { "name": "_spender", "type": "address" },
+          { "name": "_subtractedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "balanceOf",
+        "inputs": [{ "name": "_owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "burned",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "finishMinting",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "airdrop",
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_amount", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "owner",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "symbol",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "transfer",
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "airdropEligible",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "burnRate",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "mintedSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "increaseApproval",
+        "inputs": [
+          { "name": "_spender", "type": "address" },
+          { "name": "_addedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "players",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "allowance",
+        "inputs": [
+          { "name": "_owner", "type": "address" },
+          { "name": "_spender", "type": "address" }
+        ],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "transferOwnership",
+        "inputs": [{ "name": "newOwner", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      { "type": "Constructor", "stateMutability": "Nonpayable" },
+      {
+        "name": "Burn",
+        "inputs": [
+          { "indexed": true, "name": "burner", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Mint",
+        "inputs": [
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      { "name": "MintFinished", "type": "Event" },
+      {
+        "name": "OwnershipTransferred",
+        "inputs": [
+          { "indexed": true, "name": "previousOwner", "type": "address" },
+          { "indexed": true, "name": "newOwner", "type": "address" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Approval",
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Transfer",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      }
+    ]
+  },
+  "dasherc20": {
+    "address": "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm",
+    "abi": [
+      {
+        "constant": true,
+        "name": "name",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "approve",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "totalSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "multiTransfer",
+        "inputs": [
+          { "name": "receivers", "type": "address[]" },
+          { "name": "amounts", "type": "uint256[]" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "transferFrom",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "decimals",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "findTwoPercent",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "increaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "addedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burn",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "balanceOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "burned",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "burnFrom",
+        "inputs": [
+          { "name": "account", "type": "address" },
+          { "name": "amount", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "symbol",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "decreaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "subtractedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "transfer",
+        "inputs": [
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "burnRate",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "basePercent",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "allowance",
+        "inputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "spender", "type": "address" }
+        ],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      { "type": "Constructor", "payable": true, "stateMutability": "Payable" },
+      {
+        "name": "Transfer",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Approval",
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      }
+    ]
+  }
+}

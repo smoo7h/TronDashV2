@@ -1,0 +1,155 @@
+{
+  "fragstaking": {
+    "address": "TTXAkorQWkzwZADnULju1jKSEv3vaum5gz",
+    "abi": [
+      {
+        "constant": true,
+        "name": "dividendsOf",
+        "inputs": [{ "name": "customerAddress", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "savingsOf",
+        "inputs": [{ "name": "customerAddress", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "daysSinceEpoch",
+        "outputs": [{ "type": "uint128" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "withdraw",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "depositDivs",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "streakHighscore",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "streakLeader",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "streaks",
+        "inputs": [{ "type": "address" }],
+        "outputs": [
+          { "name": "currentStreak", "type": "uint128" },
+          { "name": "lastReinvestDay", "type": "uint128" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "distributeDivs",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "receiveApproval",
+        "inputs": [
+          { "name": "player", "type": "address" },
+          { "name": "amount", "type": "uint256" },
+          { "type": "address" },
+          { "name": "data", "type": "bytes" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "cashout",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "balance",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "refBuys",
+        "inputs": [{ "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "referrerOf",
+        "inputs": [{ "name": "customerAddress", "type": "address" }],
+        "outputs": [{ "name": "ref", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "referralsHeld",
+        "inputs": [{ "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "onTokenPurchase",
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "incomingTron", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" },
+          { "indexed": true, "name": "referredBy", "type": "address" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onTokenSell",
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tokensBurned", "type": "uint256" },
+          { "name": "tronEarned", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onReinvestment",
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tronReinvested", "type": "uint256" },
+          { "name": "tokensMinted", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "onWithdraw",
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "tronWithdrawn", "type": "uint256" }
+        ],
+        "type": "Event"
+      }
+    ]
+  }
+}

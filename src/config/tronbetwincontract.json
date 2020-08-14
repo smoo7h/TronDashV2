@@ -1,0 +1,330 @@
+{
+  "tronbetwindata": {
+    "address": "THDwuQsEiNqh8oLFhi7pjcyWCoYv4hSohL",
+    "abi": [
+      {
+        "name": "copyAnteStakeNext",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "addrAnte", "type": "address" },
+          { "name": "addrStake", "type": "address" },
+          { "name": "exchangeR", "type": "uint256" }
+        ],
+        "constant": true,
+        "name": "getAnteParam",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "playerToIndexMap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "winAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "getWinAmountByIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getMaxHolderIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "unfreezeForece",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "addrWin", "type": "address" },
+          { "name": "dateUnfreeze", "type": "uint256" },
+          { "name": "dateFreeze", "type": "uint256" },
+          { "name": "cdStake", "type": "uint256" }
+        ],
+        "constant": true,
+        "name": "getWinParam",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_amount", "type": "uint256" }],
+        "name": "burnAnte",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_winAmount", "type": "uint256" }],
+        "name": "unfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_unfreezeDate", "type": "uint256" },
+          { "name": "_freezeDate", "type": "uint256" }
+        ],
+        "name": "setWinFreezeDate",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newAdmin", "type": "address" }],
+        "name": "setAdmin",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_owner", "type": "address" }],
+        "name": "getStakeWinByAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_addrAnte", "type": "address" },
+          { "name": "_addrStake", "type": "address" },
+          { "name": "_exchangeRate", "type": "uint256" },
+          { "name": "_delayRate", "type": "uint256" }
+        ],
+        "name": "setAnteParam",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "name": "resetCheckedIndex",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_pause", "type": "bool" }],
+        "name": "setStakePause",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "name": "cancelUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newFinance", "type": "address" }],
+        "name": "setFinance",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_value", "type": "uint256" },
+          { "name": "_extraData", "type": "bytes" }
+        ],
+        "name": "receiveApproval",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_val", "type": "bool" }],
+        "name": "setCanExchangeAnte",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "isPaused",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOperator", "type": "address" }],
+        "name": "setOperator",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_addrWin", "type": "address" },
+          { "name": "_unfreezeDate", "type": "uint256" },
+          { "name": "_freezeDate", "type": "uint256" },
+          { "name": "_stakeCd", "type": "uint256" }
+        ],
+        "name": "setWinParam",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "name": "WithdrawUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_pause", "type": "bool" }],
+        "name": "setPause",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "addrAdmin",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "frozenAmount", "type": "uint256" },
+          { "name": "unfreezingAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "name": "getFreezeWinBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_player", "type": "address" }],
+        "name": "withdrawUnfreezeForece",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "isStakePaused",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getCheckedIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newPool", "type": "address" }],
+        "name": "updateVersion",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_tokenAmount", "type": "uint256" }],
+        "name": "stakeWin",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "copyAnteStakeSingle",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_addr", "type": "address" },
+          { "name": "_useful", "type": "bool" }
+        ],
+        "name": "setPauseController",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "pauseControllerMap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "winAmount", "type": "uint256" },
+          { "name": "tmUnfreeze", "type": "uint256" },
+          { "name": "unfreezingAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "inputs": [{ "name": "_owner", "type": "address" }],
+        "name": "getStateInfoByAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_winAmount", "type": "uint256" },
+          { "name": "_winTotal", "type": "uint256" },
+          { "name": "_frezeeTotal", "type": "uint256" }
+        ],
+        "name": "StakeWin",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_oldUnfreezingAmount", "type": "uint256" },
+          { "name": "_newUnfreezingAmount", "type": "uint256" },
+          { "name": "_leftAmount", "type": "uint256" },
+          { "name": "_tmFreeze", "type": "uint256" }
+        ],
+        "name": "UnstakeWin",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_cancelAmount", "type": "uint256" },
+          { "name": "_winTotal", "type": "uint256" }
+        ],
+        "name": "UnstakeCancel",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_winAmount", "type": "uint256" }
+        ],
+        "name": "WithdrawUnstake",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_anteAmount", "type": "uint256" },
+          { "name": "_winAmount", "type": "uint256" },
+          { "name": "_winTotal", "type": "uint256" }
+        ],
+        "name": "ExchangeAnte",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_anteAmount", "type": "uint256" },
+          { "name": "_winAmount", "type": "uint256" }
+        ],
+        "name": "CopyWinFromAnte",
+        "type": "Event"
+      }
+    ]
+  }
+}

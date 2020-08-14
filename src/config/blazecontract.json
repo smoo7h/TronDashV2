@@ -1,0 +1,143 @@
+{
+  "blaze": {
+    "address": "4173fc45638cb32c6290d0b694d59379aa295f75f8",
+    "abi": [
+      { "type": "Constructor", "stateMutability": "Nonpayable" },
+      {
+        "name": "Log",
+        "inputs": [
+          { "indexed": true, "name": "index", "type": "uint256" },
+          { "indexed": true, "name": "category", "type": "uint256" },
+          { "indexed": true, "name": "account", "type": "address" },
+          { "name": "param1", "type": "uint256" },
+          { "name": "param2", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "changeBanker",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "changeToken",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "changeStorage",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "changeMaxPointsExpiryTimeGap",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "changeMinDividendsTimeGap",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "buy",
+        "inputs": [{ "name": "referrer", "type": "address" }],
+        "type": "Function",
+        "payable": true,
+        "stateMutability": "Payable"
+      },
+      {
+        "name": "sell",
+        "inputs": [{ "name": "points", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "force",
+        "inputs": [{ "name": "player", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      { "name": "fire", "type": "Function", "stateMutability": "Nonpayable" },
+      {
+        "name": "collect",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "freeze",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "unfreeze",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      { "name": "claim", "type": "Function", "stateMutability": "Nonpayable" },
+      {
+        "name": "distribute",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "grant",
+        "type": "Function",
+        "payable": true,
+        "stateMutability": "Payable"
+      },
+      {
+        "name": "clean",
+        "inputs": [{ "name": "amount", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "promo",
+        "inputs": [{ "name": "tokens", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getStatus",
+        "outputs": [{ "type": "uint256[9]" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getAccount",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "outputs": [{ "type": "uint256[6]" }, { "type": "address[1]" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getExchangeRate",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "calcAccountExpiry",
+        "inputs": [
+          { "name": "account", "type": "address" },
+          { "name": "timer", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      }
+    ]
+  }
+}

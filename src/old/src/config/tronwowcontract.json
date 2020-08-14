@@ -1,0 +1,278 @@
+{
+  "tronwow": {
+    "address": "4105ad43952386ff1591575f21ffd9f9184555008c",
+
+    "abi": [
+      {
+        "name": "addMinter",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "renounceMinter",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "isMinter",
+        "inputs": [{ "name": "account", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      { "type": "Constructor", "stateMutability": "Nonpayable" },
+      {
+        "name": "Transfer",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "indexed": true, "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Approval",
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "indexed": true, "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Thaw12Hours",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "Thaw24Hours",
+        "inputs": [
+          { "indexed": true, "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "MinterAdded",
+        "inputs": [{ "indexed": true, "name": "account", "type": "address" }],
+        "type": "Event"
+      },
+      {
+        "name": "MinterRemoved",
+        "inputs": [{ "indexed": true, "name": "account", "type": "address" }],
+        "type": "Event"
+      },
+      {
+        "constant": true,
+        "name": "name",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "symbol",
+        "outputs": [{ "type": "string" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "decimals",
+        "outputs": [{ "type": "uint8" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "totalSupply",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "balanceOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "allowance",
+        "inputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "spender", "type": "address" }
+        ],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "frozenOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "thaws12HoursOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "thaws24HoursOf",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "lastThawTime12Hours",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "lastThawTime24Hours",
+        "inputs": [{ "name": "owner", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "transfer",
+        "inputs": [
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "approve",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "transferFrom",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "increaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "addedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "decreaseAllowance",
+        "inputs": [
+          { "name": "spender", "type": "address" },
+          { "name": "subtractedValue", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "freeze",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "thaw12Hours",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "thaw24Hours",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "withdraw12Hours",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "withdraw24Hours",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burn",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "mint",
+        "inputs": [
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burnFrom",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "burnByMinter",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      }
+    ]
+  }
+}

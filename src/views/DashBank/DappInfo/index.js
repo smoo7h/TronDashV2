@@ -182,18 +182,22 @@ function DappInfo({ className, dappData, ...rest }) {
               {dappData.DivPool.Currency}
             </Typography>
           </ListItem>
-          {/* 
+
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider
-            key={"StartDate"}
+            key={"wallet"}
           >
             <ListItemText
-              primary={"Total Deposit"}
+              primary={"Wallet"}
               primaryTypographyProps={{ color: "inherit", variant: "body1" }}
             />
-            <Typography color="inherit">{creationDate}</Typography>
+            <Typography color="inherit">
+              {"0"} {` `}
+              {dappData.DivPool.Currency}
+            </Typography>
           </ListItem>
+          {/* 
           <ListItem
             classes={{ divider: classes.itemDivider }}
             divider

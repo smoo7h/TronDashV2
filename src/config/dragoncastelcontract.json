@@ -1,0 +1,446 @@
+{
+  "dragoncastle": {
+    "address": "419677e2bc9f3284037f065c5f0802f6a02459f2a4",
+    "abi": [
+      {
+        "constant": true,
+        "name": "_enable",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setWhitelist",
+        "inputs": [
+          { "name": "addr", "type": "address" },
+          { "name": "lv", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_lock",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_givebackStep",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_airdropTrx",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setEnable",
+        "inputs": [{ "name": "enable", "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "removeWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "_freeze",
+        "inputs": [{ "type": "address" }],
+        "outputs": [
+          { "name": "index", "type": "uint256" },
+          { "name": "addr", "type": "address" },
+          { "name": "timestamp", "type": "uint256" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelist",
+        "inputs": [{ "name": "index", "type": "uint256" }],
+        "outputs": [{ "type": "address" }, { "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_givebacked",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelistLength",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "isGm",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "isWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_totalFreeze",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_whitelist",
+        "inputs": [{ "type": "address" }],
+        "outputs": [
+          { "name": "index", "type": "uint256" },
+          { "name": "lv", "type": "uint256" },
+          { "name": "addr", "type": "address" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_airdroped",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_token",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_airdropStep",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "withdraw",
+        "inputs": [
+          { "name": "addr", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "inputs": [{ "name": "token", "type": "address" }],
+        "type": "Constructor",
+        "stateMutability": "Nonpayable"
+      },
+      { "type": "Fallback", "payable": true, "stateMutability": "Payable" },
+      {
+        "name": "UpdateFreeze",
+        "inputs": [
+          { "name": "addr", "type": "address" },
+          { "name": "freeze", "type": "bool" },
+          { "name": "tokens", "type": "uint256" },
+          { "name": "totalFreeze", "type": "uint256" }
+        ],
+        "type": "Event"
+      },
+      {
+        "name": "withdrawToken",
+        "inputs": [
+          { "name": "to", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "receiveApproval",
+        "inputs": [
+          { "name": "from", "type": "address" },
+          { "name": "tokens", "type": "uint256" },
+          { "name": "token", "type": "address" },
+          { "name": "data", "type": "bytes" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "unfreeze",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getFreezeKeyLength",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getFreezeKey",
+        "inputs": [{ "name": "index", "type": "uint256" }],
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getFreeze",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [
+          { "name": "value", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getFreeze",
+        "outputs": [
+          { "name": "value", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setAirdrop",
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "airdropTrx",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setLock",
+        "inputs": [{ "name": "lock", "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setAirdropStep",
+        "inputs": [{ "name": "step", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setTokenContract",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setGivebackStep",
+        "inputs": [{ "name": "step", "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setGivebackTokens",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "givebackTokens",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      }
+    ]
+  },
+  "dragoncastle2": {
+    "address": "41d984ce7c365b82607c61b52999660511a113948a",
+    "abi": [
+      {
+        "constant": true,
+        "name": "_enable",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_rewardPools",
+        "inputs": [{ "type": "uint256" }],
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setWhitelist",
+        "inputs": [
+          { "name": "addr", "type": "address" },
+          { "name": "lv", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "_completedAirdrop",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_freeze",
+        "outputs": [{ "type": "address" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "setEnable",
+        "inputs": [{ "name": "enable", "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "removeWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelist",
+        "inputs": [{ "name": "index", "type": "uint256" }],
+        "outputs": [{ "type": "address" }, { "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "getWhitelistLength",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "isGm",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_lastDailyActionTime",
+        "outputs": [{ "type": "uint256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "isWhitelist",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "constant": true,
+        "name": "_whitelist",
+        "inputs": [{ "type": "address" }],
+        "outputs": [
+          { "name": "index", "type": "uint256" },
+          { "name": "lv", "type": "uint256" },
+          { "name": "addr", "type": "address" }
+        ],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "withdraw",
+        "inputs": [
+          { "name": "addr", "type": "address" },
+          { "name": "value", "type": "uint256" }
+        ],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "inputs": [{ "name": "freeze", "type": "address" }],
+        "type": "Constructor",
+        "stateMutability": "Nonpayable"
+      },
+      { "type": "Fallback", "payable": true, "stateMutability": "Payable" },
+      {
+        "name": "setRewardPools",
+        "inputs": [{ "name": "addrs", "type": "address[]" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "constant": true,
+        "name": "getRewardPool",
+        "outputs": [{ "type": "int256" }],
+        "type": "Function",
+        "stateMutability": "View"
+      },
+      {
+        "name": "dailyAction",
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "airdropTrx",
+        "outputs": [{ "type": "bool" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      },
+      {
+        "name": "setFreezeContract",
+        "inputs": [{ "name": "addr", "type": "address" }],
+        "type": "Function",
+        "stateMutability": "Nonpayable"
+      }
+    ]
+  }
+}

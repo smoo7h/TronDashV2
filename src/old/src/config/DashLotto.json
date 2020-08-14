@@ -1,0 +1,224 @@
+{
+  "dashlotto": {
+    "address": "TR8a3PoNEG959qSW39P2avivC67SqrSLZm",
+    "abi": [
+      {
+        "outputs": [{ "type": "string" }],
+        "constant": true,
+        "name": "name",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "entryFee",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changeOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint8" }],
+        "constant": true,
+        "name": "decimals",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getUserTotalProgressiveWins",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "lastProgressiveTimeStamp",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changeBank",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getCurrentDailyTicketCount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getCurrentProgressiveBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "winneraddress", "type": "address" },
+          { "name": "ticketnumber", "type": "string" }
+        ],
+        "name": "verifyDailyWinner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getCurrentProgressiveTicketCount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "bank",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "lastDailyTimeStamp",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newAddr", "type": "address" }],
+        "name": "changeDev",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "name": "getdonations",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "owner",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "currentDailyGame",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "dev",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newvalue", "type": "uint256" }],
+        "name": "changeDailyValue",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "dailyWinValue",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getUserTotalDailyWins",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "currentProgressiveGame",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "winneraddress", "type": "address" },
+          { "name": "ticketnumber", "type": "string" },
+          { "name": "winningamount", "type": "uint256" },
+          { "name": "winningNumbers", "type": "uint256" }
+        ],
+        "name": "verifyProgressiveWinner",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "value", "type": "uint256" }],
+        "name": "getProgressiveWins",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "payable": true,
+        "name": "buyTicket",
+        "stateMutability": "Payable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "newvalue", "type": "uint256" }],
+        "name": "changeEntryFee",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      { "payable": true, "stateMutability": "Payable", "type": "Fallback" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "timestamp", "type": "uint256" },
+          { "name": "dailylotterynumber", "type": "uint256" },
+          { "name": "weeklylotterynumber", "type": "uint256" }
+        ],
+        "name": "onTicketPurchase",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "ticketnumber", "type": "string" },
+          { "name": "numberofdash", "type": "uint256" },
+          { "name": "gamenumber", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" }
+        ],
+        "name": "onDailyWinner",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "customerAddress", "type": "address" },
+          { "name": "ticketnumber", "type": "string" },
+          { "name": "winningNumber", "type": "uint256" },
+          { "name": "jackpotsize", "type": "uint256" },
+          { "name": "gamenumber", "type": "uint256" },
+          { "name": "timestamp", "type": "uint256" }
+        ],
+        "name": "onProgressiveWinner",
+        "type": "Event"
+      }
+    ]
+  }
+}

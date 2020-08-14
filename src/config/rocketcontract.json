@@ -1,0 +1,249 @@
+{
+  "RocketDividendsData": {
+    "address": "TN5HsrLDTJU3bsSeceEbsndKKR7HqBLgS7",
+    "abi": [
+      {
+        "name": "acceptOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "owner",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "newOwner",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
+        "name": "transferOwnership",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "rocket", "type": "address" }],
+        "stateMutability": "Nonpayable",
+        "type": "Constructor"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "name": "oldunAmount", "type": "uint256" },
+          { "name": "newunAmount", "type": "uint256" },
+          { "name": "freezeAmount", "type": "uint256" },
+          { "name": "timeFreeze", "type": "uint256" }
+        ],
+        "name": "unfreezeToken",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "name": "unfreezeAmount", "type": "uint256" }
+        ],
+        "name": "withdrawUnfreezeEvent",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "name": "freezingAmount", "type": "uint256" },
+          { "name": "tokenAmount", "type": "uint256" }
+        ],
+        "name": "cancelUnfreezeEvent",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "owner", "type": "address" },
+          { "name": "freezeAmount", "type": "uint256" },
+          { "name": "tokenAmount", "type": "uint256" },
+          { "name": "index", "type": "uint256" }
+        ],
+        "name": "freezeToken",
+        "type": "Event"
+      },
+      {
+        "inputs": [{ "name": "frozen", "type": "bool" }],
+        "name": "FreezeTransfer",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_from", "type": "address" },
+          { "indexed": true, "name": "_to", "type": "address" }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "Event"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "getTokenAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_token", "type": "address" }],
+        "name": "setTokenAddress",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setMinFreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setMaxLen",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setMinUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setMaxFreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setMaxUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "setfreezingPeriod",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_freeze", "type": "bool" }],
+        "name": "setFreezeTransfer",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }, { "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "getAddressMap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "name": "_to", "type": "address" }],
+        "name": "getAddressIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getTotalToken",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getMaxIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_value", "type": "uint256" },
+          { "name": "_token", "type": "address" },
+          { "name": "_extraData", "type": "bytes" }
+        ],
+        "name": "receiveApproval",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_value", "type": "uint256" }],
+        "name": "unfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_to", "type": "address" }],
+        "name": "unfreezeF",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "name": "withdrawUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "inputs": [{ "name": "_to", "type": "address" }],
+        "name": "withdrawUnfreezeF",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "success", "type": "bool" }],
+        "name": "cancelUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "type": "address" },
+          { "type": "uint256" },
+          { "type": "uint256" },
+          { "type": "uint256" }
+        ],
+        "constant": true,
+        "inputs": [{ "name": "_owner", "type": "address" }],
+        "name": "getInfo",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256[]" }],
+        "constant": true,
+        "inputs": [
+          { "name": "_mIndex", "type": "uint256" },
+          { "name": "_aIndex", "type": "uint256" }
+        ],
+        "name": "getTokenMap",
+        "stateMutability": "View",
+        "type": "Function"
+      }
+    ]
+  }
+}

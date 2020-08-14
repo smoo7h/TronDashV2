@@ -1,0 +1,263 @@
+{
+  "dicedata": {
+    "address": "TRvGDySXaL3sdpSxo41LLskjJ76N3Mz8v9",
+    "abi": [
+      {
+        "outputs": [
+          { "name": "devAmount", "type": "uint256" },
+          { "name": "totalAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "name": "getTotalStakeDice",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "_diceToken", "type": "address" },
+          { "name": "_devDiceReader", "type": "address" }
+        ],
+        "constant": true,
+        "name": "getDiceParam",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_addr", "type": "address" }],
+        "name": "setDiceTokenAddr",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "playerToIndexMap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getMaxHolderIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "unfreezeForece",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "diceAmount", "type": "uint256" },
+          { "name": "tmUnfreeze", "type": "uint256" },
+          { "name": "unfreezingAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "inputs": [{ "name": "_owner", "type": "address" }],
+        "name": "getStakeInfoByAddress",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "inputs": [{ "type": "uint256" }],
+        "name": "playerStakeArray",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "getDevDiceAmount",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_newAdmin", "type": "address" }],
+        "name": "setAdmin",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [
+          { "name": "owner", "type": "address" },
+          { "name": "diceAmount", "type": "uint256" }
+        ],
+        "constant": true,
+        "inputs": [{ "name": "_index", "type": "uint256" }],
+        "name": "getDiceAmountByIndex",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "name": "stakeValArray", "type": "uint256[]" }],
+        "constant": true,
+        "inputs": [
+          { "name": "_minIndex", "type": "uint256" },
+          { "name": "_maxIndex", "type": "uint256" }
+        ],
+        "name": "getDiceHolderArray",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_cd", "type": "uint256" }],
+        "name": "setStakeCd",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_pause", "type": "bool" }],
+        "name": "setStakePause",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_addr", "type": "address" }],
+        "name": "setDiceReader",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_from", "type": "address" },
+          { "name": "_value", "type": "uint256" },
+          { "name": "_extraData", "type": "bytes" }
+        ],
+        "name": "receiveApproval",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "unfreezingBalance",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "uint256" }],
+        "constant": true,
+        "name": "stakeCd",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "isPaused",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "WithdrawUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_pause", "type": "bool" }],
+        "name": "setPause",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "addrAdmin",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "address" }],
+        "constant": true,
+        "name": "addrOperator",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "name": "CancelUnfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_player", "type": "address" }],
+        "name": "withdrawUnfreezeForece",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "inputs": [{ "name": "_amount", "type": "uint256" }],
+        "name": "Unfreeze",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "name": "isStakePaused",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      {
+        "inputs": [
+          { "name": "_addr", "type": "address" },
+          { "name": "_useful", "type": "bool" }
+        ],
+        "name": "setPauseController",
+        "stateMutability": "Nonpayable",
+        "type": "Function"
+      },
+      {
+        "outputs": [{ "type": "bool" }],
+        "constant": true,
+        "inputs": [{ "type": "address" }],
+        "name": "pauseControllerMap",
+        "stateMutability": "View",
+        "type": "Function"
+      },
+      { "stateMutability": "Nonpayable", "type": "Constructor" },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_diceAmount", "type": "uint256" },
+          { "name": "_diceTotal", "type": "uint256" }
+        ],
+        "name": "StakeDice",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_oldUnfreezingAmount", "type": "uint256" },
+          { "name": "_newUnfreezingAmount", "type": "uint256" },
+          { "name": "_leftAmount", "type": "uint256" },
+          { "name": "_tmFreeze", "type": "uint256" }
+        ],
+        "name": "UnstakeDice",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_cancelAmount", "type": "uint256" },
+          { "name": "_diceTotal", "type": "uint256" }
+        ],
+        "name": "UnstakeDiceCancel",
+        "type": "Event"
+      },
+      {
+        "inputs": [
+          { "indexed": true, "name": "_owner", "type": "address" },
+          { "name": "_diceAmount", "type": "uint256" }
+        ],
+        "name": "WithdrawUnstakeDice",
+        "type": "Event"
+      }
+    ]
+  }
+}
