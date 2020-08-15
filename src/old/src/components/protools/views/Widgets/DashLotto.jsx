@@ -25,7 +25,7 @@ import Card from "../../components/Card/Card.jsx";
 
 import CardBody from "../../components/Card/CardBody.jsx";
 
-import image from "../../../../assets/dashlotto.png";
+import image from "../../../../assets/dlotto.png";
 
 import {
   cardTitle,
