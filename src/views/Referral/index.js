@@ -20,7 +20,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
-    backgroundColor: "#333",
+    backgroundColor: "transparent",
   },
   actions: {
     justifyContent: "flex-end",

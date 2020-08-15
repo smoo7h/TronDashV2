@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar } from '@material-ui/core';
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/styles";
+import { AppBar, Toolbar } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
-    boxShadow: 'none'
-  }
+    boxShadow: "none",
+  },
 }));
 
 function Topbar({ className, ...rest }) {
@@ -26,7 +26,7 @@ function Topbar({ className, ...rest }) {
 }
 
 Topbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Topbar;

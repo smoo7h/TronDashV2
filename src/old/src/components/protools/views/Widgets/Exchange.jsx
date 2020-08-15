@@ -17,7 +17,7 @@ import image from "../../../../assets/tewkenaire.png";
 
 import {
   cardTitle,
-  roseColor
+  roseColor,
 } from "../../assets/jss/material-dashboard-pro-react.jsx";
 
 const styles = {
@@ -25,16 +25,16 @@ const styles = {
   cardTitleWhite: {
     ...cardTitle,
     color: "#FFFFFF",
-    marginTop: "0"
+    marginTop: "0",
   },
   cardCategoryWhite: {
     margin: "0",
     color: "rgba(255, 255, 255, 0.8)",
-    fontSize: ".875rem"
+    fontSize: ".875rem",
   },
   cardCategory: {
     color: "#999999",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   icon: {
     color: "#333333",
@@ -47,31 +47,31 @@ const styles = {
     lineHeight: "174px",
     "& svg": {
       width: "55px",
-      height: "55px"
+      height: "55px",
     },
     "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       width: "45px",
-      fontSize: "45px"
-    }
+      fontSize: "45px",
+    },
   },
   iconRose: {
-    color: roseColor
+    color: roseColor,
   },
   marginTop30: {
-    marginTop: "30px"
+    marginTop: "30px",
   },
   testimonialIcon: {
     marginTop: "30px",
     "& svg": {
       width: "40px",
-      height: "40px"
-    }
+      height: "40px",
+    },
   },
 
   cardTestimonialDescription: {
     fontStyle: "italic",
-    color: "#999999"
-  }
+    color: "#999999",
+  },
 };
 
 class Exchange extends React.Component {
@@ -81,76 +81,76 @@ class Exchange extends React.Component {
       deposit: "0",
       withdrawall: "0",
       buyamount: "0",
-      sellamount: "0"
+      sellamount: "0",
     };
   }
 
-  handleDepositChange = name => event => {
+  handleDepositChange = (name) => (event) => {
     this.setState({
       deposit: event.target.value,
-      buyamount: (event.target.value / this.state.buyPrice).toFixed(2)
+      buyamount: (event.target.value / this.state.buyPrice).toFixed(2),
     });
   };
 
-  handleWithdralChange = name => event => {
+  handleWithdralChange = (name) => (event) => {
     this.setState({
       withdrawall: event.target.value,
-      sellamount: (event.target.value * this.state.sellPrice).toFixed(2)
+      sellamount: (event.target.value * this.state.sellPrice).toFixed(2),
     });
   };
 
-  handleDepositClick = name => event => {
+  handleDepositClick = (name) => (event) => {
     if (Number(name) >= 1) {
       name = Number(name).toFixed(0);
-      name = Utils.depositdash(name).then(response => {
+      name = Utils.depositdash(name).then((response) => {
         //clear it
         this.setState({
-          deposit: "0"
+          deposit: "0",
         });
       });
     }
   };
 
-  handleWithdrawallClick = name => event => {
+  handleWithdrawallClick = (name) => (event) => {
     //   Utils.withdrawlldash(name);
 
     if (Number(name) >= 1) {
       name = Number(name).toFixed(0);
-      name = Utils.withdrawlldash(name).then(response => {
+      name = Utils.withdrawlldash(name).then((response) => {
         //clear it
         this.setState({
-          withdrawall: "0"
+          withdrawall: "0",
         });
       });
     }
   };
 
-  handleWithdrawalldivsClick = name => event => {
+  handleWithdrawalldivsClick = (name) => (event) => {
     Utils.tewkenaireTokenwithdrawl();
   };
 
-  handleReinvestdivsClick = name => event => {
+  handleReinvestdivsClick = (name) => (event) => {
     Utils.tewkenaireTokenReinvest();
   };
-  handleBuyClick = amount => event => {
+  handleBuyClick = (amount) => (event) => {
     Utils.tewkenaireTokenBuy(amount);
     this.state.deposit = 0;
   };
-  handleSellClick = amount => event => {
+  handleSellClick = (amount) => (event) => {
     Utils.tewkenaireTokenSell(amount);
     this.state.withdrawall = 0;
   };
 
   async componentDidMount() {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       const tronWebState = {
         installed: !!window.tronWeb,
-        loggedIn: window.tronWeb && window.tronWeb.ready
+        loggedIn: window.tronWeb && window.tronWeb.ready,
       };
 
       if (tronWebState.installed) {
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         return resolve();
@@ -160,7 +160,7 @@ class Exchange extends React.Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          const TRONGRID_API = "https://api.tronstack.io";
 
           window.tronWeb = new TronWeb(
             TRONGRID_API,
@@ -171,8 +171,8 @@ class Exchange extends React.Component {
           this.setState({
             tronWeb: {
               installed: false,
-              loggedIn: false
-            }
+              loggedIn: false,
+            },
           });
 
           clearInterval(timer);
@@ -185,7 +185,7 @@ class Exchange extends React.Component {
         if (!tronWebState.installed) return tries++;
 
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         resolve();
@@ -199,15 +199,15 @@ class Exchange extends React.Component {
         this.setState({
           tronWeb: {
             installed: true,
-            loggedIn: true
-          }
+            loggedIn: true,
+          },
         });
       });
     }
 
     Utils.setTronWeb(window.tronWeb);
     this.setState({
-      deposit: 0
+      deposit: 0,
     });
     this.fetchdappdata();
 
@@ -224,37 +224,37 @@ class Exchange extends React.Component {
     this.setState({
       userdivs: await Utils.fetchTewkenaireTokenAvailableDividend(
         window.tronWeb.defaultAddress.base58
-      )
+      ),
     });
 
     //get your refferals
     this.setState({
       userrefferals: await Utils.fetchTewkenaireTokenRefferalReward(
         window.tronWeb.defaultAddress.base58
-      )
+      ),
     });
     //get Your Savings
     this.setState({
       usersavings: await Utils.fetchTewkenaireTokenInvestment(
         window.tronWeb.defaultAddress.base58
-      )
+      ),
     });
     //user trx balance
     this.setState({
       usertrxbalance: await Utils.getusertrxbalance(
         window.tronWeb.defaultAddress.base58
-      )
+      ),
     });
     //get your holding of dash
     this.setState({
-      buyPrice: await Utils.fetchTewkenaireTokenBuyPrice()
+      buyPrice: await Utils.fetchTewkenaireTokenBuyPrice(),
     });
     this.setState({
-      sellPrice: await Utils.fetchTewkenaireTokenSellPrice()
+      sellPrice: await Utils.fetchTewkenaireTokenSellPrice(),
     });
     //contract balance
     this.setState({
-      contractBalance: await Utils.fetchTewkenaireContractTokenBalance()
+      contractBalance: await Utils.fetchTewkenaireContractTokenBalance(),
     });
 
     //fetchTewkenaireTokenInvestment
@@ -370,7 +370,7 @@ class Exchange extends React.Component {
                                   <InputAdornment position="end">
                                     <IconButton
                                       style={{
-                                        left: 22
+                                        left: 22,
                                       }}
                                       edge="end"
                                       color="secondary"
@@ -384,14 +384,14 @@ class Exchange extends React.Component {
                                         round
                                         color="rose"
                                         style={{
-                                          lineHeight: 0
+                                          lineHeight: 0,
                                         }}
                                       >
                                         Buy
                                       </Button>
                                     </IconButton>
                                   </InputAdornment>
-                                )
+                                ),
                               }}
                             />
                           </GridItem>
@@ -425,7 +425,7 @@ class Exchange extends React.Component {
                                       aria-label="withdrawal"
                                       className={classes.margin}
                                       style={{
-                                        left: 22
+                                        left: 22,
                                       }}
                                       onClick={this.handleSellClick(
                                         this.state.withdrawall
@@ -435,14 +435,14 @@ class Exchange extends React.Component {
                                         round
                                         style={{
                                           lineHeight: 0,
-                                          backgroundColor: "#3f51b5"
+                                          backgroundColor: "#3f51b5",
                                         }}
                                       >
                                         Sell
                                       </Button>
                                     </IconButton>
                                   </InputAdornment>
-                                )
+                                ),
                               }}
                             />
                           </GridItem>
@@ -466,7 +466,7 @@ class Exchange extends React.Component {
 }
 
 Exchange.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
 };
 
 export default withStyles(styles)(Exchange);

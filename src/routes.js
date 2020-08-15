@@ -3,6 +3,7 @@
 import React, { lazy } from "react";
 import { Redirect } from "react-router-dom";
 import AuthLayout from "./layouts/Auth";
+import { Link } from "@material-ui/core";
 import ErrorLayout from "./layouts/Error";
 import DashboardLayout from "./layouts/Dashboard";
 import DashboardAnalyticsView from "./views/DashboardAnalytics";
@@ -88,6 +89,38 @@ export default [
         path: "/referral",
         exact: true,
         component: lazy(() => import("src/views/Referral")),
+      },
+      {
+        path: "/old",
+        exact: true,
+        component: lazy(
+          () => (window.location.href = "https://old.trondash.com")
+        ),
+      },
+      {
+        path: "/telegram",
+        exact: true,
+        component: lazy(
+          () =>
+            (window.location.href =
+              "https://t.me/joinchat/KvdhdA90OAS1fAnp92HXug")
+        ),
+      },
+      {
+        path: "/twitter",
+        exact: true,
+        component: lazy(
+          () => (window.location.href = "https://twitter.com/Tron_Dash")
+        ),
+      },
+      {
+        path: "/discord",
+        exact: true,
+        component: lazy(
+          () =>
+            (window.location.href =
+              "https://t.me/joinchat/KvdhdA90OAS1fAnp92HXug")
+        ),
       },
       {
         path: "/calendar",
@@ -258,11 +291,6 @@ export default [
         path: "/social-feed",
         exact: true,
         component: lazy(() => import("src/views/SocialFeed")),
-      },
-      {
-        path: "/getting-started",
-        exact: true,
-        component: lazy(() => import("src/views/GettingStarted")),
       },
       {
         component: () => <Redirect to="/errors/error-404" />,

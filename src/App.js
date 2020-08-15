@@ -39,12 +39,12 @@ const waitTron = () => {
       attempts++;
       if (attempts >= maxAttempts) {
         //set a default address
-        const TRONGRID_API = "https://api.trongrid.io";
+        const TRONGRID_API = "https://api.tronstack.io";
         window.tronWeb = new TronWeb(TRONGRID_API, TRONGRID_API, TRONGRID_API);
 
         window.tronWeb.defaultAddress = {
           hex: window.tronWeb.address.toHex(FOUNDATION_ADDRESS),
-          base58: FOUNDATION_ADDRESS
+          base58: FOUNDATION_ADDRESS,
         };
 
         resolve(true);
@@ -77,7 +77,7 @@ function App() {
 
   useEffect(() => {
     let tronWebCheckerInterval;
-    initContract().then(contract => {
+    initContract().then((contract) => {
       setCurrentAddress(window.tronWeb.defaultAddress.base58);
       setContract(contract);
       tronWebCheckerInterval = setInterval(() => {
@@ -92,7 +92,7 @@ function App() {
   }, []);
 
   const handleDirecitonToggle = () => {
-    setDirection(prevDirection => (prevDirection === "ltr" ? "rtl" : "ltr"));
+    setDirection((prevDirection) => (prevDirection === "ltr" ? "rtl" : "ltr"));
   };
 
   return (
@@ -104,7 +104,15 @@ function App() {
               <ScrollReset />
               <GoogleAnalytics />
 
-              {!contract && <div>loading</div>}
+              {!contract && (
+                <div style={{ color: "#fff" }}>
+                  Please sign into your supported tron wallet
+                  <a href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec">
+                    {" "}
+                    TronLink
+                  </a>
+                </div>
+              )}
               {contract && renderRoutes(routes)}
             </Router>
           </MuiPickersUtilsProvider>

@@ -20,7 +20,7 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-  Tooltip
+  Tooltip,
 } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
@@ -28,41 +28,41 @@ import getInitials from "src/utils/getInitials";
 import Label from "src/components/Label";
 import GenericMoreButton from "src/components/GenericMoreButton";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   content: {
-    padding: 0
+    padding: 0,
   },
   inner: {
-    minWidth: 900
+    minWidth: 900,
   },
   author: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   labelred: {
-    backgroundImage: gradients.red
+    backgroundImage: gradients.red,
   },
   labelgreen: {
-    backgroundImage: gradients.green
+    backgroundImage: gradients.green,
   },
   tags: {
     "& > * + *": {
-      marginLeft: theme.spacing(1)
-    }
+      marginLeft: theme.spacing(1),
+    },
   },
   actions: {
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   arrowForwardIcon: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   header: {
-    backgroundColor: "#212121"
-  }
+    backgroundColor: "#212121",
+  },
 }));
 
 function LatestProjects({ className, dappData, ...rest }) {
@@ -92,16 +92,16 @@ function LatestProjects({ className, dappData, ...rest }) {
     ) => {
       axios
         .get(
-          "https://api.trongrid.io/event/contract/" +
+          "https://api.tronstack.io/event/contract/" +
             contactAddress +
             "/" +
             eventName +
             "?sort=-block_timestamp"
         )
-        .then(response => {
+        .then((response) => {
           if (mounted) {
             //add some extra data to the list
-            let addesArray = response.data.map(x => {
+            let addesArray = response.data.map((x) => {
               x.eventname = eventName;
               x.transactiontype = transactiontype;
               x.color = color;
@@ -223,7 +223,7 @@ function LatestProjects({ className, dappData, ...rest }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {transactions.map(transaction => (
+                {transactions.map((transaction) => (
                   <TableRow
                     hover
                     key={transaction.transaction_id + Math.random()}
@@ -283,7 +283,7 @@ function LatestProjects({ className, dappData, ...rest }) {
 }
 
 LatestProjects.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default LatestProjects;

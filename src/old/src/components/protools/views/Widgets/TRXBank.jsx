@@ -203,7 +203,7 @@ class Widgets extends React.Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          const TRONGRID_API = "https://api.tronstack.io";
           //const TRONGRID_API = "https://api.shasta.trongrid.io";
 
           window.tronWeb = new TronWeb(

@@ -55,7 +55,7 @@ function createData(
     dividendnumber,
     burnRate,
     price,
-    myDividend
+    myDividend,
   };
 }
 
@@ -116,7 +116,7 @@ function stableSort(array, cmp) {
     return a[1] - b[1];
   });
 
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 function getSorting(order, orderBy) {
@@ -130,38 +130,38 @@ const rows = [
     id: "image",
     numeric: false,
     disablePadding: true,
-    label: ""
+    label: "",
   },
   {
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dapp"
+    label: "Dapp",
   },
   {
     id: "burnRate",
     numeric: false,
     disablePadding: true,
-    label: "Burn Rate %"
+    label: "Burn Rate %",
   },
   {
     id: "totalSupply",
     numeric: true,
     disablePadding: false,
-    label: "Total Supply"
+    label: "Total Supply",
   },
 
   {
     id: "owned",
     numeric: true,
     disablePadding: false,
-    label: "Held"
+    label: "Held",
   },
   {
     id: "totalSteaked",
     numeric: true,
     disablePadding: false,
-    label: "Total Staked"
+    label: "Total Staked",
   },
   { id: "staked", numeric: true, disablePadding: false, label: "My Stake" },
   { id: "price", numeric: true, disablePadding: false, label: "Price" },
@@ -169,12 +169,12 @@ const rows = [
     id: "myDividend",
     numeric: true,
     disablePadding: false,
-    label: "My Dividend"
-  }
+    label: "My Dividend",
+  },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
+  createSortHandler = (property) => (event) => {
     this.props.onRequestSort(event, property);
   };
 
@@ -184,7 +184,7 @@ class EnhancedTableHead extends React.Component {
       order,
       orderBy,
       numSelected,
-      rowCount
+      rowCount,
     } = this.props;
 
     return (
@@ -198,7 +198,7 @@ class EnhancedTableHead extends React.Component {
             />
           </TableCell>
           {rows.map(
-            row => (
+            (row) => (
               <TableCell
                 key={row.id}
                 align={row.numeric ? "right" : "left"}
@@ -234,39 +234,39 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
 };
 
-const toolbarStyles = theme => ({
+const toolbarStyles = (theme) => ({
   root: {
-    paddingRight: theme.spacing.unit
+    paddingRight: theme.spacing.unit,
   },
   highlight:
     theme.palette.type === "light"
       ? {
           color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.secondary.dark,
         },
   spacer: {
-    flex: "1 1 "
+    flex: "1 1 ",
   },
   actions: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   title: {
-    flex: "0 0 auto"
-  }
+    flex: "0 0 auto",
+  },
 });
 var state = {
-  value: 50
+  value: 50,
 };
 //withdrawll and reinvest functions
 
-let reinvestAll = property => event => {
+let reinvestAll = (property) => (event) => {
   //var reinvestPercent = property.slider * 0.01;
 
   var totalStaked = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
@@ -277,83 +277,83 @@ let reinvestAll = property => event => {
   totalStaked = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
   var tabledata = property.tabledata;
 
-  let objIndex = tabledata.findIndex(obj => obj.id == "Frag");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "Frag");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //tron pays token
-    Utils.reinvestfragdivs().then(response => {
+    Utils.reinvestfragdivs().then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Dash");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Dash");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //tron pays token
-    Utils.reinvestdashdivs().then(response => {
+    Utils.reinvestdashdivs().then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "BTT");
+  objIndex = tabledata.findIndex((obj) => obj.id == "BTT");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //tron pays token
-    Utils.bttbankReinvestDivs().then(response => {
+    Utils.bttbankReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Boost");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Boost");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //tron pays token
-    Utils.boostReinvestDivs().then(response => {
+    Utils.boostReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
 };
 
-let withdrawlAll = property => event => {
+let withdrawlAll = (property) => (event) => {
   let tabledata = property;
   let selecteddata = property.selecteddata;
 
-  let objIndex = tabledata.findIndex(obj => obj.id == "Frag");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "Frag");
   //frag
   //console.log(tabledata[objIndex]);
   if (tabledata[objIndex].myDividend >= 0.01) {
     //frag
-    Utils.withdrawlfragdivs().then(response => {
+    Utils.withdrawlfragdivs().then((response) => {
       sendairdrop("1");
     });
   }
   //void
-  objIndex = tabledata.findIndex(obj => obj.id == "Void");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Void");
   if (tabledata[objIndex].myDividend >= 0.01) {
     //void
-    Utils.withdrawlvoiddivs().then(response => {
+    Utils.withdrawlvoiddivs().then((response) => {
       sendairdrop("1");
     });
   }
   //dash
-  objIndex = tabledata.findIndex(obj => obj.id == "Dash");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Dash");
   if (tabledata[objIndex].myDividend >= 0.01) {
     //void
-    Utils.withdrawlldashdivs().then(response => {
+    Utils.withdrawlldashdivs().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "BTT");
+  objIndex = tabledata.findIndex((obj) => obj.id == "BTT");
   if (tabledata[objIndex].myDividend >= 0.01) {
     //void
-    Utils.bttbankwithdrawlDivs().then(response => {
+    Utils.bttbankwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Boost");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Boost");
   if (tabledata[objIndex].myDividend >= 0.01) {
     //void
-    Utils.boostwithdrawlDivs().then(response => {
+    Utils.boostwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
 };
 
-let reinvestSelected = property => event => {
+let reinvestSelected = (property) => (event) => {
   var reinvestPercent = property.slider * 0.01;
 
   var refferal = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
@@ -365,49 +365,49 @@ let reinvestSelected = property => event => {
 
   var tabledata = property.tabledata;
   var selecteddata = property.selecteddata;
-  let objIndex = tabledata.findIndex(obj => obj.id == "Frag");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "Frag");
 
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
-    Utils.reinvestfragdivs().then(response => {
+    Utils.reinvestfragdivs().then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Dash");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Dash");
   console.log(tabledata[objIndex].dividendnumber);
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
-    Utils.reinvestdashdivs().then(response => {
+    Utils.reinvestdashdivs().then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "BTT");
+  objIndex = tabledata.findIndex((obj) => obj.id == "BTT");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
-    Utils.bttbankReinvestDivs().then(response => {
+    Utils.bttbankReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Boost");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Boost");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
-    Utils.boostReinvestDivs().then(response => {
+    Utils.boostReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
 };
 
-var sendairdrop = type => {
+var sendairdrop = (type) => {
   {
     let userrefferlstring = "none";
     if (window.location.search) {
@@ -429,17 +429,17 @@ var sendairdrop = type => {
       "https://dashairdrop.azurewebsites.net/api/airdrop?id=" + sendbackstring;
     axios
       .get(sendbackstring)
-      .then(response => {
+      .then((response) => {
         console.log("dash");
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 };
 
-let withdrawlSelected = property => event => {
+let withdrawlSelected = (property) => (event) => {
   var tabledata = property.tabledata;
   var selecteddata = property.selecteddata;
-  let objIndex = tabledata.findIndex(obj => obj.id == "Frag");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "Frag");
   //frag
   //console.log(tabledata[objIndex]);
   if (
@@ -447,48 +447,48 @@ let withdrawlSelected = property => event => {
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //frag
-    Utils.withdrawlfragdivs().then(response => {
+    Utils.withdrawlfragdivs().then((response) => {
       sendairdrop("1");
     });
   }
   //void
-  objIndex = tabledata.findIndex(obj => obj.id == "Void");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Void");
   if (
     tabledata[objIndex].myDividend >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //void
-    Utils.withdrawlvoiddivs().then(response => {
+    Utils.withdrawlvoiddivs().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Dash");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Dash");
   if (
     tabledata[objIndex].myDividend >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //void
-    Utils.withdrawlldashdivs().then(response => {
+    Utils.withdrawlldashdivs().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "BTT");
+  objIndex = tabledata.findIndex((obj) => obj.id == "BTT");
   if (
     tabledata[objIndex].myDividend >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //btt
-    Utils.bttbankwithdrawlDivs().then(response => {
+    Utils.bttbankwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Boost");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Boost");
   if (
     tabledata[objIndex].myDividend >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //btt
-    Utils.boostwithdrawlDivs().then(response => {
+    Utils.boostwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
@@ -500,26 +500,26 @@ var handleChange = (event, value) => {
   }
 
   state = {
-    value: value
+    value: value,
   };
 };
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar = (props) => {
   const { numSelected, classes, totaldivsselected } = props;
 
   const styles = {
     root: {
-      width: 100
+      width: 100,
     },
     slider: {
-      padding: "22px 0px"
-    }
+      padding: "22px 0px",
+    },
   };
 
   var passbackdata = {
     selecteddata: props.selecteddata,
     tabledata: props.tabledata,
-    slider: state.value.toFixed(0)
+    slider: state.value.toFixed(0),
   };
 
   if (
@@ -528,7 +528,7 @@ let EnhancedTableToolbar = props => {
     return (
       <Toolbar
         className={classNames(classes.root, {
-          [classes.highlight]: numSelected > 0
+          [classes.highlight]: numSelected > 0,
         })}
       >
         <div className={classes.title}>
@@ -715,7 +715,7 @@ let EnhancedTableToolbar = props => {
     return (
       <Toolbar
         className={classNames(classes.root, {
-          [classes.highlight]: numSelected > 0
+          [classes.highlight]: numSelected > 0,
         })}
       >
         <div className={classes.title}>
@@ -738,25 +738,25 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
   },
   table: {
-    minWidth: 1020
+    minWidth: 1020,
   },
   tableWrapper: {
-    overflowX: "auto"
+    overflowX: "auto",
   },
   avatar: {
-    margin: 10
-  }
+    margin: 10,
+  },
 });
 
 class DeflationaryTokenTable extends React.Component {
@@ -837,10 +837,10 @@ class DeflationaryTokenTable extends React.Component {
         "0%", //burn rate,
         "--", //price
         "--" //my divs
-      )
+      ),
     ],
     page: 0,
-    rowsPerPage: 6
+    rowsPerPage: 6,
   };
 
   handleRequestSort = (event, property) => {
@@ -854,9 +854,9 @@ class DeflationaryTokenTable extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = event => {
+  handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }));
+      this.setState((state) => ({ selected: state.data.map((n) => n.id) }));
 
       return;
     }
@@ -890,26 +890,26 @@ class DeflationaryTokenTable extends React.Component {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  isSelected = (id) => this.state.selected.indexOf(id) !== -1;
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   async componentDidMount() {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       const tronWebState = {
         installed: !!window.tronWeb,
-        loggedIn: window.tronWeb && window.tronWeb.ready
+        loggedIn: window.tronWeb && window.tronWeb.ready,
       };
 
       if (tronWebState.installed) {
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         return resolve();
@@ -919,7 +919,7 @@ class DeflationaryTokenTable extends React.Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          const TRONGRID_API = "https://api.tronstack.io";
 
           window.tronWeb = new TronWeb(
             TRONGRID_API,
@@ -930,8 +930,8 @@ class DeflationaryTokenTable extends React.Component {
           this.setState({
             tronWeb: {
               installed: false,
-              loggedIn: false
-            }
+              loggedIn: false,
+            },
           });
 
           clearInterval(timer);
@@ -944,7 +944,7 @@ class DeflationaryTokenTable extends React.Component {
         if (!tronWebState.installed) return tries++;
 
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         resolve();
@@ -958,8 +958,8 @@ class DeflationaryTokenTable extends React.Component {
         this.setState({
           tronWeb: {
             installed: true,
-            loggedIn: true
-          }
+            loggedIn: true,
+          },
         });
       });
     }
@@ -1010,7 +1010,7 @@ class DeflationaryTokenTable extends React.Component {
       return total + mynum;
     }, initialValue);
     this.setState({
-      totaldivs: sum.toFixed(2).toString()
+      totaldivs: sum.toFixed(2).toString(),
     });
   }
   async calculateTotalDivsSelected() {
@@ -1039,7 +1039,7 @@ class DeflationaryTokenTable extends React.Component {
     }, initialValue);
 
     this.setState({
-      totaldivsselected: sum.toFixed(2).toString()
+      totaldivsselected: sum.toFixed(2).toString(),
     });
   }
   cleanstring(inputdata) {
@@ -1057,9 +1057,9 @@ class DeflationaryTokenTable extends React.Component {
   async fetchMyBalance() {
     window.tronWeb.trx
       .getBalance(window.tronWeb.defaultAddress.base58)
-      .then(x => {
+      .then((x) => {
         this.setState({
-          mybalance: Number((x * 0.000001).toFixed(2)).toLocaleString("en")
+          mybalance: Number((x * 0.000001).toFixed(2)).toLocaleString("en"),
         });
       });
   }
@@ -1116,119 +1116,119 @@ class DeflationaryTokenTable extends React.Component {
     var totalcasino = sum.toFixed(2);
 
     this.setState({
-      twhDivs: totalcasino.toString()
+      twhDivs: totalcasino.toString(),
     });
   }
   async fetcmarketdata() {
     axios
       .get("https://api-tron.ddex.io/v3/markets/status")
-      .then(response => {
+      .then((response) => {
         let getdash = response.data.data.status.find(
-          out => out.pair === "DASH-WTRX"
+          (out) => out.pair === "DASH-WTRX"
         );
         let getengy = response.data.data.status.find(
-          out => out.pair === "ENGY-WTRX"
+          (out) => out.pair === "ENGY-WTRX"
         );
         let getfrag = response.data.data.status.find(
-          out => out.pair === "FRAG-WTRX"
+          (out) => out.pair === "FRAG-WTRX"
         );
 
         let getvoid = response.data.data.status.find(
-          out => out.pair === "VOID-WTRX"
+          (out) => out.pair === "VOID-WTRX"
         );
         let getbnkr = response.data.data.status.find(
-          out => out.pair === "BNKR-WTRX"
+          (out) => out.pair === "BNKR-WTRX"
         );
 
         this.setState({
-          engyprice: Number(getengy.lastPrice).toFixed(2)
+          engyprice: Number(getengy.lastPrice).toFixed(2),
         });
         this.setState({
-          bnkrprice: Number(getbnkr.lastPrice).toFixed(2)
+          bnkrprice: Number(getbnkr.lastPrice).toFixed(2),
         });
         this.setState({
-          dashprice: Number(getdash.lastPrice).toFixed(2)
+          dashprice: Number(getdash.lastPrice).toFixed(2),
         });
         this.setState({
-          fragprice: Number(getfrag.lastPrice).toFixed(2)
+          fragprice: Number(getfrag.lastPrice).toFixed(2),
         });
         this.setState({
-          voidprice: Number(getvoid.lastPrice).toFixed(2)
+          voidprice: Number(getvoid.lastPrice).toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   async fetchbnkrmarketdata() {
     //85
     axios
       .get("https://api.poloniex.org/api/exchange/common/orderListV2/85")
-      .then(response => {
+      .then((response) => {
         let dasprice = response.data.data.price * 0.000001;
         this.setState({
-          bnkrprice: dasprice.toFixed(2)
+          bnkrprice: dasprice.toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   async fetchenergymarketdata() {
     axios
       .get(
         "https://api.tronwatch.market/v1/chart/TRC20:TMX9rNwCMrWqu2Jjx8guhh8WLfXPYJp7DM/TRX:TRX?group=HALF_HOUR"
       )
-      .then(response => {
+      .then((response) => {
         let bankerprice =
           response.data.chart[response.data.chart.length - 1].close;
         this.setState({
-          engyprice: bankerprice.toFixed(2)
+          engyprice: bankerprice.toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   async fetchdashmarketdata() {
     axios
       .get("https://api.poloniex.org/api/exchange/common/orderListV2/206")
-      .then(response => {
+      .then((response) => {
         let dasprice = response.data.data.price * 0.000001;
         this.setState({
-          dashprice: dasprice.toFixed(2)
+          dashprice: dasprice.toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   async fetchbttmarketdata() {
     axios
       .get("https://api.poloniex.org/api/exchange/common/orderListV2/39")
-      .then(response => {
+      .then((response) => {
         let dasprice = response.data.data.price * 0.000001;
 
         this.setState({
-          bttprice: dasprice.toFixed(2)
+          bttprice: dasprice.toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   async fetchfragmarketdata() {
     axios
       .get(
         "https://api.tronwatch.market/v1/chart/TRC20:TPpLkxGeKragRC7qpiQjjtNmf6shXWi8i9/TRX:TRX?group=HALF_HOUR"
       )
-      .then(response => {
+      .then((response) => {
         let fragprice =
           response.data.chart[response.data.chart.length - 1].close;
 
         let total = Number(fragprice) * 1000000000000;
         this.setState({
-          fragprice: total.toFixed(2)
+          fragprice: total.toFixed(2),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   async fetchvoidmarketdata() {
     var price = await Utils.fetchvoidprice();
 
     this.setState({
-      voidprice: price
+      voidprice: price,
     });
   }
   async fetchTableData0() {
@@ -1238,7 +1238,7 @@ class DeflationaryTokenTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Frag");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Frag");
 
     updateddata[objIndex] = createData(
       "Frag",
@@ -1257,7 +1257,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
   async fetchTableData1() {
@@ -1267,7 +1267,7 @@ class DeflationaryTokenTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Void");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Void");
 
     updateddata[objIndex] = createData(
       "Void",
@@ -1286,7 +1286,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
   async fetchTableBTT() {
@@ -1296,7 +1296,7 @@ class DeflationaryTokenTable extends React.Component {
     }
 
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "BTT");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "BTT");
 
     updateddata[objIndex] = createData(
       "BTT",
@@ -1312,7 +1312,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
   async fetchTableBoost() {
@@ -1322,7 +1322,7 @@ class DeflationaryTokenTable extends React.Component {
     }
 
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Boost");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Boost");
 
     updateddata[objIndex] = createData(
       "Boost",
@@ -1338,7 +1338,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
   async fetchTableDash() {
@@ -1348,7 +1348,7 @@ class DeflationaryTokenTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Dash");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Dash");
 
     updateddata[objIndex] = createData(
       "Dash",
@@ -1366,7 +1366,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
   async fetchTableData2() {
@@ -1376,7 +1376,7 @@ class DeflationaryTokenTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "BNKR");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "BNKR");
 
     updateddata[objIndex] = createData(
       "BNKR",
@@ -1394,7 +1394,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1405,7 +1405,7 @@ class DeflationaryTokenTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "ENGY");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "ENGY");
 
     updateddata[objIndex] = createData(
       "ENGY",
@@ -1423,7 +1423,7 @@ class DeflationaryTokenTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1458,12 +1458,12 @@ class DeflationaryTokenTable extends React.Component {
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
+                .map((n) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      onClick={(event) => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
@@ -1533,7 +1533,7 @@ class DeflationaryTokenTable extends React.Component {
                       <TableCell
                         align="right"
                         style={{
-                          padding: "4px 26px 4px 1px"
+                          padding: "4px 26px 4px 1px",
                         }}
                       >
                         {n.totalSupply != "--" &&
@@ -1549,7 +1549,7 @@ class DeflationaryTokenTable extends React.Component {
                       <TableCell
                         align="right"
                         style={{
-                          padding: "4px 26px 4px 1px"
+                          padding: "4px 26px 4px 1px",
                         }}
                       >
                         {n.held != "--" && Number(n.held).toLocaleString("en")}
@@ -1647,7 +1647,7 @@ class DeflationaryTokenTable extends React.Component {
 }
 
 DeflationaryTokenTable.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(DeflationaryTokenTable);

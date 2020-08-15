@@ -8,23 +8,23 @@ import { Card, CardHeader, CardContent, Divider } from "@material-ui/core";
 import GenericMoreButton from "src/components/GenericMoreButton";
 import Chart from "./Chart";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   content: {},
   buttons: {
     display: "flex",
     justifyContent: "center",
     "& > *": {
-      marginLeft: theme.spacing(1)
-    }
+      marginLeft: theme.spacing(1),
+    },
   },
   inner: {
     height: 375,
-    minWidth: 500
+    minWidth: 500,
   },
   chart: {
-    height: "100%"
-  }
+    height: "100%",
+  },
 }));
 
 function PerformanceOverTime({
@@ -143,7 +143,7 @@ function PerformanceOverTime({
         convertDateToString(sortedtransactions[0].block_timestamp)
       );
 
-      sortedtransactions.forEach(element => {
+      sortedtransactions.forEach((element) => {
         let lastnumber = graphdata[graphdata.length - 1];
 
         if (element.transactiontype == "Invest") {
@@ -193,7 +193,7 @@ function PerformanceOverTime({
       graphdata = graphdata.reverse();
       graphlabels = graphlabels.reverse();
 
-      let decimalgraphdata = graphdata.map(x => {
+      let decimalgraphdata = graphdata.map((x) => {
         x = x * 0.000001;
 
         return x.toFixed(0);
@@ -202,8 +202,8 @@ function PerformanceOverTime({
       const data = {
         dappGraphData: {
           data: decimalgraphdata,
-          labels: graphlabels
-        }
+          labels: graphlabels,
+        },
       };
 
       return data;
@@ -219,16 +219,16 @@ function PerformanceOverTime({
     ) => {
       axios
         .get(
-          "https://api.trongrid.io/event/contract/" +
+          "https://api.tronstack.io/event/contract/" +
             contactAddress +
             "/" +
             eventName +
             "?sort=-block_timestamp"
         )
-        .then(response => {
+        .then((response) => {
           if (mounted) {
             //add some extra data to the list
-            let addesArray = response.data.map(x => {
+            let addesArray = response.data.map((x) => {
               x.eventname = eventName;
               x.transactiontype = transactiontype;
               x.color = color;
@@ -313,7 +313,7 @@ function PerformanceOverTime({
           let total = 0;
           //subtrace a day from the time stamp
           timestamp = timestamp - 86400000;
-          trans.forEach(element => {
+          trans.forEach((element) => {
             if (element.block_timestamp > timestamp) {
               let newvalue = 0;
               if (element.transactiontype == "Invest") {
@@ -354,7 +354,7 @@ function PerformanceOverTime({
 
         let currenTimeStamp = window.tronWeb.trx
           .getCurrentBlock()
-          .then(response => {
+          .then((response) => {
             let currentstamp = response.block_header.raw_data.timestamp;
 
             let totalTransactions = get24HourVolume(transactions, currentstamp);
@@ -395,7 +395,7 @@ function PerformanceOverTime({
 }
 
 PerformanceOverTime.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default PerformanceOverTime;

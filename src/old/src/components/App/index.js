@@ -26,39 +26,39 @@ const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa";
 class App extends React.Component {
   async handler(someValue) {
     this.setState({
-      currentpage: "token"
+      currentpage: "token",
     });
   }
   async handler2(someValue) {
     this.setState({
-      currentpage: "home"
+      currentpage: "home",
     });
   }
   async handlerdapps(someValue) {
     this.setState({
-      currentpage: "dapps"
+      currentpage: "dapps",
     });
   }
   async handlerbttbank(someValue) {
     this.setState({
-      currentpage: "bttbank"
+      currentpage: "bttbank",
     });
   }
   async handlertrxbank(someValue) {
     this.setState({
-      currentpage: "trxbank"
+      currentpage: "trxbank",
     });
   }
 
   async handlerlotto(someValue) {
     this.setState({
-      currentpage: "dashlotto"
+      currentpage: "dashlotto",
     });
   }
 
   async handlerexchange(someValue) {
     this.setState({
-      currentpage: "exchange"
+      currentpage: "exchange",
     });
   }
 
@@ -75,9 +75,9 @@ class App extends React.Component {
     this.state = {
       tronWeb: {
         installed: false,
-        loggedIn: false
+        loggedIn: false,
       },
-      currentpage: "home"
+      currentpage: "home",
     };
   }
 
@@ -98,31 +98,31 @@ class App extends React.Component {
 
     if (this.props.history.location.pathname === "/bttbank") {
       this.setState({
-        currentpage: "bttbank"
+        currentpage: "bttbank",
       });
     } else if (this.props.history.location.pathname === "/dashbank") {
       this.setState({
-        currentpage: "dapps"
+        currentpage: "dapps",
       });
     } else if (this.props.history.location.pathname === "/dashlotto") {
       this.setState({
-        currentpage: "dashlotto"
+        currentpage: "dashlotto",
       });
     } else if (this.props.history.location.pathname === "/trxbank") {
       this.setState({
-        currentpage: "trxbank"
+        currentpage: "trxbank",
       });
     }
 
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       const tronWebState = {
         installed: !!window.tronWeb,
-        loggedIn: window.tronWeb && window.tronWeb.ready
+        loggedIn: window.tronWeb && window.tronWeb.ready,
       };
 
       if (tronWebState.installed) {
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         return resolve();
@@ -132,7 +132,7 @@ class App extends React.Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          const TRONGRID_API = "https://api.tronstack.io";
           //const TRONGRID_API = "https://api.shasta.trongrid.io";
           window.tronWeb = new TronWeb(
             TRONGRID_API,
@@ -143,8 +143,8 @@ class App extends React.Component {
           this.setState({
             tronWeb: {
               installed: false,
-              loggedIn: false
-            }
+              loggedIn: false,
+            },
           });
 
           clearInterval(timer);
@@ -157,7 +157,7 @@ class App extends React.Component {
         if (!tronWebState.installed) return tries++;
 
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         resolve();
@@ -171,13 +171,13 @@ class App extends React.Component {
       // function call
       window.tronWeb.defaultAddress = {
         hex: window.tronWeb.address.toHex(FOUNDATION_ADDRESS),
-        base58: FOUNDATION_ADDRESS
+        base58: FOUNDATION_ADDRESS,
       };
       this.setState({
         tronWeb: {
           installed: true,
-          loggedIn: true
-        }
+          loggedIn: true,
+        },
       });
       window.tronWeb.on("addressChanged", () => {
         if (this.state.tronWeb.loggedIn) return;
@@ -185,8 +185,8 @@ class App extends React.Component {
         this.setState({
           tronWeb: {
             installed: true,
-            loggedIn: true
-          }
+            loggedIn: true,
+          },
         });
       });
     }

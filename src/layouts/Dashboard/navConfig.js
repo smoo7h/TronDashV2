@@ -32,7 +32,7 @@ export default [
         icon: DashboardIcon,
       },
       {
-        title: "Dapps",
+        title: "House Dapps",
         href: "/management",
         icon: AccountBalanceIcon,
         items: [
@@ -68,6 +68,25 @@ export default [
         title: "FAQ",
         href: "/faq",
         icon: HelpOutlineIcon,
+      },
+      {
+        title: "Social",
+        href: "/management",
+        icon: AccountBalanceIcon,
+        items: [
+          {
+            title: "Telegram",
+            href: "/telegram",
+          },
+          {
+            title: "Twitter",
+            href: "/twitter",
+          },
+          {
+            title: "Discord",
+            href: "/discord",
+          },
+        ],
       },
       {
         title: "Old Site",

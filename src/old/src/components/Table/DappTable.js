@@ -68,7 +68,7 @@ function createData(
     dividend,
     url,
     dividendnumber,
-    dailyRoi
+    dailyRoi,
   };
 }
 
@@ -129,7 +129,7 @@ function stableSort(array, cmp) {
     return a[1] - b[1];
   });
 
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 function getSorting(order, orderBy) {
@@ -143,13 +143,13 @@ const rows = [
     id: "image",
     numeric: false,
     disablePadding: true,
-    label: ""
+    label: "",
   },
   {
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dapp"
+    label: "Dapp",
   },
   /* {
     id: "dailyRoi",
@@ -161,21 +161,26 @@ const rows = [
     id: "contractbalance",
     numeric: true,
     disablePadding: false,
-    label: "Div Pool"
+    label: "Div Pool",
   },
 
   {
     id: "investment",
     numeric: true,
     disablePadding: false,
-    label: "Investment"
+    label: "Investment",
   },
   { id: "refferal", numeric: true, disablePadding: false, label: "Referral" },
-  { id: "dividend", numeric: true, disablePadding: false, label: "My Dividend" }
+  {
+    id: "dividend",
+    numeric: true,
+    disablePadding: false,
+    label: "My Dividend",
+  },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
+  createSortHandler = (property) => (event) => {
     this.props.onRequestSort(event, property);
   };
 
@@ -185,7 +190,7 @@ class EnhancedTableHead extends React.Component {
       order,
       orderBy,
       numSelected,
-      rowCount
+      rowCount,
     } = this.props;
 
     return (
@@ -199,7 +204,7 @@ class EnhancedTableHead extends React.Component {
             />
           </TableCell>
           {rows.map(
-            row => (
+            (row) => (
               <TableCell
                 key={row.id}
                 align={row.numeric ? "right" : "left"}
@@ -235,39 +240,39 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
 };
 
-const toolbarStyles = theme => ({
+const toolbarStyles = (theme) => ({
   root: {
-    paddingRight: theme.spacing.unit
+    paddingRight: theme.spacing.unit,
   },
   highlight:
     theme.palette.type === "light"
       ? {
           color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.secondary.dark,
         },
   spacer: {
-    flex: "1 1 "
+    flex: "1 1 ",
   },
   actions: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   title: {
-    flex: "0 0 auto"
-  }
+    flex: "0 0 auto",
+  },
 });
 var state = {
-  value: 50
+  value: 50,
 };
 //withdrawll and reinvest functions
 
-let reinvestAll = property => event => {
+let reinvestAll = (property) => (event) => {
   var reinvestPercent = property.slider * 0.01;
   /*
   var userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
@@ -305,52 +310,52 @@ let reinvestAll = property => event => {
     Utils.shrimpreinvest(reinvestPercent, refferal);
   }
   */
-  let objIndex = tabledata.findIndex(obj => obj.id == "TronPays Token");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "TronPays Token");
   if (tabledata[objIndex].dividendnumber >= 0.1) {
     //tron pays token
     Utils.tronpaystokenreinvest(
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "P3T Token");
+  objIndex = tabledata.findIndex((obj) => obj.id == "P3T Token");
   if (tabledata[objIndex].dividendnumber >= 0.5) {
     //p3t token
     Utils.p3TTokenreinvest(
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Crazy");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Crazy");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //Tewkenaire token
     Utils.tewkenaireTokenReinvest(
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Stable");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Stable");
   if (tabledata[objIndex].dividendnumber >= 0.01) {
     //Tewkenaire token
     Utils.tewkenaireStableTokenReinvest(
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Credits");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Credits");
   if (tabledata[objIndex].dividendnumber >= 0.1) {
     //babnkroll credits
 
@@ -358,24 +363,24 @@ let reinvestAll = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Moon");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Moon");
   if (tabledata[objIndex].dividendnumber >= 0.1) {
     //babnkroll moon
 
-    Utils.moonreinvest().then(response => {
+    Utils.moonreinvest().then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Trx Bank");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Trx Bank");
   if (tabledata[objIndex].dividendnumber >= 0.1) {
     //trx bank
 
-    Utils.trxbankReinvestDivs().then(response => {
+    Utils.trxbankReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
@@ -383,12 +388,12 @@ let reinvestAll = property => event => {
   return;
 };
 
-let withdrawlAll = property => event => {
-  let objIndex = property.findIndex(obj => obj.id == "888 Tron");
+let withdrawlAll = (property) => (event) => {
+  let objIndex = property.findIndex((obj) => obj.id == "888 Tron");
   if (property[objIndex].dividendnumber >= 0.1) {
     //888
 
-    Utils.eeewithdrawl().then(response => {
+    Utils.eeewithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
@@ -405,61 +410,61 @@ let withdrawlAll = property => event => {
     });
   }
 */
-  objIndex = property.findIndex(obj => obj.id == "TronTopia");
+  objIndex = property.findIndex((obj) => obj.id == "TronTopia");
   if (
     !property[objIndex].dividend.includes("*") &&
     property[objIndex].dividendnumber >= 0.01
   ) {
     //topia
 
-    Utils.topiawithdrawl().then(response => {
+    Utils.topiawithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = property.findIndex(obj => obj.id == "TronTopia Diamonds");
+  objIndex = property.findIndex((obj) => obj.id == "TronTopia Diamonds");
   if (
     !property[objIndex].dividend.includes("*") &&
     property[objIndex].dividendnumber >= 0.01
   ) {
     //topia diamonds
 
-    Utils.topiaDiamondwithdrawl().then(response => {
+    Utils.topiaDiamondwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = property.findIndex(obj => obj.id == "P3T Token");
+  objIndex = property.findIndex((obj) => obj.id == "P3T Token");
   if (property[objIndex].dividendnumber >= 0.1) {
     //p3t token
-    Utils.p3ttokenwithdrawl().then(response => {
+    Utils.p3ttokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = property.findIndex(obj => obj.id == "Tewkenaire Crazy");
+  objIndex = property.findIndex((obj) => obj.id == "Tewkenaire Crazy");
   if (property[objIndex].dividendnumber >= 0.01) {
     //p3t token
-    Utils.tewkenaireTokenwithdrawl().then(response => {
+    Utils.tewkenaireTokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = property.findIndex(obj => obj.id == "Tewkenaire Stable");
+  objIndex = property.findIndex((obj) => obj.id == "Tewkenaire Stable");
   if (property[objIndex].dividendnumber >= 0.01) {
     //p3t token
-    Utils.tewkenaireStableTokenwithdrawl().then(response => {
+    Utils.tewkenaireStableTokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = property.findIndex(obj => obj.id == "TronPays Token");
+  objIndex = property.findIndex((obj) => obj.id == "TronPays Token");
   if (property[objIndex].dividendnumber >= 0.1) {
     //tron pays token
-    Utils.paystokenwithdrawl().then(response => {
+    Utils.paystokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = property.findIndex(obj => obj.id == "Trx Bank");
+  objIndex = property.findIndex((obj) => obj.id == "Trx Bank");
   if (property[objIndex].dividendnumber >= 0.1) {
     //trx bank
-    Utils.trxbankwithdrawlDivs().then(response => {
+    Utils.trxbankwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
@@ -482,27 +487,27 @@ let withdrawlAll = property => event => {
     );
   }
   */
-  objIndex = property.findIndex(obj => obj.id == "Bankroll Credits");
+  objIndex = property.findIndex((obj) => obj.id == "Bankroll Credits");
   if (property[objIndex].dividendnumber >= 0.1) {
     //bankrollcredits
-    Utils.creditswithdrawl().then(response => {
+    Utils.creditswithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = property.findIndex(obj => obj.id == "Bankroll Moon");
+  objIndex = property.findIndex((obj) => obj.id == "Bankroll Moon");
   if (property[objIndex].dividendnumber >= 0.1) {
     //bankrollcredits
-    Utils.moonwithdrawl().then(response => {
+    Utils.moonwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
   //
-  objIndex = property.findIndex(obj => obj.id == "Bankroll Daily");
+  objIndex = property.findIndex((obj) => obj.id == "Bankroll Daily");
   if (property[objIndex].dividendnumber >= 0.1) {
     //bankroll roi
-    Utils.bankrollwithdrawl().then(response => {
+    Utils.bankrollwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
@@ -510,7 +515,7 @@ let withdrawlAll = property => event => {
   //creditswithdrawl
 };
 
-let reinvestSelected = property => event => {
+let reinvestSelected = (property) => (event) => {
   var reinvestPercent = property.slider * 0.01;
 
   var refferal = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
@@ -534,7 +539,7 @@ let reinvestSelected = property => event => {
 
   var tabledata = property.tabledata;
   var selecteddata = property.selecteddata;
-  let objIndex = tabledata.findIndex(obj => obj.id == "TronPays Token");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "TronPays Token");
   /*if (
     tabledata[0].dividendnumber >= 0.5 &&
     selecteddata.includes(tabledata[0].id)
@@ -547,7 +552,7 @@ let reinvestSelected = property => event => {
     );
   }
 */
-  objIndex = tabledata.findIndex(obj => obj.id == "TronPays Token");
+  objIndex = tabledata.findIndex((obj) => obj.id == "TronPays Token");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
@@ -557,11 +562,11 @@ let reinvestSelected = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "P3T Token");
+  objIndex = tabledata.findIndex((obj) => obj.id == "P3T Token");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
@@ -571,11 +576,11 @@ let reinvestSelected = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Crazy");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Crazy");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
@@ -585,11 +590,11 @@ let reinvestSelected = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Stable");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Stable");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
@@ -599,12 +604,12 @@ let reinvestSelected = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Credits");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Credits");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
@@ -615,31 +620,31 @@ let reinvestSelected = property => event => {
       window.tronWeb.defaultAddress.base58,
       reinvestPercent,
       refferal
-    ).then(response => {
+    ).then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Moon");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Moon");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //babnkroll credits
 
-    Utils.moonreinvest().then(response => {
+    Utils.moonreinvest().then((response) => {
       sendairdrop("2");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Trx Bank");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Trx Bank");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //babnkroll credits
 
-    Utils.trxbankReinvestDivs().then(response => {
+    Utils.trxbankReinvestDivs().then((response) => {
       sendairdrop("2");
     });
   }
@@ -648,10 +653,10 @@ let reinvestSelected = property => event => {
   //creditsreinvest
 };
 
-let withdrawlSelected = property => event => {
+let withdrawlSelected = (property) => (event) => {
   var tabledata = property.tabledata;
   var selecteddata = property.selecteddata;
-  let objIndex = tabledata.findIndex(obj => obj.id == "888 Tron");
+  let objIndex = tabledata.findIndex((obj) => obj.id == "888 Tron");
 
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
@@ -659,122 +664,122 @@ let withdrawlSelected = property => event => {
   ) {
     //888
 
-    Utils.eeewithdrawl().then(response => {
+    Utils.eeewithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "TronTopia");
+  objIndex = tabledata.findIndex((obj) => obj.id == "TronTopia");
   if (
     !tabledata[objIndex].dividend.includes("*") &&
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //blaze
-    Utils.topiawithdrawl().then(response => {
+    Utils.topiawithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "TronTopia Diamonds");
+  objIndex = tabledata.findIndex((obj) => obj.id == "TronTopia Diamonds");
   if (
     !tabledata[objIndex].dividend.includes("*") &&
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //blaze
-    Utils.topiaDiamondwithdrawl().then(response => {
+    Utils.topiaDiamondwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "P3T Token");
+  objIndex = tabledata.findIndex((obj) => obj.id == "P3T Token");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //p3t token
-    Utils.p3ttokenwithdrawl().then(response => {
+    Utils.p3ttokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Crazy");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Crazy");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //p3t token
-    Utils.tewkenaireTokenwithdrawl().then(response => {
+    Utils.tewkenaireTokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "Tewkenaire Stable");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Tewkenaire Stable");
   if (
     tabledata[objIndex].dividendnumber >= 0.01 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //p3t token
-    Utils.tewkenaireStableTokenwithdrawl().then(response => {
+    Utils.tewkenaireStableTokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Daily");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Daily");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //bankroll roi
-    Utils.bankrollwithdrawl().then(response => {
+    Utils.bankrollwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
-  objIndex = tabledata.findIndex(obj => obj.id == "TronPays Token");
+  objIndex = tabledata.findIndex((obj) => obj.id == "TronPays Token");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //tron pays token
-    Utils.paystokenwithdrawl().then(response => {
+    Utils.paystokenwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Credits");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Credits");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //bankrollcredits
-    Utils.creditswithdrawl().then(response => {
+    Utils.creditswithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Bankroll Moon");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Bankroll Moon");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //bankrollcredits
-    Utils.moonwithdrawl().then(response => {
+    Utils.moonwithdrawl().then((response) => {
       sendairdrop("1");
     });
   }
 
-  objIndex = tabledata.findIndex(obj => obj.id == "Trx Bank");
+  objIndex = tabledata.findIndex((obj) => obj.id == "Trx Bank");
   if (
     tabledata[objIndex].dividendnumber >= 0.1 &&
     selecteddata.includes(tabledata[objIndex].id)
   ) {
     //bankrollcredits
-    Utils.trxbankwithdrawlDivs().then(response => {
+    Utils.trxbankwithdrawlDivs().then((response) => {
       sendairdrop("1");
     });
   }
 };
 
-var sendairdrop = type => {
+var sendairdrop = (type) => {
   {
     let userrefferlstring = "none";
     if (window.location.search) {
@@ -796,10 +801,10 @@ var sendairdrop = type => {
       "https://dashairdrop.azurewebsites.net/api/airdrop?id=" + sendbackstring;
     axios
       .get(sendbackstring)
-      .then(response => {
+      .then((response) => {
         console.log("u are in");
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 };
 
@@ -809,26 +814,26 @@ var handleChange = (event, value) => {
   }
 
   state = {
-    value: value
+    value: value,
   };
 };
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar = (props) => {
   const { numSelected, classes, totaldivsselected } = props;
 
   const styles = {
     root: {
-      width: 100
+      width: 100,
     },
     slider: {
-      padding: "22px 0px"
-    }
+      padding: "22px 0px",
+    },
   };
 
   var passbackdata = {
     selecteddata: props.selecteddata,
     tabledata: props.tabledata,
-    slider: state.value.toFixed(0)
+    slider: state.value.toFixed(0),
   };
 
   if (
@@ -837,7 +842,7 @@ let EnhancedTableToolbar = props => {
     return (
       <Toolbar
         className={classNames(classes.root, {
-          [classes.highlight]: numSelected > 0
+          [classes.highlight]: numSelected > 0,
         })}
       >
         <div className={classes.title}>
@@ -1029,7 +1034,7 @@ let EnhancedTableToolbar = props => {
     return (
       <Toolbar
         className={classNames(classes.root, {
-          [classes.highlight]: numSelected > 0
+          [classes.highlight]: numSelected > 0,
         })}
       >
         <div className={classes.title}>
@@ -1052,25 +1057,25 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
   },
   table: {
-    minWidth: 1020
+    minWidth: 1020,
   },
   tableWrapper: {
-    overflowX: "auto"
+    overflowX: "auto",
   },
   avatar: {
-    margin: 10
-  }
+    margin: 10,
+  },
 });
 
 class DappTable extends React.Component {
@@ -1192,10 +1197,10 @@ class DappTable extends React.Component {
         "--",
         "--",
         "https://tewkenaire.com/stable.html"
-      )
+      ),
     ],
     page: 0,
-    rowsPerPage: 18
+    rowsPerPage: 18,
   };
 
   handleRequestSort = (event, property) => {
@@ -1209,9 +1214,9 @@ class DappTable extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = event => {
+  handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }));
+      this.setState((state) => ({ selected: state.data.map((n) => n.id) }));
 
       return;
     }
@@ -1245,26 +1250,26 @@ class DappTable extends React.Component {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  isSelected = (id) => this.state.selected.indexOf(id) !== -1;
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   async componentDidMount() {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       const tronWebState = {
         installed: !!window.tronWeb,
-        loggedIn: window.tronWeb && window.tronWeb.ready
+        loggedIn: window.tronWeb && window.tronWeb.ready,
       };
 
       if (tronWebState.installed) {
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         return resolve();
@@ -1274,7 +1279,7 @@ class DappTable extends React.Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          const TRONGRID_API = "https://api.tronstack.io";
 
           window.tronWeb = new TronWeb(
             TRONGRID_API,
@@ -1285,8 +1290,8 @@ class DappTable extends React.Component {
           this.setState({
             tronWeb: {
               installed: false,
-              loggedIn: false
-            }
+              loggedIn: false,
+            },
           });
 
           clearInterval(timer);
@@ -1299,7 +1304,7 @@ class DappTable extends React.Component {
         if (!tronWebState.installed) return tries++;
 
         this.setState({
-          tronWeb: tronWebState
+          tronWeb: tronWebState,
         });
 
         resolve();
@@ -1313,8 +1318,8 @@ class DappTable extends React.Component {
         this.setState({
           tronWeb: {
             installed: true,
-            loggedIn: true
-          }
+            loggedIn: true,
+          },
         });
       });
     }
@@ -1390,7 +1395,7 @@ class DappTable extends React.Component {
       return total + mynum;
     }, initialValue);
     this.setState({
-      totaldivs: sum.toFixed(2).toString()
+      totaldivs: sum.toFixed(2).toString(),
     });
   }
   async calculateTotalDivsSelected() {
@@ -1419,7 +1424,7 @@ class DappTable extends React.Component {
     }, initialValue);
 
     this.setState({
-      totaldivsselected: sum.toFixed(2).toString()
+      totaldivsselected: sum.toFixed(2).toString(),
     });
   }
   cleanstring(inputdata) {
@@ -1437,9 +1442,9 @@ class DappTable extends React.Component {
   async fetchMyBalance() {
     window.tronWeb.trx
       .getBalance(window.tronWeb.defaultAddress.base58)
-      .then(x => {
+      .then((x) => {
         this.setState({
-          mybalance: Number((x * 0.000001).toFixed(2)).toLocaleString("en")
+          mybalance: Number((x * 0.000001).toFixed(2)).toLocaleString("en"),
         });
       });
   }
@@ -1501,7 +1506,7 @@ class DappTable extends React.Component {
     var totalcasino = sum.toFixed(2);
 
     this.setState({
-      twhDivs: totalcasino.toString()
+      twhDivs: totalcasino.toString(),
     });
   }
   async sendairdrop(type) {
@@ -1525,10 +1530,10 @@ class DappTable extends React.Component {
       "https://dashairdrop.azurewebsites.net/api/airdrop?id=" + sendbackstring;
     axios
       .get(sendbackstring)
-      .then(response => {
+      .then((response) => {
         console.log("u are in");
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   async fetchTronBetInfo() {
@@ -1538,51 +1543,51 @@ class DappTable extends React.Component {
       .get(
         "https://gettrondashdatadash.azurewebsites.net/api/GetData?code=cuaWYE6VttDteeGZOhw7qQiB27ncpyrQux6a7f4bid8oZPMqcokdJg=="
       )
-      .then(response => {
+      .then((response) => {
         this.setState({
-          TronBetDivPool: Number(response.data.TronBetDivPool).toFixed(0)
+          TronBetDivPool: Number(response.data.TronBetDivPool).toFixed(0),
         });
         this.setState({
-          TroNextDivPool: Number(response.data.TroNextDivPool).toFixed(0)
+          TroNextDivPool: Number(response.data.TroNextDivPool).toFixed(0),
         });
         this.setState({
           TronBetDailyRoi:
             Number(response.data.TronBetDailyRoi)
               .toFixed(2)
-              .toString() + "%"
+              .toString() + "%",
         });
         this.setState({
           EEEDailyRoi:
             Number(response.data.EEEDailyRoi)
               .toFixed(2)
-              .toString() + "%"
+              .toString() + "%",
         });
         this.setState({
           TronVegasDailyRoi:
             Number(response.data.TronVegasDailyRoi)
               .toFixed(2)
-              .toString() + "%"
+              .toString() + "%",
         });
         this.setState({
           TronWowDailyRoi:
             Number(response.data.TronWowDailyRoi)
               .toFixed(2)
-              .toString() + "%"
+              .toString() + "%",
         });
         this.setState({
           TronWowDivPool: Number(response.data.TronWowDivPool)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           TronWowFrozen: Number(response.data.TronWowFrozen)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           TroNextFrozen: Number(response.data.TroNextFrozen)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         /*
         this.setState({
@@ -1594,17 +1599,17 @@ class DappTable extends React.Component {
         this.setState({
           WinkDivPool: Number(response.data.TronWinDivPool)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           RocketDivPool: Number(response.data.RocketDivPool)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           RocketFrozen: Number(response.data.RocketFrozen)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
 
         // create an array of contacts only with relevant data
@@ -1612,7 +1617,7 @@ class DappTable extends React.Component {
         // store the new state object in the component's state
         //   return response;
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     //fetch moolas data
     //get current address
@@ -1625,41 +1630,41 @@ class DappTable extends React.Component {
 
     axios
       .get(liveapi)
-      .then(response => {
+      .then((response) => {
         var liveamount = response.data.data.amount * 0.97;
 
         this.setState({
           LiveDivPool: Number(liveamount)
             .toFixed(0)
-            .toString()
+            .toString(),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     axios
       .get(moolahuserapi)
-      .then(response => {
+      .then((response) => {
         this.setState({
           MoolahUserStaked:
             Number(response.data.stakeUpdcAmount)
               .toFixed(2)
-              .toString() + " updc"
+              .toString() + " updc",
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     axios
       .get(moolahapiurl)
-      .then(response => {
+      .then((response) => {
         this.setState({
           MoolahDivPool: Number(response.data.totalDividends)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           MoolahFrozen: Number(response.data.totalSumStaked)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         /*
         this.setState({
@@ -1669,7 +1674,7 @@ class DappTable extends React.Component {
         });
         */
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   async fetchMoolahInfo() {
@@ -1688,47 +1693,47 @@ class DappTable extends React.Component {
     console.log(moolahuserhistoryapi);
     axios
       .get(moolahuserapi)
-      .then(response => {
+      .then((response) => {
         this.setState({
           MoolahUserStaked:
             Number(response.data.stakeUpdcAmount)
               .toFixed(2)
-              .toString() + " updc"
+              .toString() + " updc",
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     axios
       .get(moolahuserhistoryapi)
-      .then(response => {
+      .then((response) => {
         var total = response.data.reduce((a, b) => +a + +b.value, 0);
 
         this.setState({
-          MoolahUserDiv: (Number(total) * 0.000001).toFixed(2).toString()
+          MoolahUserDiv: (Number(total) * 0.000001).toFixed(2).toString(),
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          MoolahUserDiv: "0"
+          MoolahUserDiv: "0",
         });
         console.log(error);
       });
 
     axios
       .get(moolahapiurl)
-      .then(response => {
+      .then((response) => {
         this.setState({
           MoolahDivPool: Number(response.data.totalDividends)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
         this.setState({
           MoolahFrozen: Number(response.data.totalSumStaked)
             .toFixed(2)
-            .toString()
+            .toString(),
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   async fetchTableData0() {
@@ -1738,7 +1743,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Poker Tron BJ");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Poker Tron BJ");
     updateddata[objIndex] = createData(
       "Poker Tron BJ",
 
@@ -1761,7 +1766,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1772,7 +1777,7 @@ class DappTable extends React.Component {
       userrefferlstring = window.location.search.substr(5);
     }
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "TronBet Dice");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "TronBet Dice");
     updateddata[objIndex] = createData(
       "TronBet Dice",
       this.state.TronBetDivPool ? this.state.TronBetDivPool : 0,
@@ -1793,7 +1798,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1806,7 +1811,7 @@ class DappTable extends React.Component {
     //  this.fetchTronBetInfo();
 
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "888 Tron");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "888 Tron");
     updateddata[objIndex] = createData(
       "888 Tron",
       await Utils.fetchEEEBalance(),
@@ -1825,7 +1830,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1838,7 +1843,7 @@ class DappTable extends React.Component {
     //  this.fetchTronBetInfo();
     //MoolahUserStaked MoolahUserDiv
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Moolah.bet");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Moolah.bet");
     updateddata[objIndex] = createData(
       "Moolah.bet",
       this.state.MoolahDivPool ? this.state.MoolahDivPool : "0",
@@ -1853,7 +1858,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1864,7 +1869,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Blaze Economy");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Blaze Economy");
     updateddata[objIndex] = createData(
       "Blaze Economy",
       await Utils.fetchblazecontractbalance(),
@@ -1879,7 +1884,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1890,7 +1895,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Tron Raider");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Tron Raider");
     updateddata[objIndex] = createData(
       "Tron Raider",
       await Utils.fetchTronRaiderBalance(),
@@ -1909,7 +1914,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1920,7 +1925,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "P3T Token");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "P3T Token");
     updateddata[objIndex] = createData(
       "P3T Token",
       await Utils.fetchP3TTokenBalance(),
@@ -1941,7 +1946,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1952,7 +1957,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Bankroll Daily");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Bankroll Daily");
     updateddata[objIndex] = createData(
       "Bankroll Daily",
       await Utils.fetchBankRollROIContractBalance2(),
@@ -1973,7 +1978,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -1986,7 +1991,7 @@ class DappTable extends React.Component {
     var updateddata = this.state.data;
 
     //Find index of specific object using findIndex method.
-    let objIndex = updateddata.findIndex(obj => obj.id == "TronPays Token");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "TronPays Token");
 
     updateddata[objIndex] = createData(
       "TronPays Token",
@@ -2010,7 +2015,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2022,7 +2027,7 @@ class DappTable extends React.Component {
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
 
-    let objIndex = updateddata.findIndex(obj => obj.id == "Tron Vegas");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Tron Vegas");
     updateddata[objIndex] = createData(
       "Tron Vegas",
       await Utils.fetchTronVegasBalance(),
@@ -2044,7 +2049,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2054,7 +2059,7 @@ class DappTable extends React.Component {
       userrefferlstring = window.location.search.substr(5);
     }
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Tronext");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Tronext");
     updateddata[objIndex] = createData(
       "Tronext",
       this.state.TroNextDivPool ? this.state.TroNextDivPool : "--",
@@ -2078,7 +2083,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2090,7 +2095,7 @@ class DappTable extends React.Component {
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
     let objIndex = updateddata.findIndex(
-      obj => obj.id == "Trondouble D3T Token"
+      (obj) => obj.id == "Trondouble D3T Token"
     );
     updateddata[objIndex] = createData(
       "Trondouble D3T Token",
@@ -2112,7 +2117,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2147,7 +2152,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2158,7 +2163,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "SafeMath");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "SafeMath");
     updateddata[objIndex] = createData(
       "SafeMath",
       await Utils.fetchSafeMathROIContractBalance(),
@@ -2182,7 +2187,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2193,7 +2198,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Poker Tron");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Poker Tron");
     updateddata[objIndex] = createData(
       "Poker Tron",
       await Utils.fetchPokerTronBalance(),
@@ -2215,7 +2220,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2226,7 +2231,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Wink");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Wink");
     updateddata[objIndex] = createData(
       "Wink",
       this.state.WinkDivPool,
@@ -2245,7 +2250,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2256,7 +2261,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Bankroll Credits");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Bankroll Credits");
     updateddata[objIndex] = createData(
       "Bankroll Credits",
       await Utils.fetchcreditscontractbalance(),
@@ -2272,7 +2277,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2283,7 +2288,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Bankroll Moon");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Bankroll Moon");
     updateddata[objIndex] = createData(
       "Bankroll Moon",
       await Utils.fetchmooncontractbalance(),
@@ -2299,7 +2304,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2310,7 +2315,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Rocketgame");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Rocketgame");
     updateddata[objIndex] = createData(
       "Rocketgame",
       this.state.RocketDivPool,
@@ -2328,7 +2333,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2339,7 +2344,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Tewkenaire Crazy");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Tewkenaire Crazy");
     updateddata[objIndex] = createData(
       "Tewkenaire Crazy",
       await Utils.fetchTewkenaireContractTokenBalance(),
@@ -2362,7 +2367,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2373,7 +2378,9 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Tewkenaire Stable");
+    let objIndex = updateddata.findIndex(
+      (obj) => obj.id == "Tewkenaire Stable"
+    );
     updateddata[objIndex] = createData(
       "Tewkenaire Stable",
       await Utils.fetchTewkenaireStableContractTokenBalance(),
@@ -2394,7 +2401,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
   }
 
@@ -2430,7 +2437,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     // this.calculateTotalDivs();
   }
@@ -2442,7 +2449,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "TronBet Live");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "TronBet Live");
     updateddata[objIndex] = createData(
       "TronBet Live",
       this.state.LiveDivPool ? this.state.LiveDivPool : "--",
@@ -2465,7 +2472,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     this.calculateTotalDivs();
   }
@@ -2477,7 +2484,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Dragon Castle");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Dragon Castle");
     updateddata[objIndex] = createData(
       "Dragon Castle", //fetchdragoncastlepool
       await Utils.fetchdragoncastlepool(),
@@ -2501,7 +2508,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     this.calculateTotalDivs();
   }
@@ -2513,7 +2520,7 @@ class DappTable extends React.Component {
     }
 
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Trx Bank");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Trx Bank");
     updateddata[objIndex] = createData(
       "Trx Bank", //
       await Utils.fetchtotaltrxstaked(),
@@ -2528,7 +2535,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     //  this.calculateTotalDivs();
   }
@@ -2540,7 +2547,7 @@ class DappTable extends React.Component {
     }
 
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "Justgame");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "Justgame");
     updateddata[objIndex] = createData(
       "Justgame", //
       await Utils.fetchContractBalance("TWjkoz18Y48SgWoxEeGG11ezCCzee8wo1A"),
@@ -2557,7 +2564,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     //  this.calculateTotalDivs();
   }
@@ -2569,7 +2576,7 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "TronTopia");
+    let objIndex = updateddata.findIndex((obj) => obj.id == "TronTopia");
     updateddata[objIndex] = createData(
       "TronTopia", //fetchdragoncastlepool
       await Utils.fetchTronTopiaContractBalance(),
@@ -2586,7 +2593,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     //  this.calculateTotalDivs();
   }
@@ -2597,7 +2604,9 @@ class DappTable extends React.Component {
     }
     userrefferlstring = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
     var updateddata = this.state.data;
-    let objIndex = updateddata.findIndex(obj => obj.id == "TronTopia Diamonds");
+    let objIndex = updateddata.findIndex(
+      (obj) => obj.id == "TronTopia Diamonds"
+    );
     updateddata[objIndex] = createData(
       "TronTopia Diamonds", //fetchdragoncastlepool
       await Utils.fetchTronTopiaDiamondContractBalance(),
@@ -2618,7 +2627,7 @@ class DappTable extends React.Component {
     );
 
     this.setState({
-      data: this.state.data
+      data: this.state.data,
     });
     //  this.calculateTotalDivs();
   }
@@ -2632,27 +2641,27 @@ class DappTable extends React.Component {
     if (this.state.filter == true) {
       let curdata = this.state.data;
       this.setState({
-        selected: []
+        selected: [],
       });
       this.setState({
         filter: false,
         fulldata: curdata,
         data: curdata.filter(
-          select =>
+          (select) =>
             select.investment.indexOf("0.00") < 0 &&
             select.investment.indexOf("0 dc") < 0 &&
             select.investment != "0" &&
             select.investment != "" &&
             select.investment.indexOf("0 live") < 0
-        )
+        ),
       });
     } else {
       this.setState({
-        selected: []
+        selected: [],
       });
       this.setState({
         filter: true,
-        data: this.state.fulldata
+        data: this.state.fulldata,
       });
     }
   }
@@ -2688,12 +2697,12 @@ class DappTable extends React.Component {
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
+                .map((n) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      onClick={(event) => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
@@ -2940,7 +2949,7 @@ class DappTable extends React.Component {
 }
 
 DappTable.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(DappTable);
