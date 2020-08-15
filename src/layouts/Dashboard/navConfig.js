@@ -21,6 +21,7 @@ import SettingsIcon from "@material-ui/icons/SettingsOutlined";
 import ViewConfigIcon from "@material-ui/icons/ViewComfy";
 import ListIcon from "@material-ui/icons/List";
 import Label from "src/components/Label";
+import TwitterIcon from "@material-ui/icons/Twitter";
 
 export default [
   {
@@ -38,7 +39,7 @@ export default [
         items: [
           {
             title: "Dash Bank",
-            href: "/dashbankstake",
+            href: "/dashbank",
           },
           {
             title: "TRX Bank",
@@ -71,8 +72,8 @@ export default [
       },
       {
         title: "Social",
-        href: "/management",
-        icon: AccountBalanceIcon,
+
+        icon: TwitterIcon,
         items: [
           {
             title: "Telegram",

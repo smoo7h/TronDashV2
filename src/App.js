@@ -106,11 +106,8 @@ function App() {
 
               {!contract && (
                 <div style={{ color: "#fff" }}>
-                  Please sign into your supported tron wallet
-                  <a href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec">
-                    {" "}
-                    TronLink
-                  </a>
+                  Please sign into your supported tron wallet for full
+                  experience
                 </div>
               )}
               {contract && renderRoutes(routes)}

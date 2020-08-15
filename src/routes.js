@@ -53,7 +53,7 @@ export default [
         ),
       },
       {
-        path: "/dashbankstake",
+        path: "/dashbank",
         exact: true,
         component: lazy(() =>
           import("src/old/src/components/protools/views/Widgets/Stake.jsx")

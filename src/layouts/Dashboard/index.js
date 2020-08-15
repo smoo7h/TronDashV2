@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: "black",
     backgroundImage:
       "radial-gradient(50% 50% at 50% 50%, rgba(33, 114, 229, 0.1) 0%, rgba(33, 36, 41, 0) 100%)",
+    //backgroundImage:
+    //  "radial-gradient(50% 50% at 50% 50%, rgba(239, 114, 229, 0.1) 0%, rgba(33, 33, 33, 0) 100%)",
     // backgroundPosition: "0px -30vh",
     backgroundRepeat: "no-repeat",
   },

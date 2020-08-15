@@ -291,7 +291,7 @@ class DashLotto extends React.Component {
 
     axios
       .get(
-        "https://gettrondashdatadash.azurewebsites.net/api/GetData?code=cuaWYE6VttDteeGZOhw7qQiB27ncpyrQux6a7f4bid8oZPMqcokdJg==&publickey=" +
+        "https://getlottodata.azurewebsites.net/api/GetData?code=LKEAKDvyPYsckIf8C3w1u29DpmlGsZdwhvyBRn/Q8M5o/ENSIez3eQ==&publickey=" +
           window.tronWeb.defaultAddress.base58
       )
       .then((response) => {

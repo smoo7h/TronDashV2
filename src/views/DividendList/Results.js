@@ -136,7 +136,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ "aria-label": "select all desserts" }}
+            inputProps={{ "aria-label": "select all dapps" }}
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -340,7 +340,7 @@ function Results({ className, customers, ...rest }) {
               <Table stickyHeader>
                 <EnhancedTableHead
                   classes={classes}
-                  numSelected={selected.length}
+                  numSelected={selectedCustomers.length}
                   order={order}
                   orderBy={orderBy}
                   onSelectAllClick={handleSelectAll}
