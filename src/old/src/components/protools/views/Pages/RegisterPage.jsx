@@ -216,6 +216,29 @@ class RegisterPage extends React.Component {
                           />
                         </Button>
                       </Link>
+                      {` `}
+
+                      <Link
+                        color="inherit"
+                        target="_blank"
+                        //   component={RouterLink}
+                        // to={customer.website}
+                        href={
+                          "https://justswap.io/?lang=en-US#/scan/detail/trx/TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm"
+                        }
+                        variant="h6"
+                      >
+                        <Button
+                          justIcon
+                          round
+                          style={{ backgroundColor: "transparent" }}
+                        >
+                          <Avatar
+                            alt="PlayRoyal"
+                            src="https://miro.medium.com/fit/c/256/256/1*tPB9Iy0Ej7fHqHOb11_13A.png"
+                          />
+                        </Button>
+                      </Link>
                     </div>
                   </GridItem>
                 </GridContainer>
