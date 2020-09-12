@@ -60,7 +60,9 @@ function Chart({ data: dataProp, className, ...rest }) {
       callbacks: {
         label: function(tooltipItem, data) {
           const label = data["labels"][tooltipItem["index"]];
-          const value = data["datasets"][0]["data"][tooltipItem["index"]];
+          const value = data["datasets"][0]["data"][
+            tooltipItem["index"]
+          ].toFixed(0);
           const numbervalue = data["datasets"][0]["data"][tooltipItem["index"]];
 
           return `${label}: ${value} tdd`;

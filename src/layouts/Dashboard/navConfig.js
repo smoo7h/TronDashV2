@@ -65,6 +65,16 @@ export default [
         title: "DAO",
         href: "/dao",
         icon: BusinessIcon,
+        items: [
+          {
+            title: "Pre Sale",
+            href: "/dao",
+          },
+          {
+            title: "White Paper",
+            href: "/dao",
+          },
+        ],
       },
       {
         title: "Referral",

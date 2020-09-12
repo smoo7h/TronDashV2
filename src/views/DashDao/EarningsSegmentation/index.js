@@ -411,8 +411,8 @@ function EarningsSegmentation({ className, ...rest }) {
                           Swap TRX for TDD Tokens
                         </Typography>
                       </Grid>
-                      <Grid item md={4} xs={4}></Grid>
-                      <Grid item md={4} xs={4}>
+                      <Grid item md={4} xs={0}></Grid>
+                      <Grid item md={4} xs={10}>
                         <OutlinedInput
                           //className={classes.margin}
                           label="Deposit trx"

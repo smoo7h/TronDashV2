@@ -203,7 +203,7 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
             items: list.items,
             subheader: list.subheader,
             pathname: location.pathname,
-            key: list.subheader,
+            key: list.items.title,
           })
         )}
       </nav>

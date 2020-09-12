@@ -34,11 +34,25 @@ const useStyles = makeStyles((theme) => ({
   buycard: {
     backgroundColor: "#212121",
   },
+  divider: {
+    width: 1,
+    height: 24,
+  },
   large: {
     textAlign: "center",
     margin: "auto",
     boxShadow:
       "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+  },
+  centertext: {
+    textAlign: "center",
+  },
+
+  centerbtn: {
+    textAlign: "center",
+    margin: "auto",
     width: theme.spacing(12),
     height: theme.spacing(12),
   },
@@ -75,7 +89,38 @@ function Dao({ open, onClose, customer, className, ...rest }) {
               <Typography className={classes.centertext} variant="h5">
                 TronDash DAO
               </Typography>
+              <Link
+                color="inherit"
+                target="_blank"
+                //   component={RouterLink}
+                // to={customer.website}
+                href="https://tronscan.org/#/token20/TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5"
+                variant="h6"
+              >
+                <Typography className={classes.centertext} variant="h6">
+                  TDD Token
+                </Typography>
+              </Link>
             </Grid>
+          </Grid>
+          <br></br>
+          <br></br>
+          <Grid container spacing={3}>
+            <Grid item lg={4} xl={4} xs={12}></Grid>
+            <Grid item lg={4} xl={4} xs={12}>
+              <Card>
+                <EarningsSegmentation className={classes.buycard} />
+              </Card>
+            </Grid>
+            <Grid item lg={4} xl={4} xs={12}></Grid>
+
+            <br></br>
+            <Grid item lg={4} xl={4} xs={12}>
+              <Divider className={classes.divider} />
+            </Grid>
+
+            <br></br>
+
             <Grid item md={12} xs={12}>
               <Typography variant="body1">
                 TronDash is now a DAO, allowing you to secure a portion of the
@@ -87,6 +132,7 @@ function Dao({ open, onClose, customer, className, ...rest }) {
                 platform.
               </Typography>
             </Grid>
+
             <Grid item md={12} xs={12}>
               The core pain point of early 2019 was the inability of Tron users
               to approach decentralized applications in a centralized way. In
@@ -145,18 +191,21 @@ function Dao({ open, onClose, customer, className, ...rest }) {
                 benefit blockchain engineers and enthusiasts alike.
               </Typography>
             </Grid>
-          </Grid>
-          <br></br>
-          <br></br>
-          <Grid container spacing={3}>
-            <Grid item lg={4} xl={4} xs={12}></Grid>
-            <Grid item lg={4} xl={4} xs={12}>
-              <Card>
-                <EarningsSegmentation className={classes.buycard} />
-              </Card>
+            <Grid item lg={12} xl={12} xs={12} className={classes.centerbtn}>
+              <Button
+                variant="contained"
+                target="_blank"
+                size="large"
+                color="#ffffff"
+                href="https://www.google.com"
+              >
+                White Paper
+              </Button>
             </Grid>
-            <Grid item lg={4} xl={4} xs={12}></Grid>
           </Grid>
+          <br></br>
+          <br></br>
+          <br></br>
         </CardContent>
       </form>
     </Card>
