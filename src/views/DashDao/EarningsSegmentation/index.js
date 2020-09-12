@@ -96,23 +96,49 @@ const useStyles = makeStyles((theme) => ({
 
 function EarningsSegmentation({ className, ...rest }) {
   const classes = useStyles();
-  const [earnings, setEarnings] = useState([]);
+  const [graphObject, setGraphObject] = useState([]);
+  const [soldPercentage, setSoldPercentage] = useState(0);
+
   const [walletBalance, setWalletBalance] = useState(0);
   const [textValue, setTextValue] = useState(0);
   const [estimateToken, setestimateToken] = useState(0);
+  const [tokenBalance, settokenBalance] = useState(0);
+  const [tokensLeft, setTokensLeft] = useState(0);
 
   const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
   const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
+  const contractTokenStart = 100;
 
   useEffect(() => {
     let mounted = true;
 
     const fetchEarnings = () => {
-      axios.get("/api/dashboard/earnings").then((response) => {
-        if (mounted) {
-          setEarnings(response.data.earnings);
-        }
-      });
+      if (mounted) {
+        let data = getContractData(presaleContractAddress, "tokensleft()").then(
+          (response) => {
+            if (response) {
+              let graphvalues = [
+                {
+                  id: "27e84d20-f4a8-11ea-be42-79f6d264d75f",
+                  color: "#3f51b5",
+                  label: "For Sale",
+                  value: contractTokenStart - response,
+                },
+                {
+                  id: "27e84d21-f4a8-11ea-be42-79f6d264d722",
+                  color: "#424242",
+                  label: "Sold",
+                  value: response,
+                },
+              ];
+              setGraphObject(graphvalues);
+              //figure out how mant are sold
+              let percentage = (response / contractTokenStart) * 100;
+              setSoldPercentage(percentage);
+            }
+          }
+        );
+      }
     };
 
     fetchEarnings();
@@ -154,13 +180,12 @@ function EarningsSegmentation({ className, ...rest }) {
   const handelBuy = () => {
     //execute the contract
 
-    //get selected object and execute the Withdraw command
     if (Number(textValue) > 0) {
       ExecuteInvestContract(
         presaleContractAddress,
         "buyTokens(address)",
         window.tronWeb.defaultAddress.base58,
-        1,
+        textValue,
         6,
         "trx"
       );
@@ -207,6 +232,30 @@ function EarningsSegmentation({ className, ...rest }) {
       mounted = false;
     };
   }, [textValue]);
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchTokenBalance = () => {
+      let data = getContractData(
+        tokenAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          settokenBalance(response);
+        }
+      });
+      //console.log(data);
+    };
+
+    fetchTokenBalance();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const getContractData = async (
     contractAddress,
     functionSelector,
@@ -273,7 +322,7 @@ function EarningsSegmentation({ className, ...rest }) {
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Chart className={classes.chart} data={earnings} />
+          <Chart className={classes.chart} data={graphObject} />
         </div>
         <Divider />
         <div className={classes.statsContainer}>
@@ -300,7 +349,7 @@ function EarningsSegmentation({ className, ...rest }) {
               {"sold"}
             </Typography>
             <Typography align="center" variant="h4">
-              {75}%
+              {soldPercentage}%
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold"}>
@@ -313,7 +362,7 @@ function EarningsSegmentation({ className, ...rest }) {
               {"owned"}
             </Typography>
             <Typography align="center" variant="h4">
-              {29992}
+              {tokenBalance.toFixed(2)}
             </Typography>
           </div>
         </div>
