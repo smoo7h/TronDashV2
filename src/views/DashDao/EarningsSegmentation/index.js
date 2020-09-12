@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import BigNumber from "bignumber.js";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -14,6 +15,7 @@ import {
   withStyles,
   Typography,
 } from "@material-ui/core";
+import { ExecuteInvestContract } from "src/utils/ContractFunctions";
 import Dashimage from "../../../assets/dashcoinlogo.png";
 import axios from "src/utils/axios";
 import Visibility from "@material-ui/icons/Visibility";
@@ -95,6 +97,12 @@ const useStyles = makeStyles((theme) => ({
 function EarningsSegmentation({ className, ...rest }) {
   const classes = useStyles();
   const [earnings, setEarnings] = useState([]);
+  const [walletBalance, setWalletBalance] = useState(0);
+  const [textValue, setTextValue] = useState(0);
+  const [estimateToken, setestimateToken] = useState(0);
+
+  const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
+  const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
 
   useEffect(() => {
     let mounted = true;
@@ -114,14 +122,149 @@ function EarningsSegmentation({ className, ...rest }) {
     };
   }, []);
 
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchUserBalance = () => {
+      let currentuseraddress = window.tronWeb.defaultAddress.base58;
+      if (window.tronWeb) {
+        window.tronWeb.trx.getBalance(
+          currentuseraddress,
+          (error, contractBalance) => {
+            if (error) return console.error(error);
+            setWalletBalance(contractBalance * 0.000001);
+          }
+        );
+      }
+    };
+
+    fetchUserBalance();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
+  const handelBuy = () => {
+    //execute the contract
+
+    //get selected object and execute the Withdraw command
+    if (Number(textValue) > 0) {
+      ExecuteInvestContract(
+        presaleContractAddress,
+        "buyTokens(address)",
+        window.tronWeb.defaultAddress.base58,
+        1,
+        6,
+        "trx"
+      );
+    }
+  };
+
+  //handelBuy
+
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleMax = () => {
+    setTextValue(walletBalance.toFixed(2));
+  };
+
+  const handleTextChange = (event) => {
+    //  event.persist();
+    setTextValue(event.target.value);
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchEstimate = () => {
+      if (textValue != 0) {
+        let data = getContractData(
+          presaleContractAddress,
+          "calculateTokensReceived(uint256)",
+          Number(textValue) * 1000000
+        ).then((response) => {
+          if (response) {
+            setestimateToken(response);
+          }
+        });
+        //console.log(data);
+      } else {
+        setestimateToken(0);
+      }
+    };
+
+    fetchEstimate();
+
+    return () => {
+      mounted = false;
+    };
+  }, [textValue]);
+  const getContractData = async (
+    contractAddress,
+    functionSelector,
+    contractParameter
+  ) => {
+    var contractValue = await window.tronWeb
+      .contract()
+      .at(contractAddress, async (error, contract) => {
+        if (error) return console.error(error);
+        let getbalance1;
+
+        try {
+          //you have to send the one with a
+          getbalance1 =
+            contractParameter == "" || !contractParameter
+              ? await contract[functionSelector]().call()
+              : await contract[functionSelector](contractParameter).call();
+        } catch (error) {
+          //sometimes if they have the wrong value for the functionSelector this happens
+          getbalance1 = 999999999999999999999;
+        }
+        //need to cast number as bignumber 4 no overflow
+        let returnValueIndexd = getbalance1[Object.keys(getbalance1)[0]];
+        let numchec = new BigNumber(returnValueIndexd);
+        let returnValue = 0;
+        //set the value
+        let multiplier = Math.pow(10, 6 * -1);
+        returnValue = Number(numchec) * multiplier;
+        //remove the decmalls
+        returnValue = returnValue;
+        return returnValue;
+      });
+
+    return contractValue;
+  };
+
+  const executeContract = async (
+    contractAddress,
+    functionSelector,
+    contractParameter
+  ) => {
+    //get the contacct value
+    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
+      if (error) return console.error(error);
+      let returnvalue;
+      try {
+        //you have to send the one with a
+        returnvalue =
+          contractParameter == ""
+            ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+            : await contract[functionSelector](contractParameter).send({
+                feeLimit: 10000000,
+              });
+      } catch (error) {
+        //sometimes if they have the wrong value for the functionSelector this happens
+        console.log(error);
+      }
+    });
   };
 
   return (
@@ -147,7 +290,7 @@ function EarningsSegmentation({ className, ...rest }) {
               0.9 trx
             </Typography>
           </div>
-          <div className={classes.statsItem} key={"sold"}>
+          <div className={classes.statsItem} key={"sold2"}>
             <Typography
               align="center"
               component="h6"
@@ -188,7 +331,7 @@ function EarningsSegmentation({ className, ...rest }) {
                 color: "white",
               }}
             >
-              Buy
+              Swap
             </Button>
             <div>
               <Modal
@@ -229,14 +372,16 @@ function EarningsSegmentation({ className, ...rest }) {
                           type={"text"}
                           className={classes.root}
                           fullWidth
+                          onChange={handleTextChange}
+                          value={textValue}
                           margin="normal"
                           variant="outlined"
                           endAdornment={
                             <InputAdornment position="end">
                               <IconButton
                                 aria-label="max"
-                                // onClick={handleClickShowPassword}
-                                //   onMouseDown={handleMouseDownPassword}
+                                onClick={handleMax}
+                                onMouseDown={handleMax}
                                 edge="end"
                               >
                                 <Typography className={classes.centertext}>
@@ -250,9 +395,19 @@ function EarningsSegmentation({ className, ...rest }) {
                         <br></br>
                         <br></br>
                         <Typography className={classes.centertext} variant="h5">
-                          Balance: 1000 trx
+                          Balance: {walletBalance.toFixed(2)} {` trx`}
                         </Typography>
+                        {estimateToken > 0 && (
+                          <Typography
+                            className={classes.centertext}
+                            variant="h5"
+                          >
+                            You will receive: {estimateToken.toFixed(2)}{" "}
+                            {` tdd`}
+                          </Typography>
+                        )}
                       </Grid>
+
                       <Grid item md={4} xs={12}></Grid>
                       <Grid item md={4} xs={12}></Grid>
                       <Grid item md={4} xs={12}>
@@ -261,7 +416,7 @@ function EarningsSegmentation({ className, ...rest }) {
                           fullWidth
                           size="large"
                           color="primary"
-                          onClick={handleOpen}
+                          onClick={handelBuy}
                           className={classes.margin}
                           style={{
                             background:
@@ -269,7 +424,7 @@ function EarningsSegmentation({ className, ...rest }) {
                             color: "white",
                           }}
                         >
-                          Buy
+                          Swap
                         </Button>
                       </Grid>
                     </Grid>
