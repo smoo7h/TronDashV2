@@ -100,8 +100,8 @@ export default [
             href: "/twitter",
           },
           {
-            title: "Discord",
-            href: "/discord",
+            title: "Reddit",
+            href: "/reddit",
           },
         ],
       },

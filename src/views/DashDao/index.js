@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import EarningsSegmentation from "src/views/DashDao/EarningsSegmentation";
+import PreSale from "src/views/DashDao/PreSale";
 import { makeStyles } from "@material-ui/styles";
 import Dashimage from "../../assets/dashcoinlogo.png";
 import Avatar from "@material-ui/core/Avatar";
@@ -105,17 +105,17 @@ function Dao({ open, onClose, customer, className, ...rest }) {
           </Grid>
           <br></br>
           <br></br>
-          <Grid container spacing={3}>
-            <Grid item lg={4} xl={4} xs={12}></Grid>
-            <Grid item lg={4} xl={4} xs={12}>
+          <Grid container spacing={4}>
+            <Grid item lg={3} xl={3} xs={12}></Grid>
+            <Grid item lg={6} xl={6} xs={12}>
               <Card>
-                <EarningsSegmentation className={classes.buycard} />
+                <PreSale className={classes.buycard} />
               </Card>
             </Grid>
-            <Grid item lg={4} xl={4} xs={12}></Grid>
+            <Grid item lg={3} xl={3} xs={12}></Grid>
 
             <br></br>
-            <Grid item lg={4} xl={4} xs={12}>
+            <Grid item lg={12} xl={12} xs={12}>
               <Divider className={classes.divider} />
             </Grid>
 

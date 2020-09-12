@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import BigNumber from "bignumber.js";
 import { makeStyles } from "@material-ui/styles";
+import Dashimage from "src/assets/dashcoinlogo.png";
 import {
   Card,
   CardHeader,
@@ -16,7 +17,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ExecuteInvestContract } from "src/utils/ContractFunctions";
-import Dashimage from "../../../assets/dashcoinlogo.png";
+
 import axios from "src/utils/axios";
 import Visibility from "@material-ui/icons/Visibility";
 
@@ -58,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     boxShadow:
       "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    width: theme.spacing(12),
-    height: theme.spacing(12),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
   centertext: {
     textAlign: "center",
@@ -92,9 +93,15 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  centeritem: {
+    textAlign: "center",
+    margin: "auto",
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+  },
 }));
 
-function EarningsSegmentation({ className, ...rest }) {
+function FarmCard({ className, ...rest }) {
   const classes = useStyles();
   const [graphObject, setGraphObject] = useState([]);
   const [soldPercentage, setSoldPercentage] = useState(0);
@@ -104,9 +111,11 @@ function EarningsSegmentation({ className, ...rest }) {
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
+  const [farmName, setfarmName] = useState("");
 
   const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
   const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
+  const currentContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
   const contractTokenStart = 100;
 
   useEffect(() => {
@@ -318,12 +327,20 @@ function EarningsSegmentation({ className, ...rest }) {
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      <CardHeader title="Presale" className={classes.centertext} />
+      <CardHeader title="PEARL/TRX LP" className={classes.centertext} />
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Chart className={classes.chart} data={graphObject} />
+          <Avatar src={Dashimage} className={classes.large} />
+          <br></br>
+          <Typography className={classes.centertext} variant="h6">
+            Deposit USDT
+          </Typography>
+          <Typography className={classes.centertext} variant="h6">
+            Earn Pearl
+          </Typography>
         </div>
+
         <Divider />
         <div className={classes.statsContainer}>
           <div className={classes.statsItem} key={"price"}>
@@ -336,7 +353,7 @@ function EarningsSegmentation({ className, ...rest }) {
               Price
             </Typography>
             <Typography align="center" variant="h4">
-              0.9 trx
+              0.00002
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold2"}>
@@ -346,150 +363,171 @@ function EarningsSegmentation({ className, ...rest }) {
               gutterBottom
               variant="overline"
             >
-              {"sold"}
+              {"USDT Staked"}
             </Typography>
             <Typography align="center" variant="h4">
-              {soldPercentage}%
-            </Typography>
-          </div>
-          <div className={classes.statsItem} key={"sold"}>
-            <Typography
-              align="center"
-              component="h6"
-              gutterBottom
-              variant="overline"
-            >
-              {"owned"}
-            </Typography>
-            <Typography align="center" variant="h4">
-              {tokenBalance.toFixed(2)}
+              10000
             </Typography>
           </div>
         </div>
         <Divider />
-        <div className={classes.statsContainer}>
-          <div className={classes.statsItem} key="buybtn">
-            <Button
-              variant="contained"
-              size="large"
-              color="primary"
-              onClick={handleOpen}
-              className={classes.margin}
-              style={{
-                background: "linear-gradient(to right, #D50000, #8C9EFF)",
-                color: "white",
-              }}
-            >
-              Swap
-            </Button>
-            <div>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500,
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={6}>
+            <div className={classes.statsItem} key="harvest">
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleOpen}
+                className={classes.margin}
+                style={{
+                  background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  color: "white",
                 }}
               >
-                <Fade in={open}>
-                  <div className={classes.paper}>
-                    <Grid container spacing={3}>
-                      <Grid item md={12} xs={12}>
-                        <Avatar src={Dashimage} className={classes.large} />
-                      </Grid>
-                      <Grid item md={12} xs={12}>
-                        <Typography className={classes.centertext} variant="h3">
-                          Deposit
-                        </Typography>
-                      </Grid>
-                      <Grid item md={12} xs={12}>
-                        <Typography className={classes.centertext}>
-                          Swap TRX for TDD Tokens
-                        </Typography>
-                      </Grid>
-                      <Grid item md={4} xs={0}></Grid>
-                      <Grid item md={4} xs={10}>
-                        <OutlinedInput
-                          //className={classes.margin}
-                          label="Deposit trx"
-                          variant="outlined"
-                          id="entervaluetxt"
-                          type={"text"}
-                          className={classes.root}
-                          fullWidth
-                          onChange={handleTextChange}
-                          value={textValue}
-                          margin="normal"
-                          variant="outlined"
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="max"
-                                onClick={handleMax}
-                                onMouseDown={handleMax}
-                                edge="end"
-                              >
-                                <Typography className={classes.centertext}>
-                                  max
-                                </Typography>
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                        />
+                Harvest
+              </Button>
+            </div>
+          </Grid>
+          <Grid item md={6} xs={6}>
+            <div className={classes.statsItem} key="stake">
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleOpen}
+                className={classes.margin}
+                style={{
+                  background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  color: "white",
+                }}
+              >
+                Stake
+              </Button>
+              <div>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                  <Fade in={open}>
+                    <div className={classes.paper}>
+                      <Grid container spacing={3}>
+                        <Grid item md={12} xs={12}>
+                          <Avatar src={Dashimage} className={classes.large} />
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <Typography
+                            className={classes.centertext}
+                            variant="h3"
+                          >
+                            PEARL/TRX LP
+                          </Typography>
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <Typography className={classes.centertext}>
+                            Deposit USDT and earn Pearl
+                          </Typography>
+                        </Grid>
+                        <Grid item md={4} xs={0}></Grid>
+                        <Grid item md={4} xs={10}>
+                          <OutlinedInput
+                            //className={classes.margin}
+                            label="Deposit trx"
+                            variant="outlined"
+                            id="entervaluetxt"
+                            type={"text"}
+                            className={classes.root}
+                            fullWidth
+                            onChange={handleTextChange}
+                            value={textValue}
+                            margin="normal"
+                            variant="outlined"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="max"
+                                  onClick={handleMax}
+                                  onMouseDown={handleMax}
+                                  edge="end"
+                                >
+                                  <Typography className={classes.centertext}>
+                                    max
+                                  </Typography>
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                          />
 
-                        <br></br>
-                        <br></br>
-                        <Typography className={classes.centertext} variant="h5">
-                          Balance: {walletBalance.toFixed(2)} {` trx`}
-                        </Typography>
-                        {estimateToken > 0 && (
+                          <br></br>
+                          <br></br>
                           <Typography
                             className={classes.centertext}
                             variant="h5"
                           >
-                            You will receive: {estimateToken.toFixed(2)}{" "}
-                            {` tdd`}
+                            Balance: {walletBalance.toFixed(2)} {` trx`}
                           </Typography>
-                        )}
+                        </Grid>
+                        <Grid item md={3} xs={0}></Grid>
+                        <Grid item md={3} xs={0}></Grid>
+                        <Grid item md={3} xs={6}>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            color="primary"
+                            onClick={handelBuy}
+                            className={classes.margin}
+                            style={{
+                              background:
+                                "linear-gradient(to right, #D50000, #8C9EFF)",
+                              color: "white",
+                            }}
+                          >
+                            Unstake
+                          </Button>
+                        </Grid>
+                        <Grid item md={3} xs={6}>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            color="primary"
+                            onClick={handelBuy}
+                            className={classes.margin}
+                            style={{
+                              background:
+                                "linear-gradient(to right, #D50000, #8C9EFF)",
+                              color: "white",
+                            }}
+                          >
+                            Stake
+                          </Button>
+                        </Grid>
                       </Grid>
-
-                      <Grid item md={4} xs={12}></Grid>
-                      <Grid item md={4} xs={12}></Grid>
-                      <Grid item md={4} xs={12}>
-                        <Button
-                          variant="contained"
-                          fullWidth
-                          size="large"
-                          color="primary"
-                          onClick={handelBuy}
-                          className={classes.margin}
-                          style={{
-                            background:
-                              "linear-gradient(to right, #D50000, #8C9EFF)",
-                            color: "white",
-                          }}
-                        >
-                          Swap
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </div>
-                </Fade>
-              </Modal>
+                    </div>
+                  </Fade>
+                </Modal>
+              </div>
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
+
+        <div className={classes.statsContainer}></div>
       </CardContent>
     </Card>
   );
 }
 
-EarningsSegmentation.propTypes = {
+FarmCard.propTypes = {
   className: PropTypes.string,
 };
 
-export default EarningsSegmentation;
+export default FarmCard;

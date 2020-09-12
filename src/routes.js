@@ -96,6 +96,11 @@ export default [
         component: lazy(() => import("src/views/Referral")),
       },
       {
+        path: "/farm",
+        exact: true,
+        component: lazy(() => import("src/views/Farm")),
+      },
+      {
         path: "/old",
         exact: true,
         component: lazy(
@@ -119,12 +124,10 @@ export default [
         ),
       },
       {
-        path: "/discord",
+        path: "/reddit",
         exact: true,
         component: lazy(
-          () =>
-            (window.location.href =
-              "https://t.me/joinchat/KvdhdA90OAS1fAnp92HXug")
+          () => (window.location.href = "https://www.reddit.com/r/TronDash/")
         ),
       },
       {

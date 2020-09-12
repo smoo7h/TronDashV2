@@ -437,9 +437,7 @@ function Results({ className, customers, ...rest }) {
                           {customer.Investment.Currency}
                         </TableCell>
                         <TableCell>
-                          {customer.CurrentAPY ? customer.CurrentAPY : "-"}
-                          {` `}
-                          {"%"}
+                          {customer.Apy ? customer.Apy + ` %` : "-"}
                         </TableCell>
                         <TableCell>
                           {customer.EstimatedDivs &&
