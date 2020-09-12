@@ -3,7 +3,8 @@
 import React from "react";
 import { colors } from "@material-ui/core";
 import BarChartIcon from "@material-ui/icons/BarChart";
-import BookIcon from "@material-ui/icons/Book";
+
+import BusinessIcon from "@material-ui/icons/Business";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ChatIcon from "@material-ui/icons/ChatOutlined";
@@ -61,6 +62,11 @@ export default [
         icon: LensIcon,
       },
       {
+        title: "DAO",
+        href: "/dao",
+        icon: BusinessIcon,
+      },
+      {
         title: "Referral",
         href: "/referral",
         icon: GroupAddIcon,
@@ -88,11 +94,6 @@ export default [
             href: "/discord",
           },
         ],
-      },
-      {
-        title: "Old Site",
-        href: "/old",
-        icon: BookIcon,
       },
     ],
   },

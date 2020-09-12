@@ -224,7 +224,7 @@ class RegisterPage extends React.Component {
                         //   component={RouterLink}
                         // to={customer.website}
                         href={
-                          "https://justswap.io/?lang=en-US#/scan/detail/trx/TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm"
+                          "https://justswap.io/?lang=en-US#/home?tokenAddress=TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm&type=swap"
                         }
                         variant="h6"
                       >
@@ -234,7 +234,7 @@ class RegisterPage extends React.Component {
                           style={{ backgroundColor: "transparent" }}
                         >
                           <Avatar
-                            alt="PlayRoyal"
+                            alt="JustSwap"
                             src="https://miro.medium.com/fit/c/256/256/1*tPB9Iy0Ej7fHqHOb11_13A.png"
                           />
                         </Button>

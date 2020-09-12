@@ -86,6 +86,11 @@ export default [
         component: lazy(() => import("src/views/Faq")),
       },
       {
+        path: "/dao",
+        exact: true,
+        component: lazy(() => import("src/views/DashDao")),
+      },
+      {
         path: "/referral",
         exact: true,
         component: lazy(() => import("src/views/Referral")),

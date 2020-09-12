@@ -446,20 +446,20 @@ function Results({ className, customers, ...rest }) {
 
                           {customer.CurrentUserDivs && !customer.EstimatedDivs
                             ? Number(customer.CurrentUserDivs)
-                                .toFixed(2)
+                                .toFixed(3)
                                 .toLocaleString()
                             : ""}
 
                           {customer.EstimatedDivs &&
                           customer.CurrentUserDivs > 0
                             ? Number(customer.CurrentUserDivs)
-                                .toFixed(2)
+                                .toFixed(3)
                                 .toLocaleString()
                             : ""}
 
                           {!customer.CurrentUserDivs && customer.EstimatedDivs
                             ? Number(customer.EstimatedDivs)
-                                .toFixed(2)
+                                .toFixed(3)
                                 .toLocaleString()
                             : ""}
 
