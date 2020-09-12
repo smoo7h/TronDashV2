@@ -100,10 +100,10 @@ const headCells = [
     label: "Investment",
   },
   {
-    id: "CurrentUserRefferal",
+    id: "CurrentAPY",
     numeric: false,
     disablePadding: false,
-    label: "Refferal",
+    label: "APY",
   },
   {
     id: "CurrentUserDivs",
@@ -258,6 +258,8 @@ function Results({ className, customers, ...rest }) {
       setFilter("trx dapps");
     } else if (event == "btt dapps") {
       setFilter("btt dapps");
+    } else if (event == "farms") {
+      setFilter("farms");
     } else {
       setFilter("");
     }
@@ -301,6 +303,8 @@ function Results({ className, customers, ...rest }) {
         );
       }
     });
+    //un check them all
+    setSelectedCustomers([]);
   };
 
   const handleWithdrawl = (event, id) => {
@@ -317,6 +321,8 @@ function Results({ className, customers, ...rest }) {
         );
       }
     });
+    //un check them all
+    setSelectedCustomers([]);
   };
   const statusColors = {
     pending: colors.orange[600],
@@ -357,6 +363,8 @@ function Results({ className, customers, ...rest }) {
                         return el.PaysOutIn == "trx"; // Changed this so a home would match
                       } else if (filter == "btt dapps") {
                         return el.PaysOutIn == "btt"; // Changed this so a home would match
+                      } else if (filter == "farms") {
+                        return el.DappType.Name == "Farm"; // Changed this so a home would match
                       } else {
                         return el.ID != null;
                       }
@@ -429,11 +437,9 @@ function Results({ className, customers, ...rest }) {
                           {customer.Investment.Currency}
                         </TableCell>
                         <TableCell>
-                          {customer.CurrentUserReferal
-                            ? customer.CurrentUserReferal
-                            : "0"}
+                          {customer.CurrentAPY ? customer.CurrentAPY : "-"}
                           {` `}
-                          {customer.Referral.Currency}
+                          {"%"}
                         </TableCell>
                         <TableCell>
                           {customer.EstimatedDivs &&

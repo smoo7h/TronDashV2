@@ -94,6 +94,16 @@ function GenericMoreButton(props) {
           </ListItemIcon>
           <ListItemText primary="btt dapps" />
         </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            props.filterclick("farms");
+          }}
+        >
+          <ListItemIcon>
+            <FilterListIcon />
+          </ListItemIcon>
+          <ListItemText primary="farms" />
+        </MenuItem>
       </Menu>
     </>
   );
