@@ -26,7 +26,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Chart from "./Chart";
+
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   large: {
     textAlign: "center",
+    //color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: "#212121",
     margin: "auto",
     boxShadow:
       "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
@@ -111,12 +113,128 @@ function FarmCard({ className, ...rest }) {
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
-  const [farmName, setfarmName] = useState("");
+  const [clickState, setclickState] = useState(0);
+  const [farmName, setfarmName] = useState("jst");
+  const [farmIcon, setfarmIcon] = useState("🥑");
+  const [depositTokenName, setdepositTokenName] = useState("jst");
+  const [earnTokenName, setearnTokenName] = useState("mfi");
+  const [tokensEarned, settokensEarned] = useState(0);
+  const [tokensStaked, settokensStaked] = useState(0);
+  const [tokensHeld, settokensHeld] = useState(0);
+  const [tokensAllowance, settokensAllowance] = useState(0);
+  const [stakingContractAddress, setstakingContractAddress] = useState(
+    "TVuvY19L6BjiST9bNQrYAasNE6wJCXocnq"
+  );
+  const [inputTokenContractAddress, setinputTokenContractAddress] = useState(
+    "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9"
+  );
+  const [outputTokenContractAddress, setoutputTokenContractAddress] = useState(
+    "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9"
+  );
 
   const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
   const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
-  const currentContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
+
   const contractTokenStart = 100;
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchAllowance = () => {
+      if (mounted) {
+        let data = getContractData(
+          inputTokenContractAddress,
+          "allowance(address,address)",
+          currentuseraddress,
+          stakingContractAddress
+        ).then((response) => {
+          if (response) {
+            settokensAllowance(response);
+          }
+        });
+      }
+    };
+
+    fetchAllowance();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchUserTokenBalance = () => {
+      if (mounted) {
+        let data = getContractData(
+          inputTokenContractAddress,
+          "balanceOf(address)",
+          currentuseraddress
+        ).then((response) => {
+          if (response) {
+            settokensHeld(response);
+          }
+        });
+      }
+    };
+
+    fetchUserTokenBalance();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchUserTokenEarned = () => {
+      if (mounted) {
+        let data = getContractData(
+          stakingContractAddress,
+          "earned(address)",
+          currentuseraddress
+        ).then((response) => {
+          if (response) {
+            console.log(response);
+            settokensEarned(response);
+          }
+        });
+      }
+    };
+
+    fetchUserTokenEarned();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchUserTokenStaked = () => {
+      if (mounted) {
+        let data = getContractData(
+          stakingContractAddress,
+          "balanceOf(address)",
+          currentuseraddress
+        ).then((response) => {
+          if (response) {
+            console.log(response);
+            settokensStaked(response);
+          }
+        });
+      }
+    };
+
+    fetchUserTokenStaked();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -195,52 +313,36 @@ function FarmCard({ className, ...rest }) {
         "buyTokens(address)",
         window.tronWeb.defaultAddress.base58,
         textValue,
-        6,
-        "trx"
+        18,
+        ""
       );
     }
   };
 
-  //handelBuy
+  const handelAllowance = () => {
+    //execute the contract
+
+    ExecuteInvestContract(
+      presaleContractAddress,
+      "buyTokens(address)",
+      window.tronWeb.defaultAddress.base58,
+      textValue,
+      6,
+      "trx"
+    );
+  };
 
   const handleClose = () => {
     setOpen(false);
   };
   const handleMax = () => {
-    setTextValue(walletBalance.toFixed(2));
+    setTextValue(tokensHeld);
   };
 
   const handleTextChange = (event) => {
     //  event.persist();
     setTextValue(event.target.value);
   };
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchEstimate = () => {
-      if (textValue != 0) {
-        let data = getContractData(
-          presaleContractAddress,
-          "calculateTokensReceived(uint256)",
-          Number(textValue) * 1000000
-        ).then((response) => {
-          if (response) {
-            setestimateToken(response);
-          }
-        });
-        //console.log(data);
-      } else {
-        setestimateToken(0);
-      }
-    };
-
-    fetchEstimate();
-
-    return () => {
-      mounted = false;
-    };
-  }, [textValue]);
 
   useEffect(() => {
     let mounted = true;
@@ -268,7 +370,8 @@ function FarmCard({ className, ...rest }) {
   const getContractData = async (
     contractAddress,
     functionSelector,
-    contractParameter
+    contractParameter,
+    contractParameter2
   ) => {
     var contractValue = await window.tronWeb
       .contract()
@@ -278,10 +381,17 @@ function FarmCard({ className, ...rest }) {
 
         try {
           //you have to send the one with a
-          getbalance1 =
-            contractParameter == "" || !contractParameter
-              ? await contract[functionSelector]().call()
-              : await contract[functionSelector](contractParameter).call();
+          if (contractParameter2) {
+            getbalance1 = await contract[functionSelector](
+              contractParameter,
+              contractParameter2
+            ).call();
+          } else {
+            getbalance1 =
+              contractParameter == "" || !contractParameter
+                ? await contract[functionSelector]().call()
+                : await contract[functionSelector](contractParameter).call();
+          }
         } catch (error) {
           //sometimes if they have the wrong value for the functionSelector this happens
           getbalance1 = 999999999999999999999;
@@ -325,19 +435,34 @@ function FarmCard({ className, ...rest }) {
     });
   };
 
+  const handelHarvest = (event, id) => {
+    //get selected object and execute the reinvest command
+
+    executeContract(stakingContractAddress, "getReward()", "");
+    setclickState(clickState + 1);
+  };
+
+  const handleUnskate = () => {
+    executeContract(stakingContractAddress, "exit()", "");
+  };
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      <CardHeader title="PEARL/TRX LP" className={classes.centertext} />
+      <CardHeader title={farmName} className={classes.centertext} />
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Avatar src={Dashimage} className={classes.large} />
+          <Avatar className={classes.large}>
+            <Typography className={classes.centertext} variant="h1">
+              {farmIcon}
+            </Typography>
+          </Avatar>
           <br></br>
           <Typography className={classes.centertext} variant="h6">
-            Deposit USDT
+            Deposit {depositTokenName}
           </Typography>
           <Typography className={classes.centertext} variant="h6">
-            Earn Pearl
+            Earn {earnTokenName}
           </Typography>
         </div>
 
@@ -350,10 +475,11 @@ function FarmCard({ className, ...rest }) {
               gutterBottom
               variant="overline"
             >
-              Price
+              Farmed {earnTokenName}
+              {`'s`}
             </Typography>
             <Typography align="center" variant="h4">
-              0.00002
+              {tokensEarned}
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold2"}>
@@ -363,10 +489,11 @@ function FarmCard({ className, ...rest }) {
               gutterBottom
               variant="overline"
             >
-              {"USDT Staked"}
+              {depositTokenName}
+              {" Staked"}
             </Typography>
             <Typography align="center" variant="h4">
-              10000
+              {tokensStaked}
             </Typography>
           </div>
         </div>
@@ -378,10 +505,10 @@ function FarmCard({ className, ...rest }) {
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={handleOpen}
+                onClick={handelHarvest}
                 className={classes.margin}
                 style={{
-                  background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  background: "linear-gradient(to left, #796eff, #ff5263",
                   color: "white",
                 }}
               >
@@ -421,19 +548,26 @@ function FarmCard({ className, ...rest }) {
                     <div className={classes.paper}>
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
-                          <Avatar src={Dashimage} className={classes.large} />
+                          <Avatar className={classes.large}>
+                            <Typography
+                              className={classes.centertext}
+                              variant="h1"
+                            >
+                              {farmIcon}
+                            </Typography>
+                          </Avatar>
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <Typography
                             className={classes.centertext}
                             variant="h3"
                           >
-                            PEARL/TRX LP
+                            {farmName}
                           </Typography>
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <Typography className={classes.centertext}>
-                            Deposit USDT and earn Pearl
+                            Deposit {depositTokenName} and earn {earnTokenName}
                           </Typography>
                         </Grid>
                         <Grid item md={4} xs={0}></Grid>
@@ -472,7 +606,8 @@ function FarmCard({ className, ...rest }) {
                             className={classes.centertext}
                             variant="h5"
                           >
-                            Balance: {walletBalance.toFixed(2)} {` trx`}
+                            Balance: {tokensHeld.toFixed(17)}
+                            {` `} {depositTokenName}
                           </Typography>
                         </Grid>
                         <Grid item md={3} xs={0}></Grid>
@@ -483,11 +618,11 @@ function FarmCard({ className, ...rest }) {
                             fullWidth
                             size="large"
                             color="primary"
-                            onClick={handelBuy}
+                            onClick={handleUnskate}
                             className={classes.margin}
                             style={{
                               background:
-                                "linear-gradient(to right, #D50000, #8C9EFF)",
+                                "linear-gradient(to right, #D50000, #FF8A80)",
                               color: "white",
                             }}
                           >
@@ -495,21 +630,40 @@ function FarmCard({ className, ...rest }) {
                           </Button>
                         </Grid>
                         <Grid item md={3} xs={6}>
-                          <Button
-                            variant="contained"
-                            fullWidth
-                            size="large"
-                            color="primary"
-                            onClick={handelBuy}
-                            className={classes.margin}
-                            style={{
-                              background:
-                                "linear-gradient(to right, #D50000, #8C9EFF)",
-                              color: "white",
-                            }}
-                          >
-                            Stake
-                          </Button>
+                          {tokensAllowance > 0 && (
+                            <Button
+                              variant="contained"
+                              fullWidth
+                              size="large"
+                              color="primary"
+                              onClick={handelBuy}
+                              className={classes.margin}
+                              style={{
+                                background:
+                                  "linear-gradient(to right, #D50000, #8C9EFF)",
+                                color: "white",
+                              }}
+                            >
+                              Stake
+                            </Button>
+                          )}
+                          {tokensAllowance == 0 && (
+                            <Button
+                              variant="contained"
+                              fullWidth
+                              size="large"
+                              color="primary"
+                              onClick={handelBuy}
+                              className={classes.margin}
+                              style={{
+                                background:
+                                  "linear-gradient(to right, #D50000, #8C9EFF)",
+                                color: "white",
+                              }}
+                            >
+                              Approve
+                            </Button>
+                          )}
                         </Grid>
                       </Grid>
                     </div>

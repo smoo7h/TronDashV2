@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+
 import BigNumber from "bignumber.js";
 import { makeStyles } from "@material-ui/styles";
 import {
@@ -106,10 +107,10 @@ function PreSale({ className, ...rest }) {
   const [tokensLeft, setTokensLeft] = useState(0);
   const [farmName, setfarmName] = useState("");
 
-  const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
-  const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
-  const currentContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
-  const contractTokenStart = 100;
+  const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
+  const presaleContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
+  const currentContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
+  const contractTokenStart = 10000000;
 
   useEffect(() => {
     let mounted = true;
@@ -123,19 +124,19 @@ function PreSale({ className, ...rest }) {
                 {
                   id: "27e84d20-f4a8-11ea-be42-79f6d264d75f",
                   color: "#3f51b5",
-                  label: "For Sale",
+                  label: "Sold",
                   value: contractTokenStart - response,
                 },
                 {
                   id: "27e84d21-f4a8-11ea-be42-79f6d264d722",
                   color: "#424242",
-                  label: "Sold",
+                  label: "For Sale",
                   value: response,
                 },
               ];
               setGraphObject(graphvalues);
               //figure out how mant are sold
-              let percentage = (response / contractTokenStart) * 100;
+              let percentage = response / contractTokenStart;
               setSoldPercentage(percentage);
             }
           }
@@ -351,7 +352,7 @@ function PreSale({ className, ...rest }) {
               {"sold"}
             </Typography>
             <Typography align="center" variant="h4">
-              {soldPercentage}%
+              {soldPercentage.toFixed(0)}%
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold"}>
@@ -411,6 +412,11 @@ function PreSale({ className, ...rest }) {
                       <Grid item md={12} xs={12}>
                         <Typography className={classes.centertext}>
                           Swap TRX for TDD Tokens
+                        </Typography>
+                      </Grid>
+                      <Grid item md={12} xs={12}>
+                        <Typography className={classes.centertext}>
+                          * TDD Tokens will be frozen until presale is complete
                         </Typography>
                       </Grid>
                       <Grid item md={4} xs={0}></Grid>

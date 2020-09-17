@@ -5,6 +5,7 @@ import PreSale from "src/views/DashDao/PreSale";
 import { makeStyles } from "@material-ui/styles";
 import Dashimage from "../../assets/dashcoinlogo.png";
 import Avatar from "@material-ui/core/Avatar";
+import Whitepaper from "src/assets/TDWP.pdf";
 import {
   Modal,
   Card,
@@ -134,20 +135,22 @@ function Dao({ open, onClose, customer, className, ...rest }) {
             </Grid>
 
             <Grid item md={12} xs={12}>
-              The core pain point of early 2019 was the inability of Tron users
-              to approach decentralized applications in a centralized way. In
-              this highly fragmented environment, users were less apt to
-              interact with new dApps. Despite innovative decentralized
-              applications being deployed, the frustration over having to visit
-              these sites daily or lose their allocated portion of the staking
-              pool represented a considerable headache that was dragging the
-              ecosystem down in a substantial way. Enter TronDash and their
-              innovative approach to pulling API feeds from respective sites and
-              introducing a seamless, simple dashboard with powerful features
-              never before seen, empowering many decentralized applications to
-              enjoy faster growth and made the experience of interfacing with
-              the dApp ecosystem that much more user-friendly, revitalizing the
-              entire fragile ecosystem.
+              <Typography variant="body1">
+                The core pain point of early 2019 was the inability of Tron
+                users to approach decentralized applications in a centralized
+                way. In this highly fragmented environment, users were less apt
+                to interact with new dApps. Despite innovative decentralized
+                applications being deployed, the frustration over having to
+                visit these sites daily or lose their allocated portion of the
+                staking pool represented a considerable headache that was
+                dragging the ecosystem down in a substantial way. Enter TronDash
+                and their innovative approach to pulling API feeds from
+                respective sites and introducing a seamless, simple dashboard
+                with powerful features never before seen, empowering many
+                decentralized applications to enjoy faster growth and made the
+                experience of interfacing with the dApp ecosystem that much more
+                user-friendly, revitalizing the entire fragile ecosystem.
+              </Typography>
             </Grid>
             <Grid item md={12} xs={12}>
               <Typography variant="body1">
@@ -197,7 +200,7 @@ function Dao({ open, onClose, customer, className, ...rest }) {
                 target="_blank"
                 size="large"
                 color="#ffffff"
-                href="https://www.google.com"
+                href={Whitepaper}
               >
                 White Paper
               </Button>

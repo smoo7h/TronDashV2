@@ -63,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
 
 function DashFarm({ open, onClose, customer, className, ...rest }) {
   const classes = useStyles();
+  const [farmName, setfarmName] = useState("");
+  const [farmIcon, setfarmIcon] = useState("🥑");
   const [values, setValues] = useState({
     ...customer,
   });

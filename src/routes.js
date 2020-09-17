@@ -4,6 +4,7 @@ import React, { lazy } from "react";
 import { Redirect } from "react-router-dom";
 import AuthLayout from "./layouts/Auth";
 import { Link } from "@material-ui/core";
+import Whitepaper from "src/assets/TDWP.pdf";
 import ErrorLayout from "./layouts/Error";
 import DashboardLayout from "./layouts/Dashboard";
 import DashboardAnalyticsView from "./views/DashboardAnalytics";
@@ -128,6 +129,14 @@ export default [
         exact: true,
         component: lazy(
           () => (window.location.href = "https://www.reddit.com/r/TronDash/")
+        ),
+      },
+      {
+        path: "/whitepaper",
+        exact: true,
+        component: lazy(
+          () =>
+            (window.location.href = process.env.PUBLIC_URL + "images/TDWP.pdf")
         ),
       },
       {
