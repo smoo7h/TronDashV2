@@ -24,8 +24,8 @@ import "./assets/scss/main.scss";
 const history = createBrowserHistory();
 const store = configureStore();
 
-const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa";
-//const FOUNDATION_ADDRESS = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
+//const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa";
+const FOUNDATION_ADDRESS = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT";
 
 const waitTron = () => {
   return new Promise((resolve, reject) => {

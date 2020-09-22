@@ -112,6 +112,7 @@ function FarmCard({ className, ...rest }) {
   const [textValue, setTextValue] = useState(0);
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
+  const [tokenBalanceNormilized, settokenBalanceNormilized] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
   const [clickState, setclickState] = useState(0);
   const [farmName, setfarmName] = useState("jst");
@@ -126,16 +127,52 @@ function FarmCard({ className, ...rest }) {
     "TVuvY19L6BjiST9bNQrYAasNE6wJCXocnq"
   );
   const [inputTokenContractAddress, setinputTokenContractAddress] = useState(
-    "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9"
+    "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm"
   );
+
   const [outputTokenContractAddress, setoutputTokenContractAddress] = useState(
     "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9"
   );
-
+  const [inputTokenDecimalPlaces, setinputTokenDecimalPlaces] = useState(0);
+  const [outputTokenDecimalPlaces, setoutputTokenDecimalPlaces] = useState(0);
   const tokenAddress = "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm";
   const presaleContractAddress = "TYZ9qt1W4JdTA8FRE4yKJuio9hvqNvinBc";
 
   const contractTokenStart = 100;
+
+  useEffect(() => {
+    let mounted = true;
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    const fetchDecimalPlaces = () => {
+      if (mounted) {
+        let data = getContractData(
+          inputTokenContractAddress,
+          "decimals()"
+        ).then((response) => {
+          if (response) {
+            let decimalConverted = response * 1000000;
+            setinputTokenDecimalPlaces(decimalConverted);
+          }
+        });
+
+        let data2 = getContractData(
+          outputTokenContractAddress,
+          "decimals()"
+        ).then((response) => {
+          if (response) {
+            let decimalConverted = response * 1000000;
+            setoutputTokenDecimalPlaces(decimalConverted);
+          }
+        });
+      }
+    };
+
+    fetchDecimalPlaces();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -173,7 +210,13 @@ function FarmCard({ className, ...rest }) {
           currentuseraddress
         ).then((response) => {
           if (response) {
-            settokensHeld(response);
+            if (inputTokenDecimalPlaces > 0) {
+              let decimals = inputTokenDecimalPlaces - 6;
+              let balance = BigNumber(response).div(10 ** decimals);
+
+              settokensHeld(balance.toFixed(2).toString());
+              //set the normilized value
+            }
           }
         });
       }
@@ -184,7 +227,7 @@ function FarmCard({ className, ...rest }) {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [inputTokenDecimalPlaces]);
 
   useEffect(() => {
     let mounted = true;
@@ -239,45 +282,6 @@ function FarmCard({ className, ...rest }) {
   useEffect(() => {
     let mounted = true;
 
-    const fetchEarnings = () => {
-      if (mounted) {
-        let data = getContractData(presaleContractAddress, "tokensleft()").then(
-          (response) => {
-            if (response) {
-              let graphvalues = [
-                {
-                  id: "27e84d20-f4a8-11ea-be42-79f6d264d75f",
-                  color: "#3f51b5",
-                  label: "For Sale",
-                  value: contractTokenStart - response,
-                },
-                {
-                  id: "27e84d21-f4a8-11ea-be42-79f6d264d722",
-                  color: "#424242",
-                  label: "Sold",
-                  value: response,
-                },
-              ];
-              setGraphObject(graphvalues);
-              //figure out how mant are sold
-              let percentage = (response / contractTokenStart) * 100;
-              setSoldPercentage(percentage);
-            }
-          }
-        );
-      }
-    };
-
-    fetchEarnings();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let mounted = true;
-
     const fetchUserBalance = () => {
       let currentuseraddress = window.tronWeb.defaultAddress.base58;
       if (window.tronWeb) {
@@ -313,7 +317,7 @@ function FarmCard({ className, ...rest }) {
         "buyTokens(address)",
         window.tronWeb.defaultAddress.base58,
         textValue,
-        18,
+        inputTokenDecimalPlaces,
         ""
       );
     }
@@ -327,7 +331,7 @@ function FarmCard({ className, ...rest }) {
       "buyTokens(address)",
       window.tronWeb.defaultAddress.base58,
       textValue,
-      6,
+      inputTokenDecimalPlaces,
       "trx"
     );
   };
@@ -606,7 +610,7 @@ function FarmCard({ className, ...rest }) {
                             className={classes.centertext}
                             variant="h5"
                           >
-                            Balance: {tokensHeld.toFixed(17)}
+                            Balance: {tokensHeld}
                             {` `} {depositTokenName}
                           </Typography>
                         </Grid>
