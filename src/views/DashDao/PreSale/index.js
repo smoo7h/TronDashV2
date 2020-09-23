@@ -93,10 +93,49 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  iconButton: {
+    background: "black",
+    borderRadius: 0,
+    borderTopRightRadius: "4px",
+    borderBottomRightRadius: "4px",
+    padding: "16px",
+    marginRight: "-14px",
+  },
+  inputAdornment: {
+    zIndex: 1,
+    marginLeft: 0,
+  },
+}));
+
+// https://stackoverflow.com/questions/56958742/cant-change-border-color-of-material-ui-outlinedinput
+const useOutlinedInputStyles = makeStyles((theme) => ({
+  root: {
+    backgroundClip: "padding-box",
+    background: "black",
+    padding: "2px 15px 1px 1px",
+    "&$focused $notchedOutline": {
+      background:
+        "rgba(0, 0, 0, 0) linear-gradient(to right, rgb(213, 0, 0), rgb(140, 158, 255)) repeat scroll 0% 0%",
+      border: 0,
+      borderRadius: "4px",
+      borderWidth: "2px",
+    },
+    "&$focused $input": {
+      background: "#000000",
+      borderRadius: "4px",
+      borderTopRightRadius: 0,
+      borderBottomRightRadius: 0,
+      zIndex: 1,
+    },
+  },
+  input: {},
+  focused: {},
+  notchedOutline: {},
 }));
 
 function PreSale({ className, ...rest }) {
   const classes = useStyles();
+  const outlinedInputClasses = useOutlinedInputStyles();
   const [graphObject, setGraphObject] = useState([]);
   const [soldPercentage, setSoldPercentage] = useState(0);
 
@@ -427,19 +466,23 @@ function PreSale({ className, ...rest }) {
                           variant="outlined"
                           id="entervaluetxt"
                           type={"text"}
-                          className={classes.root}
+                          classes={outlinedInputClasses}
+                          notched={false}
                           fullWidth
                           onChange={handleTextChange}
                           value={textValue}
                           margin="normal"
-                          variant="outlined"
                           endAdornment={
-                            <InputAdornment position="end">
+                            <InputAdornment
+                              position="end"
+                              className={classes.inputAdornment}
+                            >
                               <IconButton
                                 aria-label="max"
                                 onClick={handleMax}
                                 onMouseDown={handleMax}
                                 edge="end"
+                                className={classes.iconButton}
                               >
                                 <Typography className={classes.centertext}>
                                   max
@@ -448,7 +491,6 @@ function PreSale({ className, ...rest }) {
                             </InputAdornment>
                           }
                         />
-
                         <br></br>
                         <br></br>
                         <Typography className={classes.centertext} variant="h5">
