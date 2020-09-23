@@ -94,12 +94,16 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   iconButton: {
-    background: "black",
+    background: "#000000",
     borderRadius: 0,
     borderTopRightRadius: "4px",
     borderBottomRightRadius: "4px",
     padding: "16px",
     marginRight: "-14px",
+
+    "&:hover": {
+      background: "#000000",
+    },
   },
   inputAdornment: {
     zIndex: 1,
@@ -111,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 const useOutlinedInputStyles = makeStyles((theme) => ({
   root: {
     backgroundClip: "padding-box",
-    background: "black",
+    background: "#000000",
     padding: "2px 15px 1px 1px",
     "&$focused $notchedOutline": {
       background:
@@ -119,6 +123,7 @@ const useOutlinedInputStyles = makeStyles((theme) => ({
       border: 0,
       borderRadius: "4px",
       borderWidth: "2px",
+      top: "-4.5px",
     },
     "&$focused $input": {
       background: "#000000",
