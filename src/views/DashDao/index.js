@@ -186,7 +186,7 @@ function Dao({ open, onClose, customer, className, ...rest }) {
               <Typography variant="body1">
                 Today we're announcing the presale of the DAO tokens , which
                 will commence immediately and will be sold at a 10% discount
-                until the 23rd of September, at which point it will be listed on
+                until the 23rd of October, at which point it will be listed on
                 several exchanges as a crypto pair with TRX and BTC. The core
                 developer team is staying right alongside this important and
                 impactful project and are excited to see this newfound interest

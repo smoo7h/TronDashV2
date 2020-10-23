@@ -115,10 +115,10 @@ function FarmCard({ className, ...rest }) {
   const [tokenBalanceNormilized, settokenBalanceNormilized] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
   const [clickState, setclickState] = useState(0);
-  const [farmName, setfarmName] = useState("jst");
+  const [farmName, setfarmName] = useState("trondash farm");
   const [farmIcon, setfarmIcon] = useState("🥑");
-  const [depositTokenName, setdepositTokenName] = useState("jst");
-  const [earnTokenName, setearnTokenName] = useState("mfi");
+  const [depositTokenName, setdepositTokenName] = useState("dash/trx");
+  const [earnTokenName, setearnTokenName] = useState("dash");
   const [tokensEarned, settokensEarned] = useState(0);
   const [tokensStaked, settokensStaked] = useState(0);
   const [tokensHeld, settokensHeld] = useState(0);
@@ -127,7 +127,7 @@ function FarmCard({ className, ...rest }) {
     "TVuvY19L6BjiST9bNQrYAasNE6wJCXocnq"
   );
   const [inputTokenContractAddress, setinputTokenContractAddress] = useState(
-    "TJASWoyYgUw2M1jvDje7zYLooDCzWYRdkm"
+    "TQ8moz2tt1xHKvAugPJQWSMHeMrycBjHiJ"
   );
 
   const [outputTokenContractAddress, setoutputTokenContractAddress] = useState(
@@ -640,7 +640,7 @@ function FarmCard({ className, ...rest }) {
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handelBuy}
+                              // onClick={handelBuy}
                               className={classes.margin}
                               style={{
                                 background:
@@ -657,7 +657,7 @@ function FarmCard({ className, ...rest }) {
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handelBuy}
+                              // onClick={handelBuy}
                               className={classes.margin}
                               style={{
                                 background:

@@ -35,7 +35,7 @@ function desc(a, b, orderBy) {
   if (!b[orderBy]) {
     //check for estimate divs if there are some sort by that instead
     if (orderBy == "CurrentUserDivs" && b["EstimatedDivs"]) {
-      orderBy = "EstimatedDivs";
+      orderBy = "CurrentUserDivs";
     } else {
       b[orderBy] = 0;
     }
@@ -43,7 +43,7 @@ function desc(a, b, orderBy) {
   if (!a[orderBy]) {
     //check for estimate divs if there are some sort by that instead
     if (orderBy == "CurrentUserDivs" && a["EstimatedDivs"]) {
-      orderBy = "EstimatedDivs";
+      orderBy = "CurrentUserDivs";
     } else {
       a[orderBy] = 0;
     }
@@ -202,7 +202,7 @@ function Results({ className, customers, ...rest }) {
   const classes = useStyles();
   const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [selectallbutton, setselectallbutton] = useState(true);
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("CurrentDivPool");
@@ -343,7 +343,7 @@ function Results({ className, customers, ...rest }) {
         <CardContent className={classes.content}>
           <PerfectScrollbar>
             <div className={classes.inner}>
-              <Table stickyHeader>
+              <Table stickyHeader rowCount={100}>
                 <EnhancedTableHead
                   classes={classes}
                   numSelected={selectedCustomers.length}
@@ -351,20 +351,21 @@ function Results({ className, customers, ...rest }) {
                   orderBy={orderBy}
                   onSelectAllClick={handleSelectAll}
                   onRequestSort={handleRequestSort}
-                  rowCount={customers.length}
+                  //rowCount={customers.length}
+                  rowCount={100}
                 />
 
                 <TableBody>
                   {stableSort(
                     customers.filter(function(el) {
                       if (filter == "my dapps") {
-                        return el.CurrentUserInvestment > 0; // Changed this so a home would match
+                        return el.CurrentUserInvestment > 0;
                       } else if (filter == "trx dapps") {
-                        return el.PaysOutIn == "trx"; // Changed this so a home would match
+                        return el.PaysOutIn == "trx";
                       } else if (filter == "btt dapps") {
-                        return el.PaysOutIn == "btt"; // Changed this so a home would match
+                        return el.PaysOutIn == "btt";
                       } else if (filter == "farms") {
-                        return el.DappType.Name == "Farm"; // Changed this so a home would match
+                        return el.DappType.Name == "Farm";
                       } else {
                         return el.ID != null;
                       }
