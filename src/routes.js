@@ -230,6 +230,11 @@ export default [
         component: lazy(() => import("src/views/DividendList")),
       },
       {
+        path: "/swap",
+        exact: true,
+        component: lazy(() => import("src/views/DashSwap")),
+      },
+      {
         path: "/management/customers/:id",
         exact: true,
         component: lazy(() => import("src/views/CustomerManagementDetails")),

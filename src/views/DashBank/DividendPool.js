@@ -7,35 +7,35 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Label from "src/components/Label";
 import gradients from "src/utils/gradients";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   details: {
     display: "flex",
     alignItems: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   label: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   avatar: {
     // backgroundImage: gradients.green,
     //   border: `2px solid ${theme.palette.common.white}`,
     height: 48,
-    width: 48
+    width: 48,
     // backgroundColor: theme.palette.common.white
-  }
+  },
 }));
 
 function DividendPool({ className, dappData, ...rest }) {
   const classes = useStyles();
   const data = {
     value: "24,000",
-    difference: "+4.5%"
+    difference: "+4.5%",
   };
 
   return (
@@ -77,7 +77,7 @@ function DividendPool({ className, dappData, ...rest }) {
 }
 
 DividendPool.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
   //  divamount: PropTypes.string
 };
 

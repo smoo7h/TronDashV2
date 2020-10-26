@@ -13,6 +13,7 @@ import DashboardIcon from "@material-ui/icons/DashboardOutlined";
 import ErrorIcon from "@material-ui/icons/ErrorOutline";
 import FolderIcon from "@material-ui/icons/FolderOutlined";
 import LensIcon from "@material-ui/icons/Lens";
+import SwapHoriz from "@material-ui/icons/SwapHoriz";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import HomeIcon from "@material-ui/icons/HomeOutlined";
@@ -55,6 +56,11 @@ export default [
             href: "/dashlotto",
           },
         ],
+      },
+      {
+        title: "Dash Swap",
+        href: "/swap",
+        icon: SwapHoriz,
       },
       {
         title: "Dash Token",

@@ -25,7 +25,7 @@ function Header({ className, ...rest }) {
         Customers
       </Typography>
        */}
-      <Typography component="h1" variant="h3">
+        <Typography component="h1" variant="h3">
         DashBank
       </Typography>
     </div>

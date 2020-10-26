@@ -105,9 +105,14 @@ function App() {
               <GoogleAnalytics />
 
               {!contract && (
-                <div style={{ color: "#fff" }}>
-                  Please sign into your supported tron wallet for full
-                  experience
+                <div>
+                  <div style={{ color: "#fff" }}>
+                    Please sign into your supported tron wallet for full
+                    experience
+                  </div>
+                  <div style={{ color: "#fff" }}>
+                  TronDash works best with the TronStack Node https://api.tronostack.io
+                  </div>
                 </div>
               )}
               {contract && renderRoutes(routes)}
