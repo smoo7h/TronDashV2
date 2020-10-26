@@ -369,7 +369,18 @@ function PreSale({ className, ...rest }) {
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Chart className={classes.chart} data={graphObject} />
+          <Typography
+            align="center"
+            component="h6"
+            gutterBottom
+            variant="overline"
+          >
+            Pre sale has now ended
+            <br />
+            <br />
+            Stay tuned for an announcement for when TDD will be listed on
+            justswap
+          </Typography>
         </div>
         <Divider />
         <div className={classes.statsContainer}>
@@ -420,7 +431,7 @@ function PreSale({ className, ...rest }) {
               variant="contained"
               size="large"
               color="primary"
-              onClick={handleOpen}
+              //onClick={handleOpen}
               className={classes.margin}
               style={{
                 background: "linear-gradient(to right, #D50000, #8C9EFF)",

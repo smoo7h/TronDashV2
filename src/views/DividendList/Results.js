@@ -35,7 +35,7 @@ function desc(a, b, orderBy) {
   if (!b[orderBy]) {
     //check for estimate divs if there are some sort by that instead
     if (orderBy == "CurrentUserDivs" && b["EstimatedDivs"]) {
-      orderBy = "CurrentUserDivs";
+      orderBy = "EstimatedDivs";
     } else {
       b[orderBy] = 0;
     }
@@ -43,7 +43,7 @@ function desc(a, b, orderBy) {
   if (!a[orderBy]) {
     //check for estimate divs if there are some sort by that instead
     if (orderBy == "CurrentUserDivs" && a["EstimatedDivs"]) {
-      orderBy = "CurrentUserDivs";
+      orderBy = "EstimatedDivs";
     } else {
       a[orderBy] = 0;
     }
