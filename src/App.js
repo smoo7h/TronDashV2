@@ -111,7 +111,9 @@ function App() {
                     experience
                   </div>
                   <div style={{ color: "#fff" }}>
-                  TronDash works best with the TronStack Node https://api.tronostack.io
+                    <br></br>
+                    TronDash works best with the TronStack Node
+                    https://api.tronostack.io
                   </div>
                 </div>
               )}

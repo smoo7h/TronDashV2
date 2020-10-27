@@ -18,18 +18,17 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ExecuteInvestContract } from "src/utils/ContractFunctions";
-import Dashimage from "../../../assets/dashcoinlogo.png";
-import TrxImage from "../../../assets/tron-trx-logo.png";
 
 import axios from "src/utils/axios";
 import Visibility from "@material-ui/icons/Visibility";
-
+import DashImage from "../../../assets/dashcoinlogo.png";
+import TrxImage from "../../../assets/tron-trx-logo.png";
 import Button from "@material-ui/core/Button";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -141,59 +140,60 @@ const useOutlinedInputStyles = makeStyles((theme) => ({
   notchedOutline: {},
 }));
 
-function Swap({ className, swapClick, poolClick, ...rest }, props) {
+function Swap(
+  { className, swapClick, poolClick, tokenAddress, swapAddress, ...rest },
+  props
+) {
   const classes = useStyles();
   const outlinedInputClasses = useOutlinedInputStyles();
   const [graphObject, setGraphObject] = useState([]);
   const [soldPercentage, setSoldPercentage] = useState(0);
 
   const [walletBalance, setWalletBalance] = useState(0);
-  const [viewState, setviewState] = useState("swap");
-  const [swapState, setswapState] = useState("trx");
-  const [textValue, setTextValue] = useState(0);
+
+  const [currentPrice, setcurrentPrice] = useState();
+  const [swapState, setswapState] = useState("token");
+  const [tokenToTrxSwapValue, settokenToTrxSwapValue] = useState(0);
+  const [trxToTrxSwapValue, setTrxToTokenSwapValue] = useState(0);
+
+  const [trxInputTextValue, setTrxInputTextValue] = useState(null);
+  const [tokenInPutTextValue, setTokenInPutTextValue] = useState(null);
+
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
   const [farmName, setfarmName] = useState("");
+  const [approvedStatus, setapprovedStatus] = useState(false);
 
-  const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
+  //const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
   const presaleContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
-  const currentContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
+
   const contractTokenStart = 10000000;
+
+  const fetchPageData = () => {
+    let value = 1000000;
+    let data = getContractData(
+      swapAddress,
+      "getTrxToTokenInputPrice(uint256)",
+      value
+    ).then((response) => {
+      if (response) {
+        //set the price
+        let formattedPrice = setcurrentPrice(response);
+      }
+    });
+  };
 
   useEffect(() => {
     let mounted = true;
 
-    const fetchEarnings = () => {
+    const fetchData = () => {
       if (mounted) {
-        let data = getContractData(presaleContractAddress, "tokensleft()").then(
-          (response) => {
-            if (response) {
-              let graphvalues = [
-                {
-                  id: "27e84d20-f4a8-11ea-be42-79f6d264d75f",
-                  color: "#3f51b5",
-                  label: "Sold",
-                  value: contractTokenStart - response,
-                },
-                {
-                  id: "27e84d21-f4a8-11ea-be42-79f6d264d722",
-                  color: "#424242",
-                  label: "For Sale",
-                  value: response,
-                },
-              ];
-              setGraphObject(graphvalues);
-              //figure out how mant are sold
-              let percentage = response / contractTokenStart;
-              setSoldPercentage(percentage);
-            }
-          }
-        );
+        fetchPageData();
       }
     };
 
-    fetchEarnings();
+    fetchData();
 
     return () => {
       mounted = false;
@@ -229,15 +229,19 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
     setOpen(true);
   };
 
+  const handleApprove = () => {
+    setapprovedStatus(true);
+  };
+
   const handelBuy = () => {
     //execute the contract
 
-    if (Number(textValue) > 0) {
+    if (Number(trxInputTextValue) > 0) {
       ExecuteInvestContract(
         presaleContractAddress,
         "buyTokens(address)",
         window.tronWeb.defaultAddress.base58,
-        textValue,
+        trxInputTextValue,
         6,
         "trx"
       );
@@ -249,8 +253,66 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleMax = () => {
-    setTextValue(walletBalance.toFixed(2));
+    setTrxInputTextValue(walletBalance.toFixed(2));
+    handelTrxToTokenSwapValue(walletBalance.toFixed(2));
+    //handelTrxToTokenSwapValue(walletBalance);
+    //  event.persist();
+  };
+
+  const handleMaxToken = () => {
+    setTokenInPutTextValue(tokenBalance);
+    handelTokenToTrxSwapValue(tokenBalance);
+  };
+
+  const handelTrxToTokenSwapValue = (value) => {
+    if (value && value > 0) {
+      //get the token price
+      let ogValue = value;
+      value = value * 1000000;
+      let data = getContractData(
+        swapAddress,
+        "getTrxToTokenInputPrice(uint256)",
+        value
+      ).then((response) => {
+        if (response) {
+          //set the token input value
+
+          setTokenInPutTextValue(response);
+          //set the price
+          //value / amount
+          let formattedprice2 = ogValue / response;
+          setcurrentPrice(formattedprice2);
+        }
+      });
+
+      //get an estimate on how many tokens they will receive
+    }
+  };
+
+  const handelTokenToTrxSwapValue = (value) => {
+    if (value && value > 0) {
+      //get the token price
+      let ogValue = value;
+      value = value * 1000000;
+      let data = getContractData(
+        swapAddress,
+        "getTokenToTrxInputPrice(uint256)",
+        value
+      ).then((response) => {
+        if (response) {
+          // setTokenInPutTextValue(response);
+          setTrxInputTextValue(response);
+          //set the price
+          //value / amount
+          let formattedprice2 = ogValue / response;
+          setcurrentPrice(formattedprice2);
+        }
+      });
+
+      //get an estimate on how many tokens they will receive
+    }
   };
 
   const handlePoolClick = () => {
@@ -264,6 +326,8 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
   };
 
   const handleSwapStateClick = () => {
+    setTrxInputTextValue("");
+    setTokenInPutTextValue("");
     if (swapState == "trx") {
       setswapState("token");
     } else {
@@ -273,35 +337,26 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
 
   const handleTextChange = (event) => {
     //  event.persist();
-    setTextValue(event.target.value);
+    if (event.target.value && event.target.value != "") {
+      setTrxInputTextValue(event.target.value);
+      handelTrxToTokenSwapValue(event.target.value);
+    } else {
+      setTrxInputTextValue("");
+      setTokenInPutTextValue("");
+    }
   };
 
-  useEffect(() => {
-    let mounted = true;
+  const handleTextChangeTokenInPut = (event) => {
+    //  event.persist();
 
-    const fetchEstimate = () => {
-      if (textValue != 0) {
-        let data = getContractData(
-          presaleContractAddress,
-          "calculateTokensReceived(uint256)",
-          Number(textValue) * 1000000
-        ).then((response) => {
-          if (response) {
-            setestimateToken(response);
-          }
-        });
-        //console.log(data);
-      } else {
-        setestimateToken(0);
-      }
-    };
-
-    fetchEstimate();
-
-    return () => {
-      mounted = false;
-    };
-  }, [textValue]);
+    if (event.target.value && event.target.value != "") {
+      setTokenInPutTextValue(event.target.value);
+      handelTokenToTrxSwapValue(event.target.value);
+    } else {
+      setTrxInputTextValue("");
+      setTokenInPutTextValue("");
+    }
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -422,8 +477,8 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                 classes={outlinedInputClasses}
                 notched={false}
                 fullWidth
-                onChange={handleTextChange}
-                value={textValue}
+                onChange={handleTextChangeTokenInPut}
+                value={tokenInPutTextValue}
                 margin="normal"
                 endAdornment={
                   <InputAdornment
@@ -432,8 +487,8 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                   >
                     <IconButton
                       aria-label="max"
-                      onClick={handleMax}
-                      onMouseDown={handleMax}
+                      onClick={handleMaxToken}
+                      onMouseDown={handleMaxToken}
                       edge="end"
                       // className={classes.iconButton}
                     >
@@ -448,12 +503,12 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                       edge="end"
                       //  className={classes.iconButton}
                     >
-                      <Avatar src={Dashimage} />
+                      <Avatar src={DashImage} />
                     </IconButton>
                     <IconButton
                       aria-label="max"
-                      onClick={handleMax}
-                      onMouseDown={handleMax}
+                      // onClick={handleMax}
+                      //onMouseDown={handleMax}
                       edge="end"
                       className={classes.iconButton}
                     >
@@ -483,7 +538,7 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                 notched={false}
                 fullWidth
                 onChange={handleTextChange}
-                value={textValue}
+                value={trxInputTextValue}
                 margin="normal"
                 endAdornment={
                   <InputAdornment
@@ -512,8 +567,8 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                     </IconButton>
                     <IconButton
                       aria-label="max"
-                      onClick={handleMax}
-                      onMouseDown={handleMax}
+                      //onClick={handleMax}
+                      //onMouseDown={handleMax}
                       edge="end"
                       className={classes.iconButton}
                     >
@@ -547,26 +602,29 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
 
             <Grid item md={10} xs={10}>
               <OutlinedInput
+                disabled
+                style={{ color: "white" }}
                 //className={classes.margin}
-                label="Deposit trx"
+                label="Deposit token"
                 variant="outlined"
                 id="entervaluetxt"
                 type={"text"}
                 classes={outlinedInputClasses}
                 notched={false}
                 fullWidth
-                onChange={handleTextChange}
-                value={textValue}
+                onChange={handleTextChangeTokenInPut}
+                value={tokenInPutTextValue}
                 margin="normal"
                 endAdornment={
                   <InputAdornment
                     position="end"
                     className={classes.inputAdornment}
                   >
+                    {/*
                     <IconButton
                       aria-label="max"
-                      onClick={handleMax}
-                      onMouseDown={handleMax}
+                      onClick={handleMaxToken}
+                      onMouseDown={handleMaxToken}
                       edge="end"
                       // className={classes.iconButton}
                     >
@@ -574,6 +632,7 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                         max
                       </Typography>
                     </IconButton>
+                     */}
                     <IconButton
                       aria-label="token"
                       //onClick={handleMax}
@@ -581,12 +640,12 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                       edge="end"
                       //  className={classes.iconButton}
                     >
-                      <Avatar src={Dashimage} />
+                      <Avatar src={DashImage} />
                     </IconButton>
                     <IconButton
                       aria-label="max"
-                      onClick={handleMax}
-                      onMouseDown={handleMax}
+                      // onClick={handleMax}
+                      //onMouseDown={handleMax}
                       edge="end"
                       className={classes.iconButton}
                     >
@@ -608,21 +667,24 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
             <Grid item md={10} xs={10}>
               <OutlinedInput
                 //className={classes.margin}
+                disabled
                 label="Deposit trx"
                 variant="outlined"
                 id="entervaluetxt"
                 type={"text"}
+                style={{ color: "white" }}
                 classes={outlinedInputClasses}
                 notched={false}
                 fullWidth
                 onChange={handleTextChange}
-                value={textValue}
+                value={trxInputTextValue}
                 margin="normal"
                 endAdornment={
                   <InputAdornment
                     position="end"
                     className={classes.inputAdornment}
                   >
+                    {/*
                     <IconButton
                       aria-label="max"
                       onClick={handleMax}
@@ -634,6 +696,7 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                         max
                       </Typography>
                     </IconButton>
+                     */}
                     <IconButton
                       aria-label="token"
                       //onClick={handleMax}
@@ -673,7 +736,7 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
               Price
             </Typography>
             <Typography align="center" variant="h4">
-              0.9 trx
+              {currentPrice && currentPrice.toFixed(2)} {"trx/tdd"}
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold2"}>
@@ -704,21 +767,42 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
           </div>
         </div>
         <Divider />
+
         <div className={classes.statsContainer}>
           <div className={classes.statsItem} key="buybtn">
-            <Button
-              variant="contained"
-              size="large"
-              color="primary"
-              onClick={handleOpen}
-              className={classes.margin}
-              style={{
-                background: "linear-gradient(to right, #D50000, #8C9EFF)",
-                color: "white",
-              }}
-            >
-              Swap
-            </Button>
+            {approvedStatus == true && (
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleOpen}
+                className={classes.margin}
+                style={{
+                  background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  color: "white",
+                }}
+              >
+                Swap
+              </Button>
+            )}
+
+            {approvedStatus == false && (
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleApprove}
+                className={classes.margin}
+                style={{
+                  background: "linear-gradient(to right, #8C9EFF, #D50000)",
+                  // background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  color: "white",
+                }}
+              >
+                Approve
+              </Button>
+            )}
+
             <div>
               <Modal
                 aria-labelledby="transition-modal-title"
@@ -734,22 +818,16 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
               >
                 <Fade in={open}>
                   <div className={classes.paper}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={2}>
                       <Grid item md={12} xs={12}>
-                        <Avatar src={Dashimage} className={classes.large} />
-                      </Grid>
-                      <Grid item md={12} xs={12}>
-                        <Typography className={classes.centertext} variant="h3">
-                          Deposit
+                        <Typography className={classes.centertext} variant="h4">
+                          Confirm Swap
                         </Typography>
                       </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item md={12} xs={12}></Grid>
                       <Grid item md={12} xs={12}>
-                        <Typography className={classes.centertext}>
-                          * TDD Tokens will be frozen until presale is complete
-                        </Typography>
-                      </Grid>
-                      <Grid item md={4} xs={0}></Grid>
-                      <Grid item md={4} xs={10}>
                         <OutlinedInput
                           //className={classes.margin}
                           label="Deposit trx"
@@ -759,8 +837,10 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                           classes={outlinedInputClasses}
                           notched={false}
                           fullWidth
+                          disabled
+                          style={{ color: "white" }}
                           onChange={handleTextChange}
-                          value={textValue}
+                          value={trxInputTextValue}
                           margin="normal"
                           endAdornment={
                             <InputAdornment
@@ -768,44 +848,119 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                               className={classes.inputAdornment}
                             >
                               <IconButton
-                                aria-label="max"
-                                onClick={handleMax}
-                                onMouseDown={handleMax}
+                                aria-label="token"
+                                //onClick={handleMax}
+                                //onMouseDown={handleMax}
                                 edge="end"
-                                className={classes.iconButton}
+                                //  className={classes.iconButton}
                               >
-                                <Typography className={classes.centertext}>
-                                  max
-                                </Typography>
+                                <Avatar src={TrxImage} />
                               </IconButton>
                             </InputAdornment>
                           }
                         />
-                        <br></br>
-                        <br></br>
-                        <Typography className={classes.centertext} variant="h5">
-                          Balance: {walletBalance.toFixed(2)} {` trx`}
-                        </Typography>
-                        {estimateToken > 0 && (
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item md={2} xs={2}>
+                        <Grid item md={5} xs={5}></Grid>
+                        <Grid item md={2} xs={2}>
+                          <IconButton
+                            aria-label="plus"
+                            fontSize="small"
+
+                            //  onClick={handleSwapStateClick}
+                            //className={classes.margin}
+                          >
+                            <ArrowDownwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item md={5} xs={5}></Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      // style={{ backgroundColor: "#424242" }}
+                    >
+                      <Grid item md={12} xs={12}>
+                        <OutlinedInput
+                          //className={classes.margin}
+                          disabled
+                          label="Deposit trx"
+                          variant="outlined"
+                          id="entervaluetxt"
+                          type={"text"}
+                          classes={outlinedInputClasses}
+                          notched={false}
+                          fullWidth
+                          style={{ color: "white" }}
+                          onChange={handleTextChange}
+                          value={trxInputTextValue}
+                          margin="normal"
+                          endAdornment={
+                            <InputAdornment
+                              position="end"
+                              className={classes.inputAdornment}
+                            >
+                              <IconButton
+                                aria-label="token"
+                                disabled
+                                //onClick={handleMax}
+                                //onMouseDown={handleMax}
+                                edge="end"
+                                //  className={classes.iconButton}
+                              >
+                                <Avatar src={DashImage} />
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                        />
+                      </Grid>
+                      <Grid item md={12} xs={12}></Grid>
+                      <Grid container spacing={2}>
+                        <Grid item md={12} xs={12}>
                           <Typography
                             className={classes.centertext}
                             variant="h5"
                           >
-                            You will receive: {estimateToken.toFixed(2)}{" "}
-                            {` tdd`}
+                            Price: {walletBalance.toFixed(2)} {` trx/tdd`}
                           </Typography>
-                        )}
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <Typography
+                            className={classes.centertext}
+                            variant="h5"
+                          >
+                            Minimum received : {walletBalance.toFixed(2)}{" "}
+                            {` trx/tdd`}
+                          </Typography>
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <Typography
+                            className={classes.centertext}
+                            variant="h5"
+                          >
+                            Price Impact: {"0.02"} {` %`}
+                          </Typography>
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <Typography
+                            className={classes.centertext}
+                            variant="h5"
+                          >
+                            Liquidity Provider Fee: {"0.2345"} {` trx`}
+                          </Typography>
+                        </Grid>
                       </Grid>
-
-                      <Grid item md={4} xs={12}></Grid>
-                      <Grid item md={4} xs={12}></Grid>
-                      <Grid item md={4} xs={12}>
+                      <Grid item md={12} xs={12}></Grid>
+                      <Grid item md={12} xs={12}>
                         <Button
                           variant="contained"
                           fullWidth
                           size="large"
                           color="primary"
-                          onClick={handelBuy}
+                          onClick={handleClose}
                           className={classes.margin}
                           style={{
                             background:
@@ -813,7 +968,7 @@ function Swap({ className, swapClick, poolClick, ...rest }, props) {
                             color: "white",
                           }}
                         >
-                          Swap
+                          Confirm Swap
                         </Button>
                       </Grid>
                     </Grid>

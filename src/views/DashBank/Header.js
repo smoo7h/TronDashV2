@@ -5,14 +5,11 @@ import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
 }));
 
 function Header({ className, ...rest }) {
   const classes = useStyles();
-  const customer = {
-    name: "Ekaterina Tankova"
-  };
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -25,7 +22,7 @@ function Header({ className, ...rest }) {
         Customers
       </Typography>
        */}
-        <Typography component="h1" variant="h3">
+      <Typography component="h1" variant="h3">
         DashBank
       </Typography>
     </div>
@@ -33,7 +30,7 @@ function Header({ className, ...rest }) {
 }
 
 Header.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Header;

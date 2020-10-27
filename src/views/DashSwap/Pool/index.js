@@ -137,22 +137,31 @@ const useOutlinedInputStyles = makeStyles((theme) => ({
   notchedOutline: {},
 }));
 
-function Pool({ className, swapClick, poolClick, ...rest }) {
+function Pool({
+  className,
+  swapClick,
+  poolClick,
+  swapAddress,
+  tokenAddress,
+  ...rest
+}) {
   const classes = useStyles();
   const outlinedInputClasses = useOutlinedInputStyles();
   const [graphObject, setGraphObject] = useState([]);
   const [soldPercentage, setSoldPercentage] = useState(0);
+  const [approvedAddStatus, setapprovedAddStatus] = useState(false);
+  const [approvedRemoveStatus, setapprovedRemoveStatus] = useState(false);
 
   const [walletBalance, setWalletBalance] = useState(0);
 
-  const [viewState, setViewState] = useState("remove");
+  const [viewState, setViewState] = useState("add");
   const [textValue, setTextValue] = useState(0);
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
   const [tokensLeft, setTokensLeft] = useState(0);
   const [farmName, setfarmName] = useState("");
   const [sliderValue, setSliderValue] = React.useState(0);
-  const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
+  //const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
   const presaleContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
   const currentContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
   const contractTokenStart = 10000000;
@@ -240,6 +249,12 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
     }
   };
 
+  const handleApproveRemove = () => {
+    setapprovedRemoveStatus(true);
+  };
+  const handleApproveAdd = () => {
+    setapprovedAddStatus(true);
+  };
   //handelBuy
 
   const handleClose = () => {
@@ -430,7 +445,8 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
               onClick={handelViewStateClickAdd}
               className={classes.margin}
               style={{
-                background: "linear-gradient(to right, #D50000, #ff8c8c)",
+                background: "linear-gradient(to right, #4700d5, #8C9EFF)",
+
                 color: "white",
               }}
             >
@@ -446,7 +462,7 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
               onClick={handelViewStateClickRemove}
               className={classes.margin}
               style={{
-                background: "linear-gradient(to right, #4700d5, #8C9EFF)",
+                background: "linear-gradient(to right, #D50000, #ff8c8c)",
                 color: "white",
               }}
             >
@@ -542,6 +558,8 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                   variant="outlined"
                   id="entervaluetxt"
                   type={"text"}
+                  disabled
+                  style={{ color: "white" }}
                   classes={outlinedInputClasses}
                   notched={false}
                   fullWidth
@@ -553,6 +571,7 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                       position="end"
                       className={classes.inputAdornment}
                     >
+                      {/* 
                       <IconButton
                         aria-label="max"
                         onClick={handleMax}
@@ -564,8 +583,10 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                           max
                         </Typography>
                       </IconButton>
+                      */}
                       <IconButton
-                        aria-label="token"
+                        aria-label="tokenicon"
+                        disabled
                         //onClick={handleMax}
                         //onMouseDown={handleMax}
                         edge="end"
@@ -574,7 +595,8 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                         <Avatar src={DashImage} />
                       </IconButton>
                       <IconButton
-                        aria-label="max"
+                        disabled
+                        aria-label="tokenname"
                         onClick={handleMax}
                         onMouseDown={handleMax}
                         edge="end"
@@ -636,19 +658,38 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
             <Divider />
             <div className={classes.statsContainer}>
               <div className={classes.statsItem} key="buybtn">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  onClick={handleOpen}
-                  className={classes.margin}
-                  style={{
-                    background: "linear-gradient(to right, #D50000, #8C9EFF)",
-                    color: "white",
-                  }}
-                >
-                  Add Liquidity
-                </Button>
+                {approvedAddStatus == false && (
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    onClick={handleApproveAdd}
+                    className={classes.margin}
+                    style={{
+                      background: "linear-gradient(to right, #8C9EFF, #D50000)",
+                      color: "white",
+                    }}
+                  >
+                    Approve
+                  </Button>
+                )}
+
+                {approvedAddStatus == true && (
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    onClick={handleOpen}
+                    className={classes.margin}
+                    style={{
+                      background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                      color: "white",
+                    }}
+                  >
+                    Add Liquidity
+                  </Button>
+                )}
+
                 <div>
                   <Modal
                     aria-labelledby="transition-modal-title"
@@ -664,26 +705,19 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                   >
                     <Fade in={open}>
                       <div className={classes.paper}>
-                        <Grid container spacing={3}>
-                          <Grid item md={12} xs={12}>
-                            <Avatar src={DashImage} className={classes.large} />
-                          </Grid>
+                        <Grid container spacing={2}>
                           <Grid item md={12} xs={12}>
                             <Typography
                               className={classes.centertext}
-                              variant="h3"
+                              variant="h4"
                             >
-                              Deposit
+                              Add Liquidity
                             </Typography>
                           </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                          <Grid item md={12} xs={12}></Grid>
                           <Grid item md={12} xs={12}>
-                            <Typography className={classes.centertext}>
-                              * TDD Tokens will be frozen until presale is
-                              complete
-                            </Typography>
-                          </Grid>
-                          <Grid item md={4} xs={0}></Grid>
-                          <Grid item md={4} xs={10}>
                             <OutlinedInput
                               //className={classes.margin}
                               label="Deposit trx"
@@ -693,6 +727,8 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                               classes={outlinedInputClasses}
                               notched={false}
                               fullWidth
+                              disabled
+                              style={{ color: "white" }}
                               onChange={handleTextChange}
                               value={textValue}
                               margin="normal"
@@ -702,47 +738,94 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                                   className={classes.inputAdornment}
                                 >
                                   <IconButton
-                                    aria-label="max"
-                                    onClick={handleMax}
-                                    onMouseDown={handleMax}
+                                    aria-label="token"
+                                    //onClick={handleMax}
+                                    //onMouseDown={handleMax}
                                     edge="end"
-                                    className={classes.iconButton}
+                                    //  className={classes.iconButton}
                                   >
-                                    <Typography className={classes.centertext}>
-                                      max
-                                    </Typography>
+                                    <Avatar src={TrxImage} />
                                   </IconButton>
                                 </InputAdornment>
                               }
                             />
-                            <br></br>
-                            <br></br>
-                            <Typography
-                              className={classes.centertext}
-                              variant="h5"
-                            >
-                              Balance: {walletBalance.toFixed(2)} {` trx`}
-                            </Typography>
-                            {estimateToken > 0 && (
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                          <Grid item md={2} xs={2}>
+                            <Grid item md={5} xs={5}></Grid>
+                            <Grid item md={2} xs={2}>
+                              <IconButton
+                                aria-label="plus"
+                                fontSize="small"
+
+                                //  onClick={handleSwapStateClick}
+                                //className={classes.margin}
+                              >
+                                <AddIcon />
+                              </IconButton>
+                            </Grid>
+                            <Grid item md={5} xs={5}></Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid
+                          container
+                          spacing={2}
+                          // style={{ backgroundColor: "#424242" }}
+                        >
+                          <Grid item md={12} xs={12}>
+                            <OutlinedInput
+                              //className={classes.margin}
+                              disabled
+                              label="Deposit trx"
+                              variant="outlined"
+                              id="entervaluetxt"
+                              type={"text"}
+                              classes={outlinedInputClasses}
+                              notched={false}
+                              fullWidth
+                              style={{ color: "white" }}
+                              onChange={handleTextChange}
+                              value={textValue}
+                              margin="normal"
+                              endAdornment={
+                                <InputAdornment
+                                  position="end"
+                                  className={classes.inputAdornment}
+                                >
+                                  <IconButton
+                                    aria-label="token"
+                                    disabled
+                                    //onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    //  className={classes.iconButton}
+                                  >
+                                    <Avatar src={DashImage} />
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                            />
+                          </Grid>
+                          <Grid item md={12} xs={12}></Grid>
+                          <Grid container spacing={2}>
+                            <Grid item md={12} xs={12}>
                               <Typography
                                 className={classes.centertext}
                                 variant="h5"
                               >
-                                You will receive: {estimateToken.toFixed(2)}{" "}
-                                {` tdd`}
+                                Price: {walletBalance.toFixed(2)} {` trx/tdd`}
                               </Typography>
-                            )}
+                            </Grid>
                           </Grid>
-
-                          <Grid item md={4} xs={12}></Grid>
-                          <Grid item md={4} xs={12}></Grid>
-                          <Grid item md={4} xs={12}>
+                          <Grid item md={12} xs={12}></Grid>
+                          <Grid item md={12} xs={12}>
                             <Button
                               variant="contained"
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handelBuy}
+                              onClick={handleClose}
                               className={classes.margin}
                               style={{
                                 background:
@@ -750,7 +833,7 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                                 color: "white",
                               }}
                             >
-                              Add Liquidity
+                              Supply
                             </Button>
                           </Grid>
                         </Grid>
@@ -959,19 +1042,39 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
             <Divider />
             <div className={classes.statsContainer}>
               <div className={classes.statsItem} key="buybtn">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  onClick={handleOpen}
-                  className={classes.margin}
-                  style={{
-                    background: "linear-gradient(to right, #D50000, #8C9EFF)",
-                    color: "white",
-                  }}
-                >
-                  Remove Liquidity
-                </Button>
+                {approvedRemoveStatus == true && (
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    onClick={handleOpen}
+                    className={classes.margin}
+                    style={{
+                      background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                      color: "white",
+                    }}
+                  >
+                    Remove Liquidity
+                  </Button>
+                )}
+
+                {approvedRemoveStatus == false && (
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    onClick={handleApproveRemove}
+                    className={classes.margin}
+                    style={{
+                      //background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                      background: "linear-gradient(to right, #8C9EFF, #D50000)",
+                      color: "white",
+                    }}
+                  >
+                    Approve
+                  </Button>
+                )}
+
                 <div>
                   <Modal
                     aria-labelledby="transition-modal-title"
@@ -987,26 +1090,19 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                   >
                     <Fade in={open}>
                       <div className={classes.paper}>
-                        <Grid container spacing={3}>
-                          <Grid item md={12} xs={12}>
-                            <Avatar src={DashImage} className={classes.large} />
-                          </Grid>
+                        <Grid container spacing={2}>
                           <Grid item md={12} xs={12}>
                             <Typography
                               className={classes.centertext}
-                              variant="h3"
+                              variant="h4"
                             >
-                              Deposit
+                              You will receive
                             </Typography>
                           </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                          <Grid item md={12} xs={12}></Grid>
                           <Grid item md={12} xs={12}>
-                            <Typography className={classes.centertext}>
-                              * TDD Tokens will be frozen until presale is
-                              complete
-                            </Typography>
-                          </Grid>
-                          <Grid item md={4} xs={0}></Grid>
-                          <Grid item md={4} xs={10}>
                             <OutlinedInput
                               //className={classes.margin}
                               label="Deposit trx"
@@ -1016,6 +1112,8 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                               classes={outlinedInputClasses}
                               notched={false}
                               fullWidth
+                              disabled
+                              style={{ color: "white" }}
                               onChange={handleTextChange}
                               value={textValue}
                               margin="normal"
@@ -1025,47 +1123,94 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                                   className={classes.inputAdornment}
                                 >
                                   <IconButton
-                                    aria-label="max"
-                                    onClick={handleMax}
-                                    onMouseDown={handleMax}
+                                    aria-label="token"
+                                    //onClick={handleMax}
+                                    //onMouseDown={handleMax}
                                     edge="end"
-                                    className={classes.iconButton}
+                                    //  className={classes.iconButton}
                                   >
-                                    <Typography className={classes.centertext}>
-                                      max
-                                    </Typography>
+                                    <Avatar src={TrxImage} />
                                   </IconButton>
                                 </InputAdornment>
                               }
                             />
-                            <br></br>
-                            <br></br>
-                            <Typography
-                              className={classes.centertext}
-                              variant="h5"
-                            >
-                              Balance: {walletBalance.toFixed(2)} {` trx`}
-                            </Typography>
-                            {estimateToken > 0 && (
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                          <Grid item md={2} xs={2}>
+                            <Grid item md={5} xs={5}></Grid>
+                            <Grid item md={2} xs={2}>
+                              <IconButton
+                                aria-label="plus"
+                                fontSize="small"
+
+                                //  onClick={handleSwapStateClick}
+                                //className={classes.margin}
+                              >
+                                <AddIcon />
+                              </IconButton>
+                            </Grid>
+                            <Grid item md={5} xs={5}></Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid
+                          container
+                          spacing={2}
+                          // style={{ backgroundColor: "#424242" }}
+                        >
+                          <Grid item md={12} xs={12}>
+                            <OutlinedInput
+                              //className={classes.margin}
+                              disabled
+                              label="Deposit trx"
+                              variant="outlined"
+                              id="entervaluetxt"
+                              type={"text"}
+                              classes={outlinedInputClasses}
+                              notched={false}
+                              fullWidth
+                              style={{ color: "white" }}
+                              onChange={handleTextChange}
+                              value={textValue}
+                              margin="normal"
+                              endAdornment={
+                                <InputAdornment
+                                  position="end"
+                                  className={classes.inputAdornment}
+                                >
+                                  <IconButton
+                                    aria-label="token"
+                                    disabled
+                                    //onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    //  className={classes.iconButton}
+                                  >
+                                    <Avatar src={DashImage} />
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                            />
+                          </Grid>
+                          <Grid item md={12} xs={12}></Grid>
+                          <Grid container spacing={2}>
+                            <Grid item md={12} xs={12}>
                               <Typography
                                 className={classes.centertext}
                                 variant="h5"
                               >
-                                You will receive: {estimateToken.toFixed(2)}{" "}
-                                {` tdd`}
+                                Price: {walletBalance.toFixed(2)} {` trx/tdd`}
                               </Typography>
-                            )}
+                            </Grid>
                           </Grid>
-
-                          <Grid item md={4} xs={12}></Grid>
-                          <Grid item md={4} xs={12}></Grid>
-                          <Grid item md={4} xs={12}>
+                          <Grid item md={12} xs={12}></Grid>
+                          <Grid item md={12} xs={12}>
                             <Button
                               variant="contained"
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handelBuy}
+                              onClick={handleClose}
                               className={classes.margin}
                               style={{
                                 background:
@@ -1073,7 +1218,7 @@ function Pool({ className, swapClick, poolClick, ...rest }) {
                                 color: "white",
                               }}
                             >
-                              Add Liquidity
+                              Remove
                             </Button>
                           </Grid>
                         </Grid>

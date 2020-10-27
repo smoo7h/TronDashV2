@@ -73,8 +73,8 @@ export default [
         icon: BusinessIcon,
         items: [
           {
-            title: "Pre Sale",
-            href: "/dao",
+            title: "Vote",
+            href: "/vote",
           },
           {
             title: "White Paper",

@@ -42,99 +42,6 @@ contract Ownable {
     }
 }
 
-// File: openzeppelin-solidity/contracts/ownership/Whitelist.sol
-
-/**
- * @title Whitelist
- * @dev The Whitelist contract has a whitelist of addresses, and provides basic authorization control functions.
- * @dev This simplifies the implementation of "user permissions".
- */
-contract Whitelist is Ownable {
-    mapping(address => bool) public whitelist;
-
-    event WhitelistedAddressAdded(address addr);
-    event WhitelistedAddressRemoved(address addr);
-
-    /**
-     * @dev Throws if called by any account that's not whitelisted.
-     */
-    modifier onlyWhitelisted() {
-        require(whitelist[msg.sender]);
-        _;
-    }
-
-    /**
-     * @dev add an address to the whitelist
-     * @param addr address
-     * @return true if the address was added to the whitelist, false if the address was already in the whitelist
-     */
-    function addAddressToWhitelist(address addr)
-        public
-        onlyOwner
-        returns (bool success)
-    {
-        if (!whitelist[addr]) {
-            whitelist[addr] = true;
-            emit WhitelistedAddressAdded(addr);
-            success = true;
-        }
-    }
-
-    /**
-     * @dev add addresses to the whitelist
-     * @param addrs addresses
-     * @return true if at least one address was added to the whitelist,
-     * false if all addresses were already in the whitelist
-     */
-    function addAddressesToWhitelist(address[] addrs)
-        public
-        onlyOwner
-        returns (bool success)
-    {
-        for (uint256 i = 0; i < addrs.length; i++) {
-            if (addAddressToWhitelist(addrs[i])) {
-                success = true;
-            }
-        }
-    }
-
-    /**
-     * @dev remove an address from the whitelist
-     * @param addr address
-     * @return true if the address was removed from the whitelist,
-     * false if the address wasn't in the whitelist in the first place
-     */
-    function removeAddressFromWhitelist(address addr)
-        public
-        onlyOwner
-        returns (bool success)
-    {
-        if (whitelist[addr]) {
-            whitelist[addr] = false;
-            emit WhitelistedAddressRemoved(addr);
-            success = true;
-        }
-    }
-
-    /**
-     * @dev remove addresses from the whitelist
-     * @param addrs addresses
-     * @return true if at least one address was removed from the whitelist,
-     * false if all addresses weren't in the whitelist in the first place
-     */
-    function removeAddressesFromWhitelist(address[] addrs)
-        public
-        onlyOwner
-        returns (bool success)
-    {
-        for (uint256 i = 0; i < addrs.length; i++) {
-            if (removeAddressFromWhitelist(addrs[i])) {
-                success = true;
-            }
-        }
-    }
-}
-
 /**
  * @title Standard TRC20 token
  *
@@ -437,9 +344,9 @@ contract Token {
     function mintedSupply() public returns (uint256) {}
 }
 
-contract SwapX is TRC20, Whitelist {
-    string public constant name = "Bankroll Extended Liquidity Token";
-    string public constant symbol = "BNKRXSWAP"; // solium-disable-line uppercase
+contract TddDashSwapTest is TRC20, Ownable {
+    string public constant name = "DashSwap TDD-TRX LP Token";
+    string public constant symbol = "TDDTRX"; // solium-disable-line uppercase
     uint8 public constant decimals = 6; // solium-disable-line uppercase
 
     /***********************************|
@@ -836,11 +743,11 @@ contract SwapX is TRC20, Whitelist {
     |__________________________________*/
 
     /**
-     * @notice Deposit TRX && Tokens (token) at current ratio to mint SWAP tokens.
-     * @dev min_liquidity does nothing when total SWAP supply is 0.
-     * @param min_liquidity Minimum number of SWAP sender will mint if total SWAP supply is greater than 0.
-     * @param max_tokens Maximum number of tokens deposited. Deposits max amount if total SWAP supply is 0.
-     * @return The amount of SWAP minted.
+     * @notice Deposit TRX && Tokens (token) at current ratio to mint TDDLPTEST tokens.
+     * @dev min_liquidity does nothing when total TDDLPTEST supply is 0.
+     * @param min_liquidity Minimum number of TDDLPTEST sender will mint if total TDDLPTEST supply is greater than 0.
+     * @param max_tokens Maximum number of tokens deposited. Deposits max amount if total TDDLPTEST supply is 0.
+     * @return The amount of TDDLPTEST minted.
      */
     function addLiquidity(uint256 min_liquidity, uint256 max_tokens)
         public
@@ -896,8 +803,8 @@ contract SwapX is TRC20, Whitelist {
     }
 
     /**
-     * @dev Burn SWAP tokens to withdraw TRX && Tokens at current ratio.
-     * @param amount Amount of SWAP burned.
+     * @dev Burn TDDLPTEST tokens to withdraw TRX && Tokens at current ratio.
+     * @param amount Amount of TDDLPTEST burned.
      * @param min_trx Minimum TRX withdrawn.
      * @param min_tokens Minimum Tokens withdrawn.
      * @return The amount of TRX && Tokens withdrawn.
@@ -906,7 +813,7 @@ contract SwapX is TRC20, Whitelist {
         uint256 amount,
         uint256 min_trx,
         uint256 min_tokens
-    ) public onlyWhitelisted returns (uint256, uint256) {
+    ) public returns (uint256, uint256) {
         require(amount > 0 && min_trx > 0 && min_tokens > 0);
         uint256 total_liquidity = _totalSupply;
         require(total_liquidity > 0);

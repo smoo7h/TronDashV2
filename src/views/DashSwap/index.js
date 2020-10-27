@@ -70,6 +70,13 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
   });
   const [viewState, setviewState] = useState("swap");
 
+  const [tokenAddress, setTokenAddress] = useState(
+    "TTaWvzX3mLA587AQ6V2qs9t72rqoLE1sh5"
+  );
+  const [swapAddress, setSwapAddress] = useState(
+    "TVUu7s1DLLhegheMYhoNcyo9qY6ER6PZh7"
+  );
+
   const handleFieldChange = (event) => {
     event.persist();
     setValues((currentValues) => ({
@@ -97,6 +104,8 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
               <Card>
                 {viewState == "swap" && (
                   <Swap
+                    swapAddress={swapAddress}
+                    tokenAddress={tokenAddress}
                     className={classes.buycard}
                     swapClick={handleSwapClick}
                     poolClick={handlePoolClick}
@@ -104,6 +113,8 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
                 )}
                 {viewState == "pool" && (
                   <Pool
+                    swapAddress={swapAddress}
+                    tokenAddress={tokenAddress}
                     swapClick={handleSwapClick}
                     poolClick={handlePoolClick}
                     className={classes.buycard}
