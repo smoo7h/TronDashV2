@@ -170,9 +170,6 @@ function Pool({
 
   const [sliderValue, setSliderValue] = React.useState(0);
   const [currentPrice, setcurrentPrice] = useState();
-  const presaleContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
-
-  const contractTokenStart = 10000000;
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -603,33 +600,6 @@ function Pool({
       //get an estimate on how many tokens they will receive
     }
   };
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchEstimate = () => {
-      if (trxInputTextValue != 0) {
-        let data = getContractData(
-          presaleContractAddress,
-          "calculateTokensReceived(uint256)",
-          Number(trxInputTextValue) * 1000000
-        ).then((response) => {
-          if (response) {
-            setestimateToken(response);
-          }
-        });
-        //console.log(data);
-      } else {
-        setestimateToken(0);
-      }
-    };
-
-    fetchEstimate();
-
-    return () => {
-      mounted = false;
-    };
-  }, [trxInputTextValue]);
 
   //get token balances on load
   useEffect(() => {
@@ -1182,6 +1152,12 @@ function Pool({
                     variant="contained"
                     size="large"
                     color="primary"
+                    disabled={
+                      walletBalance >= trxInputTextValue &&
+                      tokenBalance >= tokensNeededForAdd
+                        ? false
+                        : true
+                    }
                     onClick={handleOpen}
                     className={classes.margin}
                     style={{
@@ -1189,7 +1165,10 @@ function Pool({
                       color: "white",
                     }}
                   >
-                    Add Liquidity
+                    {walletBalance >= trxInputTextValue && "Add Liquidity"}
+                    {walletBalance < trxInputTextValue && "Not Enough TRX"}
+                    {` `}
+                    {tokenBalance < tokensNeededForAdd && "Not Enough TDD"}
                   </Button>
                 )}
 
@@ -1576,6 +1555,9 @@ function Pool({
                     variant="contained"
                     size="large"
                     color="primary"
+                    disabled={
+                      lptokenBalance > 0 && sliderValue > 0 ? false : true
+                    }
                     onClick={handleOpen}
                     className={classes.margin}
                     style={{
@@ -1583,7 +1565,8 @@ function Pool({
                       color: "white",
                     }}
                   >
-                    Remove Liquidity
+                    {lptokenBalance > 0 && "Remove Liquidity"}
+                    {lptokenBalance === 0 && "No Liquidity Provided"}
                   </Button>
                 )}
 

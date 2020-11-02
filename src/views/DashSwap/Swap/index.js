@@ -1088,7 +1088,7 @@ function Swap(
 
         <div className={classes.statsContainer}>
           <div className={classes.statsItem} key="buybtn">
-            {approvedStatus == true && (
+            {approvedStatus == true && swapState == "token" && (
               <Button
                 variant="contained"
                 size="large"
@@ -1104,6 +1104,24 @@ function Swap(
                 {walletBalance >= trxInPutTextValue && "Swap"}
 
                 {walletBalance < trxInPutTextValue && "Not Enough TRX"}
+              </Button>
+            )}
+            {approvedStatus == true && swapState == "trx" && (
+              <Button
+                variant="contained"
+                size="large"
+                disabled={tokenBalance >= tokenInPutTextValue ? false : true}
+                color="primary"
+                onClick={handleOpen}
+                className={classes.margin}
+                style={{
+                  background: "linear-gradient(to right, #D50000, #8C9EFF)",
+                  color: "white",
+                }}
+              >
+                {tokenBalance >= tokenInPutTextValue && "Swap"}
+
+                {tokenBalance < tokenInPutTextValue && "Not Enough TDD"}
               </Button>
             )}
 
@@ -1194,7 +1212,7 @@ function Swap(
                                 className={classes.iconButton}
                               >
                                 <Typography className={classes.centertext}>
-                                  {swapState == "trx" ? "tdd" : "trx"}
+                                  {swapState == "trx" ? "TDD" : "TRX"}
                                 </Typography>
                               </IconButton>
                             </InputAdornment>
@@ -1266,7 +1284,7 @@ function Swap(
                                 className={classes.iconButton}
                               >
                                 <Typography className={classes.centertext}>
-                                  {swapState == "token" ? "tdd" : "trx"}
+                                  {swapState == "token" ? "TDD" : "TRX"}
                                 </Typography>
                               </IconButton>
                             </InputAdornment>
