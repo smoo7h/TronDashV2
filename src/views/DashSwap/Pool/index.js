@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
@@ -15,7 +15,6 @@ import {
   IconButton,
   OutlinedInput,
   Avatar,
-  withStyles,
   Slider,
   Typography,
 } from "@material-ui/core";
@@ -151,54 +150,219 @@ function Pool({
   const [soldPercentage, setSoldPercentage] = useState(0);
   const [approvedAddStatus, setapprovedAddStatus] = useState(false);
   const [approvedRemoveStatus, setapprovedRemoveStatus] = useState(false);
-
+  const [approvedStatus, setapprovedStatus] = useState(false);
   const [walletBalance, setWalletBalance] = useState(0);
 
   const [viewState, setViewState] = useState("add");
-  const [textValue, setTextValue] = useState(0);
+  const [trxInputTextValue, settrxInputTextValue] = useState(0);
+  const [tokenInputTextValue, settokenInputTextValue] = useState(0);
   const [estimateToken, setestimateToken] = useState(0);
   const [tokenBalance, settokenBalance] = useState(0);
-  const [tokensLeft, setTokensLeft] = useState(0);
-  const [farmName, setfarmName] = useState("");
+  const [lptokenBalance, setlptokenBalance] = useState(0);
+  const [checkSiteData, setcheckSiteData] = useState(0);
+  const [lptokensReceived, setlptokensReceived] = useState(0);
+  const [tokensNeededForAdd, settokensNeededForAdd] = useState(0);
+  const [lpTokensToBeRemoved, setlpTokensToBeRemoved] = useState(0);
+  const [tick, setTick] = useState(1);
+
+  const [trxReceivedForRemove, settrxReceivedForRemove] = useState(0);
+  const [tokenReceivedForRemove, settokenReceivedForRemove] = useState(0);
+
   const [sliderValue, setSliderValue] = React.useState(0);
-  //const tokenAddress = "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5";
+  const [currentPrice, setcurrentPrice] = useState();
   const presaleContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
-  const currentContractAddress = "TFZR8AAYGwymEHQy192tBk6PPUQEDW7tfx";
+
   const contractTokenStart = 10000000;
 
-  useEffect(() => {
-    let mounted = true;
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
 
-    const fetchEarnings = () => {
-      if (mounted) {
-        let data = getContractData(presaleContractAddress, "tokensleft()").then(
-          (response) => {
-            if (response) {
-              let graphvalues = [
-                {
-                  id: "27e84d20-f4a8-11ea-be42-79f6d264d75f",
-                  color: "#3f51b5",
-                  label: "Sold",
-                  value: contractTokenStart - response,
-                },
-                {
-                  id: "27e84d21-f4a8-11ea-be42-79f6d264d722",
-                  color: "#424242",
-                  label: "For Sale",
-                  value: response,
-                },
-              ];
-              setGraphObject(graphvalues);
-              //figure out how mant are sold
-              let percentage = response / contractTokenStart;
-              setSoldPercentage(percentage);
-            }
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+  useInterval(() => {
+    //this is the data refresh interval it will refresh every x amount of time after the %
+    setTick((tick) => tick + 1);
+    if (tick % 5 == 0) {
+      fetchPageData();
+    }
+  }, 1000);
+
+  const clearAddLiqValues = () => {
+    settrxInputTextValue(0);
+    setestimateToken(0);
+    setlptokensReceived(0);
+    settokensNeededForAdd(0);
+  };
+
+  const fetchPageData = () => {
+    //get useers balance address
+    const fetchUserBalance = () => {
+      let currentuseraddress = window.tronWeb.defaultAddress.base58;
+      if (window.tronWeb) {
+        window.tronWeb.trx.getBalance(
+          currentuseraddress,
+          (error, contractBalance) => {
+            if (error) return console.error(error);
+            setWalletBalance(contractBalance * 0.000001);
           }
         );
       }
     };
 
-    fetchEarnings();
+    fetchUserBalance();
+    let value = 1000000;
+    let data = getContractData(
+      swapAddress,
+      "getTrxToTokenInputPrice(uint256)",
+      value
+    ).then((response) => {
+      if (response) {
+        //set the price
+        let formattedPrice = setcurrentPrice(response);
+      }
+    });
+
+    //check user approval to
+    //allowance(address,address)
+    //for ading liquidity
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    let paramdata = currentuseraddress + "," + swapAddress;
+    getAllowance(tokenAddress, "allowance(address,address)", paramdata).then(
+      (response) => {
+        if (response) {
+          //check if they are approved
+          if (response > 5000000000000) {
+            setapprovedAddStatus(true);
+          }
+        }
+      }
+    );
+
+    //check user approval to
+    //allowance(address,address)
+    //for removing liquidity
+
+    paramdata = currentuseraddress + "," + swapAddress;
+    getAllowance(swapAddress, "allowance(address,address)", paramdata).then(
+      (response) => {
+        if (response) {
+          //check if they are approved
+          if (response > 5000000000000) {
+            setapprovedRemoveStatus(true);
+          }
+        }
+      }
+    );
+
+    const fetchTokenBalance = () => {
+      let data = getContractData(
+        tokenAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          settokenBalance(response);
+        }
+      });
+      //console.log(data);
+    };
+
+    const fetchLPTokenBalance = () => {
+      let data = getContractData(
+        swapAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setlptokenBalance(response);
+        }
+      });
+      //console.log(data);
+    };
+
+    fetchTokenBalance();
+    fetchLPTokenBalance();
+  };
+
+  const getAllowance = async (
+    contractAddress,
+    functionSelector,
+    contractParameter
+  ) => {
+    var contractValue = await window.tronWeb
+      .contract()
+      .at(contractAddress, async (error, contract) => {
+        if (error) return console.error(error);
+        let getbalance1;
+
+        try {
+          //split parameters
+          let param1 = contractParameter.split(",")[0];
+          let param2 = contractParameter.split(",")[1];
+          let result = await contract.allowance(param1, param2).call();
+
+          //you have to send the one with a
+          getbalance1 = result;
+        } catch (error) {
+          //sometimes if they have the wrong value for the functionSelector this happens
+          getbalance1 = 101;
+        }
+        //need to cast number as bignumber 4 no overflow
+        let returnValueIndexd = getbalance1[Object.keys(getbalance1)[0]];
+        let numchec = new BigNumber(returnValueIndexd);
+        let returnValue = 0;
+        //set the value
+        let multiplier = Math.pow(10, 6 * -1);
+        returnValue = Number(numchec) * multiplier;
+        //remove the decmalls
+        returnValue = returnValue;
+        return returnValue;
+      });
+
+    return contractValue;
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchData = () => {
+      if (mounted) {
+        fetchPageData();
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      mounted = false;
+    };
+  }, [checkSiteData]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchData = () => {
+      if (mounted) {
+        fetchPageData();
+      }
+    };
+
+    fetchData();
 
     return () => {
       mounted = false;
@@ -228,40 +392,92 @@ function Pool({
     };
   }, []);
 
+  useEffect(() => {
+    let mounted = true;
+
+    const checkForzero = () => {
+      if (mounted) {
+        //clear text if slier is 0
+        if (sliderValue === 0) {
+          settrxReceivedForRemove(0);
+          settokenReceivedForRemove(0);
+          setlpTokensToBeRemoved(0);
+        }
+      }
+    };
+
+    checkForzero();
+
+    return () => {
+      mounted = false;
+    };
+  }, [sliderValue]);
+
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const handelBuy = () => {
-    //execute the contract
-
-    if (Number(textValue) > 0) {
-      ExecuteInvestContract(
-        presaleContractAddress,
-        "buyTokens(address)",
-        window.tronWeb.defaultAddress.base58,
-        textValue,
-        6,
-        "trx"
-      );
-    }
-  };
-
   const handleApproveRemove = () => {
-    setapprovedRemoveStatus(true);
+    //call the blockchain for approval
+
+    executeApprovalContract(
+      swapAddress,
+      swapAddress,
+      "10000000000000000000000"
+    ).then(setapprovedRemoveStatus(true), (response) => {
+      if (response) {
+        //successsetapprovedStatus(true);
+        setcheckSiteData(checkSiteData + 1);
+      }
+    });
   };
+
   const handleApproveAdd = () => {
-    setapprovedAddStatus(true);
+    //call the blockchain for approval
+    executeContract(tokenAddress, "approve(address)", swapAddress).then(
+      setapprovedAddStatus(true),
+      (response) => {
+        if (response) {
+          //successsetapprovedStatus(true);
+          setcheckSiteData(checkSiteData + 1);
+        }
+      }
+    );
   };
+
   //handelBuy
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleAddLiquidity = () => {
+    executeAddLiquitityContract(swapAddress, trxInputTextValue).then(
+      (response) => {
+        if (response) {
+          //successsetapprovedStatus(true);
+          // setcheckSiteData(checkSiteData + 1);
+        }
+      }
+    );
+  };
+
+  const handleRemoveLiquidity = () => {
+    executeRemoveLiquitityContract(swapAddress, lpTokensToBeRemoved).then(
+      (response) => {
+        if (response) {
+          //successsetapprovedStatus(true);
+          setcheckSiteData(checkSiteData + 1);
+        }
+      }
+    );
+  };
+
   const handleMax = () => {
-    setTextValue(walletBalance.toFixed(2));
+    settrxInputTextValue(walletBalance);
+    handelPoolInputCalculation(walletBalance);
   };
 
   const handlePoolClick = () => {
@@ -274,9 +490,15 @@ function Pool({
     swapClick();
   };
 
-  const handleTextChange = (event) => {
+  const handleAddTrxTextChange = (event) => {
     //  event.persist();
-    setTextValue(event.target.value);
+    if (event.target.value && event.target.value != "") {
+      settrxInputTextValue(event.target.value);
+      handelPoolInputCalculation(event.target.value);
+    } else {
+      settrxInputTextValue("");
+      settokensNeededForAdd("");
+    }
   };
 
   const handelViewStateClickAdd = (value) => {
@@ -284,6 +506,45 @@ function Pool({
   };
   const handelViewStateClickRemove = (value) => {
     setViewState("remove");
+  };
+
+  const handleSliderCommitChange = (event, newValue) => {
+    setSliderValue(newValue);
+
+    //update values from blockchain
+    if (
+      lptokenBalance &&
+      lptokenBalance != "" &&
+      newValue > 0 &&
+      lptokenBalance > 0
+    ) {
+      //calculate how mant tokens we wanna sell
+      let devisor = newValue * 0.01;
+      let lpTokensToSell = lptokenBalance * devisor;
+
+      //check the output of
+      let output = lpTokensToSell;
+      let solidityNumber = output * 1000000;
+
+      if (solidityNumber % 1 != 0) {
+        solidityNumber = ~~solidityNumber;
+      }
+
+      setlpTokensToBeRemoved(solidityNumber);
+      //we need to call getLiquidityToReserveInputPrice() to get the output newValues
+      let data = getContractData(
+        swapAddress,
+        "getLiquidityToReserveInputPrice(uint256)",
+        solidityNumber,
+        2
+      ).then((response) => {
+        if (response) {
+          //save the estimated tokens you get back
+          settrxReceivedForRemove(response[0]);
+          settokenReceivedForRemove(response[1]);
+        }
+      });
+    }
   };
 
   const handleSliderChange = (event, newValue) => {
@@ -302,15 +563,56 @@ function Pool({
     //  setValue(event.target.value === '' ? '' : Number(event.target.value));
   };
 
+  //calculates the number of tokens required to add liquidity from a trx value
+  const handelPoolInputCalculation = (value) => {
+    if (value && value > 0) {
+      let ogValue = value;
+      //multiply it to remove decimals
+      value = value * 1000000;
+      if (value % 1 != 0) {
+        value = ~~value;
+      }
+      //first we need to call getTrxToLiquidityInputPrice(uint256) on the contract to see how many lp tokens we get
+      let data = getContractData(
+        swapAddress,
+        "getTrxToLiquidityInputPrice(uint256)",
+        value
+      ).then((response) => {
+        if (response) {
+          //save response
+          setlptokensReceived(response);
+          //change number to solidity notation
+          response = response * 1000000;
+          //now that we have the value we need to call getLiquidityToReserveInputPrice(uint256)
+          //to get the tokens needed
+
+          let data = getContractData(
+            swapAddress,
+            "getLiquidityToReserveInputPrice(uint256)",
+            response
+          ).then((response) => {
+            if (response) {
+              //save response
+              //we now knwo how many tokens we need to add liquidity
+              settokensNeededForAdd(response);
+            }
+          });
+        }
+      });
+
+      //get an estimate on how many tokens they will receive
+    }
+  };
+
   useEffect(() => {
     let mounted = true;
 
     const fetchEstimate = () => {
-      if (textValue != 0) {
+      if (trxInputTextValue != 0) {
         let data = getContractData(
           presaleContractAddress,
           "calculateTokensReceived(uint256)",
-          Number(textValue) * 1000000
+          Number(trxInputTextValue) * 1000000
         ).then((response) => {
           if (response) {
             setestimateToken(response);
@@ -327,8 +629,9 @@ function Pool({
     return () => {
       mounted = false;
     };
-  }, [textValue]);
+  }, [trxInputTextValue]);
 
+  //get token balances on load
   useEffect(() => {
     let mounted = true;
     let currentuseraddress = window.tronWeb.defaultAddress.base58;
@@ -345,17 +648,33 @@ function Pool({
       //console.log(data);
     };
 
+    const fetchLPTokenBalance = () => {
+      let data = getContractData(
+        swapAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setlptokenBalance(response);
+        }
+      });
+      //console.log(data);
+    };
+
     fetchTokenBalance();
+    fetchLPTokenBalance();
 
     return () => {
       mounted = false;
     };
   }, []);
 
+  //use ths function to get contract data
   const getContractData = async (
     contractAddress,
     functionSelector,
-    contractParameter
+    contractParameter,
+    numberofOutPuts
   ) => {
     var contractValue = await window.tronWeb
       .contract()
@@ -373,38 +692,221 @@ function Pool({
           //sometimes if they have the wrong value for the functionSelector this happens
           getbalance1 = 999999999999999999999;
         }
-        //need to cast number as bignumber 4 no overflow
-        let returnValueIndexd = getbalance1[Object.keys(getbalance1)[0]];
-        let numchec = new BigNumber(returnValueIndexd);
-        let returnValue = 0;
-        //set the value
-        let multiplier = Math.pow(10, 6 * -1);
-        returnValue = Number(numchec) * multiplier;
-        //remove the decmalls
-        returnValue = returnValue;
-        return returnValue;
+
+        if (numberofOutPuts && numberofOutPuts > 1) {
+          const returnArray = [];
+          for (let index = 0; index < numberofOutPuts; index++) {
+            //need to cast number as bignumber 4 no overflow
+            let returnValueIndexd =
+              getbalance1[Object.keys(getbalance1)[index]];
+            let numchec = new BigNumber(returnValueIndexd);
+            let returnValue = 0;
+
+            //remove the decmalls
+            let multiplier = Math.pow(10, 6 * -1);
+            returnValue = Number(numchec) * multiplier;
+
+            //add it to the array
+            returnArray.push(returnValue);
+          }
+
+          //return the array
+          return returnArray;
+        } else {
+          //need to cast number as bignumber 4 no overflow
+          let returnValueIndexd = getbalance1[Object.keys(getbalance1)[0]];
+          let numchec = new BigNumber(returnValueIndexd);
+          let returnValue = 0;
+          //set the value
+          let multiplier = Math.pow(10, 6 * -1);
+          returnValue = Number(numchec) * multiplier;
+          //remove the decmalls
+          returnValue = returnValue;
+          return returnValue;
+        }
       });
 
     return contractValue;
   };
 
+  //use this function to execute a contract
   const executeContract = async (
     contractAddress,
     functionSelector,
-    contractParameter
+    contractParameter,
+    callValue
   ) => {
     //get the contacct value
     window.tronWeb.contract().at(contractAddress, async (error, contract) => {
       if (error) return console.error(error);
       let returnvalue;
+
+      //first one is if you neeed 2 send trx with it
+      if (callValue > 0) {
+        try {
+          //convert call value to slolidiy valye
+          let trxSumbitAmoung = callValue * 1000000;
+          //you have to send the one with a
+          returnvalue =
+            contractParameter == ""
+              ? await contract[functionSelector]().send({
+                  feeLimit: 10000000,
+                  call_value: trxSumbitAmoung,
+                })
+              : await contract[functionSelector](contractParameter).send({
+                  feeLimit: 10000000,
+                  call_value: trxSumbitAmoung,
+                });
+          return returnvalue;
+        } catch (error) {
+          //sometimes if they have the wrong value for the functionSelector this happens
+          console.log(error);
+        }
+      } else {
+        try {
+          // no trx sent
+          returnvalue =
+            contractParameter == ""
+              ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+              : await contract[functionSelector](contractParameter).send({
+                  feeLimit: 10000000,
+                });
+          return returnvalue;
+        } catch (error) {
+          //sometimes if they have the wrong value for the functionSelector this happens
+          console.log(error);
+        }
+      }
+    });
+  };
+
+  //use this function to execute a contract
+  const executeApprovalContract = async (
+    contractAddress,
+    contractParameter1,
+    contractParameter2
+  ) => {
+    //get the contacct value
+    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
+      if (error) return console.error(error);
+      let returnvalue;
+
+      //first one is if you neeed 2 send trx with it
+
       try {
-        //you have to send the one with a
-        returnvalue =
-          contractParameter == ""
-            ? await contract[functionSelector]().send({ feeLimit: 10000000 })
-            : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000,
-              });
+        // no trx sent
+        returnvalue = await contract
+          .approve(contractParameter1, contractParameter2)
+          .send({
+            feeLimit: 10000000,
+          });
+        return returnvalue;
+      } catch (error) {
+        //sometimes if they have the wrong value for the functionSelector this happens
+        console.log(error);
+      }
+    });
+  };
+
+  //use this function to execute a contract
+  const executeAddLiquitityContract = async (contractAddress, trxInput) => {
+    // this is a 3 step process
+    //first step is to call getTrxToLiquidityInputPrice(uint256)
+    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
+      if (error) return console.error(error);
+      let returnvalue;
+
+      trxInput = trxInput * 1000000;
+      if (trxInput % 1 != 0) {
+        trxInput = ~~trxInput;
+      }
+
+      try {
+        // get getTrxToLiquidityInputPrice
+        let trxInputPrice = await contract
+          .getTrxToLiquidityInputPrice(trxInput)
+          .call();
+
+        //now we need to call getLiquidityToReserveInputPrice with the returneed value of
+
+        let liquidityToReserveInputPrice = await contract
+          .getLiquidityToReserveInputPrice(trxInputPrice)
+          .call();
+
+        //now that we have this number we need to add 20% and then send it to the contract with the trx input
+
+        //Get the initial input price from the [1] value returned from the prior function
+        let liquidityToReserveInputPriceMax =
+          liquidityToReserveInputPrice[1] * 1.2;
+
+        //remove any decimals
+        if (liquidityToReserveInputPriceMax % 1 != 0) {
+          liquidityToReserveInputPriceMax = ~~liquidityToReserveInputPriceMax;
+        }
+
+        //now lets call the contract
+
+        try {
+          // no trx sent
+          let finalreturnvalue = await contract
+            .addLiquidity(1, liquidityToReserveInputPriceMax)
+            .send({
+              feeLimit: 10000000,
+              callValue: trxInput,
+              //not seending the trx duh
+            })
+            .then(() => {
+              handleClose();
+              clearAddLiqValues();
+              //clear values
+            });
+          return returnvalue;
+        } catch (error) {
+          //sometimes if they have the wrong value for the functionSelector this happens
+          console.log(error);
+        }
+
+        return returnvalue;
+      } catch (error) {
+        //sometimes if they have the wrong value for the functionSelector this happens
+        console.log(error);
+      }
+    });
+  };
+
+  //use this function to execute a contract
+  const executeRemoveLiquitityContract = async (
+    contractAddress,
+    lpTokenAmount
+  ) => {
+    //get the contacct value
+    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
+      if (error) return console.error(error);
+      let returnvalue;
+
+      /*
+      lpTokenAmount = lpTokenAmount * 1000000;
+      if (lpTokenAmount % 1 != 0) {
+        lpTokenAmount = ~~lpTokenAmount;
+      }
+      //first one is if you neeed 2 send trx with it
+*/
+      try {
+        // no trx sent
+        returnvalue = await contract
+          .removeLiquidity(lpTokenAmount, "1", "1")
+          .send({
+            feeLimit: 10000000,
+          })
+          .then(() => {
+            handleClose();
+            //clear values
+            setSliderValue(0);
+            settrxReceivedForRemove(0);
+            settokenReceivedForRemove(0);
+            setlpTokensToBeRemoved(0);
+          });
+        return returnvalue;
       } catch (error) {
         //sometimes if they have the wrong value for the functionSelector this happens
         console.log(error);
@@ -470,6 +972,7 @@ function Pool({
             </Button>
           </Grid>
         </Grid>
+        {/* the add liquidity section */}
         {viewState == "add" && (
           <div>
             <Grid container spacing={2}>
@@ -490,8 +993,8 @@ function Pool({
                   classes={outlinedInputClasses}
                   notched={false}
                   fullWidth
-                  onChange={handleTextChange}
-                  value={textValue}
+                  onChange={handleAddTrxTextChange}
+                  value={trxInputTextValue}
                   margin="normal"
                   endAdornment={
                     <InputAdornment
@@ -563,8 +1066,8 @@ function Pool({
                   classes={outlinedInputClasses}
                   notched={false}
                   fullWidth
-                  onChange={handleTextChange}
-                  value={textValue}
+                  //onChange={handleAddTrxTextChange}
+                  value={tokensNeededForAdd}
                   margin="normal"
                   endAdornment={
                     <InputAdornment
@@ -622,10 +1125,10 @@ function Pool({
                   gutterBottom
                   variant="overline"
                 >
-                  LP Tokens
+                  LP Token Balance
                 </Typography>
                 <Typography align="center" variant="h4">
-                  10 TDDLP
+                  {lptokenBalance.toFixed(2)} TDDLP
                 </Typography>
               </div>
               <div className={classes.statsItem} key={"sold2"}>
@@ -729,8 +1232,8 @@ function Pool({
                               fullWidth
                               disabled
                               style={{ color: "white" }}
-                              onChange={handleTextChange}
-                              value={textValue}
+                              // onChange={handleAddTrxTextChange}
+                              value={trxInputTextValue}
                               margin="normal"
                               endAdornment={
                                 <InputAdornment
@@ -745,6 +1248,17 @@ function Pool({
                                     //  className={classes.iconButton}
                                   >
                                     <Avatar src={TrxImage} />
+                                  </IconButton>
+                                  <IconButton
+                                    aria-label="max"
+                                    // onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    className={classes.iconButton}
+                                  >
+                                    <Typography className={classes.centertext}>
+                                      TRX
+                                    </Typography>
                                   </IconButton>
                                 </InputAdornment>
                               }
@@ -785,8 +1299,8 @@ function Pool({
                               notched={false}
                               fullWidth
                               style={{ color: "white" }}
-                              onChange={handleTextChange}
-                              value={textValue}
+                              //onChange={handleAddTrxTextChange}
+                              value={tokensNeededForAdd}
                               margin="normal"
                               endAdornment={
                                 <InputAdornment
@@ -803,6 +1317,17 @@ function Pool({
                                   >
                                     <Avatar src={DashImage} />
                                   </IconButton>
+                                  <IconButton
+                                    aria-label="max"
+                                    // onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    className={classes.iconButton}
+                                  >
+                                    <Typography className={classes.centertext}>
+                                      TDD
+                                    </Typography>
+                                  </IconButton>
                                 </InputAdornment>
                               }
                             />
@@ -814,7 +1339,8 @@ function Pool({
                                 className={classes.centertext}
                                 variant="h5"
                               >
-                                Price: {walletBalance.toFixed(2)} {` trx/tdd`}
+                                Price: {currentPrice && currentPrice.toFixed(2)}{" "}
+                                {` trx/tdd`}
                               </Typography>
                             </Grid>
                           </Grid>
@@ -825,7 +1351,7 @@ function Pool({
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handleClose}
+                              onClick={handleAddLiquidity}
                               className={classes.margin}
                               style={{
                                 background:
@@ -845,7 +1371,7 @@ function Pool({
             </div>
           </div>
         )}
-
+        {/* the remove liquidity section */}
         {viewState == "remove" && (
           <div>
             <Grid container spacing={2}>
@@ -871,6 +1397,7 @@ function Pool({
                 <Slider
                   value={typeof sliderValue === "number" ? sliderValue : 0}
                   onChange={handleSliderChange}
+                  onChangeCommitted={handleSliderCommitChange}
                   aria-labelledby="input-slider"
                 />
               </Grid>
@@ -904,8 +1431,9 @@ function Pool({
                   classes={outlinedInputClasses}
                   notched={false}
                   fullWidth
-                  onChange={handleTextChange}
-                  value={textValue}
+                  //onChange={handleAddTrxTextChange}
+                  style={{ color: "white" }}
+                  value={trxReceivedForRemove}
                   margin="normal"
                   endAdornment={
                     <InputAdornment
@@ -956,8 +1484,9 @@ function Pool({
                   classes={outlinedInputClasses}
                   notched={false}
                   fullWidth
-                  onChange={handleTextChange}
-                  value={textValue}
+                  // onChange={handleAddTrxTextChange}
+                  style={{ color: "white" }}
+                  value={tokenReceivedForRemove}
                   margin="normal"
                   endAdornment={
                     <InputAdornment
@@ -1006,10 +1535,10 @@ function Pool({
                   gutterBottom
                   variant="overline"
                 >
-                  LP Tokens
+                  LP Token Balance
                 </Typography>
                 <Typography align="center" variant="h4">
-                  10 TDDLP
+                  {lptokenBalance.toFixed(2)} TDDLP
                 </Typography>
               </div>
               <div className={classes.statsItem} key={"sold2"}>
@@ -1105,7 +1634,7 @@ function Pool({
                           <Grid item md={12} xs={12}>
                             <OutlinedInput
                               //className={classes.margin}
-                              label="Deposit trx"
+                              label="receive trx"
                               variant="outlined"
                               id="entervaluetxt"
                               type={"text"}
@@ -1114,8 +1643,8 @@ function Pool({
                               fullWidth
                               disabled
                               style={{ color: "white" }}
-                              onChange={handleTextChange}
-                              value={textValue}
+                              //onChange={handleAddTrxTextChange}
+                              value={trxReceivedForRemove}
                               margin="normal"
                               endAdornment={
                                 <InputAdornment
@@ -1130,6 +1659,17 @@ function Pool({
                                     //  className={classes.iconButton}
                                   >
                                     <Avatar src={TrxImage} />
+                                  </IconButton>
+                                  <IconButton
+                                    aria-label="max"
+                                    // onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    className={classes.iconButton}
+                                  >
+                                    <Typography className={classes.centertext}>
+                                      TRX
+                                    </Typography>
                                   </IconButton>
                                 </InputAdornment>
                               }
@@ -1164,14 +1704,14 @@ function Pool({
                               disabled
                               label="Deposit trx"
                               variant="outlined"
-                              id="entervaluetxt"
+                              //id="entervaluetxt"
                               type={"text"}
                               classes={outlinedInputClasses}
                               notched={false}
                               fullWidth
                               style={{ color: "white" }}
-                              onChange={handleTextChange}
-                              value={textValue}
+                              //onChange={handleAddTrxTextChange}
+                              value={tokenReceivedForRemove}
                               margin="normal"
                               endAdornment={
                                 <InputAdornment
@@ -1188,6 +1728,17 @@ function Pool({
                                   >
                                     <Avatar src={DashImage} />
                                   </IconButton>
+                                  <IconButton
+                                    aria-label="max"
+                                    // onClick={handleMax}
+                                    //onMouseDown={handleMax}
+                                    edge="end"
+                                    className={classes.iconButton}
+                                  >
+                                    <Typography className={classes.centertext}>
+                                      TDD
+                                    </Typography>
+                                  </IconButton>
                                 </InputAdornment>
                               }
                             />
@@ -1199,7 +1750,8 @@ function Pool({
                                 className={classes.centertext}
                                 variant="h5"
                               >
-                                Price: {walletBalance.toFixed(2)} {` trx/tdd`}
+                                Price: {currentPrice && currentPrice.toFixed(2)}{" "}
+                                {` trx/tdd`}
                               </Typography>
                             </Grid>
                           </Grid>
@@ -1210,7 +1762,7 @@ function Pool({
                               fullWidth
                               size="large"
                               color="primary"
-                              onClick={handleClose}
+                              onClick={handleRemoveLiquidity}
                               className={classes.margin}
                               style={{
                                 background:
