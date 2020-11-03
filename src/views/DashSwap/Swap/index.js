@@ -150,7 +150,9 @@ function Swap(
   const [tick, setTick] = useState(1);
   const [currentPrice, setcurrentPrice] = useState();
   const [currentOneToOnePrice, setcurrentOneToOnePrice] = useState();
+  const [currentOneToOnePriceToken, setcurrentOneToOnePriceToken] = useState();
   const [priceImpact, setpriceImpact] = useState();
+  const [priceImpactToken, setpriceImpactToken] = useState();
   const [swapState, setswapState] = useState("token");
 
   const [walletBalance, setWalletBalance] = useState(0);
@@ -250,6 +252,8 @@ function Swap(
         //   setcurrentOneToOnePrice(response);
         let pImpact = percIncrease(currentOneToOnePrice, currentPrice);
         setpriceImpact(pImpact);
+        let pImpact2 = percIncrease(currentOneToOnePriceToken, currentPrice);
+        setpriceImpactToken(pImpact2);
       }
     };
 
@@ -296,8 +300,26 @@ function Swap(
         });
       }
     };
+    const fetchData2 = () => {
+      if (mounted) {
+        //get the current price
+        let value = 1000000;
+        getContractData(
+          swapAddress,
+          "getTokenToTrxInputPrice(uint256)",
+          value
+        ).then((response) => {
+          if (response) {
+            //set the price
+
+            setcurrentOneToOnePriceToken(response);
+          }
+        });
+      }
+    };
 
     fetchData();
+    fetchData2();
 
     return () => {
       mounted = false;
@@ -1308,7 +1330,9 @@ function Swap(
                           Price
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {currentPrice && currentPrice.toFixed(2)} {"trx/tdd"}
+                          {currentPrice && currentPrice.toFixed(2)}
+                          {swapState == "token" && " trx/tdd"}
+                          {swapState == "trx" && " tdd/trx"}
                         </Typography>
                       </div>
                       <div className={classes.statsItem} key={"sold2"}>
@@ -1334,7 +1358,9 @@ function Swap(
                           Price Impact
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {priceImpact} {` %`}
+                          {swapState == "trx" && priceImpact}
+                          {swapState == "token" && priceImpactToken}
+                          {` %`}
                         </Typography>
                       </div>
                       <div className={classes.statsItem} key={"sold"}>
