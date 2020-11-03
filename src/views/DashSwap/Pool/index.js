@@ -506,46 +506,50 @@ function Pool({
   };
 
   const handleSliderCommitChange = (event, newValue) => {
-    setSliderValue(newValue);
+    if (lptokenBalance > 0) {
+      setSliderValue(newValue);
 
-    //update values from blockchain
-    if (
-      lptokenBalance &&
-      lptokenBalance != "" &&
-      newValue > 0 &&
-      lptokenBalance > 0
-    ) {
-      //calculate how mant tokens we wanna sell
-      let devisor = newValue * 0.01;
-      let lpTokensToSell = lptokenBalance * devisor;
+      //update values from blockchain
+      if (
+        lptokenBalance &&
+        lptokenBalance != "" &&
+        newValue > 0 &&
+        lptokenBalance > 0
+      ) {
+        //calculate how mant tokens we wanna sell
+        let devisor = newValue * 0.01;
+        let lpTokensToSell = lptokenBalance * devisor;
 
-      //check the output of
-      let output = lpTokensToSell;
-      let solidityNumber = output * 1000000;
+        //check the output of
+        let output = lpTokensToSell;
+        let solidityNumber = output * 1000000;
 
-      if (solidityNumber % 1 != 0) {
-        solidityNumber = ~~solidityNumber;
-      }
-
-      setlpTokensToBeRemoved(solidityNumber);
-      //we need to call getLiquidityToReserveInputPrice() to get the output newValues
-      let data = getContractData(
-        swapAddress,
-        "getLiquidityToReserveInputPrice(uint256)",
-        solidityNumber,
-        2
-      ).then((response) => {
-        if (response) {
-          //save the estimated tokens you get back
-          settrxReceivedForRemove(response[0]);
-          settokenReceivedForRemove(response[1]);
+        if (solidityNumber % 1 != 0) {
+          solidityNumber = ~~solidityNumber;
         }
-      });
+
+        setlpTokensToBeRemoved(solidityNumber);
+        //we need to call getLiquidityToReserveInputPrice() to get the output newValues
+        let data = getContractData(
+          swapAddress,
+          "getLiquidityToReserveInputPrice(uint256)",
+          solidityNumber,
+          2
+        ).then((response) => {
+          if (response) {
+            //save the estimated tokens you get back
+            settrxReceivedForRemove(response[0]);
+            settokenReceivedForRemove(response[1]);
+          }
+        });
+      }
     }
   };
 
   const handleSliderChange = (event, newValue) => {
-    setSliderValue(newValue);
+    if (lptokenBalance > 0) {
+      setSliderValue(newValue);
+    }
   };
 
   const handleBlur = () => {

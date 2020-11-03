@@ -795,6 +795,7 @@ function Swap(
                 classes={outlinedInputClasses}
                 notched={false}
                 fullWidth
+                type="number"
                 onChange={handleTextChangeTokenInPut}
                 value={tokenInPutTextValue}
                 margin="normal"
@@ -1054,7 +1055,9 @@ function Swap(
               Price
             </Typography>
             <Typography align="center" variant="h4">
-              {currentPrice && currentPrice.toFixed(2)} {"trx/tdd"}
+              {currentPrice && currentPrice.toFixed(2)}
+              {swapState == "token" && " trx/tdd"}
+              {swapState == "trx" && " tdd/trx"}
             </Typography>
           </div>
           <div className={classes.statsItem} key={"sold2"}>

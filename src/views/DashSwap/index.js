@@ -123,15 +123,7 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
               </Card>
             </Grid>
             <Grid item lg={3} xl={3} xs={12}></Grid>
-
-            <br></br>
-            <Grid item lg={12} xl={12} xs={12}>
-              <Divider className={classes.divider} />
-            </Grid>
           </Grid>
-          <br></br>
-          <br></br>
-          <br></br>
         </CardContent>
       </form>
     </Card>
