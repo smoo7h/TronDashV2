@@ -7,6 +7,8 @@ import { makeStyles } from "@material-ui/styles";
 import Dashimage from "../../assets/dashcoinlogo.png";
 import Avatar from "@material-ui/core/Avatar";
 import Whitepaper from "src/assets/TDWP.pdf";
+import withWidth from "@material-ui/core/withWidth";
+
 import {
   Modal,
   Card,
@@ -24,14 +26,20 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(0),
     backgroundColor: "transparent",
+
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing(2),
+    },
   },
   actions: {
     justifyContent: "flex-end",
   },
   card: {
-    backgroundColor: "#424242",
+    // [theme.breakpoints.up("sm")]: {
+    // backgroundColor: "#424242",
+    // },
   },
   buycard: {
     backgroundColor: "#212121",
@@ -74,7 +82,7 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
     "TTaWvzX3mLA587AQ6V2qs9t72rqoLE1sh5"
   );
   const [swapAddress, setSwapAddress] = useState(
-    "TVUu7s1DLLhegheMYhoNcyo9qY6ER6PZh7"
+    "TRdeKsxDHZZ1kX8pS4yxbEsQLRQbngBzQe"
   );
 
   const handleFieldChange = (event) => {
@@ -139,4 +147,4 @@ DashSwap.propTypes = {
 
 DashSwap.defaultProps = {};
 
-export default DashSwap;
+export default withWidth()(DashSwap);

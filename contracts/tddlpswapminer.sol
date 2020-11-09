@@ -344,6 +344,22 @@ contract Token {
     function mintedSupply() public returns (uint256) {}
 }
 
+contract MintToken {
+    function transferFrom(
+        address src,
+        address dst,
+        uint256 amount
+    ) public returns (bool) {}
+
+    function transfer(address dst, uint256 amount) public returns (bool) {}
+
+    function mint(address account, uint256 amount) public {}
+
+    function balanceOf(address account) public view returns (uint256) {}
+
+    function burn(uint256 amount) public {}
+}
+
 contract TddDashSwapMinerTest is TRC20, Ownable {
     string public constant name = "DashSwap TDD-TRX LP Token";
     string public constant symbol = "TDDTRX"; // solium-disable-line uppercase
@@ -367,7 +383,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
     //miner token
     address public minerTokenAddress;
     uint256 public minerDivider;
-    TRC20 public minerToken;
+    MintToken public minerToken;
     bool public minerOn;
 
     // Events
@@ -425,7 +441,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
     function changeMinerToken(address newMiner) public onlyOwner {
         require(newMiner != address(0));
         minerTokenAddress = newMiner;
-        minerToken = TRC20(minerTokenAddress);
+        minerToken = MintToken(minerTokenAddress);
     }
 
     /**
@@ -523,7 +539,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
             //mint the token for the user
             minerToken.mint(buyer, mineAmount);
             //emit mine event
-            emit onTokenMine(buyer, minertokenaddress, mineAmount);
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
         }
         return tokens_bought;
     }
@@ -570,7 +586,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
             //mint the token for the user
             minerToken.mint(buyer, mineAmount);
             //emit mine event
-            emit onTokenMine(buyer, minertokenaddress, mineAmount);
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
         }
         return trx_sold;
     }
@@ -615,7 +631,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
             //mint the token for the user
             minerToken.mint(buyer, mineAmount);
             //emit mine event
-            emit onTokenMine(buyer, minertokenaddress, mineAmount);
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
         }
         return trx_bought;
     }
@@ -660,7 +676,7 @@ contract TddDashSwapMinerTest is TRC20, Ownable {
             //mint the token for the user
             minerToken.mint(buyer, mineAmount);
             //emit mine event
-            emit onTokenMine(buyer, minertokenaddress, mineAmount);
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
         }
         return tokens_sold;
     }

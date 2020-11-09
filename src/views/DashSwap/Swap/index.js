@@ -225,6 +225,20 @@ function Swap(
         }
       }
     );
+    const fetchTokenBalance = () => {
+      let data = getContractData(
+        tokenAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          settokenBalance(response);
+        }
+      });
+      //console.log(data);
+    };
+
+    fetchTokenBalance();
   };
 
   function percIncrease(a, b) {

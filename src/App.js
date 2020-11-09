@@ -24,9 +24,7 @@ import "./assets/scss/main.scss";
 const history = createBrowserHistory();
 const store = configureStore();
 
-//const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa"; //blank address
-//const FOUNDATION_ADDRESS = "TYj7pEyPEWxCRQm51gmgFW45iCZPLSTh85"; //second wallet
-const FOUNDATION_ADDRESS = "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT"; //first wallet
+const FOUNDATION_ADDRESS = "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa"; //blank address
 
 const waitTron = () => {
   return new Promise((resolve, reject) => {

@@ -97,6 +97,11 @@ export default [
         component: lazy(() => import("src/views/Referral")),
       },
       {
+        path: "/vote",
+        exact: true,
+        component: lazy(() => import("src/views/Vote")),
+      },
+      {
         path: "/farm",
         exact: true,
         component: lazy(() => import("src/views/Farm")),

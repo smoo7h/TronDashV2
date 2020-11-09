@@ -274,7 +274,11 @@ function DividendList() {
   return (
     <Page className={classes.root} title="TronDash">
       <Container maxWidth={false}>
-        <Statistics className={classes.statistics} customers={customers} />
+        {window.tronWeb.defaultAddress.base58 !=
+          "TYrNrk11FhuZWZEzPZTf6YqaKA6joeApaa" && (
+          <Statistics className={classes.statistics} customers={customers} />
+        )}
+
         {customers && (
           <div>
             <Results className={classes.results} customers={customers} />
