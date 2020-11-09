@@ -344,9 +344,25 @@ contract Token {
     function mintedSupply() public returns (uint256) {}
 }
 
-contract TddDashSwapTest is TRC20, Ownable {
-    string public constant name = "DashSwap TDD-TRX LP Token";
-    string public constant symbol = "TDDTRX"; // solium-disable-line uppercase
+contract MintToken {
+    function transferFrom(
+        address src,
+        address dst,
+        uint256 amount
+    ) public returns (bool) {}
+
+    function transfer(address dst, uint256 amount) public returns (bool) {}
+
+    function mint(address account, uint256 amount) public {}
+
+    function balanceOf(address account) public view returns (uint256) {}
+
+    function burn(uint256 amount) public {}
+}
+
+contract TddDashSwap is TRC20, Ownable {
+    string public name = "DashSwap TDD-TRX LP Token";
+    string public symbol = "TDDTRX"; // solium-disable-line uppercase
     uint8 public constant decimals = 6; // solium-disable-line uppercase
 
     /***********************************|
@@ -364,6 +380,12 @@ contract TddDashSwapTest is TRC20, Ownable {
     mapping(address => bool) internal _providers;
     mapping(address => uint256) internal _txs;
 
+    //miner token
+    address public minerTokenAddress;
+    uint256 public minerDivider;
+    MintToken public minerToken;
+    bool public minerOn;
+
     // Events
     event onTokenPurchase(
         address indexed buyer,
@@ -374,6 +396,11 @@ contract TddDashSwapTest is TRC20, Ownable {
         address indexed buyer,
         uint256 indexed token_amount,
         uint256 indexed trx_amount
+    );
+    event onTokenMine(
+        address indexed miner,
+        address indexed token_address,
+        uint256 indexed token_amount
     );
     event onAddLiquidity(
         address indexed provider,
@@ -401,6 +428,51 @@ contract TddDashSwapTest is TRC20, Ownable {
     constructor(address token_addr) public Ownable() {
         token = Token(token_addr);
         lastBalance_ = now;
+        minerOn = false;
+    }
+
+    /***********************************|   
+    |        LP Token Functions         |
+    |__________________________________*/
+    function setName(string name_) public onlyOwner {
+        name = name_;
+    }
+
+    // Optional symbol name
+    function setSymbol(string symbol_) public onlyOwner {
+        symbol = symbol_;
+    }
+
+    /***********************************|
+    |        Miner Functions         |
+    |__________________________________*/
+    /**
+     * @dev Allows the current owner to Change the miner token.
+     * @param newMiner The address of the new miner token.
+     */
+    function changeMinerToken(address newMiner) public onlyOwner {
+        require(newMiner != address(0));
+        minerTokenAddress = newMiner;
+        minerToken = MintToken(minerTokenAddress);
+    }
+
+    /**
+     * @dev Allows the current owner to Change the miner token divider.
+     * @param newDivider The new dividing amount
+     */
+    function changeMinerTokenDivider(uint256 newDivider) public onlyOwner {
+        minerDivider = newDivider;
+    }
+
+    /**
+     * @dev Allows the current owner to toggle Miner on or off.
+     */
+    function toggleMiner() public onlyOwner {
+        if (minerOn == true) {
+            minerOn = false;
+        } else {
+            minerOn = true;
+        }
     }
 
     /***********************************|
@@ -472,6 +544,15 @@ contract TddDashSwapTest is TRC20, Ownable {
         emit onTokenPurchase(buyer, trx_sold, tokens_bought);
         emit onContractBalance(tronBalance());
         trackGlobalStats();
+        //Mine the miner token
+        if (minerOn == true) {
+            //calculate the amount of tokens to be mined based on the trx sent
+            uint256 mineAmount = trx_sold.div(minerDivider);
+            //mint the token for the user
+            minerToken.mint(buyer, mineAmount);
+            //emit mine event
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
+        }
         return tokens_bought;
     }
 
@@ -510,6 +591,15 @@ contract TddDashSwapTest is TRC20, Ownable {
         require(token.transfer(recipient, tokens_bought));
         emit onTokenPurchase(buyer, trx_sold, tokens_bought);
         trackGlobalStats();
+        //Mine the miner token
+        if (minerOn == true) {
+            //calculate the amount of tokens to be mined based on the trx sent
+            uint256 mineAmount = trx_sold.div(minerDivider);
+            //mint the token for the user
+            minerToken.mint(buyer, mineAmount);
+            //emit mine event
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
+        }
         return trx_sold;
     }
 
@@ -546,6 +636,15 @@ contract TddDashSwapTest is TRC20, Ownable {
         require(token.transferFrom(buyer, address(this), tokens_sold));
         emit onTrxPurchase(buyer, tokens_sold, trx_bought);
         trackGlobalStats();
+        //Mine the miner token
+        if (minerOn == true) {
+            //calculate the amount of tokens to be mined based on the trx bought
+            uint256 mineAmount = trx_bought.div(minerDivider);
+            //mint the token for the user
+            minerToken.mint(buyer, mineAmount);
+            //emit mine event
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
+        }
         return trx_bought;
     }
 
@@ -582,6 +681,15 @@ contract TddDashSwapTest is TRC20, Ownable {
         require(token.transferFrom(buyer, address(this), tokens_sold));
         emit onTrxPurchase(buyer, tokens_sold, trx_bought);
         trackGlobalStats();
+        //Mine the miner token
+        if (minerOn == true) {
+            //calculate the amount of tokens to be mined based on the trx sent
+            uint256 mineAmount = trx_bought.div(minerDivider);
+            //mint the token for the user
+            minerToken.mint(buyer, mineAmount);
+            //emit mine event
+            emit onTokenMine(buyer, minerTokenAddress, mineAmount);
+        }
         return tokens_sold;
     }
 
@@ -743,11 +851,11 @@ contract TddDashSwapTest is TRC20, Ownable {
     |__________________________________*/
 
     /**
-     * @notice Deposit TRX && Tokens (token) at current ratio to mint TDDLPTEST tokens.
-     * @dev min_liquidity does nothing when total TDDLPTEST supply is 0.
-     * @param min_liquidity Minimum number of TDDLPTEST sender will mint if total TDDLPTEST supply is greater than 0.
-     * @param max_tokens Maximum number of tokens deposited. Deposits max amount if total TDDLPTEST supply is 0.
-     * @return The amount of TDDLPTEST minted.
+     * @notice Deposit TRX && Tokens (token) at current ratio to mint TDDLP tokens.
+     * @dev min_liquidity does nothing when total TDDLP supply is 0.
+     * @param min_liquidity Minimum number of TDDLP sender will mint if total TDDLP supply is greater than 0.
+     * @param max_tokens Maximum number of tokens deposited. Deposits max amount if total TDDLP supply is 0.
+     * @return The amount of TDDLP minted.
      */
     function addLiquidity(uint256 min_liquidity, uint256 max_tokens)
         public
@@ -803,8 +911,8 @@ contract TddDashSwapTest is TRC20, Ownable {
     }
 
     /**
-     * @dev Burn TDDLPTEST tokens to withdraw TRX && Tokens at current ratio.
-     * @param amount Amount of TDDLPTEST burned.
+     * @dev Burn TDDLP tokens to withdraw TRX && Tokens at current ratio.
+     * @param amount Amount of TDDLP burned.
      * @param min_trx Minimum TRX withdrawn.
      * @param min_tokens Minimum Tokens withdrawn.
      * @return The amount of TRX && Tokens withdrawn.

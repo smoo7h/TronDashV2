@@ -79,10 +79,10 @@ function DashSwap({ open, onClose, customer, className, ...rest }) {
   const [viewState, setviewState] = useState("swap");
 
   const [tokenAddress, setTokenAddress] = useState(
-    "TTaWvzX3mLA587AQ6V2qs9t72rqoLE1sh5"
+    "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5"
   );
   const [swapAddress, setSwapAddress] = useState(
-    "TRdeKsxDHZZ1kX8pS4yxbEsQLRQbngBzQe"
+    "TYtCU5129eRyMF35g3dz7J3Nan5kqAkg67"
   );
 
   const handleFieldChange = (event) => {

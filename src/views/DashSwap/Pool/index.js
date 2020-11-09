@@ -489,9 +489,11 @@ function Pool({
 
   const handleAddTrxTextChange = (event) => {
     //  event.persist();
-    if (event.target.value && event.target.value != "") {
-      settrxInputTextValue(event.target.value);
-      handelPoolInputCalculation(event.target.value);
+    //remove the letters from the string value
+    var sValue = event.target.value.replace(/[^\d.-]/g, "");
+    if (sValue && sValue != "") {
+      settrxInputTextValue(sValue);
+      handelPoolInputCalculation(sValue);
     } else {
       settrxInputTextValue("");
       settokensNeededForAdd("");
@@ -525,7 +527,8 @@ function Pool({
         let solidityNumber = output * 1000000;
 
         if (solidityNumber % 1 != 0) {
-          solidityNumber = ~~solidityNumber;
+          solidityNumber = Math.floor(solidityNumber);
+          // solidityNumber = ~~solidityNumber;
         }
 
         setlpTokensToBeRemoved(solidityNumber);
@@ -571,7 +574,8 @@ function Pool({
       //multiply it to remove decimals
       value = value * 1000000;
       if (value % 1 != 0) {
-        value = ~~value;
+        // value = ~~value;
+        value = Math.floor(value);
       }
       //first we need to call getTrxToLiquidityInputPrice(uint256) on the contract to see how many lp tokens we get
       let data = getContractData(
@@ -584,6 +588,10 @@ function Pool({
           setlptokensReceived(response);
           //change number to solidity notation
           response = response * 1000000;
+          if (response % 1 != 0) {
+            // value = ~~value;
+            response = Math.floor(response);
+          }
           //now that we have the value we need to call getLiquidityToReserveInputPrice(uint256)
           //to get the tokens needed
 
@@ -792,7 +800,8 @@ function Pool({
 
       trxInput = trxInput * 1000000;
       if (trxInput % 1 != 0) {
-        trxInput = ~~trxInput;
+        //trxInput = ~~trxInput;
+        trxInput = Math.floor(trxInput);
       }
 
       try {
@@ -815,7 +824,10 @@ function Pool({
 
         //remove any decimals
         if (liquidityToReserveInputPriceMax % 1 != 0) {
-          liquidityToReserveInputPriceMax = ~~liquidityToReserveInputPriceMax;
+          //liquidityToReserveInputPriceMax = ~~liquidityToReserveInputPriceMax;
+          liquidityToReserveInputPriceMax = Math.floor(
+            liquidityToReserveInputPriceMax
+          );
         }
 
         //now lets call the contract
@@ -1524,7 +1536,7 @@ function Pool({
                   {lptokenBalance.toFixed(2)} TDDLP
                 </Typography>
               </div>
-              <div className={classes.statsItem} key={"sold2"}>
+              <div className={classes.statsItem} key={"sold8"}>
                 <Typography
                   align="center"
                   component="h6"
@@ -1537,7 +1549,7 @@ function Pool({
                   {walletBalance.toFixed(2)} {` trx`}
                 </Typography>
               </div>
-              <div className={classes.statsItem} key={"sold"}>
+              <div className={classes.statsItem} key={"sold4"}>
                 <Typography
                   align="center"
                   component="h6"

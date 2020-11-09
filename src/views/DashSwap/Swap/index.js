@@ -450,7 +450,8 @@ function Swap(
       let ogValue = value;
       value = value * 1000000;
       if (value % 1 != 0) {
-        value = ~~value;
+        //value = ~~value;
+        value = Math.floor(value);
       }
 
       let data = getContractData(
@@ -487,7 +488,8 @@ function Swap(
       let ogValue = value;
       value = value * 1000000;
       if (value % 1 != 0) {
-        value = ~~value;
+        //value = ~~value;
+        value = Math.floor(value);
       }
 
       let data = getContractData(
@@ -728,11 +730,13 @@ function Swap(
         //remove decimals
 
         if (trxSumbitAmoung % 1 != 0) {
-          trxSumbitAmoung = ~~trxSumbitAmoung;
+          // trxSumbitAmoung = ~~trxSumbitAmoung;
+          trxSumbitAmoung = Math.floor(trxSumbitAmoung);
         }
 
         if (contractParameter % 1 != 0) {
-          contractParameter = ~~contractParameter;
+          //contractParameter = ~~contractParameter;
+          contractParameter = Math.floor(contractParameter);
         }
 
         //you have to send the one with afunctionSelector
@@ -774,7 +778,8 @@ function Swap(
 
         //remove decimals
         if (contractParameter % 1 != 0) {
-          contractParameter = ~~contractParameter;
+          // contractParameter = ~~contractParameter;
+          contractParameter = Math.floor(contractParameter);
         }
 
         //you have to send the one with afunctionSelector
@@ -845,8 +850,8 @@ function Swap(
                   >
                     <IconButton
                       aria-label="max"
-                      onClick={handleMaxTrx}
-                      onMouseDown={handleMaxTrx}
+                      onClick={handleMaxToken}
+                      onMouseDown={handleMaxToken}
                       edge="end"
                       className={classes.iconButton}
                     >
