@@ -524,9 +524,11 @@ function Swap(
 
   const handleTextChange = (event) => {
     //  event.persist();
-    if (event.target.value && event.target.value != "") {
-      setTrxInputTextValue(event.target.value);
-      handelTrxToTokenSwapValue(event.target.value);
+    //remove the letters from the string value
+    var sValue = event.target.value.replace(/[^\d.-]/g, "");
+    if (sValue && sValue != "") {
+      setTrxInputTextValue(sValue);
+      handelTrxToTokenSwapValue(sValue);
     } else {
       setTrxInputTextValue("");
       setTokenInPutTextValue("");
@@ -536,9 +538,11 @@ function Swap(
   const handleTextChangeTokenInPut = (event) => {
     //  event.persist();
 
-    if (event.target.value && event.target.value != "") {
-      setTokenInPutTextValue(event.target.value);
-      handelTokenToTrxSwapValue(event.target.value);
+    //remove the letters from the string value
+    var sValue = event.target.value.replace(/[^\d.-]/g, "");
+    if (sValue && sValue != "") {
+      setTokenInPutTextValue(sValue);
+      handelTokenToTrxSwapValue(sValue);
     } else {
       setTrxInputTextValue("");
       setTokenInPutTextValue("");
@@ -817,7 +821,6 @@ function Swap(
                 classes={outlinedInputClasses}
                 notched={false}
                 fullWidth
-                type="number"
                 onChange={handleTextChangeTokenInPut}
                 value={tokenInPutTextValue}
                 margin="normal"
@@ -828,10 +831,10 @@ function Swap(
                   >
                     <IconButton
                       aria-label="max"
-                      onClick={handleMaxToken}
-                      onMouseDown={handleMaxToken}
+                      onClick={handleMaxTrx}
+                      onMouseDown={handleMaxTrx}
                       edge="end"
-                      // className={classes.iconButton}
+                      className={classes.iconButton}
                     >
                       <Typography className={classes.centertext}>
                         max
@@ -842,9 +845,13 @@ function Swap(
                       //onClick={handleMaxTrx}
                       //onMouseDown={handleMaxTrx}
                       edge="end"
+
                       //  className={classes.iconButton}
                     >
-                      <Avatar src={DashImage} />
+                      <Avatar
+                        src={DashImage}
+                        //style={{ backgroundColor: "black" }}
+                      />
                     </IconButton>
                     <IconButton
                       aria-label="tokenlabel"
