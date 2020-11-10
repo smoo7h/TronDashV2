@@ -4,6 +4,7 @@ import React from "react";
 import { colors } from "@material-ui/core";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import Whitepaper from "src/assets/TDWP.pdf";
+import Opacity from "@material-ui/icons/Opacity";
 import BusinessIcon from "@material-ui/icons/Business";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
@@ -61,6 +62,11 @@ export default [
         title: "Dash Swap",
         href: "/swap",
         icon: SwapHoriz,
+      },
+      {
+        title: "Liquidity Farm",
+        href: "/liquidityfarm",
+        icon: Opacity,
       },
       {
         title: "Dash Token",

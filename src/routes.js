@@ -145,84 +145,9 @@ export default [
         ),
       },
       {
-        path: "/calendar",
-        exact: true,
-        component: lazy(() => import("src/views/Calendar")),
-      },
-      {
-        path: "/changelog",
-        exact: true,
-        component: lazy(() => import("src/views/Changelog")),
-      },
-      {
-        path: "/chat",
-        exact: true,
-        component: lazy(() => import("src/views/Chat")),
-      },
-      {
-        path: "/chat/:id",
-        exact: true,
-        component: lazy(() => import("src/views/Chat")),
-      },
-      {
-        path: "/components/buttons",
-        exact: true,
-        component: lazy(() => import("src/views/Buttons")),
-      },
-      {
-        path: "/components/cards",
-        exact: true,
-        component: lazy(() => import("src/views/Cards")),
-      },
-      {
-        path: "/components/chips",
-        exact: true,
-        component: lazy(() => import("src/views/Chips")),
-      },
-      {
-        path: "/components/forms",
-        exact: true,
-        component: lazy(() => import("src/views/Forms")),
-      },
-      {
-        path: "/components/lists",
-        exact: true,
-        component: lazy(() => import("src/views/Lists")),
-      },
-      {
-        path: "/components/modals",
-        exact: true,
-        component: lazy(() => import("src/views/Modals")),
-      },
-      {
-        path: "/components/typography",
-        exact: true,
-        component: lazy(() => import("src/views/Typography")),
-      },
-      {
-        path: "/dashboards/analytics",
-        exact: true,
-        component: DashboardAnalyticsView,
-      },
-      {
         path: "/dashboards/default",
         exact: true,
         component: DashboardDefaultView,
-      },
-      {
-        path: "/invoices/:id",
-        exact: true,
-        component: lazy(() => import("src/views/InvoiceDetails")),
-      },
-      {
-        path: "/kanban-board",
-        exact: true,
-        component: lazy(() => import("src/views/KanbanBoard")),
-      },
-      {
-        path: "/management/customers",
-        exact: true,
-        component: lazy(() => import("src/views/DividendList")),
       },
       {
         path: "/dashbank/:id/:tab",
@@ -240,6 +165,11 @@ export default [
         component: lazy(() => import("src/views/DashSwap")),
       },
       {
+        path: "/liquidityfarm",
+        exact: true,
+        component: lazy(() => import("src/views/TDDLiquidityFarm")),
+      },
+      {
         path: "/management/customers/:id",
         exact: true,
         component: lazy(() => import("src/views/CustomerManagementDetails")),
@@ -248,76 +178,6 @@ export default [
         path: "/management/customers/:id/:tab",
         exact: true,
         component: lazy(() => import("src/views/CustomerManagementDetails")),
-      },
-      {
-        path: "/management/projects",
-        exact: true,
-        component: lazy(() => import("src/views/ProjectManagementList")),
-      },
-      {
-        path: "/management/orders",
-        exact: true,
-        component: lazy(() => import("src/views/OrderManagementList")),
-      },
-      {
-        path: "/management/orders/:id",
-        exact: true,
-        component: lazy(() => import("src/views/OrderManagementDetails")),
-      },
-      {
-        path: "/overview",
-        exact: true,
-        component: OverviewView,
-      },
-      {
-        path: "/presentation",
-        exact: true,
-        component: lazy(() => import("src/views/DividendList")),
-      },
-      {
-        path: "/profile/:id",
-        exact: true,
-        component: lazy(() => import("src/views/Profile")),
-      },
-      {
-        path: "/profile/:id/:tab",
-        exact: true,
-        component: lazy(() => import("src/views/Profile")),
-      },
-      {
-        path: "/projects/create",
-        exact: true,
-        component: lazy(() => import("src/views/ProjectCreate")),
-      },
-      {
-        path: "/projects/:id",
-        exact: true,
-        component: lazy(() => import("src/views/ProjectDetails")),
-      },
-      {
-        path: "/projects/:id/:tab",
-        exact: true,
-        component: lazy(() => import("src/views/ProjectDetails")),
-      },
-      {
-        path: "/projects",
-        exact: true,
-        component: lazy(() => import("src/views/ProjectList")),
-      },
-      {
-        path: "/settings",
-        exact: true,
-        component: lazy(() => import("src/views/Settings")),
-      },
-      {
-        path: "/settings/:tab",
-        exact: true,
-        component: lazy(() => import("src/views/Settings")),
-      },
-      {
-        path: "/social-feed",
-        exact: true,
-        component: lazy(() => import("src/views/SocialFeed")),
       },
       {
         component: () => <Redirect to="/errors/error-404" />,
