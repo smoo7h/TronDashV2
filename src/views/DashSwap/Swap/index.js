@@ -1131,7 +1131,7 @@ function Swap(
               {"tdd"} {"Balance"}
             </Typography>
             <Typography align="center" variant="h4">
-              {tokenBalance.toFixed(2)}
+              {tokenBalance.toFixed(2)} {"tdd"}
             </Typography>
           </div>
         </div>

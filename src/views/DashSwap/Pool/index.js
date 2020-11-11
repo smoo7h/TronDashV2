@@ -1141,6 +1141,7 @@ function Pool({
                 </Typography>
                 <Typography align="center" variant="h4">
                   {tokenBalance.toFixed(2)}
+                  {"TDD"}
                 </Typography>
               </div>
             </div>
@@ -1560,6 +1561,7 @@ function Pool({
                 </Typography>
                 <Typography align="center" variant="h4">
                   {tokenBalance.toFixed(2)}
+                  {"TDD"}
                 </Typography>
               </div>
             </div>

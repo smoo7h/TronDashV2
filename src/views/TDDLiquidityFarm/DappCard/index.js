@@ -840,9 +840,12 @@ function DappCard({
       <br></br>
       <Grid container>
         <Typography className={classes.centertextarea} variant="h5">
-          TronDash Liquidity Farm is a long term way to profit from providing
-          liquidity to the TDD ecosystem. Passively earn TRX rewards over time
-          by staking into Liquidity Farm.
+          TronDash’s Liquidity Farm is the best of way to profit from the
+          TronDash platform. Your share of TDDFRM entitles you to community
+          deposit distributions, TTDLP reserved tokens `&` their earned fees, a
+          2% daily pool payout, and provides liquidity to TDD-TRX staked pools,
+          encouraging trading, and fee generation, vaulting the value of your
+          TDDFRM staked position.
         </Typography>
       </Grid>
 
