@@ -197,16 +197,15 @@ function Swap(
   const fetchPageData = async () => {
     //get useers balance address
     const fetchUserBalance = () => {
-      let currentuseraddress = window.tronWeb.defaultAddress.base58;
-      if (window.tronWeb) {
-        window.tronWeb.trx.getBalance(
-          currentuseraddress,
-          (error, contractBalance) => {
-            if (error) return console.error(error);
-            setWalletBalance(contractBalance * 0.000001);
-          }
-        );
-      }
+      let data = getContractData(
+        "TTSjjapoGvVx66CfmcmCwWypk7bbqMkTp2",
+        "trxBalance(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setWalletBalance(response);
+        }
+      });
     };
 
     fetchUserBalance();
@@ -358,18 +357,18 @@ function Swap(
 
   useEffect(() => {
     let mounted = true;
-
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
+    //get useers balance address
     const fetchUserBalance = () => {
-      let currentuseraddress = window.tronWeb.defaultAddress.base58;
-      if (window.tronWeb) {
-        window.tronWeb.trx.getBalance(
-          currentuseraddress,
-          (error, contractBalance) => {
-            if (error) return console.error(error);
-            setWalletBalance(contractBalance * 0.000001);
-          }
-        );
-      }
+      let data = getContractData(
+        "TTSjjapoGvVx66CfmcmCwWypk7bbqMkTp2",
+        "trxBalance(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setWalletBalance(response);
+        }
+      });
     };
 
     fetchUserBalance();
