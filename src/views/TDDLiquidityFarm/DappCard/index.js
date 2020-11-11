@@ -155,20 +155,13 @@ function DappCard({
   className,
   swapClick,
   poolClick,
-  swapAddress,
+  dappAddress,
   tokenAddress,
   ...rest
 }) {
   const classes = useStyles();
   const outlinedInputClasses = useOutlinedInputStyles();
-  const [graphObject, setGraphObject] = useState([]);
-  const [soldPercentage, setSoldPercentage] = useState(0);
-  const [approvedAddStatus, setapprovedAddStatus] = useState(false);
-  const [approvedRemoveStatus, setapprovedRemoveStatus] = useState(false);
-  const [approvedStatus, setapprovedStatus] = useState(false);
-  const [walletBalance, setWalletBalance] = useState(0);
 
-  const [viewState, setViewState] = useState("add");
   const [trxInputTextValue, settrxInputTextValue] = useState(0);
   const [tokenInputTextValue, settokenInputTextValue] = useState(0);
   const [estimateToken, setestimateToken] = useState(0);
@@ -186,6 +179,20 @@ function DappCard({
   const [sliderValue, setSliderValue] = React.useState(0);
   const [currentPrice, setcurrentPrice] = useState();
 
+  const [open, setOpen] = React.useState(false);
+  const [openInfo, setOpenInfo] = React.useState(false);
+
+  //Dapp data
+
+  const [walletBalance, setWalletBalance] = useState(0);
+  const [userStake, setuserStake] = useState(0);
+  const [userDividend, setuserDividend] = useState(0);
+  const [dividendPool, setdividendPool] = useState(0);
+  const [dividendPoolToken, setdividendPoolToken] = useState(0);
+  const [contractBalance, setcontractBalance] = useState(0);
+  const [memberCount, setmemberCount] = useState(0);
+
+  //timer for refresh
   function useInterval(callback, delay) {
     const savedCallback = useRef();
 
@@ -222,9 +229,9 @@ function DappCard({
   };
 
   const fetchPageData = () => {
+    let currentuseraddress = window.tronWeb.defaultAddress.base58;
     //get useers balance address
     const fetchUserBalance = () => {
-      let currentuseraddress = window.tronWeb.defaultAddress.base58;
       if (window.tronWeb) {
         window.tronWeb.trx.getBalance(
           currentuseraddress,
@@ -237,116 +244,85 @@ function DappCard({
     };
 
     fetchUserBalance();
-    let value = 1000000;
-    let data = getContractData(
-      swapAddress,
-      "getTrxToTokenInputPrice(uint256)",
-      value
-    ).then((response) => {
-      if (response) {
-        //set the price
-        let formattedPrice = setcurrentPrice(response);
-      }
-    });
 
-    //check user approval to
-    //allowance(address,address)
-    //for ading liquidity
-    let currentuseraddress = window.tronWeb.defaultAddress.base58;
-    let paramdata = currentuseraddress + "," + swapAddress;
-    getAllowance(tokenAddress, "allowance(address,address)", paramdata).then(
-      (response) => {
-        if (response) {
-          //check if they are approved
-          if (response > 5000000000000) {
-            setapprovedAddStatus(true);
-          }
-        }
-      }
-    );
-
-    //check user approval to
-    //allowance(address,address)
-    //for removing liquidity
-
-    paramdata = currentuseraddress + "," + swapAddress;
-    getAllowance(swapAddress, "allowance(address,address)", paramdata).then(
-      (response) => {
-        if (response) {
-          //check if they are approved
-          if (response > 5000000000000) {
-            setapprovedRemoveStatus(true);
-          }
-        }
-      }
-    );
-
-    const fetchTokenBalance = () => {
+    //get user userStake
+    const fetchUserStake = () => {
       let data = getContractData(
-        tokenAddress,
-        "balanceOf(address)",
+        dappAddress,
+        "statsOf(address)",
         currentuseraddress
       ).then((response) => {
         if (response) {
-          settokenBalance(response);
+          setuserStake(response);
         }
       });
-      //console.log(data);
     };
 
-    const fetchLPTokenBalance = () => {
-      let data = getContractData(
-        swapAddress,
-        "balanceOf(address)",
-        currentuseraddress
-      ).then((response) => {
+    fetchUserStake();
+
+    //get user Dividends
+    const fetchUserDivs = () => {
+      let data = getContractData(dappAddress, "myDividends()").then(
+        (response) => {
+          if (response) {
+            setuserDividend(response);
+          }
+        }
+      );
+    };
+
+    fetchUserDivs();
+
+    //dividendBalance
+
+    const fetDivPoolTrx = () => {
+      let data = getContractData(dappAddress, "dividendBalance()").then(
+        (response) => {
+          if (response) {
+            setdividendPool(response);
+          }
+        }
+      );
+    };
+
+    fetDivPoolTrx();
+
+    //div balance token
+    const fetDivPoolToken = () => {
+      let data = getContractData(dappAddress, "lockedTokenBalance()").then(
+        (response) => {
+          if (response) {
+            setdividendPoolToken(response);
+          }
+        }
+      );
+    };
+
+    fetDivPoolToken();
+
+    //get member count
+    const fetchMemberCount = () => {
+      let data = getContractData(dappAddress, "players()").then((response) => {
         if (response) {
-          setlptokenBalance(response);
+          setmemberCount(response * 1000000);
         }
       });
-      //console.log(data);
     };
 
-    fetchTokenBalance();
-    fetchLPTokenBalance();
-  };
+    fetchMemberCount();
 
-  const getAllowance = async (
-    contractAddress,
-    functionSelector,
-    contractParameter
-  ) => {
-    var contractValue = await window.tronWeb
-      .contract()
-      .at(contractAddress, async (error, contract) => {
-        if (error) return console.error(error);
-        let getbalance1;
-
-        try {
-          //split parameters
-          let param1 = contractParameter.split(",")[0];
-          let param2 = contractParameter.split(",")[1];
-          let result = await contract.allowance(param1, param2).call();
-
-          //you have to send the one with a
-          getbalance1 = result;
-        } catch (error) {
-          //sometimes if they have the wrong value for the functionSelector this happens
-          getbalance1 = 101;
+    //totalTokenBalance
+    const fetchcontractbalance = () => {
+      let data = getContractData(dappAddress, "totalTokenBalance()").then(
+        (response) => {
+          if (response) {
+            setcontractBalance(response);
+          }
         }
-        //need to cast number as bignumber 4 no overflow
-        let returnValueIndexd = getbalance1[Object.keys(getbalance1)[0]];
-        let numchec = new BigNumber(returnValueIndexd);
-        let returnValue = 0;
-        //set the value
-        let multiplier = Math.pow(10, 6 * -1);
-        returnValue = Number(numchec) * multiplier;
-        //remove the decmalls
-        returnValue = returnValue;
-        return returnValue;
-      });
+      );
+    };
 
-    return contractValue;
+    fetchcontractbalance();
   };
 
   useEffect(() => {
@@ -359,45 +335,6 @@ function DappCard({
     };
 
     fetchData();
-
-    return () => {
-      mounted = false;
-    };
-  }, [checkSiteData]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchData = () => {
-      if (mounted) {
-        fetchPageData();
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchUserBalance = () => {
-      let currentuseraddress = window.tronWeb.defaultAddress.base58;
-      if (window.tronWeb) {
-        window.tronWeb.trx.getBalance(
-          currentuseraddress,
-          (error, contractBalance) => {
-            if (error) return console.error(error);
-            setWalletBalance(contractBalance * 0.000001);
-          }
-        );
-      }
-    };
-
-    fetchUserBalance();
 
     return () => {
       mounted = false;
@@ -425,9 +362,6 @@ function DappCard({
     };
   }, [sliderValue]);
 
-  const [open, setOpen] = React.useState(false);
-  const [openInfo, setOpenInfo] = React.useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -435,14 +369,9 @@ function DappCard({
     setOpenInfo(true);
   };
 
-  const handleApproveRemove = () => {
+  const handleReinvest = () => {
     //call the blockchain for approval
-
-    executeApprovalContract(
-      swapAddress,
-      swapAddress,
-      "10000000000000000000000"
-    ).then(setapprovedRemoveStatus(true), (response) => {
+    executeContract(dappAddress, "reinvest()", "").then((response) => {
       if (response) {
         //successsetapprovedStatus(true);
         setcheckSiteData(checkSiteData + 1);
@@ -450,10 +379,60 @@ function DappCard({
     });
   };
 
-  const handleApproveAdd = () => {
+  const handleWithdral = () => {
     //call the blockchain for approval
-    executeContract(tokenAddress, "approve(address)", swapAddress).then(
-      setapprovedAddStatus(true),
+    executeContract(dappAddress, "withdraw()", "").then((response) => {
+      if (response) {
+        //successsetapprovedStatus(true);
+        setcheckSiteData(checkSiteData + 1);
+      }
+    });
+  };
+
+  const executeTrxToTokenSwapContract = async (contractAddress, callValue) => {
+    //get the contacct value
+    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
+      if (error) return console.error(error);
+      let returnvalue;
+
+      try {
+        //convert call value to slolidiy valye
+        let trxSumbitAmount = callValue * 1000000;
+
+        //remove decimals
+
+        if (trxSumbitAmount % 1 != 0) {
+          // trxSumbitAmount = ~~trxSumbitAmount;
+          trxSumbitAmount = Math.floor(trxSumbitAmount);
+        }
+
+        //you have to send the one with afunctionSelector
+        returnvalue = await contract
+          .buy()
+          .send({
+            feeLimit: 10000000,
+            callValue: trxSumbitAmount,
+          })
+          .then((response) => {
+            if (response) {
+              setcheckSiteData(checkSiteData + 1);
+              handleClose();
+
+              return response;
+            }
+          });
+        return returnvalue;
+      } catch (error) {
+        //error
+        console.log(error);
+      }
+    });
+  };
+  //handel  deposit
+
+  const handleDeposit = () => {
+    //call the blockchain for approval
+    executeTrxToTokenSwapContract(dappAddress, trxInputTextValue).then(
       (response) => {
         if (response) {
           //successsetapprovedStatus(true);
@@ -462,8 +441,6 @@ function DappCard({
       }
     );
   };
-
-  //handelBuy
 
   const handleClose = () => {
     setOpen(false);
@@ -473,7 +450,7 @@ function DappCard({
   };
 
   const handleAddLiquidity = () => {
-    executeAddLiquitityContract(swapAddress, trxInputTextValue).then(
+    executeAddLiquitityContract(dappAddress, trxInputTextValue).then(
       (response) => {
         if (response) {
           //successsetapprovedStatus(true);
@@ -483,30 +460,9 @@ function DappCard({
     );
   };
 
-  const handleRemoveLiquidity = () => {
-    executeRemoveLiquitityContract(swapAddress, lpTokensToBeRemoved).then(
-      (response) => {
-        if (response) {
-          //successsetapprovedStatus(true);
-          setcheckSiteData(checkSiteData + 1);
-        }
-      }
-    );
-  };
-
   const handleMax = () => {
     settrxInputTextValue(walletBalance);
     handelPoolInputCalculation(walletBalance);
-  };
-
-  const handlePoolClick = () => {
-    //handels when the user changes from swap to pool
-    poolClick();
-  };
-
-  const handleSwapClick = () => {
-    //handels when the user changes from pool to swap
-    swapClick();
   };
 
   const handleAddTrxTextChange = (event) => {
@@ -522,73 +478,6 @@ function DappCard({
     }
   };
 
-  const handelViewStateClickAdd = (value) => {
-    setViewState("add");
-  };
-  const handelViewStateClickRemove = (value) => {
-    setViewState("remove");
-  };
-
-  const handleSliderCommitChange = (event, newValue) => {
-    if (lptokenBalance > 0) {
-      setSliderValue(newValue);
-
-      //update values from blockchain
-      if (
-        lptokenBalance &&
-        lptokenBalance != "" &&
-        newValue > 0 &&
-        lptokenBalance > 0
-      ) {
-        //calculate how mant tokens we wanna sell
-        let devisor = newValue * 0.01;
-        let lpTokensToSell = lptokenBalance * devisor;
-
-        //check the output of
-        let output = lpTokensToSell;
-        let solidityNumber = output * 1000000;
-
-        if (solidityNumber % 1 != 0) {
-          solidityNumber = Math.floor(solidityNumber);
-          // solidityNumber = ~~solidityNumber;
-        }
-
-        setlpTokensToBeRemoved(solidityNumber);
-        //we need to call getLiquidityToReserveInputPrice() to get the output newValues
-        let data = getContractData(
-          swapAddress,
-          "getLiquidityToReserveInputPrice(uint256)",
-          solidityNumber,
-          2
-        ).then((response) => {
-          if (response) {
-            //save the estimated tokens you get back
-            settrxReceivedForRemove(response[0]);
-            settokenReceivedForRemove(response[1]);
-          }
-        });
-      }
-    }
-  };
-
-  const handleSliderChange = (event, newValue) => {
-    if (lptokenBalance > 0) {
-      setSliderValue(newValue);
-    }
-  };
-
-  const handleBlur = () => {
-    if (sliderValue < 0) {
-      setSliderValue(0);
-    } else if (sliderValue > 100) {
-      setSliderValue(100);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    //  setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
-
   //calculates the number of tokens required to add liquidity from a trx value
   const handelPoolInputCalculation = (value) => {
     if (value && value > 0) {
@@ -601,7 +490,7 @@ function DappCard({
       }
       //first we need to call getTrxToLiquidityInputPrice(uint256) on the contract to see how many lp tokens we get
       let data = getContractData(
-        swapAddress,
+        dappAddress,
         "getTrxToLiquidityInputPrice(uint256)",
         value
       ).then((response) => {
@@ -618,7 +507,7 @@ function DappCard({
           //to get the tokens needed
 
           let data = getContractData(
-            swapAddress,
+            dappAddress,
             "getLiquidityToReserveInputPrice(uint256)",
             response
           ).then((response) => {
@@ -654,7 +543,7 @@ function DappCard({
 
     const fetchLPTokenBalance = () => {
       let data = getContractData(
-        swapAddress,
+        dappAddress,
         "balanceOf(address)",
         currentuseraddress
       ).then((response) => {
@@ -749,17 +638,17 @@ function DappCard({
       if (callValue > 0) {
         try {
           //convert call value to slolidiy valye
-          let trxSumbitAmoung = callValue * 1000000;
+          let trxSumbitAmount = callValue * 1000000;
           //you have to send the one with a
           returnvalue =
             contractParameter == ""
               ? await contract[functionSelector]().send({
                   feeLimit: 10000000,
-                  call_value: trxSumbitAmoung,
+                  call_value: trxSumbitAmount,
                 })
               : await contract[functionSelector](contractParameter).send({
                   feeLimit: 10000000,
-                  call_value: trxSumbitAmoung,
+                  call_value: trxSumbitAmount,
                 });
           return returnvalue;
         } catch (error) {
@@ -967,7 +856,7 @@ function DappCard({
               fullWidth
               size="large"
               color="primary"
-              onClick={handelViewStateClickAdd}
+              onClick={handleWithdral}
               className={classes.margin}
               style={{
                 background: "linear-gradient(to right, #4700d5, #8C9EFF)",
@@ -984,7 +873,7 @@ function DappCard({
               fullWidth
               size="large"
               color="primary"
-              onClick={handelViewStateClickRemove}
+              onClick={handleReinvest}
               className={classes.margin}
               style={{
                 background: "linear-gradient(to right, #D50000, #ff8c8c)",
@@ -1008,7 +897,7 @@ function DappCard({
               Your Stake
             </Typography>
             <Typography align="center" variant="h4">
-              {lptokenBalance.toFixed(2)} trx
+              {userStake.toFixed(2)} trx
             </Typography>
           </div>
           <div className={classes.statsItem}>
@@ -1021,7 +910,7 @@ function DappCard({
               Dividend
             </Typography>
             <Typography align="center" variant="h4">
-              {walletBalance.toFixed(2)} {` trx`}
+              {userDividend.toFixed(2)} {` trx`}
             </Typography>
           </div>
           <div className={classes.statsItem}>
@@ -1034,7 +923,7 @@ function DappCard({
               TRX Balance
             </Typography>
             <Typography align="center" variant="h4">
-              {tokenBalance.toFixed(2)} {` `} trx
+              {walletBalance.toFixed(2)} {` `} trx
             </Typography>
           </div>
         </div>
@@ -1238,7 +1127,7 @@ function DappCard({
                           fullWidth
                           size="large"
                           color="primary"
-                          onClick={handleAddLiquidity}
+                          onClick={handleDeposit}
                           className={classes.margin}
                           style={{
                             background:
@@ -1293,12 +1182,12 @@ function DappCard({
                             // to={customer.website}
                             href={
                               "https://tronscan.org/#/contract/" +
-                              swapAddress +
+                              dappAddress +
                               "/code"
                             }
                             variant="h6"
                           >
-                            {swapAddress}
+                            {dappAddress}
                           </Link>
                         </Typography>
                       </Grid>
@@ -1359,7 +1248,8 @@ function DappCard({
                           Dividend Pool
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {lptokenBalance.toFixed(2)} trx
+                          {dividendPool.toFixed(2)} trx /
+                          {dividendPoolToken.toFixed(2)} tdd
                         </Typography>
                       </div>
                       <div className={classes.statsItem}>
@@ -1372,7 +1262,7 @@ function DappCard({
                           Contract Balance
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {walletBalance.toFixed(2)} {` trx`}
+                          {contractBalance.toFixed(2)} {` tddlp`}
                         </Typography>
                       </div>
                       <div className={classes.statsItem}>
@@ -1385,7 +1275,7 @@ function DappCard({
                           Members
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {tokenBalance.toFixed(2)}
+                          {memberCount}
                         </Typography>
                       </div>
                     </div>

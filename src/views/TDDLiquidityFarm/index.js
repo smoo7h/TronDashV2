@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import Swap from "src/views/TDDLiquidityFarm/Swap";
-import Pool from "src/views/TDDLiquidityFarm/DappCard";
+import DappCard from "src/views/TDDLiquidityFarm/DappCard";
 import { makeStyles } from "@material-ui/styles";
-import Dashimage from "../../assets/dashcoinlogo.png";
-import Avatar from "@material-ui/core/Avatar";
-import Whitepaper from "src/assets/TDWP.pdf";
 import withWidth from "@material-ui/core/withWidth";
 
 import {
@@ -77,23 +73,9 @@ function TDDLiquidityFarm({ open, onClose, customer, className, ...rest }) {
     ...customer,
   });
 
-  const [tokenAddress, setTokenAddress] = useState(
-    "TQ2Qyqu6rPXskGGfcPSkF8X7vYnfLMxCx5"
+  const [dappAddress, setDappAddress] = useState(
+    "TGAF2jVdoDz1Rjxx6rukNhDZ6qMga6vbhg"
   );
-  const [swapAddress, setSwapAddress] = useState(
-    "TYtCU5129eRyMF35g3dz7J3Nan5kqAkg67"
-  );
-
-  const handleFieldChange = (event) => {
-    event.persist();
-    setValues((currentValues) => ({
-      ...currentValues,
-      [event.target.name]:
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value,
-    }));
-  };
 
   return (
     <Card className={clsx(classes.root)}>
@@ -103,9 +85,8 @@ function TDDLiquidityFarm({ open, onClose, customer, className, ...rest }) {
             <Grid item lg={3} xl={3} xs={12}></Grid>
             <Grid item lg={6} xl={6} xs={12}>
               <Card>
-                <Pool
-                  swapAddress={swapAddress}
-                  tokenAddress={tokenAddress}
+                <DappCard
+                  dappAddress={dappAddress}
                   className={classes.buycard}
                 />
               </Card>
