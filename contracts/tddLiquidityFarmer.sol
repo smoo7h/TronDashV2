@@ -283,6 +283,7 @@ contract TronDashTDDLiquidityFarmer {
         address indexed account,
         uint256 amount
     );
+    event Transfer(address indexed src, address indexed dst, uint256 amount);
 
     event onLiquiditySweep(uint256 amount);
 
@@ -305,7 +306,7 @@ contract TronDashTDDLiquidityFarmer {
         uint256 xReceivedTokens;
     }
 
-    /*-----------------------------------==
+    /*-------------------------------------
     =            CONFIGURABLES            =
     -------------------------------------*/
 
@@ -515,6 +516,7 @@ contract TronDashTDDLiquidityFarmer {
         totalTxs += 1;
 
         emit onTransfer(_customerAddress, _toAddress, _amountOfTokens, now);
+        emit Transfer(_customerAddress, _toAddress, _amountOfTokens);
 
         emit onLeaderBoard(
             _customerAddress,
@@ -531,7 +533,6 @@ contract TronDashTDDLiquidityFarmer {
             stats[_toAddress].withdrawn,
             now
         );
-
         return true;
     }
 
@@ -681,6 +682,7 @@ contract TronDashTDDLiquidityFarmer {
         totalTxs += 1;
 
         emit onTransfer(_customerAddress, _toAddress, _amountOfTokens, now);
+        emit Transfer(_customerAddress, _toAddress, _amountOfTokens);
 
         emit onLeaderBoard(
             _customerAddress,
@@ -712,7 +714,7 @@ contract TronDashTDDLiquidityFarmer {
         dev = newAddr;
     }
 
-    /*-----------------------------------==
+    /*-------------------------------------
     =      Dash mining Functions           =
     -------------------------------------*/
     function transferDash(address customerAddress, uint256 amount)
@@ -742,7 +744,7 @@ contract TronDashTDDLiquidityFarmer {
         return true;
     }
 
-    /*-----------------------------------==
+    /*-------------------------------------
     =      HELPERS AND CALCULATORS        =
     -------------------------------------*/
 
@@ -770,6 +772,15 @@ contract TronDashTDDLiquidityFarmer {
     function myTokens() public view returns (uint256) {
         address _customerAddress = msg.sender;
         return balanceOf(_customerAddress);
+    }
+
+    /// @dev Retrieve TRX dividends.
+    function myTrxDivs() public view returns (uint256) {
+        address _customerAddress = msg.sender;
+        uint256 _customerTokenDivs = dividendsOf(_customerAddress);
+        //calculate the trx output
+        uint256 _trxDiv = calculateLiquidityToTrx(_customerTokenDivs);
+        return _trxDiv;
     }
 
     /**
@@ -966,7 +977,7 @@ contract TronDashTDDLiquidityFarmer {
                 : 0;
     }
 
-    /*----------------------------------------==
+    /*------------------------------------------
     =            INTERNAL FUNCTIONS            =
     ------------------------------------------*/
 
@@ -1083,7 +1094,7 @@ contract TronDashTDDLiquidityFarmer {
 
         stats[_customerAddress].invested += trxAmount;
         stats[_customerAddress].xInvested += 1;
-
+        emit Transfer(address(this), _customerAddress, _amountOfTokens);
         //we send some mined dash to the user
         if (miningRate > 0) {
             uint256 miningbonus = SafeMath.div(trxAmount, miningRate);

@@ -282,13 +282,27 @@ function DappCard({
 
     //get user Dividends
     const fetchUserDivs = () => {
-      let data = getContractData(dappAddress, "myDividends()").then(
-        (response) => {
-          if (response) {
-            setuserDividend(response);
-          }
+      //get the user trx dividends
+      let userTrxDivs = 0;
+      let userTokenDivs = 0;
+      let tokenPrice = 0;
+      getContractData(dappAddress, "myDividends()").then((response) => {
+        if (response) {
+          //save it
+
+          //get get the user token div balance
+          getContractData(dappAddress, "myDividends()").then((response) => {
+            if (response) {
+              //save it
+              let userTrxDivs = response;
+
+              setuserDividend(response);
+            }
+          });
+
+          setuserDividend(response);
         }
-      );
+      });
     };
 
     fetchUserDivs();
@@ -1027,6 +1041,7 @@ function DappCard({
               {walletBalance >= trxInputTextValue && "Deposit"}
               {walletBalance < trxInputTextValue && "Not Enough TRX"}
             </Button>
+            <br></br>
             <Grid
               container
               direction="row"
