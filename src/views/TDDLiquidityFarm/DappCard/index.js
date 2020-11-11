@@ -186,6 +186,7 @@ function DappCard({
 
   const [walletBalance, setWalletBalance] = useState(0);
   const [userStake, setuserStake] = useState(0);
+  const [userTokenBalance, setuserTokenBalance] = useState(0);
   const [userDividend, setuserDividend] = useState(0);
   const [dividendPool, setdividendPool] = useState(0);
   const [dividendPoolToken, setdividendPoolToken] = useState(0);
@@ -231,16 +232,17 @@ function DappCard({
   const fetchPageData = () => {
     let currentuseraddress = window.tronWeb.defaultAddress.base58;
     //get useers balance address
+
     const fetchUserBalance = () => {
-      if (window.tronWeb) {
-        window.tronWeb.trx.getBalance(
-          currentuseraddress,
-          (error, contractBalance) => {
-            if (error) return console.error(error);
-            setWalletBalance(contractBalance * 0.000001);
-          }
-        );
-      }
+      let data = getContractData(
+        dappAddress,
+        "trxBalance(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setWalletBalance(response);
+        }
+      });
     };
 
     fetchUserBalance();
@@ -259,6 +261,24 @@ function DappCard({
     };
 
     fetchUserStake();
+
+    //get user token balance
+    //userTokenBalance
+
+    //get user userStake
+    const fetchUserTokenBalance = () => {
+      let data = getContractData(
+        dappAddress,
+        "balanceOf(address)",
+        currentuseraddress
+      ).then((response) => {
+        if (response) {
+          setuserTokenBalance(response);
+        }
+      });
+    };
+
+    fetchUserTokenBalance();
 
     //get user Dividends
     const fetchUserDivs = () => {
@@ -842,8 +862,8 @@ function DappCard({
         <Typography className={classes.centertextarea} variant="h5">
           TronDash’s Liquidity Farm is the best of way to profit from the
           TronDash platform. Your share of TDDFRM entitles you to community
-          deposit distributions, TTDLP reserved tokens `&` their earned fees, a
-          2% daily pool payout, and provides liquidity to TDD-TRX staked pools,
+          deposit distributions, TTDLP reserved tokens their earned fees, a 2%
+          daily pool payout, and provides liquidity to TDD-TRX staked pools,
           encouraging trading, and fee generation, vaulting the value of your
           TDDFRM staked position.
         </Typography>
@@ -897,10 +917,10 @@ function DappCard({
               gutterBottom
               variant="overline"
             >
-              Your Stake
+              TDDFRM Balance
             </Typography>
             <Typography align="center" variant="h4">
-              {userStake.toFixed(2)} trx
+              {userTokenBalance.toFixed(2)}
             </Typography>
           </div>
           <div className={classes.statsItem}>

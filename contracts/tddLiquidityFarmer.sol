@@ -198,9 +198,9 @@ contract Swap {
 contract TronDashTDDLiquidityFarmer {
     using SafeMath for uint256;
 
-    /*=================================
+    /*---------------------------------
     =            MODIFIERS            =
-    =================================*/
+    ---------------------------------*/
     //only owner
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -218,9 +218,9 @@ contract TronDashTDDLiquidityFarmer {
         _;
     }
 
-    /*==============================
+    /*------------------------------
     =            EVENTS            =
-    ==============================*/
+    ------------------------------*/
 
     event onLeaderBoard(
         address indexed customerAddress,
@@ -278,6 +278,12 @@ contract TronDashTDDLiquidityFarmer {
         uint256 timestamp
     );
 
+    event Approval(
+        address indexed src,
+        address indexed account,
+        uint256 amount
+    );
+
     event onLiquiditySweep(uint256 amount);
 
     event onLiquidityProviderReward(uint256 amount);
@@ -299,9 +305,9 @@ contract TronDashTDDLiquidityFarmer {
         uint256 xReceivedTokens;
     }
 
-    /*=====================================
+    /*-----------------------------------==
     =            CONFIGURABLES            =
-    =====================================*/
+    -------------------------------------*/
 
     /// @dev 10% dividends for token purchase
     uint8 internal constant entryFee_ = 10;
@@ -315,18 +321,24 @@ contract TronDashTDDLiquidityFarmer {
     uint256 internal constant magnitude = 2**64;
 
     uint256 constant MAX_UINT = 2**256 - 1;
+    /*---------------------------------
+     =            TOKEN DATA            =
+     --------------------------------*/
 
-    /*=================================
+    string public name = "TDD Liquidity Farmer";
+    string public symbol = "TDDFRM";
+    uint256 public decimals = 6;
+    mapping(address => uint256) _balances;
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    /*---------------------------------
      =            DATASETS            =
-     ================================*/
+     --------------------------------*/
 
     // amount of shares for each address (scaled number)
     mapping(address => uint256) private tokenBalanceLedger_;
     mapping(address => int256) private payoutsTo_;
     mapping(address => Stats) private stats;
-
-    string public name = "TDD Liquidity Farmer";
-    string public symbol = "TDDFRM";
 
     address public owner;
     address public dev;
@@ -365,9 +377,9 @@ contract TronDashTDDLiquidityFarmer {
     Swap private swap;
     DashToken private dashToken;
 
-    /*=======================================
+    /*---------------------------------------
     =            PUBLIC FUNCTIONS           =
-    =======================================*/
+    ---------------------------------------*/
 
     constructor() public {
         swapToken = Token(swapAddress);
@@ -427,6 +439,113 @@ contract TronDashTDDLiquidityFarmer {
     function() public payable {
         //do nothing
     }
+
+    /*---------------------------------
+     =            TOKEN FUNCTIONS     =
+     --------------------------------*/
+    function allowance(address src, address account)
+        public
+        view
+        returns (uint256)
+    {
+        return _approvals[src][account];
+    }
+
+    function transferFrom(
+        address _customerAddress,
+        address _toAddress,
+        uint256 _amountOfTokens
+    ) external returns (bool) {
+        if (_customerAddress != msg.sender) {
+            require(
+                _approvals[_customerAddress][msg.sender] >= _amountOfTokens,
+                "ds-token-insufficient-approval"
+            );
+            _approvals[_customerAddress][msg.sender] = SafeMath.sub(
+                _approvals[_customerAddress][msg.sender],
+                _amountOfTokens
+            );
+        }
+
+        //--------------------------
+        // setup
+
+        // make sure we have the requested tokens
+        require(
+            _amountOfTokens <= tokenBalanceLedger_[_customerAddress],
+            "Amount of tokens is greater than balance"
+        );
+
+        // withdraw all outstanding dividends first
+        if (myDividends() > 0) {
+            withdraw();
+        }
+
+        // exchange tokens
+        tokenBalanceLedger_[_customerAddress] = SafeMath.sub(
+            tokenBalanceLedger_[_customerAddress],
+            _amountOfTokens
+        );
+        tokenBalanceLedger_[_toAddress] = SafeMath.add(
+            tokenBalanceLedger_[_toAddress],
+            _amountOfTokens
+        );
+
+        // update dividend trackers
+        payoutsTo_[_customerAddress] -= (int256)(
+            profitPerShare_ * _amountOfTokens
+        );
+        payoutsTo_[_toAddress] += (int256)(profitPerShare_ * _amountOfTokens);
+
+        /* Members
+            A player can be initialized by buying or receiving and we want to add the user first
+         */
+        if (
+            stats[_toAddress].invested == 0 &&
+            stats[_toAddress].receivedTokens == 0
+        ) {
+            players += 1;
+        }
+
+        //Stats
+        stats[_customerAddress].xTransferredTokens += 1;
+        stats[_customerAddress].transferredTokens += _amountOfTokens;
+        stats[_toAddress].receivedTokens += _amountOfTokens;
+        stats[_toAddress].xReceivedTokens += 1;
+        totalTxs += 1;
+
+        emit onTransfer(_customerAddress, _toAddress, _amountOfTokens, now);
+
+        emit onLeaderBoard(
+            _customerAddress,
+            stats[_customerAddress].invested,
+            tokenBalanceLedger_[_customerAddress],
+            stats[_customerAddress].withdrawn,
+            now
+        );
+
+        emit onLeaderBoard(
+            _toAddress,
+            stats[_toAddress].invested,
+            tokenBalanceLedger_[_toAddress],
+            stats[_toAddress].withdrawn,
+            now
+        );
+
+        return true;
+    }
+
+    function approve(address account, uint256 amount) public returns (bool) {
+        _approvals[msg.sender][account] = amount;
+
+        emit Approval(msg.sender, account, amount);
+
+        return true;
+    }
+
+    /*---------------------------------
+     =            FARM FUNCTIONS     =
+     --------------------------------*/
 
     /// @dev Converts all of caller's dividends to tokens.
     function reinvest() public onlyStronghands returns (uint256) {
@@ -582,9 +701,9 @@ contract TronDashTDDLiquidityFarmer {
         return true;
     }
 
-    /*=====================================
+    /*-------------------------------------
     =      ownership Functions           =
-    =====================================*/
+    -------------------------------------*/
     function changeownership(address newAddr) public onlyOwner {
         owner = newAddr;
     }
@@ -593,9 +712,9 @@ contract TronDashTDDLiquidityFarmer {
         dev = newAddr;
     }
 
-    /*=====================================
+    /*-----------------------------------==
     =      Dash mining Functions           =
-    =====================================*/
+    -------------------------------------*/
     function transferDash(address customerAddress, uint256 amount)
         public
         onlyOwner
@@ -603,20 +722,18 @@ contract TronDashTDDLiquidityFarmer {
         dashToken.transfer(customerAddress, amount);
     }
 
-    function transferTDD(address customerAddress, uint256 amount)
-        public
-        onlyOwner
-    {
-        cToken.transfer(customerAddress, amount);
-    }
-
     function changeminingrate(uint8 rate) public onlyOwner {
         miningRate = rate;
+        //change to 0 to turn this feature off
     }
 
-    /*=====================================
+    function changeminingtoken(address newtoken) public onlyOwner {
+        dashToken = DashToken(newtoken);
+    }
+
+    /*-------------------------------------
     =      PROMO Functions                =
-    =====================================*/
+    -------------------------------------*/
     function promote() public payable {
         msg.sender.transfer(msg.value);
     }
@@ -625,9 +742,9 @@ contract TronDashTDDLiquidityFarmer {
         return true;
     }
 
-    /*=====================================
+    /*-----------------------------------==
     =      HELPERS AND CALCULATORS        =
-    =====================================*/
+    -------------------------------------*/
 
     /**
      * @dev Method to view the current trx stored in the contract
@@ -849,9 +966,9 @@ contract TronDashTDDLiquidityFarmer {
                 : 0;
     }
 
-    /*==========================================
+    /*----------------------------------------==
     =            INTERNAL FUNCTIONS            =
-    ==========================================*/
+    ------------------------------------------*/
 
     /// @dev Distribute undividend in and out fees across drip pools and instant divs
     function allocateFees(uint256 fee) private {
