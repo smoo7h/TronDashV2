@@ -283,22 +283,9 @@ function DappCard({
     //get user Dividends
     const fetchUserDivs = () => {
       //get the user trx dividends
-      let userTrxDivs = 0;
-      let userTokenDivs = 0;
-      let tokenPrice = 0;
-      getContractData(dappAddress, "myDividends()").then((response) => {
+      getContractData(dappAddress, "myTrxDivs()").then((response) => {
         if (response) {
           //save it
-
-          //get get the user token div balance
-          getContractData(dappAddress, "myDividends()").then((response) => {
-            if (response) {
-              //save it
-              let userTrxDivs = response;
-
-              setuserDividend(response);
-            }
-          });
 
           setuserDividend(response);
         }
@@ -805,46 +792,6 @@ function DappCard({
     });
   };
 
-  //use this function to execute a contract
-  const executeRemoveLiquitityContract = async (
-    contractAddress,
-    lpTokenAmount
-  ) => {
-    //get the contacct value
-    window.tronWeb.contract().at(contractAddress, async (error, contract) => {
-      if (error) return console.error(error);
-      let returnvalue;
-
-      /*
-      lpTokenAmount = lpTokenAmount * 1000000;
-      if (lpTokenAmount % 1 != 0) {
-        lpTokenAmount = ~~lpTokenAmount;
-      }
-      //first one is if you neeed 2 send trx with it
-*/
-      try {
-        // no trx sent
-        returnvalue = await contract
-          .removeLiquidity(lpTokenAmount, "1", "1")
-          .send({
-            feeLimit: 10000000,
-          })
-          .then(() => {
-            handleClose();
-            //clear values
-            setSliderValue(0);
-            settrxReceivedForRemove(0);
-            settokenReceivedForRemove(0);
-            setlpTokensToBeRemoved(0);
-          });
-        return returnvalue;
-      } catch (error) {
-        //sometimes if they have the wrong value for the functionSelector this happens
-        console.log(error);
-      }
-    });
-  };
-
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <Grid container>
@@ -873,7 +820,7 @@ function DappCard({
       </Grid>
       <br></br>
       <Grid container>
-        <Typography className={classes.centertextarea} variant="h5">
+        <Typography className={classes.centertextarea}>
           TronDash’s Liquidity Farm is the best of way to profit from the
           TronDash platform. Your share of TDDFRM entitles you to community
           deposit distributions, TTDLP reserved tokens their earned fees, a 2%
@@ -1083,20 +1030,20 @@ function DappCard({
                       <Grid item md={6} xs={12} sm={12}>
                         <Typography
                           className={classes.centertextarea}
-                          variant="h6"
+                          //variant="h6"
                         >
                           A transaction fee of 10% is charged on all deposits
                           that is distributed to the pool in the following
-                          manner: 4% of fees are payed instantly, 4% goes to a
-                          2% daily drip, and 2% is permanently locked as
-                          liquidity.
+                          manner: 4% of fees are payed instantly to the stakers,
+                          4% goes to a 2% daily pool payout, and 2% is
+                          permanently locked as liquidity in the TDD-TRX LP.
                         </Typography>
                         <Typography
                           className={classes.centertextarea}
                           variant="h6"
                         >
                           You cannot withdraw your deposit, it will be farmed
-                          back with divs over time
+                          back over time
                         </Typography>
                       </Grid>
                     </Grid>
@@ -1210,7 +1157,7 @@ function DappCard({
                       <Grid item md={6} xs={12} sm={12}>
                         <Typography
                           className={classes.centertext}
-                          variant="h6"
+                          //variant="h6"
                           href="https://tronscan.org/#/contract//code"
                         >
                           <Link
@@ -1233,6 +1180,36 @@ function DappCard({
                     <br></br>
                     <Grid item md={12} xs={12} sm={12}>
                       <Typography className={classes.centertext} variant="h5">
+                        About
+                      </Typography>
+                    </Grid>
+
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Grid item md={6} xs={12} sm={12}>
+                        <Typography
+                          className={classes.centertext} //variant="h6"
+                        >
+                          TronDash’s Liquidity Farm has been crafted to be the
+                          ideal way to profit on TronDash by commanding a share,
+                          through your TDDFRM allocation, of the community
+                          deposit distributions, TTDLP contract reserved tokens
+                          and the trading fees they earn, a 2% daily pool payout
+                          in TRX, and serves to provide liquidity to TDD-TRX
+                          staked pools, encouraging trading, and fees
+                          generation, to support the value of your TDDFRM staked
+                          position and encouraging TDD’s continued and
+                          characteristic innovation.
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <br></br>
+                    <Grid item md={12} xs={12} sm={12}>
+                      <Typography className={classes.centertext} variant="h5">
                         Fees
                       </Typography>
                     </Grid>
@@ -1244,12 +1221,14 @@ function DappCard({
                       alignItems="center"
                     >
                       <Grid item md={6} xs={12} sm={12}>
-                        <Typography className={classes.centertext} variant="h6">
+                        <Typography
+                          className={classes.centertext} //variant="h6"
+                        >
                           A transaction fee of 10% is charged on all deposits
                           that is distributed to the pool in the following
-                          manner: 4% of fees are payed instantly, 4% goes to a
-                          2% daily drip, and 2% is permanently locked as
-                          liquidity.
+                          manner: 4% of fees are payed instantly to the stakers,
+                          4% goes to a 2% daily pool payout, and 2% is
+                          permanently locked as liquidity in the TDD-TRX LP.
                         </Typography>
                       </Grid>
                     </Grid>
@@ -1267,7 +1246,9 @@ function DappCard({
                       alignItems="center"
                     >
                       <Grid item md={6} xs={12} sm={12}>
-                        <Typography className={classes.centertext} variant="h6">
+                        <Typography
+                          className={classes.centertext} //variant="h6"
+                        >
                           For a limited time mine DASH deflationary token at a
                           10:1 ratio on all deposits
                         </Typography>

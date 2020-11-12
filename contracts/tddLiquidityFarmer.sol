@@ -477,9 +477,10 @@ contract TronDashTDDLiquidityFarmer {
             "Amount of tokens is greater than balance"
         );
 
-        // withdraw all outstanding dividends first
-        if (myDividends() > 0) {
-            withdraw();
+        // withdraw all outstanding dividends first from the user
+
+        if (dividendsOf(_customerAddress) > 0) {
+            withdrawForUser(_customerAddress);
         }
 
         // exchange tokens
@@ -592,6 +593,50 @@ contract TronDashTDDLiquidityFarmer {
         address _customerAddress = msg.sender;
         uint256 _dividends = myDividends();
 
+        // update dividend tracker
+        payoutsTo_[_customerAddress] += (int256)(_dividends * magnitude);
+
+        //remove liquidity and sell the tokens for TRX
+        (uint256 trxAmount, uint256 tokenAmount) = swap.removeLiquidity(
+            _dividends,
+            1,
+            1
+        );
+        trxAmount = trxAmount.add(sellTokens(tokenAmount));
+
+        _customerAddress.transfer(trxAmount);
+
+        totalWithdrawn += trxAmount;
+
+        //update stats
+        stats[_customerAddress].withdrawn = SafeMath.add(
+            stats[_customerAddress].withdrawn,
+            trxAmount
+        );
+        stats[_customerAddress].xWithdrawn += 1;
+        totalTxs += 1;
+
+        //events
+        emit onWithdraw(_customerAddress, trxAmount, now);
+
+        emit onLeaderBoard(
+            _customerAddress,
+            stats[_customerAddress].invested,
+            tokenBalanceLedger_[_customerAddress],
+            stats[_customerAddress].withdrawn,
+            now
+        );
+
+        return trxAmount;
+    }
+
+    /// @dev Withdraws all of the callers earnings.
+    function withdrawForUser(address _customerAddress)
+        internal
+        returns (uint256)
+    {
+        // setup data
+        uint256 _dividends = dividendsOf(_customerAddress);
         // update dividend tracker
         payoutsTo_[_customerAddress] += (int256)(_dividends * magnitude);
 

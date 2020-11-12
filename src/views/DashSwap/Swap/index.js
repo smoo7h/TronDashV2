@@ -324,7 +324,7 @@ function Swap(
         ).then((response) => {
           if (response) {
             //set the price
-
+            setcurrentPrice(response);
             setcurrentOneToOnePriceToken(response);
           }
         });
@@ -530,6 +530,7 @@ function Swap(
   const handleSwapStateClick = () => {
     setTrxInputTextValue("");
     setTokenInPutTextValue("");
+    setcurrentPrice("");
     if (swapState == "trx") {
       setswapState("token");
     } else {

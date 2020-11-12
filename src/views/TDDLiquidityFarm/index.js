@@ -74,7 +74,7 @@ function TDDLiquidityFarm({ open, onClose, customer, className, ...rest }) {
   });
 
   const [dappAddress, setDappAddress] = useState(
-    "TRWhnatSuB87MF91PK1QbMw3LnndfAeU7v"
+    "TVCDHEpsPHm8sUb6iogpjnuzqDU34oxqDW"
   );
 
   //TGAF2jVdoDz1Rjxx6rukNhDZ6qMga6vbhg
