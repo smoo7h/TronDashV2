@@ -300,7 +300,24 @@ function DappCard({
       let data = getContractData(dappAddress, "dividendBalance()").then(
         (response) => {
           if (response) {
-            setdividendPool(response);
+            let responsevalue = response * 1000000;
+
+            if (responsevalue % 1 != 0) {
+              // trxSumbitAmount = ~~trxSumbitAmount;
+              responsevalue = Math.floor(responsevalue);
+            }
+            //convert token lp balance to trxInputTextValue
+            let data = getContractData(
+              dappAddress,
+              "calculateLiquidityToTrx(uint256)",
+              responsevalue
+            ).then((response) => {
+              if (response) {
+                setdividendPool(response);
+              }
+            });
+
+            // setdividendPool(response);
           }
         }
       );
@@ -1267,8 +1284,9 @@ function DappCard({
                           Dividend Pool
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {dividendPool.toFixed(2)} trx /
-                          {dividendPoolToken.toFixed(2)} tdd
+                          {dividendPool.toFixed(2)} trx
+                          {/*  /
+                          {dividendPoolToken.toFixed(2)} tdd*/}
                         </Typography>
                       </div>
                       <div className={classes.statsItem}>
@@ -1294,7 +1312,7 @@ function DappCard({
                           Members
                         </Typography>
                         <Typography align="center" variant="h4">
-                          {memberCount}
+                          {memberCount.toFixed(0)}
                         </Typography>
                       </div>
                     </div>
