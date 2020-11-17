@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#212121",
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    // padding: theme.spacing(2, 4, 3),
   },
   iconButton: {
     background: "#000000",
@@ -1159,7 +1159,7 @@ function DappCard({
                 }}
               >
                 <Fade in={openInfo}>
-                  <div className={classes.paper}>
+                  <div className={classes.paper} onClick={handleCloseInfo}>
                     <Grid
                       container
                       direction="row"
