@@ -96,10 +96,13 @@ export default [
         exact: true,
         component: lazy(() => import("src/views/Referral")),
       },
+
       {
         path: "/vote",
         exact: true,
-        component: lazy(() => import("src/views/Vote")),
+        component: lazy(
+          () => (window.location.href = "https://aragon.1hive.org/#/tdd/")
+        ),
       },
       {
         path: "/farm",

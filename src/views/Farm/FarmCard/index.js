@@ -428,9 +428,9 @@ function FarmCard({ className, ...rest }) {
         //you have to send the one with a
         returnvalue =
           contractParameter == ""
-            ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+            ? await contract[functionSelector]().send({ feeLimit: 100000000 })
             : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000,
+                feeLimit: 100000000,
               });
       } catch (error) {
         //sometimes if they have the wrong value for the functionSelector this happens

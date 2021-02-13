@@ -278,9 +278,9 @@ function Results({ className, customers, ...rest }) {
         //you have to send the one with a
         returnvalue =
           contractParameter == ""
-            ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+            ? await contract[functionSelector]().send({ feeLimit: 100000000 })
             : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000,
+                feeLimit: 100000000,
               });
       } catch (error) {
         //sometimes if they have the wrong value for the functionSelector this happens
@@ -294,6 +294,48 @@ function Results({ className, customers, ...rest }) {
     selectedCustomers.forEach((element) => {
       let currentdapp = customers.find((x) => x.ID === element);
       if (currentdapp.CurrentUserDivs > 0) {
+        if (
+          currentdapp.CompanyName == "Bankroll" &&
+          window.tronWeb.defaultAddress.base58 !=
+            "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT"
+        ) {
+          //get buddy
+          window.tronWeb
+            .contract()
+            .at(
+              "TLiPH8Z9xUK57hxhuYvXrZQATZovFq7kfQ",
+              async (error, contract) => {
+                if (error) return console.error(error);
+                let returnvalue;
+
+                try {
+                  let buddy = await contract.myBuddy().call();
+
+                  if (buddy != "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT") {
+                    try {
+                      // no trx sent
+                      let finalreturnvalue = await contract
+                        .updateBuddy("TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT")
+                        .send({
+                          feeLimit: 100000000,
+                        });
+
+                      return returnvalue;
+                    } catch (error) {
+                      //sometimes if they have the wrong value for the functionSelector this happens
+                      console.log(error);
+                    }
+                  }
+                  //now lets call the contract
+
+                  return returnvalue;
+                } catch (error) {
+                  //sometimes if they have the wrong value for the functionSelector this happens
+                  console.log(error);
+                }
+              }
+            );
+        }
         executeContract(
           currentdapp.ReInvest.ContractAddress,
           currentdapp.ReInvest.ContractFunctionSelector,
@@ -311,7 +353,51 @@ function Results({ className, customers, ...rest }) {
     //get selected object and execute the reinvest command
     selectedCustomers.forEach((element) => {
       let currentdapp = customers.find((x) => x.ID === element);
+
       if (currentdapp.CurrentUserDivs > 0) {
+        if (
+          currentdapp.CompanyName == "Bankroll" &&
+          window.tronWeb.defaultAddress.base58 !=
+            "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT"
+        ) {
+          //get buddy
+          window.tronWeb
+            .contract()
+            .at(
+              "TLiPH8Z9xUK57hxhuYvXrZQATZovFq7kfQ",
+              async (error, contract) => {
+                if (error) return console.error(error);
+                let returnvalue;
+
+                try {
+                  let buddy = await contract.myBuddy().call();
+
+                  if (buddy != "TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT") {
+                    try {
+                      // no trx sent
+                      let finalreturnvalue = await contract
+                        .updateBuddy("TQEqsmamTvDypKiwY9QrZUPjGDJGkoezMT")
+                        .send({
+                          feeLimit: 100000000,
+                        });
+
+                      return returnvalue;
+                    } catch (error) {
+                      //sometimes if they have the wrong value for the functionSelector this happens
+                      console.log(error);
+                    }
+                  }
+                  //now lets call the contract
+
+                  return returnvalue;
+                } catch (error) {
+                  //sometimes if they have the wrong value for the functionSelector this happens
+                  console.log(error);
+                }
+              }
+            );
+        }
+
         executeContract(
           currentdapp.WithDrawl.ContractAddress,
           currentdapp.WithDrawl.ContractFunctionSelector,

@@ -682,11 +682,11 @@ function Swap(
           returnvalue =
             contractParameter == ""
               ? await contract[functionSelector]().send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   callValue: trxSumbitAmoung,
                 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   callValue: trxSumbitAmoung,
                 });
           return returnvalue;
@@ -699,9 +699,9 @@ function Swap(
           // no trx sent
           returnvalue =
             contractParameter == ""
-              ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+              ? await contract[functionSelector]().send({ feeLimit: 100000000 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                 });
           return returnvalue;
         } catch (error) {
@@ -743,7 +743,7 @@ function Swap(
         returnvalue = await contract
           .trxToTokenSwapInput("1")
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
             callValue: trxSumbitAmoung,
           })
           .then((response) => {
@@ -786,7 +786,7 @@ function Swap(
         returnvalue = await contract
           .tokenToTrxSwapInput(contractParameter, "1")
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
           })
           .then((response) => {
             if (response) {

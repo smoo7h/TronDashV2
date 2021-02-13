@@ -36,14 +36,20 @@ export default [
         icon: DashboardIcon,
       },
       {
+        title: "Liquidity Farm",
+        href: "/liquidityfarm",
+        icon: Opacity,
+      },
+      {
+        title: "Dash Swap",
+        href: "/swap",
+        icon: SwapHoriz,
+      },
+      {
         title: "House Dapps",
         href: "/management",
         icon: AccountBalanceIcon,
         items: [
-          {
-            title: "Dash Bank",
-            href: "/dashbank",
-          },
           {
             title: "TRX Bank",
             href: "/trxbank",
@@ -53,26 +59,12 @@ export default [
             href: "/bttbank",
           },
           {
-            title: "Dash Lotto",
-            href: "/dashlotto",
+            title: "Dash Bank",
+            href: "/dashbank",
           },
         ],
       },
-      {
-        title: "Dash Swap",
-        href: "/swap",
-        icon: SwapHoriz,
-      },
-      {
-        title: "Liquidity Farm",
-        href: "/liquidityfarm",
-        icon: Opacity,
-      },
-      {
-        title: "Dash Token",
-        href: "/dashtoken",
-        icon: LensIcon,
-      },
+
       {
         title: "DAO",
 
@@ -87,6 +79,11 @@ export default [
             href: "/whitepaper",
           },
         ],
+      },
+      {
+        title: "Dash Token",
+        href: "/dashtoken",
+        icon: LensIcon,
       },
       {
         title: "Referral",

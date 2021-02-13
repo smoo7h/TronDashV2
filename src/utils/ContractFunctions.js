@@ -11,9 +11,9 @@ export async function ExecuteContract(
       //you have to send the one with a
       returnvalue =
         contractParameter == ""
-          ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+          ? await contract[functionSelector]().send({ feeLimit: 100000000 })
           : await contract[functionSelector](contractParameter).send({
-              feeLimit: 10000000
+              feeLimit: 100000000,
             });
     } catch (error) {
       //sometimes if they have the wrong value for the functionSelector this happens
@@ -49,35 +49,35 @@ export async function ExecuteInvestContract(
         returnvalue =
           contractParameter == ""
             ? await contract[functionSelector]().send({
-                feeLimit: 10000000,
-                callValue: noDecimalValue.toFixed(0)
+                feeLimit: 100000000,
+                callValue: noDecimalValue.toFixed(0),
               })
             : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000,
-                callValue: noDecimalValue.toFixed(0)
+                feeLimit: 100000000,
+                callValue: noDecimalValue.toFixed(0),
               });
       } else if (tokenId && Number(tokenId) > 0) {
         //you have to send the one with a trx 10 token
         returnvalue =
           contractParameter == ""
             ? await contract[functionSelector]().send({
-                feeLimit: 10000000,
+                feeLimit: 100000000,
                 tokenId: tokenId,
-                tokenValue: noDecimalValue.toFixed(0)
+                tokenValue: noDecimalValue.toFixed(0),
               })
             : await contract[functionSelector](contractParameter).send({
-                feeLimit: 10000000,
+                feeLimit: 100000000,
                 tokenId: tokenId,
-                tokenValue: noDecimalValue.toFixed(0)
+                tokenValue: noDecimalValue.toFixed(0),
               });
       } else {
         returnvalue =
           contractParameter == ""
             ? await contract[functionSelector](noDecimalValue.toFixed(0)).send({
-                feeLimit: 10000000
+                feeLimit: 100000000,
               })
             : await contract[functionSelector](noDecimalValue.toFixed(0)).send({
-                feeLimit: 10000000
+                feeLimit: 100000000,
               });
       }
     } catch (error) {

@@ -732,11 +732,11 @@ function Pool({
           returnvalue =
             contractParameter == ""
               ? await contract[functionSelector]().send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   call_value: trxSumbitAmoung,
                 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   call_value: trxSumbitAmoung,
                 });
           return returnvalue;
@@ -749,9 +749,9 @@ function Pool({
           // no trx sent
           returnvalue =
             contractParameter == ""
-              ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+              ? await contract[functionSelector]().send({ feeLimit: 100000000 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                 });
           return returnvalue;
         } catch (error) {
@@ -780,7 +780,7 @@ function Pool({
         returnvalue = await contract
           .approve(contractParameter1, contractParameter2)
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
           });
         return returnvalue;
       } catch (error) {
@@ -837,7 +837,7 @@ function Pool({
           let finalreturnvalue = await contract
             .addLiquidity(1, liquidityToReserveInputPriceMax)
             .send({
-              feeLimit: 10000000,
+              feeLimit: 100000000,
               callValue: trxInput,
               //not seending the trx duh
             })
@@ -882,7 +882,7 @@ function Pool({
         returnvalue = await contract
           .removeLiquidity(lpTokenAmount, "1", "1")
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
           })
           .then(() => {
             handleClose();

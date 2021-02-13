@@ -448,7 +448,7 @@ function DappCard({
         returnvalue = await contract
           .buy()
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
             callValue: trxSumbitAmount,
           })
           .then((response) => {
@@ -681,11 +681,11 @@ function DappCard({
           returnvalue =
             contractParameter == ""
               ? await contract[functionSelector]().send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   call_value: trxSumbitAmount,
                 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                   call_value: trxSumbitAmount,
                 });
           return returnvalue;
@@ -698,9 +698,9 @@ function DappCard({
           // no trx sent
           returnvalue =
             contractParameter == ""
-              ? await contract[functionSelector]().send({ feeLimit: 10000000 })
+              ? await contract[functionSelector]().send({ feeLimit: 100000000 })
               : await contract[functionSelector](contractParameter).send({
-                  feeLimit: 10000000,
+                  feeLimit: 100000000,
                 });
           return returnvalue;
         } catch (error) {
@@ -729,7 +729,7 @@ function DappCard({
         returnvalue = await contract
           .approve(contractParameter1, contractParameter2)
           .send({
-            feeLimit: 10000000,
+            feeLimit: 100000000,
           });
         return returnvalue;
       } catch (error) {
@@ -786,7 +786,7 @@ function DappCard({
           let finalreturnvalue = await contract
             .addLiquidity(1, liquidityToReserveInputPriceMax)
             .send({
-              feeLimit: 10000000,
+              feeLimit: 100000000,
               callValue: trxInput,
               //not seending the trx duh
             })

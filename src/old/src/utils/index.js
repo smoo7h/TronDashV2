@@ -483,7 +483,7 @@ const utils = {
   async creditswithdrawl() {
     const message = await this.creditscontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   },
@@ -492,7 +492,7 @@ const utils = {
     if (percentage == 1) {
       const message = await this.creditscontract
         .reinvest()
-        .send({ feeLimit: 10000000 });
+        .send({ feeLimit: 100000000 });
     } else {
       const message = await this.creditscontract.myDividends(address).call();
 
@@ -509,7 +509,7 @@ const utils = {
         refferal = this.refferaladdress;
       }
       //withdrawl balance
-      this.creditscontract.withdraw().send({ feeLimit: 10000000 });
+      this.creditscontract.withdraw().send({ feeLimit: 100000000 });
       // reinvest here
       await this.creditscontract.buy(refferal).send({
         callValue: newreinvestamount.toFixed(0),
@@ -542,14 +542,14 @@ const utils = {
   async moonwithdrawl() {
     const message = await this.bankrollmooncontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   },
   async moonreinvest() {
     const message = await this.bankrollmooncontract
       .reinvest()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   },
@@ -618,7 +618,7 @@ const utils = {
     }
   },
   async blazewithdrawl() {
-    this.blazecontract.claim().send({ feeLimit: 10000000 });
+    this.blazecontract.claim().send({ feeLimit: 100000000 });
     return;
   },
   //oneup
@@ -648,7 +648,7 @@ const utils = {
     return (message._referral.toNumber() * 0.000001).toFixed(2).toString();
   },
   async oneupwithdrawl() {
-    this.oneup.withdraw().send({ feeLimit: 10000000 });
+    this.oneup.withdraw().send({ feeLimit: 100000000 });
     return;
   },
   async oneupreinvest(address, percentage, refferal) {
@@ -666,7 +666,7 @@ const utils = {
       refferal = this.refferaladdress;
     }
     //withdrawl balance
-    this.oneup.withdraw().send({ feeLimit: 10000000 });
+    this.oneup.withdraw().send({ feeLimit: 100000000 });
     // reinvest here
     this.oneup.buy(refferal).send({
       callValue: newreinvestamount.toFixed(0),
@@ -738,7 +738,7 @@ const utils = {
 
     this.tronextcontractcode
       .withdrawDividends(message.toNumber())
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     //   return
     // return (divpool * 0.000001).toFixed(2);
@@ -758,7 +758,7 @@ const utils = {
     }
   },
   async pokerTronBJwithdrawl() {
-    this.pokertronbjcontractcode.withdraw_divi().send({ feeLimit: 10000000 });
+    this.pokertronbjcontractcode.withdraw_divi().send({ feeLimit: 100000000 });
     return;
   },
   async fetchPokerTronBJUserFrozen(address) {
@@ -828,7 +828,7 @@ const utils = {
   async pokerTronwithdrawl() {
     this.pokertrontokencontractcode
       .withdraw_divi()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async fetchPokerTronUserFrozen(address) {
@@ -1186,7 +1186,7 @@ const utils = {
     }
 
     //withdrawl balance
-    this.p3TDailyROIContract.withdraw().send({ feeLimit: 10000000 });
+    this.p3TDailyROIContract.withdraw().send({ feeLimit: 100000000 });
     // reinvest here
     await this.p3TDailyROIContract.buy(refferal).send({
       callValue: newreinvestamount.toFixed(0),
@@ -1245,7 +1245,7 @@ const utils = {
     }
 
     //withdrawl balance
-    await this.tronPaysTokenContract.withdraw().send({ feeLimit: 10000000 });
+    await this.tronPaysTokenContract.withdraw().send({ feeLimit: 100000000 });
 
     // reinvest here
     await this.tronPaysTokenContract.buy(refferal).send({
@@ -1288,13 +1288,13 @@ const utils = {
   },
   async tewkenaireTokenwithdrawl() {
     this.tewkenaireContract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
   async tewkenaireTokenReinvest() {
     this.tewkenaireContract.reinvest().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -1304,7 +1304,7 @@ const utils = {
     let calculatedamount = trxamount * 1000000;
     this.tewkenaireContract.buy(refferal).send({
       callValue: calculatedamount.toFixed(0),
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -1313,7 +1313,7 @@ const utils = {
     let finalnum = fixedamount.toString() + "000000000000";
 
     this.tewkenaireContract.sell(finalnum).send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
 
     return;
@@ -1361,13 +1361,13 @@ const utils = {
   },
   async tewkenaireStableTokenwithdrawl() {
     this.tewkenaireStableContract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
   async tewkenaireStableTokenReinvest() {
     this.tewkenaireStableContract.reinvest().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -1377,7 +1377,7 @@ const utils = {
     let calculatedamount = trxamount * 1000000;
     this.tewkenaireStableContract.buy(refferal).send({
       callValue: calculatedamount.toFixed(0),
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -1386,7 +1386,7 @@ const utils = {
     let finalnum = fixedamount.toString() + "000000000000";
 
     this.tewkenaireStableContract.sell(finalnum).send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
 
     return;
@@ -1433,7 +1433,7 @@ const utils = {
 
     //withdrawl balance
     await this.p3TTokenContract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
 
     // reinvest here
@@ -1483,7 +1483,7 @@ const utils = {
     }
 
     //withdrawl balance
-    await this.d3TTokenContract.withdraw().send({ feeLimit: 10000000 });
+    await this.d3TTokenContract.withdraw().send({ feeLimit: 100000000 });
 
     // reinvest here
     await this.d3TTokenContract.buy(refferal).send({
@@ -1535,7 +1535,7 @@ const utils = {
     return (message.toNumber() * 0.000001).toFixed(2).toString();
   },
   async bankrollwithdrawl() {
-    this.bankRollDailyROIContract.claim().send({ feeLimit: 10000000 });
+    this.bankRollDailyROIContract.claim().send({ feeLimit: 100000000 });
     return;
   },
   async bankrollreinvest(address, percentage, refferal) {
@@ -1552,7 +1552,7 @@ const utils = {
     if (!refferal) {
       refferal = this.refferaladdress;
     }
-    await this.bankRollDailyROIContract.withdraw().send({ feeLimit: 10000000 });
+    await this.bankRollDailyROIContract.withdraw().send({ feeLimit: 100000000 });
     // reinvest here
     await this.bankRollDailyROIContract.buy(refferal).send({
       callValue: newreinvestamount.toFixed(0),
@@ -1567,57 +1567,57 @@ const utils = {
     }
     await this.tronShrimpContract
       .hatchEggs(refferal)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     // reinvest here
 
     return;
   },
   async p3troiwithdrawl() {
-    this.p3TDailyROIContract.withdraw().send({ feeLimit: 10000000 });
+    this.p3TDailyROIContract.withdraw().send({ feeLimit: 100000000 });
     return;
   },
   async p3ttokenwithdrawl() {
-    this.p3TTokenContract.withdraw().send({ feeLimit: 10000000 });
+    this.p3TTokenContract.withdraw().send({ feeLimit: 100000000 });
     return;
   },
   async doubleroiwithdrawl() {
-    this.tronDoubleDailyROIContract.withdraw().send({ feeLimit: 10000000 });
+    this.tronDoubleDailyROIContract.withdraw().send({ feeLimit: 100000000 });
     return;
   },
   async doubleTokenwithdrawl() {
-    this.d3TTokenContract.withdraw().send({ feeLimit: 10000000 });
+    this.d3TTokenContract.withdraw().send({ feeLimit: 100000000 });
     return;
   },
 
   async paystokenwithdrawl() {
-    this.tronPaysTokenContract.withdraw().send({ feeLimit: 10000000 });
+    this.tronPaysTokenContract.withdraw().send({ feeLimit: 100000000 });
     return;
   },
   async doowithdrawl() {
     // console.log(address);
     this.dooTronToken
       .withdrawDividends("0x0000000000000000000000000000000000000000")
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async shrimpwithdrawl() {
     // console.log(address);
-    this.tronShrimpContract.sellEggs().send({ feeLimit: 10000000 });
+    this.tronShrimpContract.sellEggs().send({ feeLimit: 100000000 });
     return;
   },
   async eeewithdrawl() {
     this.eeedivdControllerContract
       .withdrawDividends()
-      .send({ feeLimit: 10000000 });
-    // this.eeedivdControllerContract.unfreezeTokens().send({ feeLimit: 10000000 });
-    //this.eeedivdControllerContract().send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
+    // this.eeedivdControllerContract.unfreezeTokens().send({ feeLimit: 100000000 });
+    //this.eeedivdControllerContract().send({ feeLimit: 100000000 });
     return;
   },
   //fetch tronpays
   async paysroiwithdrawl(address) {
     this.tronPaysDailyROIContract
       .withdraw(address)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
 
@@ -1637,7 +1637,7 @@ const utils = {
     //withdrawl balance
     this.tronPaysDailyROIContract
       .withdraw(address)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     // reinvest here
     await this.tronPaysDailyROIContract
       .buy(address, this.refferaladdress)
@@ -1676,7 +1676,7 @@ const utils = {
   },
   async mathroiwithdrawl(address) {
     this.safemathroicontract.withdraw(address).send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
       originEnergyLimit: 30000, // Set origin energy limit
       shouldPollResponse: false,
     });
@@ -1688,7 +1688,7 @@ const utils = {
     }
     this.safemathroicontract
       .reinvest(address, refferal)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
 
@@ -1834,7 +1834,7 @@ const utils = {
 
     var mydivnumber = mydivs * 1000000;
     //withdrawl balance
-    this.tronDoubleDailyROIContract.withdraw().send({ feeLimit: 10000000 });
+    this.tronDoubleDailyROIContract.withdraw().send({ feeLimit: 100000000 });
     // reinvest here
     await this.tronDoubleDailyROIContract.buy(this.refferaladdress).send({
       callValue: mydivs,
@@ -2100,7 +2100,7 @@ const utils = {
     // erc20contractbnkr
     const message = await this.voidcontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async withdrawlfragdivs() {
@@ -2108,7 +2108,7 @@ const utils = {
     // erc20contractbnkr
     const message = await this.fragcontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async reinvestvoiddivs(address) {
@@ -2118,11 +2118,11 @@ const utils = {
 
     const withdrawl = await this.voidcontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     const message = await this.voidcontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     //stake
     return;
   },
@@ -2131,7 +2131,7 @@ const utils = {
     // erc20contractbnkr
     const message = await this.fragcontract
       .depositDivs()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
 
@@ -2163,13 +2163,13 @@ const utils = {
   },
   async boostwithdrawlDivs() {
     this.boostcontract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
   async boostReinvestDivs() {
     this.boostcontract.reinvest().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -2240,13 +2240,13 @@ const utils = {
 
   async bttbankwithdrawlDivs() {
     this.bttBankContract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
   async bttbankReinvestDivs() {
     this.bttBankContract.reinvest().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -2285,7 +2285,7 @@ const utils = {
     let finalnum = fixedamount.toString();
 
     this.bttBankContract.sell(finalnum).send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
 
     return;
@@ -2358,13 +2358,13 @@ const utils = {
 
   async trxbankwithdrawlDivs() {
     this.trxBankContract.withdraw().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
   async trxbankReinvestDivs() {
     this.trxBankContract.reinvest().send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
     return;
   },
@@ -2400,7 +2400,7 @@ const utils = {
     let finalnum = fixedamount.toString();
 
     this.trxBankContract.sell(finalnum).send({
-      feeLimit: 10000000,
+      feeLimit: 100000000,
     });
 
     return;
@@ -2452,7 +2452,7 @@ const utils = {
     // erc20contractbnkr
     const message = await this.dashbankcontract
       .reinvest()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async withdrawlldashdivs() {
@@ -2460,7 +2460,7 @@ const utils = {
     // erc20contractbnkr
     const message = await this.dashbankcontract
       .withdraw()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async withdrawlldash(amount) {
@@ -2470,7 +2470,7 @@ const utils = {
 
     const message = await this.dashbankcontract
       .sell(finalnum)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
     return;
   },
   async depositdash(amount, useraddress) {
@@ -2493,7 +2493,7 @@ const utils = {
 
     let deposit = await this.erc20contractdash
       .transfer(depositaddress, fixedamount)
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   },
@@ -2696,7 +2696,7 @@ const utils = {
   async topiawithdrawl() {
     const message = await this.trontopiadivcontract
       .withdrawDividendDivRake()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   },
@@ -2756,7 +2756,7 @@ const utils = {
   async topiaDiamondwithdrawl() {
     const message = await this.trontopiadiamonddivcontract
       .withdrawDividendsEverything()
-      .send({ feeLimit: 10000000 });
+      .send({ feeLimit: 100000000 });
 
     return;
   }, //
