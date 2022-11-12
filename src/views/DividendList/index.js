@@ -11,6 +11,7 @@ import Statistics from "./Statistics";
 import TronWeb from "tronweb";
 import BigNumber from "bignumber.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ListData from "./ListData.json";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -193,7 +194,65 @@ function DividendList() {
     }
   };
 
-  const fetchCustomers = async () => {
+  const fetchCustomersStatic = async () => {
+
+    const listData = ListData;
+    //get data from our api server
+    
+        //now get data for each contract function we
+        listData.map(async (item, key) => {
+          //divpool
+          fetchContractValue(
+            item,
+            "CurrentDivPool",
+            item.DivPool.ContractAddress,
+            item.DivPool.ContractFunctionSelector,
+            item.DivPool.ContractParameter,
+            item.DivPool.Decimals,
+            item.DivPool
+          );
+          //CurrentUserDivs
+          fetchContractValue(
+            item,
+            "CurrentUserDivs",
+            item.UserDividend.ContractAddress,
+            item.UserDividend.ContractFunctionSelector,
+            item.UserDividend.ContractParameter,
+            item.UserDividend.Decimals,
+            item.UserDividend
+          );
+          //user investment
+          fetchContractValue(
+            item,
+            "CurrentUserInvestment",
+            item.Investment.ContractAddress,
+            item.Investment.ContractFunctionSelector,
+            item.Investment.ContractParameter,
+            item.Investment.Decimals,
+            item.Investment
+          );
+
+          //ony get this if its an estimate in the db
+          if (item.EstimageDivs) {
+            //CurrentUserDivsEstimated
+            fetchContractValue(
+              item,
+              "TotalStaked",
+              item.TotalStaked.ContractAddress,
+              item.TotalStaked.ContractFunctionSelector,
+              item.TotalStaked.ContractParameter,
+              item.TotalStaked.Decimals,
+              item.TotalStaked
+            );
+          }
+          //only do this for ones that require an estimate
+        });
+      
+  };
+
+  const fetchCustomersDynamic = async () => {
+
+    console.log(ListData);
     //get data from our api server
     axios
       .get(
@@ -252,10 +311,11 @@ function DividendList() {
       });
   };
 
+
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      fetchCustomers();
+      fetchCustomersStatic();
     }
     return () => {
       mounted = false;
@@ -267,7 +327,7 @@ function DividendList() {
     setTick((tick) => tick + 1);
     if (tick % 8 == 0) {
       console.log(tick);
-      fetchCustomers();
+      fetchCustomersStatic();
     }
   }, 1000);
 
